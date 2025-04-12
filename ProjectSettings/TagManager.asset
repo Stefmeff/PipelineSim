@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - BackgroundCanvas
+  - PinConnectionHandler
+  - MousePointer
+  - Timer
+  - MenuCanvas
+  - ProjectManager
+  - Selector
+  - Editor
+  - ButtonPause
+  - SimulationSpeed
+  - ScrollBarContent
+  - ScrollBar
+  - DialogBoxes
+  - ButtonRotate
+  - ButtonDelete
+  - InfoBar
+  - StepSize
+  - ToolTip
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - ChildLayer
+  - Water
+  - UI
+  - Wire
+  - WireKnot
+  - Post
+  - Screen
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 423436079
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: ChildLayer
+    uniqueID: 2944608677
+    locked: 0
+  - name: Wire
+    uniqueID: 1820619683
+    locked: 0
+  - name: WireKnot
+    uniqueID: 882297861
+    locked: 0
+  - name: Selected
+    uniqueID: 2373661445
+    locked: 0
+  - name: TopMenu
+    uniqueID: 50522629
+    locked: 0
