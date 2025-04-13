@@ -13,7 +13,7 @@ using static Pin;
  * 
  * @details: 
  * */
-public class CPLatch : ILoadable, IDelay
+public class CPLatch : Loadable, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin capture;     //capture input pin

@@ -18,7 +18,7 @@ using static Pin;
  * 
  * For further details on the implementation please read the code and documentation below.
  * */
-public class Clock : ILoadable
+public class Clock : Loadable
 {
     [JsonProperty] private OutputPin clkOut;     //the clock's output pin  
 

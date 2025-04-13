@@ -17,7 +17,7 @@ using UnityEngine;
  **/
 public class ComponentMono : MonoBehaviour, IObjectMono 
 {
-    public ILoadable component;
+    public Loadable component;
     [SerializeField] private componentType componentID;
     [SerializeField] private InputPin_Mono[] inPins = new InputPin_Mono[]{};
     [SerializeField] private OutputPin_Mono[] outPins = new OutputPin_Mono[]{};
@@ -55,7 +55,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     }
 
     //Initialize component according to identifier
-    private ILoadable newComponent(){
+    private Loadable newComponent(){
         switch (componentID)
         {
             case componentType.AND:
@@ -101,7 +101,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
         return null;
     }
 
-    public void Load(ILoadable component)
+    public void Load(Loadable component)
     {
         if(this.component != null)this.component.Dispose();
         this.component = component;
@@ -132,7 +132,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
         }
     }
 
-    public ILoadable GetMain()
+    public Loadable GetMain()
     {
         return this.component;
     }

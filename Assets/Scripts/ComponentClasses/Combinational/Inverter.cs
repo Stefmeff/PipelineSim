@@ -11,7 +11,7 @@ using static Pin;
  * @details: This class describes the behaviour of an Inverter. It takes bit input signals and negates
  * them at the output.
  * */
-public class Inverter : ILoadable, IDelay
+public class Inverter : Loadable, IDelay
 { 
     //PINS:
     [JsonProperty] private InputPin dataIn;          //data input pin

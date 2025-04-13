@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LED : ILoadable
+public class LED : Loadable
 {
     [JsonProperty] public InputPin input;
     [JsonProperty] private BitToken data;

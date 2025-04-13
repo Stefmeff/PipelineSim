@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using static Pin;
 
-public class XOR : ILoadable, IDelay
+public class XOR : Loadable, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin dataA;       //input pin a

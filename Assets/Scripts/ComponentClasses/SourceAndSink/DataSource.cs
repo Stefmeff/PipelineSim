@@ -16,7 +16,7 @@ using static Pin;
  * The output signals of DataSource are not meant to be used for implementing any logic, but rather for the
  * visualisation of different signals/tokens progressing through the circuit.
  * */
-public class DataSource : ILoadable
+public class DataSource : Loadable
 {
     [JsonProperty] private InputPin clkIn;               //clock input pin
     [JsonProperty] private OutputPin[] dataOutPins;

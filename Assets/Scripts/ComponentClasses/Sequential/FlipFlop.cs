@@ -16,7 +16,7 @@ using Unity.Properties;
  * The input data is sampled and transferred to the output only on the rising clock edge, 
  * meaning when the clk input changes from low to high.
  * */
-public class FlipFlop : ILoadable, IDelay
+public class FlipFlop : Loadable, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin clk;         //clock input pin

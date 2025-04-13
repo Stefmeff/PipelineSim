@@ -49,7 +49,7 @@ public class Editor : MonoBehaviour
     }
 
 
-    public void openEditor(ILoadable component)
+    public void openEditor(Loadable component)
     {
         //TODO: access copmonent of Monobehaviour => then type 
 

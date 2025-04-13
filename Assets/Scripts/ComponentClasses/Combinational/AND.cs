@@ -14,7 +14,7 @@ using static Pin;
  * the AND gate is implemented in the "OnTick..." methods, while there are difference if the component has a propagation delay
  * or also visualizes the delay. 
  * */
-public class AND : ILoadable, IDelay
+public class AND : Loadable, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin dataA;       //input pin a

@@ -14,7 +14,7 @@ using static Pin;
  * @details: The Muller C element has two inputs (a,b) and one output. The output is set to 0 when both inputs are 0, and
  * to 1 when both inputs are 1. For any other input combinations the value does not change.
  * */
-public class MullerC : ILoadable, IDelay
+public class MullerC : Loadable, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin dataA;       //input pin a

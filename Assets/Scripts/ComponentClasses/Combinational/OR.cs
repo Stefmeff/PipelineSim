@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using static Pin;
 
-public class OR : ILoadable, IDelay
+public class OR : Loadable, IDelay
 {
     [JsonProperty] private InputPin dataA;       //input pin a
     [JsonProperty] private InputPin dataB;       //input pin b

@@ -16,7 +16,7 @@ using static Pin;
  * 
  * 
  * */
-public class Latch : ILoadable , IDelay
+public class Latch : Loadable , IDelay
 {
     //PINS:
     [JsonProperty] private InputPin clk;         //clock input pin

@@ -106,9 +106,9 @@ public class ProjectManager : MonoBehaviour
     public void LoadWorld(string jsonString)
     {
 
-        List<ILoadable> elements = JsonConvert.DeserializeObject<List<ILoadable>>(jsonString, settings);
+        List<Loadable> elements = JsonConvert.DeserializeObject<List<Loadable>>(jsonString, settings);
 
-        foreach (ILoadable l in elements)
+        foreach (Loadable l in elements)
         {
             l.Load();
         }
@@ -118,12 +118,12 @@ public class ProjectManager : MonoBehaviour
     public string SaveWorld()
     {
         string fileName = Application.persistentDataPath;
-        List<ILoadable> elements = new List<ILoadable>();
+        List<Loadable> elements = new List<Loadable>();
 
         foreach(IObjectMono o in gameElements)
         {
             o.SaveTransform();
-            ILoadable l = o.GetMain();
+            Loadable l = o.GetMain();
             elements.Add(l);
         }
 

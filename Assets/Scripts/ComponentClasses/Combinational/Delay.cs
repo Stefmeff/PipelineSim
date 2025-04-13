@@ -18,7 +18,7 @@ using static Pin;
  * 
  * For further details, please read the documentation and code below!
  * */
-public class Delay : ILoadable, IDelay
+public class Delay : Loadable, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin dataIn;              //delay's input pin

@@ -48,7 +48,7 @@ public class LED_Mono : MonoBehaviour, IObjectMono
         sRend.color = c;
     }
 
-    public ILoadable GetMain()
+    public Loadable GetMain()
     {
         return this.led;
     }

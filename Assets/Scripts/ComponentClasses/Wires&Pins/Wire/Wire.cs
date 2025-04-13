@@ -9,7 +9,7 @@ using UnityEngine;
  * @details: This class describes the main properties of a wire. Each wire has a source OutputPin that writes to the wire,
  * and a sink InputPin. Each wire can also has intermediate wire knots, from which branching wires can be created.
  * */
-public class Wire : ILoadable
+public class Wire : Loadable
 {
     [JsonProperty] public OutputPin dataIn;         //OutputPin that writes to this wire
     [JsonProperty] public InputPin dataOut;         //InputPin this wire writes to

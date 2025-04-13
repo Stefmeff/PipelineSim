@@ -82,7 +82,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
     }
 
 
-    public ILoadable GetMain()
+    public Loadable GetMain()
     {
         return this.s;
     }

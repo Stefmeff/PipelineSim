@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IObjectMono
 {
-    public ILoadable GetMain();
+    public Loadable GetMain();
     public void SaveTransform();
     public void Clear();
 }
