@@ -1,0 +1,6218 @@
+[
+  {
+    "$id": "1",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$id": "2",
+      "wire": {
+        "$id": "3",
+        "dataIn": {
+          "$id": "4",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "2"
+        },
+        "knots": [
+          {
+            "$id": "5",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "4"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "6",
+              "x": -22.2342072,
+              "y": 10.8827915,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "7",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "8",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "9",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "10",
+      "wire": {
+        "$id": "11",
+        "dataIn": {
+          "$id": "12",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "10"
+        },
+        "knots": [
+          {
+            "$id": "13",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "12"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "14",
+              "x": -12.7443886,
+              "y": 2.655932,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "15",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "16",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "17",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "18",
+      "connectedPins": [
+        {
+          "$id": "19",
+          "wire": {
+            "$id": "20",
+            "dataIn": {
+              "$ref": "18"
+            },
+            "dataOut": {
+              "$ref": "19"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "21",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "22",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "20"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "23",
+      "x": 11.7479887,
+      "y": 7.16022873,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "24",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "25",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$id": "26",
+      "wire": {
+        "$id": "27",
+        "dataIn": {
+          "$id": "28",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "26"
+        },
+        "knots": [],
+        "knotCount": 2,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "29",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "30",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "31",
+      "wire": {
+        "$id": "32",
+        "dataIn": {
+          "$id": "33",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "31"
+        },
+        "knots": [
+          {
+            "$id": "34",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "33"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "35",
+              "x": -8.815815,
+              "y": -42.4606476,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "36",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "37",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "38",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "39",
+      "connectedPins": [
+        {
+          "$id": "40",
+          "wire": {
+            "$id": "41",
+            "dataIn": {
+              "$ref": "39"
+            },
+            "dataOut": {
+              "$ref": "40"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "42",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "43",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "$id": "44",
+          "wire": {
+            "$id": "45",
+            "dataIn": {
+              "$id": "46",
+              "$type": "Knot, Assembly-CSharp",
+              "dataIn": {
+                "$ref": "39"
+              },
+              "wire": {
+                "$ref": "45"
+              },
+              "pos": {
+                "$id": "47",
+                "x": 32.47151,
+                "y": -36.6949463,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "48",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "connectedPins": []
+            },
+            "dataOut": {
+              "$ref": "44"
+            },
+            "knots": [
+              {
+                "$id": "49",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "46"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "50",
+                  "x": 32.47151,
+                  "y": -70.33889,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "51",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 3,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "52",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "53",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$id": "54",
+        "dataIn": {
+          "$ref": "39"
+        },
+        "dataOut": {
+          "$ref": "40"
+        },
+        "knots": [
+          {
+            "$ref": "46"
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "55",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "56",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "57",
+      "x": 12.5679255,
+      "y": -36.6949463,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "58",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "59",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$ref": "40"
+    },
+    "dataB": {
+      "$id": "60",
+      "wire": {
+        "$id": "61",
+        "dataIn": {
+          "$id": "62",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "60"
+        },
+        "knots": [
+          {
+            "$id": "63",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "62"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "64",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "65",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "66",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "62"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "67",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "68",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "69",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "62"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "70",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "71",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "72",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "62"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "73",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "74",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "75",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "62"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "76",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "77",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 7,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "78",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "79",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "80",
+      "connectedPins": [
+        {
+          "$id": "81",
+          "wire": {
+            "$id": "82",
+            "dataIn": {
+              "$ref": "80"
+            },
+            "dataOut": {
+              "$ref": "81"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "83",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "84",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "82"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "85",
+      "x": 57.23048,
+      "y": -40.2949448,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "86",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "87",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$id": "88",
+      "wire": {
+        "$id": "89",
+        "dataIn": {
+          "$ref": "34"
+        },
+        "dataOut": {
+          "$ref": "88"
+        },
+        "knots": [
+          {
+            "$id": "90",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "34"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "91",
+              "x": -8.815815,
+              "y": -76.05704,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "92",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "93",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "94",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "95",
+      "wire": {
+        "$id": "96",
+        "dataIn": {
+          "$id": "97",
+          "$type": "Knot, Assembly-CSharp",
+          "dataIn": {
+            "$ref": "28"
+          },
+          "wire": null,
+          "pos": {
+            "$id": "98",
+            "x": -14.986475,
+            "y": -33.0949478,
+            "z": 0.0
+          },
+          "rot": {
+            "$id": "99",
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "connectedPins": []
+        },
+        "dataOut": {
+          "$ref": "95"
+        },
+        "knots": [
+          {
+            "$id": "100",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "97"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "101",
+              "x": -14.986475,
+              "y": -83.51655,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "102",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "103",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "104",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "105",
+      "connectedPins": [
+        {
+          "$id": "106",
+          "wire": {
+            "$id": "107",
+            "dataIn": {
+              "$ref": "105"
+            },
+            "dataOut": {
+              "$ref": "106"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "108",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "109",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "107"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "110",
+      "x": 12.9534817,
+      "y": -79.91655,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "111",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "112",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$id": "113",
+      "wire": {
+        "$id": "114",
+        "dataIn": {
+          "$ref": "75"
+        },
+        "dataOut": {
+          "$ref": "113"
+        },
+        "knots": [
+          {
+            "$id": "115",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "75"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "116",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "117",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "118",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "119",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$ref": "44"
+    },
+    "dataOut": {
+      "$id": "120",
+      "connectedPins": [
+        {
+          "$id": "121",
+          "wire": {
+            "$id": "122",
+            "dataIn": {
+              "$ref": "120"
+            },
+            "dataOut": {
+              "$ref": "121"
+            },
+            "knots": [
+              {
+                "$id": "123",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "120"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "124",
+                  "x": 94.0482559,
+                  "y": -66.6976547,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "125",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "126",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "120"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "127",
+                  "x": 94.08345,
+                  "y": -72.7633,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "128",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 4,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "129",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "130",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "122"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "131",
+      "x": 68.74188,
+      "y": -66.19326,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "132",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "133",
+    "$type": "OR, Assembly-CSharp",
+    "dataA": {
+      "$ref": "121"
+    },
+    "dataB": {
+      "$ref": "106"
+    },
+    "dataOut": {
+      "$id": "134",
+      "connectedPins": [
+        {
+          "$id": "135",
+          "wire": {
+            "$id": "136",
+            "dataIn": {
+              "$ref": "134"
+            },
+            "dataOut": {
+              "$ref": "135"
+            },
+            "knots": [
+              {
+                "$id": "137",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "134"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "138",
+                  "x": 131.508453,
+                  "y": -76.31655,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "139",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "140",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "134"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "141",
+                  "x": 131.508453,
+                  "y": -98.56606,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "142",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "143",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "134"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "144",
+                  "x": -23.3068466,
+                  "y": -98.56606,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "145",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "146",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "134"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "147",
+                  "x": -23.3068466,
+                  "y": -129.724319,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "148",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "149",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "134"
+                },
+                "wire": {
+                  "$id": "150",
+                  "dataIn": {
+                    "$ref": "149"
+                  },
+                  "dataOut": {
+                    "$id": "151",
+                    "wire": {
+                      "$ref": "150"
+                    }
+                  },
+                  "knots": [
+                    {
+                      "$id": "152",
+                      "$type": "Knot, Assembly-CSharp",
+                      "dataIn": {
+                        "$ref": "149"
+                      },
+                      "wire": null,
+                      "pos": {
+                        "$id": "153",
+                        "x": 42.61061,
+                        "y": -141.801544,
+                        "z": 0.0
+                      },
+                      "rot": {
+                        "$id": "154",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                      },
+                      "connectedPins": []
+                    }
+                  ],
+                  "knotCount": 3,
+                  "coloring": "E0E0E0",
+                  "pos": {
+                    "$id": "155",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "156",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  }
+                },
+                "pos": {
+                  "$id": "157",
+                  "x": 42.61061,
+                  "y": -129.724319,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "158",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 7,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "159",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "160",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "$ref": "151"
+        }
+      ],
+      "wire": {
+        "$ref": "136"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "161",
+      "x": 109.43364,
+      "y": -76.31655,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "162",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "54"
+  },
+  {
+    "$ref": "45"
+  },
+  {
+    "$ref": "107"
+  },
+  {
+    "$ref": "122"
+  },
+  {
+    "$id": "163",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$id": "164",
+      "wire": {
+        "$id": "165",
+        "dataIn": {
+          "$id": "166",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "164"
+        },
+        "knots": [],
+        "knotCount": 2,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "167",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "168",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "169",
+      "wire": {
+        "$id": "170",
+        "dataIn": {
+          "$id": "171",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "169"
+        },
+        "knots": [
+          {
+            "$id": "172",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "171"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "173",
+              "x": -6.036084,
+              "y": -117.599,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "174",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "175",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "176",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "177",
+      "connectedPins": [
+        {
+          "$id": "178",
+          "wire": {
+            "$id": "179",
+            "dataIn": {
+              "$ref": "177"
+            },
+            "dataOut": {
+              "$ref": "178"
+            },
+            "knots": [
+              {
+                "$id": "180",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "177"
+                },
+                "wire": {
+                  "$id": "181",
+                  "dataIn": {
+                    "$ref": "180"
+                  },
+                  "dataOut": {
+                    "$id": "182",
+                    "wire": {
+                      "$ref": "181"
+                    }
+                  },
+                  "knots": [
+                    {
+                      "$id": "183",
+                      "$type": "Knot, Assembly-CSharp",
+                      "dataIn": {
+                        "$ref": "180"
+                      },
+                      "wire": null,
+                      "pos": {
+                        "$id": "184",
+                        "x": 36.8655,
+                        "y": -148.699448,
+                        "z": 0.0
+                      },
+                      "rot": {
+                        "$id": "185",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                      },
+                      "connectedPins": []
+                    }
+                  ],
+                  "knotCount": 3,
+                  "coloring": "E0E0E0",
+                  "pos": {
+                    "$id": "186",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "187",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  }
+                },
+                "pos": {
+                  "$id": "188",
+                  "x": 36.8655,
+                  "y": -111.643784,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "189",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 3,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "190",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "191",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "$ref": "182"
+        }
+      ],
+      "wire": {
+        "$ref": "179"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "192",
+      "x": 13.0316086,
+      "y": -111.643784,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "193",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "194",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$ref": "178"
+    },
+    "dataB": {
+      "$ref": "135"
+    },
+    "dataOut": {
+      "$id": "195",
+      "connectedPins": [
+        {
+          "$id": "196",
+          "wire": {
+            "$id": "197",
+            "dataIn": {
+              "$ref": "195"
+            },
+            "dataOut": {
+              "$ref": "196"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "198",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "199",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "197"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "200",
+      "x": 63.126915,
+      "y": -115.243782,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "201",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "179"
+  },
+  {
+    "$ref": "136"
+  },
+  {
+    "$id": "202",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$id": "203",
+      "wire": {
+        "$id": "204",
+        "dataIn": {
+          "$ref": "172"
+        },
+        "dataOut": {
+          "$ref": "203"
+        },
+        "knots": [
+          {
+            "$id": "205",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "172"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "206",
+              "x": -6.036084,
+              "y": -156.17218,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "207",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "208",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "209",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "210",
+      "wire": {
+        "$id": "211",
+        "dataIn": {
+          "$id": "212",
+          "$type": "Knot, Assembly-CSharp",
+          "dataIn": {
+            "$ref": "166"
+          },
+          "wire": null,
+          "pos": {
+            "$id": "213",
+            "x": -17.5680218,
+            "y": -108.043785,
+            "z": 0.0
+          },
+          "rot": {
+            "$id": "214",
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "connectedPins": []
+        },
+        "dataOut": {
+          "$ref": "210"
+        },
+        "knots": [
+          {
+            "$id": "215",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "212"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "216",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "217",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "218",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "219",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "220",
+      "connectedPins": [
+        {
+          "$id": "221",
+          "wire": {
+            "$id": "222",
+            "dataIn": {
+              "$ref": "220"
+            },
+            "dataOut": {
+              "$ref": "221"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "223",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "224",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "222"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "225",
+      "x": 14.4979334,
+      "y": -160.044922,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "226",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "227",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$ref": "151"
+    },
+    "dataB": {
+      "$ref": "182"
+    },
+    "dataOut": {
+      "$id": "228",
+      "connectedPins": [
+        {
+          "$id": "229",
+          "wire": {
+            "$id": "230",
+            "dataIn": {
+              "$ref": "228"
+            },
+            "dataOut": {
+              "$ref": "229"
+            },
+            "knots": [
+              {
+                "$id": "231",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "228"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "232",
+                  "x": 96.20514,
+                  "y": -145.099442,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "233",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "234",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "228"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "235",
+                  "x": 96.29439,
+                  "y": -152.684662,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "236",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 4,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "237",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "238",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "230"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "239",
+      "x": 73.966095,
+      "y": -145.099442,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "240",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "181"
+  },
+  {
+    "$ref": "150"
+  },
+  {
+    "$id": "241",
+    "$type": "OR, Assembly-CSharp",
+    "dataA": {
+      "$ref": "229"
+    },
+    "dataB": {
+      "$ref": "221"
+    },
+    "dataOut": {
+      "$id": "242",
+      "connectedPins": [
+        {
+          "$id": "243",
+          "wire": {
+            "$id": "244",
+            "dataIn": {
+              "$ref": "242"
+            },
+            "dataOut": {
+              "$ref": "243"
+            },
+            "knots": [
+              {
+                "$id": "245",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "242"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "246",
+                  "x": 130.838715,
+                  "y": -156.444916,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "247",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "248",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "242"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "249",
+                  "x": 130.838715,
+                  "y": -176.243179,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "250",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "251",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "242"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "252",
+                  "x": -24.2790833,
+                  "y": -176.243179,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "253",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "254",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "242"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "255",
+                  "x": -24.2790833,
+                  "y": -207.861176,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "256",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "257",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "242"
+                },
+                "wire": {
+                  "$id": "258",
+                  "dataIn": {
+                    "$ref": "257"
+                  },
+                  "dataOut": {
+                    "$id": "259",
+                    "wire": {
+                      "$ref": "258"
+                    }
+                  },
+                  "knots": [
+                    {
+                      "$id": "260",
+                      "$type": "Knot, Assembly-CSharp",
+                      "dataIn": {
+                        "$ref": "257"
+                      },
+                      "wire": null,
+                      "pos": {
+                        "$id": "261",
+                        "x": 54.08603,
+                        "y": -215.927032,
+                        "z": 0.0
+                      },
+                      "rot": {
+                        "$id": "262",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                      },
+                      "connectedPins": []
+                    }
+                  ],
+                  "knotCount": 3,
+                  "coloring": "E0E0E0",
+                  "pos": {
+                    "$id": "263",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "264",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  }
+                },
+                "pos": {
+                  "$id": "265",
+                  "x": 54.4085159,
+                  "y": -207.8612,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "266",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 7,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "267",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "268",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "$ref": "259"
+        }
+      ],
+      "wire": {
+        "$ref": "244"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "269",
+      "x": 109.967392,
+      "y": -156.444916,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "270",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "222"
+  },
+  {
+    "$ref": "230"
+  },
+  {
+    "$id": "271",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$id": "272",
+      "wire": {
+        "$id": "273",
+        "dataIn": {
+          "$ref": "13"
+        },
+        "dataOut": {
+          "$ref": "272"
+        },
+        "knots": [
+          {
+            "$id": "274",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "13"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "275",
+              "x": -12.7443886,
+              "y": -9.414629,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "276",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "277",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "278",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "279",
+      "wire": {
+        "$id": "280",
+        "dataIn": {
+          "$ref": "5"
+        },
+        "dataOut": {
+          "$ref": "279"
+        },
+        "knots": [
+          {
+            "$id": "281",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "5"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "282",
+              "x": -22.2342072,
+              "y": -16.9627743,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "283",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "284",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "285",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "286",
+      "connectedPins": [
+        {
+          "$ref": "60"
+        },
+        {
+          "$ref": "113"
+        }
+      ],
+      "wire": {
+        "$id": "287",
+        "dataIn": {
+          "$ref": "286"
+        },
+        "dataOut": {
+          "$ref": "60"
+        },
+        "knots": [
+          {
+            "$id": "288",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "286"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "289",
+              "x": 38.4837875,
+              "y": -13.3627739,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "290",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "291",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "286"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "292",
+              "x": 38.4837875,
+              "y": -24.9549141,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "293",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "294",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "286"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "295",
+              "x": -22.9841614,
+              "y": -24.9549141,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "296",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "297",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "286"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "298",
+              "x": -22.9841614,
+              "y": -57.5895233,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "299",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "300",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "286"
+            },
+            "wire": {
+              "$id": "301",
+              "dataIn": {
+                "$ref": "300"
+              },
+              "dataOut": {
+                "$ref": "113"
+              },
+              "knots": [
+                {
+                  "$id": "302",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "300"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "303",
+                    "x": 41.590477,
+                    "y": -62.9176254,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "304",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "305",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "306",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "307",
+              "x": 41.368557,
+              "y": -57.5895233,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "308",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 7,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "309",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "310",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "311",
+      "x": 12.8826742,
+      "y": -13.3627739,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "312",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "287"
+  },
+  {
+    "$ref": "301"
+  },
+  {
+    "$id": "313",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$id": "314",
+      "wire": {
+        "$id": "315",
+        "dataIn": {
+          "$id": "316",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "314"
+        },
+        "knots": [],
+        "knotCount": 2,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "317",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "318",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "319",
+      "wire": {
+        "$id": "320",
+        "dataIn": {
+          "$id": "321",
+          "connectedPins": [],
+          "wire": null
+        },
+        "dataOut": {
+          "$ref": "319"
+        },
+        "knots": [
+          {
+            "$id": "322",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "321"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "323",
+              "x": -8.477064,
+              "y": -192.797455,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "324",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "325",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "326",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "327",
+      "connectedPins": [
+        {
+          "$id": "328",
+          "wire": {
+            "$id": "329",
+            "dataIn": {
+              "$ref": "327"
+            },
+            "dataOut": {
+              "$ref": "328"
+            },
+            "knots": [
+              {
+                "$id": "330",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "327"
+                },
+                "wire": {
+                  "$id": "331",
+                  "dataIn": {
+                    "$ref": "330"
+                  },
+                  "dataOut": {
+                    "$id": "332",
+                    "wire": {
+                      "$id": "333",
+                      "dataIn": {
+                        "$ref": "330"
+                      },
+                      "dataOut": {
+                        "$ref": "332"
+                      },
+                      "knots": [
+                        {
+                          "$id": "334",
+                          "$type": "Knot, Assembly-CSharp",
+                          "dataIn": {
+                            "$ref": "330"
+                          },
+                          "wire": null,
+                          "pos": {
+                            "$id": "335",
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                          },
+                          "rot": {
+                            "$id": "336",
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 1.0
+                          },
+                          "connectedPins": []
+                        }
+                      ],
+                      "knotCount": 3,
+                      "coloring": "E0E0E0",
+                      "pos": {
+                        "$id": "337",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      },
+                      "rot": {
+                        "$id": "338",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                      }
+                    }
+                  },
+                  "knots": [
+                    {
+                      "$id": "339",
+                      "$type": "Knot, Assembly-CSharp",
+                      "dataIn": {
+                        "$ref": "330"
+                      },
+                      "wire": null,
+                      "pos": {
+                        "$id": "340",
+                        "x": 46.3462753,
+                        "y": -223.024948,
+                        "z": 0.0
+                      },
+                      "rot": {
+                        "$id": "341",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                      },
+                      "connectedPins": []
+                    }
+                  ],
+                  "knotCount": 3,
+                  "coloring": "E0E0E0",
+                  "pos": {
+                    "$id": "342",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "343",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  }
+                },
+                "pos": {
+                  "$id": "344",
+                  "x": 46.3462753,
+                  "y": -188.331635,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "345",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 3,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "346",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "347",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "$ref": "332"
+        }
+      ],
+      "wire": {
+        "$ref": "329"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "348",
+      "x": 13.6699295,
+      "y": -188.331635,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "349",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "350",
+    "$type": "XOR, Assembly-CSharp",
+    "dataA": {
+      "$ref": "328"
+    },
+    "dataB": {
+      "$ref": "243"
+    },
+    "dataOut": {
+      "$id": "351",
+      "connectedPins": [
+        {
+          "$id": "352",
+          "wire": {
+            "$id": "353",
+            "dataIn": {
+              "$ref": "351"
+            },
+            "dataOut": {
+              "$ref": "352"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "354",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "355",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "353"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "356",
+      "x": 70.7507248,
+      "y": -191.931641,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "357",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "358",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$id": "359",
+      "wire": {
+        "$id": "360",
+        "dataIn": {
+          "$ref": "322"
+        },
+        "dataOut": {
+          "$ref": "359"
+        },
+        "knots": [
+          {
+            "$id": "361",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "322"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "362",
+              "x": -8.477064,
+              "y": -226.251282,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "363",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "364",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "365",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataB": {
+      "$id": "366",
+      "wire": {
+        "$id": "367",
+        "dataIn": {
+          "$id": "368",
+          "$type": "Knot, Assembly-CSharp",
+          "dataIn": {
+            "$ref": "316"
+          },
+          "wire": null,
+          "pos": {
+            "$id": "369",
+            "x": -18.1517715,
+            "y": -184.731628,
+            "z": 0.0
+          },
+          "rot": {
+            "$id": "370",
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "connectedPins": []
+        },
+        "dataOut": {
+          "$ref": "366"
+        },
+        "knots": [
+          {
+            "$id": "371",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "368"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "372",
+              "x": -18.1517715,
+              "y": -233.671844,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "373",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "374",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "375",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "376",
+      "connectedPins": [
+        {
+          "$id": "377",
+          "wire": {
+            "$id": "378",
+            "dataIn": {
+              "$ref": "376"
+            },
+            "dataOut": {
+              "$ref": "377"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "379",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "380",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "378"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "381",
+      "x": 15.6723814,
+      "y": -230.071838,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "382",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "383",
+    "$type": "AND, Assembly-CSharp",
+    "dataA": {
+      "$ref": "259"
+    },
+    "dataB": {
+      "$ref": "332"
+    },
+    "dataOut": {
+      "$id": "384",
+      "connectedPins": [
+        {
+          "$id": "385",
+          "wire": {
+            "$id": "386",
+            "dataIn": {
+              "$ref": "384"
+            },
+            "dataOut": {
+              "$ref": "385"
+            },
+            "knots": [
+              {
+                "$id": "387",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "384"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "388",
+                  "x": 95.6512,
+                  "y": -219.424942,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "389",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "390",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "384"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "391",
+                  "x": 95.6512,
+                  "y": -222.766891,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "392",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 4,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "393",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "394",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "386"
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "395",
+      "x": 72.7531357,
+      "y": -219.424942,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "396",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "397",
+    "$type": "OR, Assembly-CSharp",
+    "dataA": {
+      "$ref": "385"
+    },
+    "dataB": {
+      "$ref": "377"
+    },
+    "dataOut": {
+      "$id": "398",
+      "connectedPins": [
+        {
+          "$id": "399",
+          "wire": {
+            "$id": "400",
+            "dataIn": {
+              "$ref": "398"
+            },
+            "dataOut": {
+              "$ref": "399"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "401",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "402",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$id": "403",
+        "dataIn": {
+          "$ref": "398"
+        },
+        "dataOut": {
+          "$ref": "399"
+        },
+        "knots": [],
+        "knotCount": 2,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "404",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "405",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 10,
+    "visualizerOn": true,
+    "pos": {
+      "$id": "406",
+      "x": 114.961113,
+      "y": -226.3669,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "407",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "244"
+  },
+  {
+    "$ref": "258"
+  },
+  {
+    "$ref": "329"
+  },
+  {
+    "$ref": "331"
+  },
+  {
+    "$ref": "378"
+  },
+  {
+    "$ref": "386"
+  },
+  {
+    "$id": "408",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$id": "409",
+      "wire": {
+        "$id": "410",
+        "dataIn": {
+          "$id": "411",
+          "$type": "Knot, Assembly-CSharp",
+          "dataIn": {
+            "$id": "412",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$id": "413",
+              "$type": "Knot, Assembly-CSharp",
+              "dataIn": {
+                "$id": "414",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$id": "415",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$id": "416",
+                    "$type": "Knot, Assembly-CSharp",
+                    "dataIn": {
+                      "$id": "417",
+                      "$type": "Knot, Assembly-CSharp",
+                      "dataIn": {
+                        "$id": "418",
+                        "connectedPins": [
+                          {
+                            "$id": "419",
+                            "wire": {
+                              "$id": "420",
+                              "dataIn": {
+                                "$ref": "418"
+                              },
+                              "dataOut": {
+                                "$ref": "419"
+                              },
+                              "knots": [
+                                {
+                                  "$id": "421",
+                                  "$type": "Knot, Assembly-CSharp",
+                                  "dataIn": {
+                                    "$ref": "418"
+                                  },
+                                  "wire": {
+                                    "$id": "422",
+                                    "dataIn": {
+                                      "$ref": "421"
+                                    },
+                                    "dataOut": {
+                                      "$id": "423",
+                                      "wire": {
+                                        "$ref": "422"
+                                      }
+                                    },
+                                    "knots": [],
+                                    "knotCount": 2,
+                                    "coloring": "E0E0E0",
+                                    "pos": {
+                                      "$id": "424",
+                                      "x": 0.0,
+                                      "y": 0.0,
+                                      "z": 0.0
+                                    },
+                                    "rot": {
+                                      "$id": "425",
+                                      "x": 0.0,
+                                      "y": 0.0,
+                                      "z": 0.0,
+                                      "w": 1.0
+                                    }
+                                  },
+                                  "pos": {
+                                    "$id": "426",
+                                    "x": -111.601051,
+                                    "y": -257.4218,
+                                    "z": 0.0
+                                  },
+                                  "rot": {
+                                    "$id": "427",
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                  },
+                                  "connectedPins": []
+                                },
+                                {
+                                  "$id": "428",
+                                  "$type": "Knot, Assembly-CSharp",
+                                  "dataIn": {
+                                    "$ref": "418"
+                                  },
+                                  "wire": {
+                                    "$id": "429",
+                                    "dataIn": {
+                                      "$ref": "428"
+                                    },
+                                    "dataOut": {
+                                      "$id": "430",
+                                      "wire": {
+                                        "$ref": "429"
+                                      }
+                                    },
+                                    "knots": [
+                                      {
+                                        "$id": "431",
+                                        "$type": "Knot, Assembly-CSharp",
+                                        "dataIn": {
+                                          "$ref": "428"
+                                        },
+                                        "wire": null,
+                                        "pos": {
+                                          "$id": "432",
+                                          "x": 143.551056,
+                                          "y": -257.4218,
+                                          "z": 0.0
+                                        },
+                                        "rot": {
+                                          "$id": "433",
+                                          "x": 0.0,
+                                          "y": 0.0,
+                                          "z": 0.0,
+                                          "w": 1.0
+                                        },
+                                        "connectedPins": []
+                                      },
+                                      {
+                                        "$id": "434",
+                                        "$type": "Knot, Assembly-CSharp",
+                                        "dataIn": {
+                                          "$ref": "428"
+                                        },
+                                        "wire": {
+                                          "$id": "435",
+                                          "dataIn": {
+                                            "$ref": "434"
+                                          },
+                                          "dataOut": {
+                                            "$id": "436",
+                                            "wire": {
+                                              "$ref": "435"
+                                            }
+                                          },
+                                          "knots": [
+                                            {
+                                              "$id": "437",
+                                              "$type": "Knot, Assembly-CSharp",
+                                              "dataIn": {
+                                                "$ref": "434"
+                                              },
+                                              "wire": {
+                                                "$id": "438",
+                                                "dataIn": {
+                                                  "$ref": "437"
+                                                },
+                                                "dataOut": {
+                                                  "$id": "439",
+                                                  "wire": {
+                                                    "$ref": "438"
+                                                  }
+                                                },
+                                                "knots": [
+                                                  {
+                                                    "$id": "440",
+                                                    "$type": "Knot, Assembly-CSharp",
+                                                    "dataIn": {
+                                                      "$ref": "437"
+                                                    },
+                                                    "wire": {
+                                                      "$id": "441",
+                                                      "dataIn": {
+                                                        "$ref": "440"
+                                                      },
+                                                      "dataOut": {
+                                                        "$id": "442",
+                                                        "wire": {
+                                                          "$ref": "441"
+                                                        }
+                                                      },
+                                                      "knots": [
+                                                        {
+                                                          "$id": "443",
+                                                          "$type": "Knot, Assembly-CSharp",
+                                                          "dataIn": {
+                                                            "$ref": "440"
+                                                          },
+                                                          "wire": {
+                                                            "$id": "444",
+                                                            "dataIn": {
+                                                              "$ref": "443"
+                                                            },
+                                                            "dataOut": {
+                                                              "$id": "445",
+                                                              "wire": {
+                                                                "$ref": "444"
+                                                              }
+                                                            },
+                                                            "knots": [
+                                                              {
+                                                                "$id": "446",
+                                                                "$type": "Knot, Assembly-CSharp",
+                                                                "dataIn": {
+                                                                  "$ref": "443"
+                                                                },
+                                                                "wire": null,
+                                                                "pos": {
+                                                                  "$id": "447",
+                                                                  "x": 143.551056,
+                                                                  "y": -5.68600941,
+                                                                  "z": 0.0
+                                                                },
+                                                                "rot": {
+                                                                  "$id": "448",
+                                                                  "x": 0.0,
+                                                                  "y": 0.0,
+                                                                  "z": 0.0,
+                                                                  "w": 1.0
+                                                                },
+                                                                "connectedPins": []
+                                                              }
+                                                            ],
+                                                            "knotCount": 3,
+                                                            "coloring": "E0E0E0",
+                                                            "pos": {
+                                                              "$id": "449",
+                                                              "x": 0.0,
+                                                              "y": 0.0,
+                                                              "z": 0.0
+                                                            },
+                                                            "rot": {
+                                                              "$id": "450",
+                                                              "x": 0.0,
+                                                              "y": 0.0,
+                                                              "z": 0.0,
+                                                              "w": 1.0
+                                                            }
+                                                          },
+                                                          "pos": {
+                                                            "$id": "451",
+                                                            "x": 143.551056,
+                                                            "y": -53.8482132,
+                                                            "z": 0.0
+                                                          },
+                                                          "rot": {
+                                                            "$id": "452",
+                                                            "x": 0.0,
+                                                            "y": 0.0,
+                                                            "z": 0.0,
+                                                            "w": 1.0
+                                                          },
+                                                          "connectedPins": []
+                                                        }
+                                                      ],
+                                                      "knotCount": 3,
+                                                      "coloring": "E0E0E0",
+                                                      "pos": {
+                                                        "$id": "453",
+                                                        "x": 0.0,
+                                                        "y": 0.0,
+                                                        "z": 0.0
+                                                      },
+                                                      "rot": {
+                                                        "$id": "454",
+                                                        "x": 0.0,
+                                                        "y": 0.0,
+                                                        "z": 0.0,
+                                                        "w": 1.0
+                                                      }
+                                                    },
+                                                    "pos": {
+                                                      "$id": "455",
+                                                      "x": 143.551056,
+                                                      "y": -123.7224,
+                                                      "z": 0.0
+                                                    },
+                                                    "rot": {
+                                                      "$id": "456",
+                                                      "x": 0.0,
+                                                      "y": 0.0,
+                                                      "z": 0.0,
+                                                      "w": 1.0
+                                                    },
+                                                    "connectedPins": []
+                                                  }
+                                                ],
+                                                "knotCount": 3,
+                                                "coloring": "E0E0E0",
+                                                "pos": {
+                                                  "$id": "457",
+                                                  "x": 0.0,
+                                                  "y": 0.0,
+                                                  "z": 0.0
+                                                },
+                                                "rot": {
+                                                  "$id": "458",
+                                                  "x": 0.0,
+                                                  "y": 0.0,
+                                                  "z": 0.0,
+                                                  "w": 1.0
+                                                }
+                                              },
+                                              "pos": {
+                                                "$id": "459",
+                                                "x": 143.551056,
+                                                "y": -200.123428,
+                                                "z": 0.0
+                                              },
+                                              "rot": {
+                                                "$id": "460",
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": 0.0,
+                                                "w": 1.0
+                                              },
+                                              "connectedPins": []
+                                            }
+                                          ],
+                                          "knotCount": 3,
+                                          "coloring": "E0E0E0",
+                                          "pos": {
+                                            "$id": "461",
+                                            "x": 0.0,
+                                            "y": 0.0,
+                                            "z": 0.0
+                                          },
+                                          "rot": {
+                                            "$id": "462",
+                                            "x": 0.0,
+                                            "y": 0.0,
+                                            "z": 0.0,
+                                            "w": 1.0
+                                          }
+                                        },
+                                        "pos": {
+                                          "$id": "463",
+                                          "x": 143.551056,
+                                          "y": -235.148788,
+                                          "z": 0.0
+                                        },
+                                        "rot": {
+                                          "$id": "464",
+                                          "x": 0.0,
+                                          "y": 0.0,
+                                          "z": 0.0,
+                                          "w": 1.0
+                                        },
+                                        "connectedPins": []
+                                      }
+                                    ],
+                                    "knotCount": 4,
+                                    "coloring": "E0E0E0",
+                                    "pos": {
+                                      "$id": "465",
+                                      "x": 0.0,
+                                      "y": 0.0,
+                                      "z": 0.0
+                                    },
+                                    "rot": {
+                                      "$id": "466",
+                                      "x": 0.0,
+                                      "y": 0.0,
+                                      "z": 0.0,
+                                      "w": 1.0
+                                    }
+                                  },
+                                  "pos": {
+                                    "$id": "467",
+                                    "x": -62.9475937,
+                                    "y": -257.4218,
+                                    "z": 0.0
+                                  },
+                                  "rot": {
+                                    "$id": "468",
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                  },
+                                  "connectedPins": []
+                                },
+                                {
+                                  "$ref": "417"
+                                }
+                              ],
+                              "knotCount": 5,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "469",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "470",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "430"
+                          },
+                          {
+                            "$ref": "436"
+                          },
+                          {
+                            "$ref": "439"
+                          },
+                          {
+                            "$ref": "442"
+                          },
+                          {
+                            "$ref": "445"
+                          },
+                          {
+                            "$id": "471",
+                            "wire": {
+                              "$id": "472",
+                              "dataIn": {
+                                "$ref": "417"
+                              },
+                              "dataOut": {
+                                "$ref": "471"
+                              },
+                              "knots": [
+                                {
+                                  "$ref": "416"
+                                }
+                              ],
+                              "knotCount": 3,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "473",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "474",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$id": "475",
+                            "wire": {
+                              "$id": "476",
+                              "dataIn": {
+                                "$ref": "416"
+                              },
+                              "dataOut": {
+                                "$ref": "475"
+                              },
+                              "knots": [
+                                {
+                                  "$ref": "415"
+                                }
+                              ],
+                              "knotCount": 3,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "477",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "478",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$id": "479",
+                            "wire": {
+                              "$id": "480",
+                              "dataIn": {
+                                "$ref": "415"
+                              },
+                              "dataOut": {
+                                "$ref": "479"
+                              },
+                              "knots": [
+                                {
+                                  "$ref": "414"
+                                }
+                              ],
+                              "knotCount": 3,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "481",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "482",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$id": "483",
+                            "wire": {
+                              "$id": "484",
+                              "dataIn": {
+                                "$ref": "414"
+                              },
+                              "dataOut": {
+                                "$ref": "483"
+                              },
+                              "knots": [
+                                {
+                                  "$ref": "413"
+                                }
+                              ],
+                              "knotCount": 3,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "485",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "486",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$id": "487",
+                            "wire": {
+                              "$id": "488",
+                              "dataIn": {
+                                "$ref": "413"
+                              },
+                              "dataOut": {
+                                "$ref": "487"
+                              },
+                              "knots": [
+                                {
+                                  "$ref": "412"
+                                }
+                              ],
+                              "knotCount": 3,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "489",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "490",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$id": "491",
+                            "wire": {
+                              "$id": "492",
+                              "dataIn": {
+                                "$ref": "412"
+                              },
+                              "dataOut": {
+                                "$ref": "491"
+                              },
+                              "knots": [
+                                {
+                                  "$ref": "411"
+                                }
+                              ],
+                              "knotCount": 3,
+                              "coloring": "E0E0E0",
+                              "pos": {
+                                "$id": "493",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                              },
+                              "rot": {
+                                "$id": "494",
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "409"
+                          },
+                          {
+                            "$ref": "423"
+                          }
+                        ],
+                        "wire": {
+                          "$ref": "420"
+                        }
+                      },
+                      "wire": {
+                        "$ref": "472"
+                      },
+                      "pos": {
+                        "$id": "495",
+                        "x": -62.9475937,
+                        "y": -211.390884,
+                        "z": 0.0
+                      },
+                      "rot": {
+                        "$id": "496",
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0,
+                        "w": 1.0
+                      },
+                      "connectedPins": []
+                    },
+                    "wire": {
+                      "$ref": "476"
+                    },
+                    "pos": {
+                      "$id": "497",
+                      "x": -62.9475937,
+                      "y": -194.266769,
+                      "z": 0.0
+                    },
+                    "rot": {
+                      "$id": "498",
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0,
+                      "w": 1.0
+                    },
+                    "connectedPins": []
+                  },
+                  "wire": {
+                    "$ref": "480"
+                  },
+                  "pos": {
+                    "$id": "499",
+                    "x": -62.9475937,
+                    "y": -133.995331,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "500",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                },
+                "wire": {
+                  "$ref": "484"
+                },
+                "pos": {
+                  "$id": "501",
+                  "x": -62.9475937,
+                  "y": -117.922943,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "502",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              "wire": {
+                "$ref": "488"
+              },
+              "pos": {
+                "$id": "503",
+                "x": -62.9475937,
+                "y": -61.0955658,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "504",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              },
+              "connectedPins": []
+            },
+            "wire": {
+              "$ref": "492"
+            },
+            "pos": {
+              "$id": "505",
+              "x": -62.9475937,
+              "y": -43.875164,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "506",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          "wire": {
+            "$ref": "410"
+          },
+          "pos": {
+            "$id": "507",
+            "x": -62.9475937,
+            "y": -18.0445385,
+            "z": 0.0
+          },
+          "rot": {
+            "$id": "508",
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+          },
+          "connectedPins": []
+        },
+        "dataOut": {
+          "$ref": "409"
+        },
+        "knots": [
+          {
+            "$id": "509",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "411"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "510",
+              "x": -62.9475937,
+              "y": 2.0459404,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "511",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "512",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "513",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataIn": {
+      "$id": "514",
+      "wire": {
+        "$id": "515",
+        "dataIn": {
+          "$id": "516",
+          "connectedPins": [
+            {
+              "$ref": "514"
+            }
+          ],
+          "wire": {
+            "$ref": "515"
+          }
+        },
+        "dataOut": {
+          "$ref": "514"
+        },
+        "knots": [
+          {
+            "$id": "517",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "516"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "518",
+              "x": -99.41851,
+              "y": -86.9430847,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "519",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "520",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "516"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "521",
+              "x": -99.41851,
+              "y": 10.7410431,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "522",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "523",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "524",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "525",
+      "connectedPins": [
+        {
+          "$ref": "2"
+        },
+        {
+          "$ref": "279"
+        }
+      ],
+      "wire": {
+        "$id": "526",
+        "dataIn": {
+          "$ref": "525"
+        },
+        "dataOut": {
+          "$ref": "2"
+        },
+        "knots": [
+          {
+            "$id": "527",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "525"
+            },
+            "wire": {
+              "$id": "528",
+              "dataIn": {
+                "$ref": "527"
+              },
+              "dataOut": {
+                "$ref": "279"
+              },
+              "knots": [
+                {
+                  "$id": "529",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "527"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "530",
+                    "x": -11.31259,
+                    "y": -16.946701,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "531",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "532",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "533",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "534",
+              "x": -11.31259,
+              "y": 10.6236076,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "535",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "536",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "537",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "538",
+      "x": -47.02014,
+      "y": 6.12360764,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "539",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$id": "540",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "491"
+    },
+    "dataIn": {
+      "$id": "541",
+      "wire": {
+        "$id": "542",
+        "dataIn": {
+          "$id": "543",
+          "connectedPins": [
+            {
+              "$ref": "541"
+            }
+          ],
+          "wire": {
+            "$ref": "542"
+          }
+        },
+        "dataOut": {
+          "$ref": "541"
+        },
+        "knots": [
+          {
+            "$id": "544",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "543"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "545",
+              "x": -88.89557,
+              "y": -115.743088,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "546",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "547",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "543"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "548",
+              "x": -88.89557,
+              "y": -7.589264,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "549",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "550",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "551",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "552",
+      "connectedPins": [
+        {
+          "$ref": "10"
+        },
+        {
+          "$ref": "272"
+        }
+      ],
+      "wire": {
+        "$id": "553",
+        "dataIn": {
+          "$ref": "552"
+        },
+        "dataOut": {
+          "$ref": "10"
+        },
+        "knots": [
+          {
+            "$id": "554",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "552"
+            },
+            "wire": {
+              "$id": "555",
+              "dataIn": {
+                "$ref": "554"
+              },
+              "dataOut": {
+                "$ref": "272"
+              },
+              "knots": [],
+              "knotCount": 2,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "556",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "557",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "558",
+              "x": -3.22412968,
+              "y": -8.305878,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "559",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "560",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "552"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "561",
+              "x": -3.22412968,
+              "y": 3.56022835,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "562",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "563",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "564",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "565",
+      "x": -47.61198,
+      "y": -12.8058777,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "566",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "526"
+  },
+  {
+    "$ref": "528"
+  },
+  {
+    "$ref": "553"
+  },
+  {
+    "$ref": "555"
+  },
+  {
+    "$id": "567",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "487"
+    },
+    "dataIn": {
+      "$id": "568",
+      "wire": {
+        "$id": "569",
+        "dataIn": {
+          "$id": "570",
+          "connectedPins": [
+            {
+              "$ref": "568"
+            }
+          ],
+          "wire": {
+            "$ref": "569"
+          }
+        },
+        "dataOut": {
+          "$ref": "568"
+        },
+        "knots": [
+          {
+            "$id": "571",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "570"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "572",
+              "x": -95.3451157,
+              "y": -94.14308,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "573",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "574",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "570"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "575",
+              "x": -95.3451157,
+              "y": -33.0479965,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "576",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "577",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "578",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "579",
+      "connectedPins": [
+        {
+          "$ref": "26"
+        },
+        {
+          "$ref": "95"
+        }
+      ],
+      "wire": {
+        "$id": "580",
+        "dataIn": {
+          "$ref": "579"
+        },
+        "dataOut": {
+          "$ref": "26"
+        },
+        "knots": [
+          {
+            "$id": "581",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "579"
+            },
+            "wire": {
+              "$id": "582",
+              "dataIn": {
+                "$ref": "581"
+              },
+              "dataOut": {
+                "$ref": "95"
+              },
+              "knots": [
+                {
+                  "$id": "583",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "581"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "584",
+                    "x": -10.9180117,
+                    "y": -84.38295,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "585",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "586",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "587",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "588",
+              "x": -10.9180117,
+              "y": -33.74235,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "589",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "590",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "591",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "592",
+      "x": -47.8092422,
+      "y": -38.24235,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "593",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "580"
+  },
+  {
+    "$ref": "582"
+  },
+  {
+    "$id": "594",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "483"
+    },
+    "dataIn": {
+      "$id": "595",
+      "wire": {
+        "$id": "596",
+        "dataIn": {
+          "$id": "597",
+          "connectedPins": [
+            {
+              "$ref": "595"
+            }
+          ],
+          "wire": {
+            "$ref": "596"
+          }
+        },
+        "dataOut": {
+          "$ref": "595"
+        },
+        "knots": [
+          {
+            "$id": "598",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "597"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "599",
+              "x": -84.8221741,
+              "y": -122.943092,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "600",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "601",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "597"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "602",
+              "x": -84.8221741,
+              "y": -51.7177429,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "603",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "604",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "605",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "606",
+      "connectedPins": [
+        {
+          "$ref": "31"
+        },
+        {
+          "$ref": "88"
+        }
+      ],
+      "wire": {
+        "$id": "607",
+        "dataIn": {
+          "$ref": "606"
+        },
+        "dataOut": {
+          "$ref": "31"
+        },
+        "knots": [
+          {
+            "$id": "608",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "606"
+            },
+            "wire": {
+              "$id": "609",
+              "dataIn": {
+                "$ref": "608"
+              },
+              "dataOut": {
+                "$ref": "88"
+              },
+              "knots": [
+                {
+                  "$id": "610",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "608"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "611",
+                    "x": -2.65106583,
+                    "y": -76.19925,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "612",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "613",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "614",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "615",
+              "x": -2.65106583,
+              "y": -51.152916,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "616",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "617",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "606"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "618",
+              "x": -2.65106583,
+              "y": -40.6712341,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "619",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "620",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "621",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "622",
+      "x": -47.83244,
+      "y": -55.652916,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "623",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "607"
+  },
+  {
+    "$ref": "609"
+  },
+  {
+    "$id": "624",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "479"
+    },
+    "dataIn": {
+      "$id": "625",
+      "wire": {
+        "$id": "626",
+        "dataIn": {
+          "$id": "627",
+          "connectedPins": [
+            {
+              "$ref": "625"
+            }
+          ],
+          "wire": {
+            "$ref": "626"
+          }
+        },
+        "dataOut": {
+          "$ref": "625"
+        },
+        "knots": [
+          {
+            "$id": "628",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "627"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "629",
+              "x": -68.86802,
+              "y": -101.343094,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "630",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "631",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "627"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "632",
+              "x": -68.86802,
+              "y": -108.066437,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "633",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "634",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "635",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "636",
+      "connectedPins": [
+        {
+          "$ref": "164"
+        },
+        {
+          "$ref": "210"
+        }
+      ],
+      "wire": {
+        "$id": "637",
+        "dataIn": {
+          "$ref": "636"
+        },
+        "dataOut": {
+          "$ref": "164"
+        },
+        "knots": [
+          {
+            "$id": "638",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "636"
+            },
+            "wire": {
+              "$id": "639",
+              "dataIn": {
+                "$ref": "638"
+              },
+              "dataOut": {
+                "$ref": "210"
+              },
+              "knots": [
+                {
+                  "$id": "640",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "638"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "641",
+                    "x": -11.1145992,
+                    "y": -163.67218,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "642",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "643",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "644",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "645",
+              "x": -11.114603,
+              "y": -107.6061,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "646",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "647",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "648",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "649",
+      "x": -47.67459,
+      "y": -112.656731,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "650",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "637"
+  },
+  {
+    "$ref": "639"
+  },
+  {
+    "$id": "651",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "475"
+    },
+    "dataIn": {
+      "$id": "652",
+      "wire": {
+        "$id": "653",
+        "dataIn": {
+          "$id": "654",
+          "connectedPins": [
+            {
+              "$ref": "652"
+            }
+          ],
+          "wire": {
+            "$id": "655",
+            "dataIn": {
+              "$ref": "654"
+            },
+            "dataOut": {
+              "$ref": "652"
+            },
+            "knots": [
+              {
+                "$id": "656",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "654"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "657",
+                  "x": -78.0100555,
+                  "y": -130.1431,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "658",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              },
+              {
+                "$id": "659",
+                "$type": "Knot, Assembly-CSharp",
+                "dataIn": {
+                  "$ref": "654"
+                },
+                "wire": null,
+                "pos": {
+                  "$id": "660",
+                  "x": -78.0100555,
+                  "y": -124.127853,
+                  "z": 0.0
+                },
+                "rot": {
+                  "$id": "661",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0,
+                  "w": 1.0
+                },
+                "connectedPins": []
+              }
+            ],
+            "knotCount": 4,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "662",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "663",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        "dataOut": {
+          "$ref": "652"
+        },
+        "knots": [
+          {
+            "$id": "664",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "654"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "665",
+              "x": -80.06987,
+              "y": -130.1431,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "666",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "667",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "668",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "669",
+      "connectedPins": [
+        {
+          "$ref": "169"
+        },
+        {
+          "$ref": "203"
+        }
+      ],
+      "wire": {
+        "$id": "670",
+        "dataIn": {
+          "$ref": "669"
+        },
+        "dataOut": {
+          "$ref": "169"
+        },
+        "knots": [
+          {
+            "$id": "671",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "669"
+            },
+            "wire": {
+              "$id": "672",
+              "dataIn": {
+                "$ref": "671"
+              },
+              "dataOut": {
+                "$ref": "203"
+              },
+              "knots": [
+                {
+                  "$id": "673",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "671"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "674",
+                    "x": -1.18385315,
+                    "y": -156.651443,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "675",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "676",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "677",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "678",
+              "x": -1.18385315,
+              "y": -124.552689,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "679",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "680",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "669"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "681",
+              "x": -1.18385315,
+              "y": -115.495407,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "682",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "683",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "684",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "685",
+      "x": -47.1516342,
+      "y": -128.627853,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "686",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "670"
+  },
+  {
+    "$ref": "672"
+  },
+  {
+    "$id": "687",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "471"
+    },
+    "dataIn": {
+      "$id": "688",
+      "wire": {
+        "$id": "689",
+        "dataIn": {
+          "$id": "690",
+          "connectedPins": [
+            {
+              "$ref": "688"
+            }
+          ],
+          "wire": {
+            "$ref": "689"
+          }
+        },
+        "dataOut": {
+          "$ref": "688"
+        },
+        "knots": [
+          {
+            "$id": "691",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "690"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "692",
+              "x": -72.94144,
+              "y": -108.543091,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "693",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "694",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "690"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "695",
+              "x": -72.94144,
+              "y": -185.121552,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "696",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "697",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "698",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "699",
+      "connectedPins": [
+        {
+          "$ref": "314"
+        },
+        {
+          "$ref": "366"
+        }
+      ],
+      "wire": {
+        "$id": "700",
+        "dataIn": {
+          "$ref": "699"
+        },
+        "dataOut": {
+          "$ref": "314"
+        },
+        "knots": [
+          {
+            "$id": "701",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "699"
+            },
+            "wire": {
+              "$id": "702",
+              "dataIn": {
+                "$ref": "701"
+              },
+              "dataOut": {
+                "$ref": "366"
+              },
+              "knots": [
+                {
+                  "$id": "703",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "701"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "704",
+                    "x": -11.513505,
+                    "y": -234.284943,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "705",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "706",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "707",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "708",
+              "x": -11.513505,
+              "y": -184.557266,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "709",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 3,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "710",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "711",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "712",
+      "x": -47.3824,
+      "y": -189.057266,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "713",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "700"
+  },
+  {
+    "$ref": "702"
+  },
+  {
+    "$id": "714",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "419"
+    },
+    "dataIn": {
+      "$id": "715",
+      "wire": {
+        "$id": "716",
+        "dataIn": {
+          "$id": "717",
+          "connectedPins": [
+            {
+              "$ref": "715"
+            }
+          ],
+          "wire": {
+            "$ref": "716"
+          }
+        },
+        "dataOut": {
+          "$ref": "715"
+        },
+        "knots": [
+          {
+            "$id": "718",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "717"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "719",
+              "x": -79.39098,
+              "y": -137.3431,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "720",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "721",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "717"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "722",
+              "x": -79.39098,
+              "y": -203.451859,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "723",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "724",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "725",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "dataOut": {
+      "$id": "726",
+      "connectedPins": [
+        {
+          "$ref": "319"
+        },
+        {
+          "$ref": "359"
+        }
+      ],
+      "wire": {
+        "$id": "727",
+        "dataIn": {
+          "$ref": "726"
+        },
+        "dataOut": {
+          "$ref": "319"
+        },
+        "knots": [
+          {
+            "$id": "728",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "726"
+            },
+            "wire": {
+              "$id": "729",
+              "dataIn": {
+                "$ref": "728"
+              },
+              "dataOut": {
+                "$ref": "359"
+              },
+              "knots": [
+                {
+                  "$id": "730",
+                  "$type": "Knot, Assembly-CSharp",
+                  "dataIn": {
+                    "$ref": "728"
+                  },
+                  "wire": null,
+                  "pos": {
+                    "$id": "731",
+                    "x": -1.02876,
+                    "y": -225.460022,
+                    "z": 0.0
+                  },
+                  "rot": {
+                    "$id": "732",
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                  },
+                  "connectedPins": []
+                }
+              ],
+              "knotCount": 3,
+              "coloring": "E0E0E0",
+              "pos": {
+                "$id": "733",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+              },
+              "rot": {
+                "$id": "734",
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+              }
+            },
+            "pos": {
+              "$id": "735",
+              "x": -1.02876,
+              "y": -201.655518,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "736",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          },
+          {
+            "$id": "737",
+            "$type": "Knot, Assembly-CSharp",
+            "dataIn": {
+              "$ref": "726"
+            },
+            "wire": null,
+            "pos": {
+              "$id": "738",
+              "x": -1.02876,
+              "y": -192.09082,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "739",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "connectedPins": []
+          }
+        ],
+        "knotCount": 4,
+        "coloring": "E0E0E0",
+        "pos": {
+          "$id": "740",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "rot": {
+          "$id": "741",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        }
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "742",
+      "x": -47.6583138,
+      "y": -206.155518,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "743",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "727"
+  },
+  {
+    "$ref": "729"
+  },
+  {
+    "$id": "744",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "430"
+    },
+    "dataIn": {
+      "$ref": "399"
+    },
+    "dataOut": {
+      "$id": "745",
+      "connectedPins": [
+        {
+          "$id": "746",
+          "wire": {
+            "$id": "747",
+            "dataIn": {
+              "$ref": "745"
+            },
+            "dataOut": {
+              "$ref": "746"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "748",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "749",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "747"
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "750",
+      "x": 152.731583,
+      "y": -230.8669,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "751",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "403"
+  },
+  {
+    "$id": "752",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "436"
+    },
+    "dataIn": {
+      "$ref": "352"
+    },
+    "dataOut": {
+      "$id": "753",
+      "connectedPins": [
+        {
+          "$id": "754",
+          "wire": {
+            "$id": "755",
+            "dataIn": {
+              "$ref": "753"
+            },
+            "dataOut": {
+              "$ref": "754"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "756",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "757",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "755"
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "758",
+      "x": 153.119858,
+      "y": -196.431641,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "759",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "353"
+  },
+  {
+    "$id": "760",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "439"
+    },
+    "dataIn": {
+      "$ref": "196"
+    },
+    "dataOut": {
+      "$id": "761",
+      "connectedPins": [
+        {
+          "$id": "762",
+          "wire": {
+            "$id": "763",
+            "dataIn": {
+              "$ref": "761"
+            },
+            "dataOut": {
+              "$ref": "762"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "764",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "765",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "763"
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "766",
+      "x": 152.731613,
+      "y": -119.743782,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "767",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "197"
+  },
+  {
+    "$id": "768",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "442"
+    },
+    "dataIn": {
+      "$ref": "81"
+    },
+    "dataOut": {
+      "$id": "769",
+      "connectedPins": [
+        {
+          "$id": "770",
+          "wire": {
+            "$id": "771",
+            "dataIn": {
+              "$ref": "769"
+            },
+            "dataOut": {
+              "$ref": "770"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "772",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "773",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "771"
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "774",
+      "x": 151.178635,
+      "y": -44.7949448,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "775",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "82"
+  },
+  {
+    "$id": "776",
+    "$type": "FlipFlop, Assembly-CSharp",
+    "clk": {
+      "$ref": "445"
+    },
+    "dataIn": {
+      "$ref": "19"
+    },
+    "dataOut": {
+      "$id": "777",
+      "connectedPins": [
+        {
+          "$id": "778",
+          "wire": {
+            "$id": "779",
+            "dataIn": {
+              "$ref": "777"
+            },
+            "dataOut": {
+              "$ref": "778"
+            },
+            "knots": [],
+            "knotCount": 2,
+            "coloring": "E0E0E0",
+            "pos": {
+              "$id": "780",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rot": {
+              "$id": "781",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ],
+      "wire": {
+        "$ref": "779"
+      }
+    },
+    "delay": 0,
+    "setup": 0,
+    "hold": 0,
+    "visualizerOn": false,
+    "pos": {
+      "$id": "782",
+      "x": 151.1786,
+      "y": 2.66022873,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "783",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "20"
+  },
+  {
+    "$id": "784",
+    "$type": "Clock, Assembly-CSharp",
+    "clkOut": {
+      "$ref": "418"
+    },
+    "high": 35,
+    "low": 35,
+    "pos": {
+      "$id": "785",
+      "x": -136.484879,
+      "y": -257.4218,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "786",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "420"
+  },
+  {
+    "$ref": "429"
+  },
+  {
+    "$ref": "435"
+  },
+  {
+    "$ref": "438"
+  },
+  {
+    "$ref": "441"
+  },
+  {
+    "$ref": "444"
+  },
+  {
+    "$ref": "472"
+  },
+  {
+    "$ref": "476"
+  },
+  {
+    "$ref": "480"
+  },
+  {
+    "$ref": "484"
+  },
+  {
+    "$ref": "488"
+  },
+  {
+    "$ref": "492"
+  },
+  {
+    "$ref": "410"
+  },
+  {
+    "$id": "787",
+    "$type": "LED, Assembly-CSharp",
+    "input": {
+      "$ref": "746"
+    },
+    "data": {
+      "$id": "788"
+    },
+    "pos": {
+      "$id": "789",
+      "x": 189.708771,
+      "y": -226.4369,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "790",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "747"
+  },
+  {
+    "$id": "791",
+    "$type": "LED, Assembly-CSharp",
+    "input": {
+      "$ref": "754"
+    },
+    "data": {
+      "$id": "792"
+    },
+    "pos": {
+      "$id": "793",
+      "x": 188.188126,
+      "y": -192.001648,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "794",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "755"
+  },
+  {
+    "$id": "795",
+    "$type": "LED, Assembly-CSharp",
+    "input": {
+      "$ref": "762"
+    },
+    "data": {
+      "$id": "796"
+    },
+    "pos": {
+      "$id": "797",
+      "x": 189.201889,
+      "y": -115.313782,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "798",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "763"
+  },
+  {
+    "$id": "799",
+    "$type": "LED, Assembly-CSharp",
+    "input": {
+      "$ref": "770"
+    },
+    "data": {
+      "$id": "800"
+    },
+    "pos": {
+      "$id": "801",
+      "x": 186.9209,
+      "y": -40.3649445,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "802",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "771"
+  },
+  {
+    "$id": "803",
+    "$type": "LED, Assembly-CSharp",
+    "input": {
+      "$ref": "778"
+    },
+    "data": {
+      "$id": "804"
+    },
+    "pos": {
+      "$id": "805",
+      "x": 185.907074,
+      "y": 7.09022856,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "806",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "779"
+  },
+  {
+    "$id": "807",
+    "$type": "DataSource, Assembly-CSharp",
+    "clkIn": {
+      "$ref": "423"
+    },
+    "dataOutPins": [
+      {
+        "$ref": "717"
+      },
+      {
+        "$ref": "654"
+      },
+      {
+        "$ref": "597"
+      },
+      {
+        "$ref": "543"
+      },
+      {
+        "$ref": "690"
+      },
+      {
+        "$ref": "627"
+      },
+      {
+        "$ref": "570"
+      },
+      {
+        "$ref": "516"
+      }
+    ],
+    "nBits": 8,
+    "pos": {
+      "$id": "808",
+      "x": -110.459229,
+      "y": -141.8431,
+      "z": 0.0
+    },
+    "rot": {
+      "$id": "809",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  {
+    "$ref": "515"
+  },
+  {
+    "$ref": "569"
+  },
+  {
+    "$ref": "626"
+  },
+  {
+    "$ref": "689"
+  },
+  {
+    "$ref": "542"
+  },
+  {
+    "$ref": "596"
+  },
+  {
+    "$ref": "716"
+  },
+  {
+    "$ref": "422"
+  },
+  {
+    "$ref": "655"
+  }
+]
