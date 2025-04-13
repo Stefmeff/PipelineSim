@@ -1,11 +1,5 @@
-TODO:
-Sometimes last token color does  not equal result color => XOR
-
-
 IDEAS:
 -Improve Wire physics
--Improve TokenTpes => new idea with colored binary values
 -Text Label
 -LookUp Tables
--Custom Componenents => abstraction => build mor complex components inside separate editor
--User can input file path (Player prefs)=> the content of this file (pip projects) will be shown in the library
+-Custom Componenents

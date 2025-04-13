@@ -10,7 +10,7 @@ The user can enter important timing parameters of components, such as propagatio
 The timing parameters of the components are all relative to the time unit entered in the top menu. This allows the user to speed up or slow down the simulation. The user can also step through the simulation with discrete time steps, allowing more control of the propagation of time. The folder "ProjectTemplates" includes some examplary projects, which can be opened within the application. The pre-built pipeline architectures include classical synchronous approaches such as flip-flop and latch based pipelines, that are driven by a global clock and also asynchronous approaches such as the Muller pipeline, Micropipelines and the Mousetrap pipeline, which operate via handshake signals.
 
 The tool was implemented in Unity because of its ability to easily create user interfaces and distribute the application
-across multiple platforms, including Linux, Windows, and WebGL. For implementation details, please go to the "Assets" folder.
+across multiple platforms, including Linux, Windows, and WebGL. For implementation details, please go to the "Assets/Scripts" folder.
 
 
 

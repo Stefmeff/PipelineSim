@@ -9,7 +9,6 @@ public class BitToken
     private int time;       //the current timestamp of this BitToken
     private bool value;
     private Color color;    //the color this BitToken is represented with
-    private GameObject informationWindow;
 
     [JsonIgnore] public readonly Color low = new Color32(0xE0, 0xE0, 0xE0, 0xFF);
 
@@ -34,8 +33,6 @@ public class BitToken
         this.time = time;
         this.value = value;
         this.color = color;
-        GameObject o = GameObject.FindWithTag("DialogBoxes");
-        informationWindow = o.transform.GetChild(1).gameObject;
     }
 
     public int GetTime()
@@ -44,11 +41,13 @@ public class BitToken
     }
 
     public Color TokenColor(){
+        //returns the color that represents this token
         return color;
     }
 
     public Color ActiveColor()
     {
+        //returns the color depending on the tokens value
         if(value){
             return color;
         }else{
@@ -57,10 +56,6 @@ public class BitToken
     }
 
     public bool GetValue(){
-
-        //Warning: value of generic token is accessed!
-        //informationWindow.SetActive(true);
-
         return this.value;
     }
     
