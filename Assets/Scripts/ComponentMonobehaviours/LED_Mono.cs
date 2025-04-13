@@ -45,7 +45,7 @@ public class LED_Mono : MonoBehaviour, IObjectMono
 
     private void UpdateColor(Color c)
     {
-        sRend.color = c;
+        if(sRend)sRend.color = c;
     }
 
     public Loadable GetMain()

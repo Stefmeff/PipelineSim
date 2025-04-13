@@ -6,8 +6,6 @@ using System.Linq;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using static Pin;
-
 
 /**
  * @author: Stefan Moser

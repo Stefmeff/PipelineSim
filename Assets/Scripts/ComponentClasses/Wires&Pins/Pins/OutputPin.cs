@@ -10,7 +10,7 @@ using Newtonsoft.Json;
  * @brief: This class describes an Output Pin. It contains the wire, all the connect pins and
  * also the type of data this pin writes.
  * */
-public class OutputPin : Pin
+public class OutputPin
 {
     [JsonIgnore] public BitToken data;                      //data that this pin writes
     [JsonProperty] private List<InputPin> connectedPins;     //pins this pin writes to
@@ -45,7 +45,7 @@ public class OutputPin : Pin
      * 
      * @param data that is set
      * */
-    public override void SetValue(BitToken data)
+    public virtual void SetValue(BitToken data)
     {
         this.data = data;
 

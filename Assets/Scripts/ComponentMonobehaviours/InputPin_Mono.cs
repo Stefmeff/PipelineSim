@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * This class handles mouse inputs of an InputPin prefab.
+ * This class handles user inputs of an InputPin.
  */
 public class InputPin_Mono : MonoBehaviour
 {

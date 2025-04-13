@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
-using static Pin;
 
 public class OR : Loadable, IDelay
 {

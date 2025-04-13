@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
-using static Pin;
 
 /**
  * @author: Stefan Moser

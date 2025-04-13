@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * This class handles mouse inputs of an OutputPin prefab. It also hold a reference
- * to the OutputPin Object that describes this pins state.
+ * This class handles the user input of an output pin.
  */
 public class OutputPin_Mono : MonoBehaviour
 {
-    public OutputPin pin;   //Main OutputPin Object that stores the state of this GameObject
+    public OutputPin pin;
 
     //Variables for Wire creation
     public GameObject wirePrefab;   //prefab used for initializing wire

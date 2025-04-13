@@ -9,7 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(EdgeCollider2D))]
 
 /**
- * This class stores the main wire object and is used for drawing the wire.
+ * This class is used for drawing wires
  */
 public class Wire_Mono : MonoBehaviour, IObjectMono
 {

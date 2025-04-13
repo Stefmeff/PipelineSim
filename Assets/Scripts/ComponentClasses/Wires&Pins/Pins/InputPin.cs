@@ -11,7 +11,7 @@ using UnityEngine;
  * @brief: This class describes an InputPin. 
  * */
 [JsonObject(IsReference = true)]
-public class InputPin : Pin
+public class InputPin
 {
     [JsonIgnore] public BitToken data;                     //data that is set on this input pin
     [JsonIgnore] public Transform transform;            //the transform of this pin
@@ -34,21 +34,20 @@ public class InputPin : Pin
         this.wire = null;
     }
 
-    public override void SetValue(BitToken data)
+    public void SetValue(BitToken data)
     {
         this.data = data;
         NewDataEvent?.Invoke();
     }
 
-    public bool connectWire(Wire wire){
+    public Wire connectWire(Wire wire){
         if(this.wire == null){
             this.wire = wire;
-            return true;
         }
-        return false;
+        return wire;
     }
 
-    public virtual bool disconnectWire()
+    public bool disconnectWire()
     {
         if (wire != null)
         {
