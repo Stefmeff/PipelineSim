@@ -176,13 +176,6 @@ public class DataSource : ILoadable
         return editor;
     }
 
-    private Color32 setTransp(Color c){
-        //Change the transparency of the token colours
-        Color32 b = new Color(c.r,c.g,c.b);
-        b.a = 0xD4;
-        return b;
-    }
-
     public void AddToken(TokenInputField t){
         tokenFields.Add(t);
         Debug.Log("ADD TOKEN: " +tokenFields.Count);
