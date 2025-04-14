@@ -7557,7 +7557,7 @@ GameObject:
   - component: {fileID: 436496633}
   m_Layer: 5
   m_Name: DelayEditor
-  m_TagString: Untagged
+  m_TagString: EditorDelay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13058,6 +13058,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2337795b503d4846a168b509eccab17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomActive: 1
+  dragActive: 1
 --- !u!1 &720359520
 GameObject:
   m_ObjectHideFlags: 0
@@ -19286,6 +19288,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
+  clockEditor: {fileID: 0}
+  delayEditor: {fileID: 0}
+  delay2Editor: {fileID: 0}
+  flopEditor: {fileID: 0}
+  latchEditor: {fileID: 0}
+  cplEditor: {fileID: 0}
+  dataSourceEditor: {fileID: 0}
+  buttonPause: {fileID: 0}
 --- !u!1 &1076101950
 GameObject:
   m_ObjectHideFlags: 0
@@ -19812,7 +19822,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -4.7999954, y: 0.26000977}
+  m_AnchoredPosition: {x: -4.800003, y: 0.26000977}
   m_SizeDelta: {x: 8.534, y: -0.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097273044

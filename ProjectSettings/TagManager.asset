@@ -22,6 +22,7 @@ TagManager:
   - InfoBar
   - StepSize
   - ToolTip
+  - EditorDelay
   layers:
   - Default
   - TransparentFX

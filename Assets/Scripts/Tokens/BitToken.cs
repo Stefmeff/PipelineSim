@@ -24,7 +24,6 @@ public class BitToken
         this.value = value;
         this.time = time;
         this.color = Color.red;
-
         
     }
 

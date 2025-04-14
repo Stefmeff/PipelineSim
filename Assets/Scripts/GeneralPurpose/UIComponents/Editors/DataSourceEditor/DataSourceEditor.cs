@@ -93,10 +93,10 @@ public class DataSourceEditor : MonoBehaviour
         if(colorIndex < 0)colorIndex = colorScheme.Count-1;
     }
 
-    public TokenInputField GetNextToken(){
+    public Token GetNextToken(){
         if(tokenFields.Count == 0)return null;
         if(tokenCount >= tokenFields.Count)tokenCount=0;
-        TokenInputField token = tokenFields[tokenCount];
+        Token token = tokenFields[tokenCount].GetToken();
         tokenCount++;
         return token;
     }

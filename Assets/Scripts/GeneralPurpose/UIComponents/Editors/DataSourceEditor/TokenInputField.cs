@@ -13,7 +13,7 @@ public class TokenInputField : MonoBehaviour
     private TMP_InputField tokenField;
     private String lastValid;
 
-    private bool[] token;
+    private Token token;
     private Image icon;
     private Color c;
     private int nBits;
@@ -38,7 +38,7 @@ public class TokenInputField : MonoBehaviour
         tokenField.characterLimit = nBits;
         lastValid = new string('1',nBits);
         tokenField.text = lastValid;
-        token = StringToArray(lastValid);
+        token = new Token(lastValid, this.c);
     }
     
     public void UpdateInputSize(int nBits){
@@ -46,7 +46,7 @@ public class TokenInputField : MonoBehaviour
             this.nBits = nBits;
             tokenField.characterLimit = nBits;
             lastValid = new string('1',nBits);
-            token = StringToArray(lastValid);
+            token = new Token(lastValid, this.c);
             tokenField.text = lastValid;
         }
     }
@@ -59,31 +59,16 @@ public class TokenInputField : MonoBehaviour
 
             if(binary.IsMatch(input.text)){
                 lastValid = input.text;
-                token = StringToArray(lastValid);
+                token = new Token(lastValid, this.c);
             }
         }
 
         tokenField.text = lastValid;
     }
 
-    //precondition: string consists solely of binary numbers, e.g. "10110"
-    public bool[] StringToArray(string binary){
-        Debug.Log("binary String: " + binary);
-        bool[] result = new bool[binary.Length];
 
-        for (int i = 0; i < binary.Length; i++)
-        {
-            if (binary[i] == '1')
-                result[i] = true;
-            else if (binary[i] == '0')
-                result[i] = false;
-        }
-        Debug.Log("Bool Array: " + string.Join(", ", result));
 
-        return result;
-    }
-
-    public BitToken GetBitTokenAt(int index, int time){
-        return new BitToken(token[index],time,c);
+    public Token GetToken(){
+        return token;
     }
 }

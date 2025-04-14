@@ -65,10 +65,10 @@ public class DataSource : Loadable
             lastClkIn = c;
             if(lastClkIn.GetValue() == true){
 
-                TokenInputField token = sourceEditor.GetNextToken();
+                Token token = sourceEditor.GetNextToken();
                 if(token != null){
                     for(int i = 0; i < nBits; i++){
-                        BitToken t = token.GetBitTokenAt((nBits-1)-i,clkIn.data.GetTime());
+                        BitToken t = token.GetBitAt((nBits-1)-i).NewToken(clkIn.data.GetTime());
                         dataOutPins[i].SetValue(t);
                     }
                 }
