@@ -17,12 +17,6 @@ public class OutputPin
     [JsonProperty] private Wire wire;
     [JsonIgnore] public Transform transform;                //the transform of this pin
 
-    /**
-     * constructor of OutputPin object
-     * 
-     * @param type of data this pin writes
-     * @param data the pin holds
-     * */
     public OutputPin()
     {
         this.data = new BitToken();

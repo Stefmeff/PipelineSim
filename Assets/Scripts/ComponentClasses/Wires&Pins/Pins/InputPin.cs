@@ -21,13 +21,6 @@ public class InputPin
     public delegate void NewData();
     public event NewData NewDataEvent;                  //Event that is sent out on new inputs (parent component can listen to this input event)
 
-
-    /**
-     * Constructor of InputPin object
-     * 
-     * @param type of data this pin holds
-     * @param data this pin holds
-     * */
     public InputPin()
     {
         this.data = new BitToken();
