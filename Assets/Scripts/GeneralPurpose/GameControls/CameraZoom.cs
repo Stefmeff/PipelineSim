@@ -14,21 +14,27 @@ public class CameraZoom : MonoBehaviour
 
     [SerializeField] private Camera cam;
 
+    private ProjectManager projectManager;
+
     private int i = 0;
 
     private void Start()
     {
         zoom = cam.orthographicSize;
+        
+        GameObject o = GameObject.FindGameObjectWithTag("ProjectManager");
+        projectManager = o.GetComponent<ProjectManager>();
     }
 
     private void Update()
     {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        
-        zoom -= scroll * zoomMultiplier;
-        zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, zoom, ref velocity, smoothTime);
-
+        if(projectManager.zoomActive){
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            
+            zoom -= scroll * zoomMultiplier;
+            zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
+            cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, zoom, ref velocity, smoothTime);
+        }
         
     }
 }

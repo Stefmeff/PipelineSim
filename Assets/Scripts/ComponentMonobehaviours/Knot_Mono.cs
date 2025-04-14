@@ -20,6 +20,8 @@ public class Knot_Mono : MonoBehaviour
     private Vector3 animateScale;
     private CameraMouseDrag camDrag;
 
+    private ProjectManager projectManager;
+
     private bool drag = false;
 
     // Start is called before the first frame update
@@ -36,6 +38,9 @@ public class Knot_Mono : MonoBehaviour
         GameObject o = GameObject.FindWithTag("BackgroundCanvas");
         o = o.transform.GetChild(0).gameObject;
         camDrag = o.GetComponent<CameraMouseDrag>();
+
+        o = GameObject.FindGameObjectWithTag("ProjectManager");
+        projectManager = o.GetComponent<ProjectManager>();
 
         if (knot != null)
         {
@@ -86,8 +91,9 @@ public class Knot_Mono : MonoBehaviour
     **/
     private void OnMouseDrag()
     {
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (drag)
+        if (projectManager.dragActive && drag)
         {
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);
         }

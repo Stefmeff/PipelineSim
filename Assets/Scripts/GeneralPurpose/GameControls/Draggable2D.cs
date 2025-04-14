@@ -21,8 +21,8 @@ public class Draggable2D : MonoBehaviour
 
     //variable for ctrl
     private CameraMouseDrag camDrag;
-    private SelectCtrl selector;
-    private Editor editor;  //opens component editor on left click
+    private SelectCtrl selector; //opens component editor on left click
+    private ProjectManager projectManager;
 
     // Start is called before the first frame update
     void Start()
@@ -41,16 +41,16 @@ public class Draggable2D : MonoBehaviour
         o = GameObject.FindWithTag("Selector");
         selector = o.GetComponent<SelectCtrl>();
 
-        //init SelectCtrl to steer object => Delete, Rotate,...
-        o = GameObject.FindWithTag("Editor");
-        editor = o.GetComponent<Editor>();
+        o = GameObject.FindGameObjectWithTag("ProjectManager");
+        projectManager = o.GetComponent<ProjectManager>();
+
     }
 
 
     public void OnMouseDrag()
     {
         camDrag.camDragOn = false;
-        if(!editor.active){
+        if(projectManager.dragActive){
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);
         }

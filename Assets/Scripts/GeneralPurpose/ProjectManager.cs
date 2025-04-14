@@ -25,6 +25,9 @@ public class ProjectManager : MonoBehaviour
     //list of the projects game elements:
     private List<IObjectMono> gameElements = new List<IObjectMono>();
 
+    public bool zoomActive = true;
+    public bool dragActive = true;
+
 
     private void Awake()
     {

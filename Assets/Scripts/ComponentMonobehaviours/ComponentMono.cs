@@ -28,9 +28,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     private GameObject ErrorMessage;
     private ProjectManager projectManager;
 
-    private Editor editor;  //opens component editor on left click
-
-    private GameObject componentEditor;
+    private GameObject editor;  //opens component editor on left click
 
     void Awake()
     {
@@ -44,8 +42,8 @@ public class ComponentMono : MonoBehaviour, IObjectMono
 
         
         //init SelectCtrl to steer object => Delete, Rotate,...
-        o = GameObject.FindWithTag("Editor");
-        editor = o.GetComponent<Editor>();
+        editor = GameObject.FindWithTag("Editor");
+
 
         try{
             delayVisualizer = gameObject.transform.Find("DelayVisualizer").gameObject;
@@ -157,7 +155,13 @@ public class ComponentMono : MonoBehaviour, IObjectMono
         //if clicked => open editor of this item
         if (Input.GetMouseButtonDown(1))
         {
-            editor.openEditor(component);
+            for( int i = 0; i < editor.transform.childCount; ++i )
+            {
+                editor.transform.GetChild(i).gameObject.SetActive(false);
+            }       
+            component.OpenEditor();
+            projectManager.dragActive = false;
+            projectManager.zoomActive = false;
         }
     }
 

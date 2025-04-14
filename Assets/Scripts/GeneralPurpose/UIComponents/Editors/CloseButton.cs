@@ -7,24 +7,23 @@ using UnityEngine.EventSystems;
 //Closes the parent editor
 public class CloseButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private GameObject editor;
-
     private Image cross;
     private Image outline;
-
-    private Editor editorManager;
+    private ProjectManager projectManager;
+    private GameObject editor;
     void Start()
     {
-        editor = gameObject.transform.parent.gameObject;
-
         GameObject o = gameObject.transform.GetChild(0).gameObject;
         cross = o.GetComponent<Image>();
 
         o = gameObject.transform.GetChild(1).gameObject;
         outline = o.GetComponent<Image>();
 
-        o = GameObject.FindWithTag("Editor");
-        editorManager = o.GetComponent<Editor>();
+        
+        o = GameObject.FindGameObjectWithTag("ProjectManager");
+        projectManager = o.GetComponent<ProjectManager>();
+
+        editor = GameObject.FindWithTag("Editor");
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -43,7 +42,14 @@ public class CloseButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     {
         cross.color = (Color)new Color32(182, 182, 182, 255);
         outline.color = (Color)new Color32(182, 182, 182, 255);
-        editor.SetActive(false);
-        editorManager.active = false;
+
+        for( int i = 0; i < editor.transform.childCount; ++i )
+        {
+            editor.transform.GetChild(i).gameObject.SetActive(false);
+        } 
+
+        projectManager.dragActive = true;
+        projectManager.zoomActive = true;
+
     }
 }

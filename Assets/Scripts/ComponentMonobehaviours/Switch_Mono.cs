@@ -127,7 +127,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
     private void OnMouseDrag()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (drag)
+        if (projectManager.dragActive && drag)
         {
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);
         }
