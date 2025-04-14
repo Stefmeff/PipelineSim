@@ -46,6 +46,8 @@ public class FlipFlop : Loadable, IDelay
     [JsonIgnore] private Color defaultColor = new Color32(0x78,0x85, 0x8D, 0xFF);
     [JsonIgnore] private Color errorColor = new Color32(0xFF, 0x13, 0x00, 0xFF);
 
+    [JsonIgnore] private GameObject editor;
+    
     /**
      * Constructor of FlipFlop object
      * */
@@ -62,6 +64,10 @@ public class FlipFlop : Loadable, IDelay
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
         Subscribe();
+
+        
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(3).gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay
@@ -332,5 +338,11 @@ public class FlipFlop : Loadable, IDelay
             }
         }
         return this.hold;
+    }
+
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        editor.GetComponent<FlopEditor>().init(this);
     }
 }

@@ -29,6 +29,8 @@ public class Clock : Loadable
     [JsonIgnore] private int tick = 0;
     [JsonIgnore] private bool value = false;
 
+    [JsonIgnore] private GameObject editor;
+
 
     /**
     * Constructor of Clock object
@@ -41,8 +43,10 @@ public class Clock : Loadable
         //subscribe to Timer events:
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
-
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(0).gameObject;
     }
 
 
@@ -64,8 +68,10 @@ public class Clock : Loadable
         //subscribe to Timer events:
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
-
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(0).gameObject;
     }
 
 
@@ -130,5 +136,9 @@ public class Clock : Loadable
         timer.TimerTickEvent -= OnTimerTick;
     }
 
-
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        editor.GetComponent<ClockEditor>().init(this);
+    }
 }

@@ -31,6 +31,8 @@ public class AND : Loadable, IDelay
     [JsonIgnore] private BitToken lastA = new BitToken();
     [JsonIgnore] private BitToken lastB = new BitToken();
 
+    [JsonIgnore] private GameObject editor;
+
     /**
      * Constructor of a AND Object
      * */
@@ -46,6 +48,11 @@ public class AND : Loadable, IDelay
         //subscribe to Timer events:
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
+
+        
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(1).gameObject;
+
         Subscribe();
     }
 
@@ -193,6 +200,14 @@ public class AND : Loadable, IDelay
         GameObject square = DelayHandler.NewSquare(100,initSignal.ActiveColor(),delayVisualizer,1);
         signalQueue.Add(Tuple.Create(initSignal,square));
         delayVisualizer.SetActive(visualizerOn);
+    }
+
+    public override void OpenEditor(){
+        editor.SetActive(true);
+        DelayEditor e = editor.GetComponent<DelayEditor>();
+        e.init(this);
+        e.SetTitle("AND-Gate");
+        e.SetDescription("The AND gate output 1 if and only if all the inputs are 1, otherwise it outputs 0.");
     }
 
     public int parseDelay(string inputDelay){

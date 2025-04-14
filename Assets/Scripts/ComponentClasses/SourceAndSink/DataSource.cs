@@ -25,12 +25,10 @@ public class DataSource : Loadable
     [JsonIgnore] private BitToken lastClkIn;
 
     [JsonIgnore] private OutputPin_Mono[] pinGameObjects;
-    
-    [JsonIgnore] private List<TokenInputField> tokenFields;
-    [JsonIgnore] private int tokenCount = 0;
 
+    [JsonIgnore] private GameObject editor;
 
-
+    [JsonIgnore] private DataSourceEditor sourceEditor;
 
     /**
      * Constructor of DataSource object
@@ -47,11 +45,11 @@ public class DataSource : Loadable
         }
         lastClkIn = new BitToken();
 
-        tokenFields = new List<TokenInputField>();
-        
-        //dataOut.SetValue(new BitToken());
-
         Subscribe();
+
+        LoadEditor();
+
+
     }
 
 
@@ -67,15 +65,12 @@ public class DataSource : Loadable
             lastClkIn = c;
             if(lastClkIn.GetValue() == true){
 
-                if(tokenFields.Count != 0){
-                    if(tokenCount >= tokenFields.Count)tokenCount=0;
-                    TokenInputField token = tokenFields[tokenCount];
-
+                TokenInputField token = sourceEditor.GetNextToken();
+                if(token != null){
                     for(int i = 0; i < nBits; i++){
                         BitToken t = token.GetBitTokenAt((nBits-1)-i,clkIn.data.GetTime());
                         dataOutPins[i].SetValue(t);
                     }
-                    tokenCount++;
                 }
             }
         }
@@ -85,7 +80,7 @@ public class DataSource : Loadable
     //Event: simulation restart
     public override void Reset()
     {
-        tokenCount = 0;
+        sourceEditor.tokenCount = 0;
         clkIn.SetValue(new BitToken());
         foreach(OutputPin p in dataOutPins){
             p.SetValue(new BitToken());
@@ -136,7 +131,6 @@ public class DataSource : Loadable
                 if (value > 0 && value <= 8)
                 {
                     nBits = value;
-                    UpdateTokenSizes();
                     ActivatePins();
                 }
             }catch{
@@ -161,34 +155,22 @@ public class DataSource : Loadable
     {
     }
 
-    public GameObject LoadEditor(){
+    private void LoadEditor(){
         GameObject o = GameObject.FindWithTag("Editor");
         GameObject prefab = Resources.Load("Prefabs/DataSourceEditor") as GameObject;
         GameObject editor = GameObject.Instantiate(prefab);
 
         editor.transform.SetParent(o.transform,false);
         editor.SetActive(true);
-        DataSourceEditor d = editor.GetComponent<DataSourceEditor>();
-        d.init(this);
+        sourceEditor = editor.GetComponent<DataSourceEditor>();
+        sourceEditor.init(this);
         editor.SetActive(false);
-        return editor;
+        
+        this.editor = editor;
     }
 
-    public void AddToken(TokenInputField t){
-        tokenFields.Add(t);
-        Debug.Log("ADD TOKEN: " +tokenFields.Count);
-    }
-
-    public void RemoveToken(){
-        int lastIndex = tokenFields.Count - 1;
-        TokenInputField last = tokenFields[lastIndex];
-        tokenFields.RemoveAt(lastIndex);
-        GameObject.Destroy(last.gameObject);
-    }
-
-    private void UpdateTokenSizes(){
-        foreach(TokenInputField tF in tokenFields){
-            tF.UpdateInputSize(nBits);
-        }
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
     }
 }

@@ -41,7 +41,7 @@ public abstract class Loadable
     }
 
     //public abstract Component GetMainComponent();
-
+    public abstract void OpenEditor();
     public abstract void Reset();
 
     public abstract void Dispose();

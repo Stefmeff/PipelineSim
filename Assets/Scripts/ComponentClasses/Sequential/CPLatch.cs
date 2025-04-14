@@ -42,6 +42,8 @@ public class CPLatch : Loadable, IDelay
     [JsonIgnore] private Color defaultColor = new Color32(0x78,0x85, 0x8D, 0xFF);
     [JsonIgnore] private Color errorColor = new Color32(0xFF, 0x13, 0x00, 0xFF);
 
+    [JsonIgnore] private GameObject editor;
+
     public CPLatch(){
 
         //init the capture-pass latch pins:
@@ -54,6 +56,9 @@ public class CPLatch : Loadable, IDelay
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(5).gameObject;
     }
 
     private void OnTickNoDelay(int tick){
@@ -329,6 +334,13 @@ public class CPLatch : Loadable, IDelay
             }
         }
         return this.hold;
+    }
+
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        CPLatchEditor e = editor.GetComponent<CPLatchEditor>();
+        e.init(this);
     }
 }
 

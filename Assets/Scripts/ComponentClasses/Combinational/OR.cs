@@ -20,6 +20,7 @@ public class OR : Loadable, IDelay
     [JsonIgnore] private BitToken lastA = new BitToken();
     [JsonIgnore] private BitToken lastB = new BitToken();
 
+    [JsonIgnore] private GameObject editor;
     /**
      * Constructor of a XOR Object
      * */
@@ -36,6 +37,9 @@ public class OR : Loadable, IDelay
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(1).gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay
@@ -194,6 +198,14 @@ public class OR : Loadable, IDelay
         GameObject square = DelayHandler.NewSquare(100,initSignal.ActiveColor(),delayVisualizer,1);
         signalQueue.Add(Tuple.Create(initSignal,square));
         delayVisualizer.SetActive(visualizerOn);
+    }
+
+    public override void OpenEditor(){
+        editor.SetActive(true);
+        DelayEditor e = editor.GetComponent<DelayEditor>();
+        e.init(this);
+        e.SetTitle("OR-Gate");
+        e.SetDescription("The OR gate outputs 1 if any of its inputs is 1, otherwise it outputs 0.");
     }
 
     public int parseDelay(string inputDelay){

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /**
@@ -92,7 +93,6 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 return new Clock(100,100);
             case componentType.DataSource:
                 DataSource d = new DataSource();
-                componentEditor = d.LoadEditor();
                 return d;
             case componentType.Delay2:
                 return new Delay2();
@@ -127,7 +127,6 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 break;
             case DataSource:
                 DataSource d = (DataSource)component;
-                componentEditor = d.LoadEditor();
                 break;
         }
     }
@@ -158,12 +157,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
         //if clicked => open editor of this item
         if (Input.GetMouseButtonDown(1))
         {
-            if(componentID.Equals(componentType.DataSource)){
-                componentEditor.SetActive(true);
-            }else{
-                editor.openEditor(component);
-            }
-           
+            editor.openEditor(component);
         }
     }
 

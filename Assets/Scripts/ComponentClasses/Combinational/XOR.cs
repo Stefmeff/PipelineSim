@@ -23,6 +23,8 @@ public class XOR : Loadable, IDelay
     [JsonIgnore] private BitToken lastA = new BitToken();       //last input on Pin A
     [JsonIgnore] private BitToken lastB = new BitToken();       //last input on Pin B
 
+    [JsonIgnore] private GameObject editor;
+
     /**
      * Constructor of a XOR Object
      * */
@@ -39,6 +41,9 @@ public class XOR : Loadable, IDelay
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
         Subscribe();
+        
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(1).gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay
@@ -217,5 +222,14 @@ public class XOR : Loadable, IDelay
 
     public bool IsVisualizerActive(){
         return visualizerOn;
+    }
+
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        DelayEditor e = editor.GetComponent<DelayEditor>();
+        e.init(this);
+        e.SetTitle("XOR-Gate");
+        e.SetDescription("The XOR gate outputs 1 if one, and only one, of the inputs is 1, otherwise it outputs 0.");
     }
 }

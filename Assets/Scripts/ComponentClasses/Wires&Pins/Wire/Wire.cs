@@ -108,4 +108,8 @@ public class Wire : Loadable
     {
         //no delay on wire component
     }
+
+    public override void OpenEditor()
+    {
+    }
 }

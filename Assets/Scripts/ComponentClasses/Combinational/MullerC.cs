@@ -33,6 +33,7 @@ public class MullerC : Loadable, IDelay
     [JsonIgnore] private BitToken lastB = new BitToken();  //last input on PIn B
     [JsonIgnore] private BitToken lastResult = new BitToken();   //last computed result
 
+    [JsonIgnore] private GameObject editor;
 
     /**
      * Constructor of a MullerC Object
@@ -53,6 +54,9 @@ public class MullerC : Loadable, IDelay
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(1).gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay
@@ -261,5 +265,14 @@ public class MullerC : Loadable, IDelay
 
     public bool IsVisualizerActive(){
         return visualizerOn;
+    }
+
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        DelayEditor e = editor.GetComponent<DelayEditor>();
+        e.init(this);
+        e.SetTitle("Muller C-Element");
+        e.SetDescription("The C-Elemet outputs 1, when all inputs are 1 and 0, when all inputs are 0.\n\nFor all other input combinations, the C-gate holds it’s current state.");
     }
 }

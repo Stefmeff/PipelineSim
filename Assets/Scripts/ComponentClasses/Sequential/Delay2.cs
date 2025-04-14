@@ -32,7 +32,7 @@ public class Delay2 : Loadable
     [JsonIgnore] private TimeTick timer;                //global simulation timer
     [JsonIgnore] private BitToken lastDataIn;
 
-
+    [JsonIgnore] private GameObject editor;
 
     /**
      * Constructor of Delay Object
@@ -53,8 +53,10 @@ public class Delay2 : Loadable
         //subscribe to Timer events:
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
-
         Subscribe();
+                
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(2).gameObject;
     }
 
 
@@ -149,6 +151,9 @@ public class Delay2 : Loadable
         signalQueue.Add(Tuple.Create(lastDataIn,square));
     }
 
-
-
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        editor.GetComponent<Delay2Editor>().init(this);
+    }
 }

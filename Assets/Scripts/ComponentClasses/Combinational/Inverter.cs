@@ -25,6 +25,8 @@ public class Inverter : Loadable, IDelay
     [JsonIgnore] private TimeTick timer;            //global simulation timer
     [JsonIgnore] private BitToken lastDataIn;
 
+    [JsonIgnore] private GameObject editor;
+
     //Constructor of an inverter:
     public Inverter()
     {
@@ -39,8 +41,10 @@ public class Inverter : Loadable, IDelay
         //Get timer reference
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
-
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(1).gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay
@@ -202,5 +206,14 @@ public class Inverter : Loadable, IDelay
 
     public bool IsVisualizerActive(){
         return visualizerOn;
+    }
+
+    public override void OpenEditor()
+    {   
+        editor.SetActive(true);
+        DelayEditor e = editor.GetComponent<DelayEditor>();
+        e.init(this);
+        e.SetTitle("Inverter");
+        e.SetDescription("The inverter outputs a 0 when given a 1, and a 1 when given a 0");
     }
 }

@@ -69,4 +69,9 @@ public class LED : Loadable
     public override void LoadDelay(GameObject delayVisualizer)
     {
     }
+
+    public override void OpenEditor()
+    {
+        
+    }
 }

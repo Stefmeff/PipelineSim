@@ -31,6 +31,8 @@ public class Delay : Loadable, IDelay
     [JsonIgnore] private BitToken lastDataIn;
 
     [JsonIgnore] private TimeTick timer;                //global simulation timer
+    
+    [JsonIgnore] private GameObject editor;
 
 
     /**
@@ -51,9 +53,10 @@ public class Delay : Loadable, IDelay
         //Get timer reference
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
-
-
         Subscribe();
+
+        o = GameObject.FindWithTag("Editor");
+        editor = o.transform.GetChild(1).gameObject;
     }
 
 
@@ -214,5 +217,14 @@ public class Delay : Loadable, IDelay
 
     public bool IsVisualizerActive(){
         return visualizerOn;
+    }
+
+    public override void OpenEditor()
+    {
+        editor.SetActive(true);
+        DelayEditor e = editor.GetComponent<DelayEditor>();
+        e.init(this);
+        e.SetTitle("Propagation Delay");
+        e.SetDescription("The propagation delay delays incoming signals by the given time.");
     }
 }

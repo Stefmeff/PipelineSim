@@ -11,6 +11,8 @@ public class DataSourceEditor : MonoBehaviour
     private int nBits;
     private GameObject scrollContent;
     private List<Color> colorScheme;  
+    private List<TokenInputField> tokenFields;
+    public int tokenCount = 0;
     private int colorIndex = 0;
 
 
@@ -34,6 +36,7 @@ public class DataSourceEditor : MonoBehaviour
         colorScheme.Add(setTransp(Color.magenta));
         colorScheme.Add(new Color32(0xff,0x88,0x00,0xFF));
 
+        tokenFields = new List<TokenInputField>();
     }
 
     public void init(DataSource dataSource)
@@ -49,6 +52,7 @@ public class DataSourceEditor : MonoBehaviour
     {
         //fill the parameters of the editor with the current clock values
         nBits = dataSource.parseBitSize("");
+        UpdateTokenSizes();
         inputField.text = nBits + "";
 
     }
@@ -56,6 +60,7 @@ public class DataSourceEditor : MonoBehaviour
     private void ParseInput(TMP_InputField input)
     {
         nBits = dataSource.parseBitSize(input.text);
+        UpdateTokenSizes();
         input.text = nBits + "";
     }
 
@@ -69,7 +74,7 @@ public class DataSourceEditor : MonoBehaviour
         if (colorIndex >= colorScheme.Count) colorIndex = 0;
         f.Init(nBits, colorScheme[colorIndex]);
         colorIndex++;
-        dataSource.AddToken(f);
+        tokenFields.Add(f);
 
         //update content size fitter for newly added prefab:
         Transform t = TokenInputField.transform;
@@ -79,10 +84,27 @@ public class DataSourceEditor : MonoBehaviour
     }
 
     public void RemoveToken(){
-        Debug.Log("Remove Token");
-        dataSource.RemoveToken();
+        int lastIndex = tokenFields.Count - 1;
+        TokenInputField last = tokenFields[lastIndex];
+        tokenFields.RemoveAt(lastIndex);
+        GameObject.Destroy(last.gameObject);
+
         colorIndex--;
         if(colorIndex < 0)colorIndex = colorScheme.Count-1;
+    }
+
+    public TokenInputField GetNextToken(){
+        if(tokenFields.Count == 0)return null;
+        if(tokenCount >= tokenFields.Count)tokenCount=0;
+        TokenInputField token = tokenFields[tokenCount];
+        tokenCount++;
+        return token;
+    }
+
+    private void UpdateTokenSizes(){
+        foreach(TokenInputField tF in tokenFields){
+            tF.UpdateInputSize(nBits);
+        }
     }
 
     private void UpdateContentSizeFitter(){

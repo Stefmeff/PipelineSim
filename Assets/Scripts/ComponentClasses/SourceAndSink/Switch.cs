@@ -96,4 +96,8 @@ public class Switch : Loadable
     public override void LoadDelay(GameObject delayVisualizer)
     {
     }
+
+    public override void OpenEditor()
+    {
+    }
 }
