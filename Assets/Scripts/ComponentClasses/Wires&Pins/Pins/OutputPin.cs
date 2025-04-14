@@ -13,10 +13,9 @@ using Newtonsoft.Json;
 public class OutputPin
 {
     [JsonIgnore] public BitToken data;                      //data that this pin writes
-    [JsonProperty] private List<InputPin> connectedPins;     //pins this pin writes to
+    [JsonProperty] private List<InputPin> connectedPins;    //pins this pin writes to
     [JsonProperty] private Wire wire;
-
-    [JsonIgnore] public Transform transform;             //the transform of this pin
+    [JsonIgnore] public Transform transform;                //the transform of this pin
 
     /**
      * constructor of OutputPin object
