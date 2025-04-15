@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor;
 using UnityEngine;
 
 /**
@@ -46,10 +47,6 @@ public class DataSource : Loadable
         lastClkIn = new BitToken();
 
         Subscribe();
-
-        LoadEditor();
-
-
     }
 
 
@@ -155,10 +152,11 @@ public class DataSource : Loadable
     {
     }
 
-    private void LoadEditor(){
+    public void LoadEditor(){
+        if(editor)GameObject.Destroy(editor);
         GameObject o = GameObject.FindWithTag("Editor");
         GameObject prefab = Resources.Load("Prefabs/DataSourceEditor") as GameObject;
-        GameObject editor = GameObject.Instantiate(prefab);
+        editor = GameObject.Instantiate(prefab);
 
         editor.transform.SetParent(o.transform,false);
         editor.SetActive(true);
@@ -166,7 +164,6 @@ public class DataSource : Loadable
         sourceEditor.init(this);
         editor.SetActive(false);
         
-        this.editor = editor;
     }
 
     public override void OpenEditor()

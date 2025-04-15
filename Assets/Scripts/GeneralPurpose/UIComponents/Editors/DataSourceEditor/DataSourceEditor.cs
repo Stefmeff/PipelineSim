@@ -42,10 +42,10 @@ public class DataSourceEditor : MonoBehaviour
     public void init(DataSource dataSource)
     {
         this.dataSource = dataSource;
-        fillParameters();
         foreach(Color c in colorScheme){
             AddToken();
         }
+        fillParameters();
     }
 
     private void fillParameters()

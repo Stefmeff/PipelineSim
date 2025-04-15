@@ -91,6 +91,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 return new Clock(100,100);
             case componentType.DataSource:
                 DataSource d = new DataSource();
+                d.LoadEditor();
                 return d;
             case componentType.Delay2:
                 return new Delay2();
@@ -125,6 +126,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 break;
             case DataSource:
                 DataSource d = (DataSource)component;
+                d.LoadEditor();
                 break;
         }
     }
