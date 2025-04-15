@@ -35,7 +35,6 @@ public class Inverter : Loadable, IDelay
         this.dataOut = new OutputPin();
 
         lastDataIn = new BitToken(true, 0);
-
         signalQueue = new List<Tuple<BitToken,GameObject>>();
 
         //Get timer reference

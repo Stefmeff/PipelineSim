@@ -16,7 +16,7 @@ public class BitToken
     {
         this.time = 0;
         this.value = false;
-        this.color = low;
+        this.color = Color.red;
     }
 
     public BitToken(bool value, int time)
