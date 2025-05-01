@@ -10,7 +10,7 @@ using UnityEngine;
  * @details: This class describes the behaviour of an Inverter. It takes bit input signals and negates
  * them at the output.
  * */
-public class Inverter : Loadable, IDelay
+public class Inverter : CircuitComponent, IDelay
 { 
     //PINS:
     [JsonProperty] private InputPin dataIn;          //data input pin

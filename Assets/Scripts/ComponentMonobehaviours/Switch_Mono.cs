@@ -82,7 +82,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
     }
 
 
-    public Loadable GetMain()
+    public CircuitComponent GetMain()
     {
         return this.s;
     }

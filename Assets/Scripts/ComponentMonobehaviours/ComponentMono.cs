@@ -17,7 +17,7 @@ using UnityEngine;
  **/
 public class ComponentMono : MonoBehaviour, IObjectMono 
 {
-    public Loadable component;
+    public CircuitComponent component;
     [SerializeField] private componentType componentID;
     [SerializeField] private InputPin_Mono[] inPins = new InputPin_Mono[]{};
     [SerializeField] private OutputPin_Mono[] outPins = new OutputPin_Mono[]{};
@@ -53,7 +53,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     }
 
     //Initialize component according to identifier
-    private Loadable newComponent(){
+    private CircuitComponent newComponent(){
         switch (componentID)
         {
             case componentType.AND:
@@ -99,7 +99,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
         return null;
     }
 
-    public void Load(Loadable component)
+    public void Load(CircuitComponent component)
     {
         if(this.component != null)this.component.Dispose();
         this.component = component;
@@ -130,7 +130,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
         }
     }
 
-    public Loadable GetMain()
+    public CircuitComponent GetMain()
     {
         return this.component;
     }

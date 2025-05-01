@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class XOR : Loadable, IDelay
+public class XOR : CircuitComponent, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin dataA;       //input pin a

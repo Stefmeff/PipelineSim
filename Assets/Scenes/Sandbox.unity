@@ -27975,6 +27975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e47b4150e78ba54c9c2476ed6c6bb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tick: 0
   paused: 1
   buttonStep: {fileID: 1252445945}
   stepModeOn: 0

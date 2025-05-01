@@ -9,22 +9,21 @@ public class BitToken
     private int time;       //the current timestamp of this BitToken
     private bool value;
     private Color color;    //the color this BitToken is represented with
-
+    [JsonIgnore] private Color red = new Color32(0xc4,0x0c,0x0c,0xff);
     [JsonIgnore] public readonly Color low = new Color32(0xE0, 0xE0, 0xE0, 0xFF);
 
     public BitToken()
     {
         this.time = 0;
         this.value = false;
-        this.color = Color.red;
+        this.color = red;
     }
 
     public BitToken(bool value, int time)
     {
         this.value = value;
         this.time = time;
-        this.color = Color.red;
-        
+        this.color = red; 
     }
 
     public BitToken(bool value, int time, Color color)

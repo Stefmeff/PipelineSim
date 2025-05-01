@@ -9,7 +9,7 @@ using UnityEngine;
  * 
  * @brief: This class implements a switch.
  * */
-public class Switch : Loadable
+public class Switch : CircuitComponent
 {
 
     [JsonProperty] public OutputPin output;         //output pin

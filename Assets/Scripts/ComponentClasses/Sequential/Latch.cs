@@ -15,7 +15,7 @@ using TMPro;
  * 
  * 
  * */
-public class Latch : Loadable , IDelay
+public class Latch : CircuitComponent , IDelay
 {
     //PINS:
     [JsonProperty] private InputPin clk;         //clock input pin

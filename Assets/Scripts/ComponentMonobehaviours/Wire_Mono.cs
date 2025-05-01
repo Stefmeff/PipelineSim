@@ -77,7 +77,7 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         //string jsonString = JsonConvert.SerializeObject(wire, settings);
     }
 
-    public Loadable GetMain()
+    public CircuitComponent GetMain()
     {
         return this.wire;
     }

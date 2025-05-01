@@ -17,7 +17,7 @@ using UnityEngine;
  * 
  * For further details on the implementation please read the code and documentation below.
  * */
-public class Clock : Loadable
+public class Clock : CircuitComponent
 {
     [JsonProperty] private OutputPin clkOut;     //the clock's output pin  
 

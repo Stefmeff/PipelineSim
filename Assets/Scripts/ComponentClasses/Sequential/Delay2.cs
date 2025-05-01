@@ -17,7 +17,7 @@ using UnityEngine;
  * 
  * For further details, please read the documentation and code below!
  * */
-public class Delay2 : Loadable
+public class Delay2 : CircuitComponent
 {
     //PINS:
     [JsonProperty] private InputPin dataIn;              //delay's input pin

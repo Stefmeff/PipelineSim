@@ -12,7 +12,7 @@ using UnityEngine;
  * 
  * @details: 
  * */
-public class CPLatch : Loadable, IDelay
+public class CPLatch : CircuitComponent, IDelay
 {
     //PINS:
     [JsonProperty] private InputPin capture;     //capture input pin

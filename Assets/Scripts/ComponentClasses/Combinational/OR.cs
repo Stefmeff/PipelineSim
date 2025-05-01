@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class OR : Loadable, IDelay
+public class OR : CircuitComponent, IDelay
 {
     [JsonProperty] private InputPin dataA;       //input pin a
     [JsonProperty] private InputPin dataB;       //input pin b

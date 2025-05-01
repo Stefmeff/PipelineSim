@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IObjectMono
 {
-    public Loadable GetMain();
+    public CircuitComponent GetMain();
     public void SaveTransform();
     public void Clear();
 }

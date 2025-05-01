@@ -28,7 +28,7 @@ public class TimeTick : MonoBehaviour
     //Simulation parameters
     private float targetSimulationTime = 0.01f;     //last user input simulation time
     private float tickTimerMax = 0.01f;             //actual simulation time: how often per second ticks
-    private int tick = 0;                           //current tick
+    [SerializeField] private int tick = 0;                           //current tick
     private float tickTimer = 0;                    //time during tick
     public bool paused = true;                      //simulation pause
 
@@ -100,8 +100,8 @@ public class TimeTick : MonoBehaviour
         if(!paused){
             tickTimer += Time.deltaTime;    //measure delta time between frames
 
-            //if delta Time slower than target simulation time:
-            AdaptSimulationTime();
+            
+            AdaptSimulationTime();          //if delta Time slower than target simulation time:
 
             if (tickTimer >= tickTimerMax)
             {

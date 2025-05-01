@@ -32,12 +32,22 @@ public class ProjectManager : MonoBehaviour
     private void Awake()
     {
         #if UNITY_WEBGL && !UNITY_EDITOR
-            //https://discussions.unity.com/t/running-webgl-with-arguments-on-startup-from-browser/639343
-            Debug.Log("URL:" + Application.absoluteURL);
+
+            //Web: Open File from URL parameter:
+            string fileUrl = GetUrlParameter("file");
+            Debug.Log("File URL: " + fileUrl);
+
+            if(isSafeUrl(fileUrl))
+            {
+                //Open File
+                Debug.Log("Loading JSON from: " + fileUrl);
+                StartCoroutine(DownloadAndLoadJson(fileUrl));
+            }
+            else
+            {
+                Debug.LogWarning("File cannot be opened");
+            }
             
-            //get program argument => file url
-            string url = "";
-            //StartCoroutine(GetText(url));
 
         #else
             //if project has command line arguments => open project
@@ -109,9 +119,9 @@ public class ProjectManager : MonoBehaviour
     public void LoadWorld(string jsonString)
     {
 
-        List<Loadable> elements = JsonConvert.DeserializeObject<List<Loadable>>(jsonString, settings);
+        List<CircuitComponent> elements = JsonConvert.DeserializeObject<List<CircuitComponent>>(jsonString, settings);
 
-        foreach (Loadable l in elements)
+        foreach (CircuitComponent l in elements)
         {
             l.Load();
         }
@@ -121,12 +131,12 @@ public class ProjectManager : MonoBehaviour
     public string SaveWorld()
     {
         string fileName = Application.persistentDataPath;
-        List<Loadable> elements = new List<Loadable>();
+        List<CircuitComponent> elements = new List<CircuitComponent>();
 
         foreach(IObjectMono o in gameElements)
         {
             o.SaveTransform();
-            Loadable l = o.GetMain();
+            CircuitComponent l = o.GetMain();
             elements.Add(l);
         }
 
@@ -161,5 +171,58 @@ public class ProjectManager : MonoBehaviour
 
 
         Camera.main.transform.position = new Vector3(xSum,ySum,-10);
+    }
+
+
+    // Extracts query parameter from URL (for WebGL only)
+    private string GetUrlParameter(string key)
+    {
+        string url = Application.absoluteURL;
+
+        if (string.IsNullOrEmpty(url)) return null;
+
+
+        string[] parameters = url.Split('?');
+        if (parameters.Length < 2) return null;
+
+        string[] queryParams = parameters[1].Split('&');
+        foreach (var param in queryParams)
+        {
+            string[] pair = param.Split('=');
+            if (pair.Length == 2 && pair[0] == key)
+            {
+                return System.Uri.UnescapeDataString(pair[1]);
+            }
+        }
+        return null;
+    }
+
+    private bool isSafeUrl(string url){
+        if (string.IsNullOrEmpty(url)) return false;
+
+        // Only allow specific trusted domain(s)
+        return  url.StartsWith("https://raw.githubusercontent.com/Stefmeff/PipelineSim/");
+    }
+
+    IEnumerator DownloadAndLoadJson(string url)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        yield return www.SendWebRequest();
+
+#if UNITY_2020_1_OR_NEWER
+        if (www.result != UnityWebRequest.Result.Success)
+#else
+        if (www.isNetworkError || www.isHttpError)
+#endif
+        {
+            Debug.LogError("Failed to load JSON: " + www.error);
+        }
+        else
+        {
+            string jsonString = www.downloadHandler.text;
+
+            // Call your world-loading function
+            LoadWorld(jsonString);
+        }
     }
 }

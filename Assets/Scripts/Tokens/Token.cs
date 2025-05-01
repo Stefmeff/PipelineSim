@@ -38,7 +38,7 @@ public class Token
     }
 
     //precondition: string consists solely of binary numbers, e.g. "10110"
-    public BitToken[] StringToArray(string binary){
+    private BitToken[] StringToArray(string binary){
         BitToken[] result = new BitToken[binary.Length];
 
         for (int i = 0; i < binary.Length; i++)
