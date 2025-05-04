@@ -37,7 +37,7 @@ public class ProjectManager : MonoBehaviour
             string fileUrl = GetUrlParameter("file");
             Debug.Log("File URL: " + fileUrl);
 
-            if(isSafeUrl(fileUrl))
+            if(string.IsNullOrEmpty(fileUrl))
             {
                 //Open File
                 Debug.Log("Loading JSON from: " + fileUrl);
@@ -197,12 +197,6 @@ public class ProjectManager : MonoBehaviour
         return null;
     }
 
-    private bool isSafeUrl(string url){
-        if (string.IsNullOrEmpty(url)) return false;
-
-        // Only allow specific trusted domain(s)
-        return  url.StartsWith("https://raw.githubusercontent.com/Stefmeff/PipelineSim/");
-    }
 
     IEnumerator DownloadAndLoadJson(string url)
     {
