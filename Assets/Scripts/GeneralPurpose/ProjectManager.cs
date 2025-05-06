@@ -37,7 +37,7 @@ public class ProjectManager : MonoBehaviour
             string fileUrl = GetUrlParameter("file");
             Debug.Log("File URL: " + fileUrl);
 
-            if(string.IsNullOrEmpty(fileUrl))
+            if(!string.IsNullOrEmpty(fileUrl))
             {
                 //Open File
                 Debug.Log("Loading JSON from: " + fileUrl);
