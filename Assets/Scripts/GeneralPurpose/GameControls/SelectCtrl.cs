@@ -31,7 +31,6 @@ public class SelectCtrl : MonoBehaviour
         o = GameObject.FindWithTag("ButtonDelete");
         ButtonDelete b2 = o.GetComponent<ButtonDelete>();
         b2.DeleteObjectEvent += OnDelete;
-        
     }
 
     private void OnDelete()
@@ -72,7 +71,7 @@ public class SelectCtrl : MonoBehaviour
                 Destroy(selected);
             }
 
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
             {
                 selected.transform.Rotate(0, 0, 90);
             }
@@ -80,13 +79,13 @@ public class SelectCtrl : MonoBehaviour
 
 
         
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("Copy!");
             //TODO:
         }
 
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.V))
         {
             Debug.Log("Paste!");
             
