@@ -12,15 +12,15 @@ The user can enter important timing parameters of components, such as propagatio
 The timing parameters of the components are all relative to the time unit entered in the top menu. This allows the user to speed up or slow down the simulation. The user can also step through the simulation with discrete time steps, allowing more control of the propagation of time. The folder "ProjectTemplates" includes some examplary projects, which can be opened within the application. The pre-built pipeline architectures include classical synchronous approaches such as flip-flop and latch based pipelines, that are driven by a global clock and also asynchronous approaches such as the Muller pipeline, Micropipelines and the Mousetrap pipeline, which operate via handshake signals. Links opening the individual pipeline projects in the web-application are listed below.
 
 # Synchronous Pipelines:
-*[Flip-Flop Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/FlipFlopPipeline.pip)
-*[2 Phase Transparent Latch Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/2PhaseLatchPipeline.pip)
-*[Pulsed Latch Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/PulsedLatchPipeline.pip)
+* [Flip-Flop Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/FlipFlopPipeline.pip)
+* [2 Phase Transparent Latch Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/2PhaseLatchPipeline.pip)
+* [Pulsed Latch Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/PulsedLatchPipeline.pip)
 
 # Asynchronous Pipelines:
-*[Muller Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/MullerPipeline.pip)
-*[Latch-Based Muller Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/4PhaseBundledData.pip)
-*[Micropipelines](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/Micropipeline.pip)
-*[Mousetrap](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/Mousetrap.pip)
+* [Muller Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/MullerPipeline.pip)
+* [Latch-Based Muller Pipeline](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/4PhaseBundledData.pip)
+* [Micropipelines](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/Micropipeline.pip)
+* [Mousetrap](https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/Mousetrap.pip)
 
 
 The tool was implemented in Unity because of its ability to easily create user interfaces and distribute the application
