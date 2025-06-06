@@ -24,7 +24,7 @@ The timing parameters of the components are all relative to the time unit entere
 
 
 The tool was implemented in Unity because of its ability to easily create user interfaces and distribute the application
-across multiple platforms, including Linux, Windows, and WebGL. If you want to test out the application, please go to the "Versions" folder for latest updates. For implementation details, please go to the "Assets/Scripts" folder.
+across multiple platforms, including Linux, Windows, and WebGL. 
 
 
 
