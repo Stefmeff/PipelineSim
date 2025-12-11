@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Introduction &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
+    <title>3.2 Basic Asynchronous Circuit Elements &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
   
   
   
@@ -57,10 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/Introduction';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/3_2_async_elements';</script>
     <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.3 Pipeline Implementations" href="3_3_implementations.html" />
+    <link rel="prev" title="3.1 Handshake Protocols" href="3_1_handshake_protocols.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,18 +181,16 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline Architectures</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="async/intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="async/3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="async/3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="async/3_2_1_muller_c.html">3.2.1 Muller C-element</a></li>
-<li class="toctree-l3"><a class="reference internal" href="async/3_2_2_muller_pipeline.html">3.2.2 The Muller Pipeline</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="3_intro.html">3 Asynchronous Pipelines</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">3.2 Basic Asynchronous Circuit Elements</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="async/3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="async/3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="async/3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="async/3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
 </ul>
 </details></li>
 </ul>
@@ -268,7 +266,7 @@
       
       
       
-      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/pipelines/Introduction.md" target="_blank"
+      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/pipelines/3_2_async_elements.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -285,7 +283,7 @@
       
       
       
-      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fpipelines/Introduction.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fpipelines/3_2_async_elements.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -315,7 +313,7 @@
       
       
       
-      <li><a href="../_sources/pipelines/Introduction.md" target="_blank"
+      <li><a href="../_sources/pipelines/3_2_async_elements.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,7 +384,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -397,11 +397,20 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Introduction</h1>
+    <h1>3.2 Basic Asynchronous Circuit Elements</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muller-c-element">3.2.1 Muller C-Element</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-muller-pipeline">3.2.2 The Muller Pipeline</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -411,9 +420,75 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
-<p>TODO:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-asynchronous-circuit-elements">
+<h1>3.2 Basic Asynchronous Circuit Elements<a class="headerlink" href="#basic-asynchronous-circuit-elements" title="Link to this heading">#</a></h1>
+<p>In <code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">3.1</span></code>, we concerned ourselves with the theoretical protocols that are used to implement handshaking in asynchronous circuits. In this section we will look at fundamental circuit elements that act as the basis of asynchronous circuits.</p>
+<p>The handshake protocols discussed so far were all based on mutual agreement (request and acknowledgment) before transferring data between each other. Many asynchronous circuits rely on the so called <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">Pipeline</span></code> as the fundamental control structure to implement these handshakes. While there are some variations in implementations,
+depending on the specific protocol, the concept of the Muller pipeline remains as the backbone of most asynchronous circuits. Having understood the behaviour of the Muller pipeline will be key to understand the behaviour of the specific pipeline architectures introduced in Section 3.3.</p>
+<p>This section will first go over the <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">C-element</span></code> or <code class="docutils literal notranslate"><span class="pre">C-gate</span></code>, which is a fundamental building block for the Muller pipeline and asynchronous circuits in general. After that we will look at the implementation and behaviour of the Muller pipeline itself. These concepts date back as early as the 1950s and were pioneered by <code class="docutils literal notranslate"><span class="pre">David</span> <span class="pre">E.</span> <span class="pre">Muller</span></code> [9, 8].</p>
+<section id="muller-c-element">
+<h2>3.2.1 Muller C-Element<a class="headerlink" href="#muller-c-element" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">C-element</span></code> or <code class="docutils literal notranslate"><span class="pre">C-Gate</span></code> is a sequencing element for asynchronous circuits. Its function is quite straightforward: the output is <strong>1</strong>, when all inputs are <strong>1</strong> and <strong>0</strong>, when all inputs are <strong>0</strong>. For all other input combinations, the C-gate holds its current state.</p>
+<a class="reference internal image-reference" href="../_images/MullerC.png"><img alt="../_images/MullerC.png" src="../_images/MullerC.png" style="width: 50%;" />
+</a>
+<p><strong>Figure 3.3:</strong> <em>Specification of the Muller C-element</em> [13]</p>
+<p><strong>Figure 3.3</strong> shows the symbol and four possible formal specifications of the Muller C
+element. The element exhibits the behaviour that it only changes its state, when all
+inputs agree. Additionally, a state change at the output clearly indicates the states of
+the inputs: When the element changes its output from <strong>0</strong> to <strong>1</strong>, we know that both inputs
+have to be <strong>1</strong>. The same goes for the output changing from <strong>1</strong> to <strong>0</strong>, indicating that both
+inputs are now <strong>0</strong>.</p>
+<p>When dealing with protocols, where both sides have to agree via req and ack singals,
+that cyclically transition between <strong>0</strong> and <strong>1</strong>, the Muller C element is useful in capturing
+those events.</p>
+</section>
+<section id="the-muller-pipeline">
+<h2>3.2.2 The Muller Pipeline<a class="headerlink" href="#the-muller-pipeline" title="Link to this heading">#</a></h2>
+<p><strong>Figure 3.4</strong> depicts the general structure of the Muller pipeline2. It consists of a series of
+interconnected C-gates <strong>C[i]</strong>, where each gate receives its inputs from the output of its
+predecessor <strong>C[i-1]</strong> and the inverted output of its successor <strong>C[i+1]</strong>.</p>
+<a class="reference internal image-reference" href="../_images/MullerPipeline.png"><img alt="../_images/MullerPipeline.png" src="../_images/MullerPipeline.png" style="width: 70%;" />
+</a>
+<p><strong>Figure 3.4:</strong> <em>The Muller Pipeline</em> [13]</p>
+<p>Initially, all C-gates <strong>C[i]</strong> store the value <strong>0</strong>. An input value <strong>1</strong> from predecessor <strong>C[i-1]</strong> is
+propagated, when the successor <strong>C[i+1]</strong> outputs a <strong>0</strong>. Similarly a <strong>0</strong> from <strong>C[i-1]</strong> will only
+propagate, if <strong>C[i+1]</strong> holds a <strong>1</strong>. Generally one can form the following simple state rule:</p>
+<p align="center">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“<strong>IF</strong> predecessor and successor differ in state  <br> <strong>THEN</strong> copy predecessor’s state  <br> <strong>ELSE</strong> hold present state”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+<p>The pipeline basically works as a FIFO for the transitions on the request signals. When
+the left side issues a request, it travels through all the stages until it arrives at the
+right-hand side. If never acknowledged by the right-hand side, the pipeline will slowly
+fill with every transition made on the request signal. Once filled, the C-gates will store
+alternating 0 and 1 values and the pipeline will stop handshaking with the left-hand side
+and block new requests from entering. For a more intuitive of the Pipeline understanding you can use the <code class="docutils literal notranslate"><span class="pre">PipSim</span></code> simulation tool below:</p>
+<div style="width:100%; overflow:hidden;">
+  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8);">
+    <iframe
+      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/MullerPipeline.pip"
+      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px"
+      loading="lazy">
+    </iframe>
+  </div>
+</div>  
+The power of the Muller pipeline lies in its ability, to capture all the different handshaking
+events made by req and ack, no matter if a 2-phased or 4-phased approach is used. It
+just depends on how one decides to interpret the signals and use the Muller pipeline in
+a specific context. The Muller pipeline also has the benefit of being delay-insensitive,
+meaning that delays in gates or wires do not affect its function.
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,12 +521,46 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="3_1_handshake_protocols.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3.1 Handshake Protocols</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_3_implementations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.3 Pipeline Implementations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muller-c-element">3.2.1 Muller C-Element</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-muller-pipeline">3.2.2 The Muller Pipeline</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

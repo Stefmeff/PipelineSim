@@ -57,11 +57,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="icon" href="_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3 Asynchronous Pipelines" href="pipelines/async/intro.html" />
+    <link rel="next" title="3 Asynchronous Pipelines" href="pipelines/3_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,17 +185,15 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline Architectures</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="pipelines/async/intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/async/3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="pipelines/async/3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/async/3_2_1_muller_c.html">3.2.1 Muller C-element</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/async/3_2_2_muller_pipeline.html">3.2.2 The Muller Pipeline</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pipelines/3_intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pipelines/3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pipelines/3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="pipelines/async/3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/async/3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/async/3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/async/3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pipelines/3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pipelines/3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines/3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pipelines/3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
 </ul>
 </details></li>
 </ul>
@@ -450,7 +450,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="pipelines/async/intro.html"
+       href="pipelines/3_intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

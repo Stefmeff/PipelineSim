@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Introduction &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
+    <title>3.1 Handshake Protocols &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
   
   
   
@@ -57,10 +57,12 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/Introduction';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/3_1_handshake_protocols';</script>
     <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.2 Basic Asynchronous Circuit Elements" href="3_2_async_elements.html" />
+    <link rel="prev" title="3 Asynchronous Pipelines" href="3_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,18 +181,16 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline Architectures</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="async/intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="async/3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="async/3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="async/3_2_1_muller_c.html">3.2.1 Muller C-element</a></li>
-<li class="toctree-l3"><a class="reference internal" href="async/3_2_2_muller_pipeline.html">3.2.2 The Muller Pipeline</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="3_intro.html">3 Asynchronous Pipelines</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.1 Handshake Protocols</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="async/3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="async/3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="async/3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="async/3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
 </ul>
 </details></li>
 </ul>
@@ -268,7 +266,7 @@
       
       
       
-      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/pipelines/Introduction.md" target="_blank"
+      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/pipelines/3_1_handshake_protocols.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -285,7 +283,7 @@
       
       
       
-      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fpipelines/Introduction.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fpipelines/3_1_handshake_protocols.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -315,7 +313,7 @@
       
       
       
-      <li><a href="../_sources/pipelines/Introduction.md" target="_blank"
+      <li><a href="../_sources/pipelines/3_1_handshake_protocols.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -397,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Introduction</h1>
+    <h1>3.1 Handshake Protocols</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,9 +409,32 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
-<p>TODO:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="handshake-protocols">
+<h1>3.1 Handshake Protocols<a class="headerlink" href="#handshake-protocols" title="Link to this heading">#</a></h1>
+<p>This section presents several key handshaking protocols commonly used in modern asynchronous circuits. It is important to note that here we solely focus on the conceptual aspects of these handshakes; the detailed circuits that realize these protocols will be discussed in subsequent sections.</p>
+<p>While there are numerous handshake protocols, all share a fundamental structure: one side <code class="docutils literal notranslate"><span class="pre">requests</span></code> data to be processed, while the other side <code class="docutils literal notranslate"><span class="pre">acknowledges</span></code> receipt of the data. The set of handshake protocols which we will focus on are referred to as <code class="docutils literal notranslate"><span class="pre">bundled-data</span></code> protocols<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, meaning that the data is sent in a bundle, while the handshaking information is sent along in separate request (<em>req</em>) and acknowledge (<em>ack</em>) wires, as seen in Figure 1. On the contrary, there are also so-called <code class="docutils literal notranslate"><span class="pre">delay-insensitive</span></code> protocols, where the request information is encoded into the data signals by using two wires for each bit of information. Delay-insensitive protocols are, however, not covered in this section, since they are not relevant for the pipeline architectures presented in this thesis.</p>
+<!-- Figure 1 -->
+<a class="reference internal image-reference" href="../_images/Handshake.png"><img alt="../_images/Handshake.png" src="../_images/Handshake.png" style="width: 70%;" />
+</a>
+<p><strong>Figure 1:</strong> <em>Bundled data channel with separate request and acknowledge wires</em> [Sparso20]</p>
+<p>One specific approach is a <code class="docutils literal notranslate"><span class="pre">4-phase</span> <span class="pre">bundled-data</span></code> protocol that requires the following steps:</p>
+<p><strong>1.</strong> <code class="docutils literal notranslate"><span class="pre">Sender</span></code> issues new data and sets <em>req</em> high<br />
+<strong>2.</strong> <code class="docutils literal notranslate"><span class="pre">Receiver</span></code> consumes data and sets <em>ack</em> high<br />
+<strong>3.</strong> <code class="docutils literal notranslate"><span class="pre">Sender</span></code> responds by taking <em>req</em> low<br />
+<strong>4.</strong> <code class="docutils literal notranslate"><span class="pre">Receiver</span></code> acknowledges this by also taking <em>ack</em> low</p>
+<p>After this, the sender can start the next communication cycle. Looking at the left picture in Figure 2, one can see all the signal transitions that have to be made within one handshake. It is a straightforward approach but has the disadvantage that the request and acknowledge signals make unnecessary <code class="docutils literal notranslate"><span class="pre">return-to-zero</span></code> transitions. In practice, this will cost time and energy.</p>
+<!-- Figure 2 -->
+<a class="reference internal image-reference" href="../_images/4PhaseProtocol.png"><img alt="../_images/4PhaseProtocol.png" src="../_images/4PhaseProtocol.png" style="width: 90%;" />
+</a>
+<p><strong>Figure 2:</strong> <em>Timing diagram of bundled-data protocols</em> [Sparso20]</p>
+<p>Another approach that is more efficient in this aspect is the <code class="docutils literal notranslate"><span class="pre">2-phase</span> <span class="pre">bundled-data</span></code> protocol, seen to the right of Figure 2. It encodes request and acknowledge as signal transitions, rather than absolute values. Both transitions 0→1 and 1→0 represent the same event. This avoids the excessive use of signal transitions that were made in the 4-phase protocol.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Bundled-data protocols are also often referred to as <code class="docutils literal notranslate"><span class="pre">single-rail</span></code> protocols.</p>
+</aside>
+</aside>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,6 +467,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="3_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3 Asynchronous Pipelines</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_2_async_elements.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3.2 Basic Asynchronous Circuit Elements</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

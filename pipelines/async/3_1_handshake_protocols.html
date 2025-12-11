@@ -416,11 +416,8 @@ document.write(`
 <p>This section presents several key handshaking protocols commonly used in modern asynchronous circuits. It is important to note that here we solely focus on the conceptual aspects of these handshakes; the detailed circuits that realize these protocols will be discussed in subsequent sections.</p>
 <p>While there are numerous handshake protocols, all share a fundamental structure: one side <em>requests</em> data to be processed, while the other side <em>acknowledges</em> receipt of the data. The set of handshake protocols which we will focus on are referred to as <em>bundled-data</em> protocols<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, meaning that the data is sent in a bundle, while the handshaking information is sent along in separate request (<em>req</em>) and acknowledge (<em>ack</em>) wires, as seen in Figure 1. On the contrary, there are also so-called <em>delay-insensitive</em> protocols, where the request information is encoded into the data signals by using two wires for each bit of information. Delay-insensitive protocols are, however, not covered in this section, since they are not relevant for the pipeline architectures presented in this thesis.</p>
 <!-- Figure 1 -->
-<object data="graphics/Handshake.pdf" type="application/pdf" width="700px" height="500px">
-    <embed src="graphics/Handshake.pdf" type="application/pdf" />
-    <p>This browser does not support PDFs. Please download the PDF to view it: <a href="graphics/Handshake.pdf">Download PDF</a>.</p>
-</object>
-<p><em>Figure 1: Bundled data channel with separate request and acknowledge wires [Sparso20]</em></p>
+<img src="../graphics/Handshake.png" width="45%" style="display:inline-block; margin-right:5%;">
+*Figure 1: Bundled data channel with separate request and acknowledge wires [Sparso20]*
 <p>One specific approach is a <em>4-phase bundled-data</em> protocol that requires the following steps:</p>
 <ol class="arabic simple">
 <li><p>Sender issues new data and sets <em>req</em> high</p></li>
@@ -430,11 +427,8 @@ document.write(`
 </ol>
 <p>After this, the sender can start the next communication cycle. Looking at the left picture in Figure 2, one can see all the signal transitions that have to be made within one handshake. It is a straightforward approach but has the disadvantage that the request and acknowledge signals make unnecessary <em>return-to-zero</em> transitions. In practice, this will cost time and energy.</p>
 <!-- Figure 2 -->
-<object data="graphics/4PhaseProtocol.pdf" type="application/pdf" width="700px" height="500px">
-    <embed src="graphics/4PhaseProtocol.pdf" type="application/pdf" />
-    <p>This browser does not support PDFs. Please download the PDF to view it: <a href="graphics/4PhaseProtocol.pdf">Download PDF</a>.</p>
-</object>
-<p><em>Figure 2: Timing diagram of bundled-data protocols [Sparso20]</em></p>
+ <img src="../graphics/4PhaseProtocol.png" width="45%" style="display:inline-block;">
+*Figure 2: Timing diagram of bundled-data protocols [Sparso20]*
 <p>Another approach that is more efficient in this aspect is the <em>2-phase bundled-data</em> protocol, seen to the right of Figure 2. It encodes request and acknowledge as signal transitions, rather than absolute values. Both transitions 0→1 and 1→0 represent the same event. This avoids the excessive use of signal transitions that were made in the 4-phase protocol.</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
