@@ -1,11 +1,11 @@
 # 3.3.1 D-Latch-Based Bundled-Data Implementation
 
 **Figure 3.5** shows a pipeline that implements a `4-phase bundled-data` protocol. The lower
-part of the pipeline implements the `data path` and consists of the different combinational logic stages
-separated by ordinary D-latches. The upper `control` part consists of the `Muller pipeline`,
+part of the pipeline implements the *data path* and consists of the different combinational logic stages
+separated by ordinary D-latches. The upper *control* part consists of the `Muller pipeline`,
 where the output of each C-gate is connected to the Enable input of its associated latch.
-In order to work properly, the `req` signals should not arrive until after the `data` has arrived.
-This condition is satisfied by introducing `delay elements` in the req paths larger than the
+In order to work properly, the *req* signals should not arrive until after the *data* has arrived.
+This condition is satisfied by introducing delay elements in the req paths larger than the
 delays of the associated data path.
 
 <img src="plots/4PhasePipeline.png" width="70%" style="display:inline-block;">

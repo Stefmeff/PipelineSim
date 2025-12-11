@@ -184,11 +184,11 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline Architectures</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_intro.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_intro.html">2 Synchronous Pipelines</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="3_intro.html">3 Asynchronous Pipelines</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
-</ul>
-</details></li>
+<li class="toctree-l2"><a class="reference internal" href="3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="3_3_implementations.html">3.3 Pipeline Implementations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
@@ -424,11 +424,11 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="d-latch-based-bundled-data-implementation">
 <h1>3.3.1 D-Latch-Based Bundled-Data Implementation<a class="headerlink" href="#d-latch-based-bundled-data-implementation" title="Link to this heading">#</a></h1>
 <p><strong>Figure 3.5</strong> shows a pipeline that implements a <code class="docutils literal notranslate"><span class="pre">4-phase</span> <span class="pre">bundled-data</span></code> protocol. The lower
-part of the pipeline implements the <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">path</span></code> and consists of the different combinational logic stages
-separated by ordinary D-latches. The upper <code class="docutils literal notranslate"><span class="pre">control</span></code> part consists of the <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">pipeline</span></code>,
+part of the pipeline implements the <em>data path</em> and consists of the different combinational logic stages
+separated by ordinary D-latches. The upper <em>control</em> part consists of the <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">pipeline</span></code>,
 where the output of each C-gate is connected to the Enable input of its associated latch.
-In order to work properly, the <code class="docutils literal notranslate"><span class="pre">req</span></code> signals should not arrive until after the <code class="docutils literal notranslate"><span class="pre">data</span></code> has arrived.
-This condition is satisfied by introducing <code class="docutils literal notranslate"><span class="pre">delay</span> <span class="pre">elements</span></code> in the req paths larger than the
+In order to work properly, the <em>req</em> signals should not arrive until after the <em>data</em> has arrived.
+This condition is satisfied by introducing delay elements in the req paths larger than the
 delays of the associated data path.</p>
 <a class="reference internal image-reference" href="../_images/4PhasePipeline.png"><img alt="../_images/4PhasePipeline.png" src="../_images/4PhasePipeline.png" style="width: 70%;" />
 </a>
