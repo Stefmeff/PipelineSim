@@ -1,3 +1,5 @@
+Read documentation and theoretical background in my [jupyter-notebook](https://stefmeff.github.io/PipelineSim/)
+
 # Pipeline Simulation Tool
 (Try it at: https://stefmeff.github.io/PipSim_Web/)
 
