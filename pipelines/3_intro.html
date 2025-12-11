@@ -413,16 +413,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="asynchronous-pipelines">
 <h1>3 Asynchronous Pipelines<a class="headerlink" href="#asynchronous-pipelines" title="Link to this heading">#</a></h1>
-<p>The pipeline architectures we have dealt with so far, can all be classified as synchronous
-circuits. This means that they are run with a global clock, that dictates when and in what
+<p>The pipeline architectures we have dealt with so far, can all be classified as <code class="docutils literal notranslate"><span class="pre">synchronous</span> <span class="pre">circuits</span></code>. This means that they are run with a global <code class="docutils literal notranslate"><span class="pre">clock</span></code>, that dictates when and in what
 order things happen and introduces a common notion of time among all the components.
 Asynchronous circuits on the other hand, are implemented entirely without a clock.
-Instead the circuit components coordinate themselves via handshakes. At a basic level,
+Instead the circuit components coordinate themselves via <code class="docutils literal notranslate"><span class="pre">handshakes</span></code>. At a basic level,
 these handshakes must be able to communicate when a stage can provide new data and
 when it can receive new data, so the components can decide when to initiate a data
 transfer between each other.</p>
 <p>Since asynchronous circuits represent a very broad subject area, this chapter will only
-provide an overview of the foundations and a couple of prominent examples for asynchronous pipelines and handshake protocols. The chapter is primarily based on the book ’Introduction to Asynchronous Circuits Design’ by Jens Sparso [13] and related papers.</p>
+provide an overview of the foundations and a couple of prominent examples for asynchronous pipelines and handshake protocols. The chapter is primarily based on the book <code class="docutils literal notranslate"><span class="pre">Introduction</span> <span class="pre">to</span> <span class="pre">Asynchronous</span> <span class="pre">Circuits</span> <span class="pre">Design</span></code> by Jens Sparso [13] and related papers.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
