@@ -1,6 +1,4 @@
-# 2. Synchronous Pipelines
-
-Test:
+# 3.2.1 Muller C-element
 
 
 <div style="width:100%; overflow:hidden;">
@@ -11,4 +9,4 @@ Test:
       loading="lazy">
     </iframe>
   </div>
-</div>        
+</div>       
