@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to PipSim’s documentation! &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
+    <title>2.5 Wave-Pipelining &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
   
   
   
@@ -18,52 +18,51 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
-    <link rel="icon" href="_static/Logo-schwarz-1.png"/>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Introduction" href="pipelines/1_intro.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/2_6_wave_pipelines';</script>
+    <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3 Asynchronous Pipelines" href="3_intro.html" />
+    <link rel="prev" title="2.5 Time Borrowing" href="2_5_time_borrowing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -95,7 +94,7 @@
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="search.html"
+      action="../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -126,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -146,7 +143,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../intro.html">
   
   
   
@@ -157,8 +154,8 @@
       
     
     
-    <img src="_static/Logo-schwarz-1.png" class="logo__image only-light" alt="Design Principles and Interactive Visualization of Pipeline Architectures - Home"/>
-    <script>document.write(`<img src="_static/Logo-schwarz-1.png" class="logo__image only-dark" alt="Design Principles and Interactive Visualization of Pipeline Architectures - Home"/>`);</script>
+    <img src="../_static/Logo-schwarz-1.png" class="logo__image only-light" alt="Design Principles and Interactive Visualization of Pipeline Architectures - Home"/>
+    <script>document.write(`<img src="../_static/Logo-schwarz-1.png" class="logo__image only-dark" alt="Design Principles and Interactive Visualization of Pipeline Architectures - Home"/>`);</script>
   
   
 </a></div>
@@ -177,31 +174,31 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
                     Welcome to PipSim’s documentation!
                 </a>
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline Architectures</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="pipelines/1_intro.html">1 Introduction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="pipelines/2_intro.html">2 Synchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/2_1_sequencing_elements.html">2.1 Sequencing Elements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/2_2_flip_flop_pipeline.html">2.2 Flip-Flop-Based Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/2_3_two_phase_latches.html">2.3 2-Phase Transparent Latch Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/2_4_pulsed_latches.html">2.4 Pulsed Latch Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/2_5_time_borrowing.html">2.5 Time Borrowing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/2_6_wave_pipelines.html">2.5 Wave-Pipelining</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_intro.html">1 Introduction</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="2_intro.html">2 Synchronous Pipelines</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2_1_sequencing_elements.html">2.1 Sequencing Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_2_flip_flop_pipeline.html">2.2 Flip-Flop-Based Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_3_two_phase_latches.html">2.3 2-Phase Transparent Latch Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_4_pulsed_latches.html">2.4 Pulsed Latch Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_5_time_borrowing.html">2.5 Time Borrowing</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.5 Wave-Pipelining</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="pipelines/3_intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipelines/3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="pipelines/3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipelines/3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="3_intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
 </ul>
 </details></li>
 </ul>
@@ -277,7 +274,7 @@
       
       
       
-      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/intro.md" target="_blank"
+      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/pipelines/2_6_wave_pipelines.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +291,7 @@
       
       
       
-      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fpipelines/2_6_wave_pipelines.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -324,7 +321,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="../_sources/pipelines/2_6_wave_pipelines.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -406,7 +403,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to PipSim’s documentation!</h1>
+    <h1>2.5 Wave-Pipelining</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -420,20 +417,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-pipsim-s-documentation">
-<h1>Welcome to PipSim’s documentation!<a class="headerlink" href="#welcome-to-pipsim-s-documentation" title="Link to this heading">#</a></h1>
-<p>Hello Test</p>
-<div style="width:100%; overflow:hidden;">
-  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8);">
-    <iframe
-      src="https://stefmeff.github.io/PipSim_Web/"
-      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px"
-      loading="lazy">
-    </iframe>
-  </div>
-</div>        
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="wave-pipelining">
+<h1>2.5 Wave-Pipelining<a class="headerlink" href="#wave-pipelining" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -449,7 +434,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./."
+            path: "./pipelines"
         },
         predefinedOutput: true
     }
@@ -466,12 +451,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="2_5_time_borrowing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2.5 Time Borrowing</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="pipelines/1_intro.html"
+       href="3_intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Introduction</p>
+        <p class="prev-next-title">3 Asynchronous Pipelines</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -521,8 +515,8 @@ By The Jupyter Book community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
