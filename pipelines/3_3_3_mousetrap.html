@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/3_3_3_mousetrap';</script>
     <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -383,7 +385,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -399,6 +403,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -410,6 +422,43 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mousetrap">
 <h1>3.3.3 Mousetrap<a class="headerlink" href="#mousetrap" title="Link to this heading">#</a></h1>
+<p>The so-called <code class="docutils literal notranslate"><span class="pre">Mousetrap</span></code> pipeline introduced by [Mouse01, Mouse07] uses the <code class="docutils literal notranslate"><span class="pre">2-phase</span> <span class="pre">bundled-data</span></code> protocol, where the <em>req</em> and <em>ack</em> information is encoded via signal transitions.</p>
+<p>The pipelines we have looked at so far all used some variation of the Muller pipeline to implement the handshakes. Here, the control structure of the pipeline is different and consists only of basic XNOR gates and latches. Figure below shows the general pipeline structure of a <em>Mousetrap</em>. It consists of a <code class="docutils literal notranslate"><span class="pre">latch</span> <span class="pre">controller</span></code> that handles the handshakes and controls the data flow between the <em>data latches</em>. The <em>data latches</em> separate the different pipeline stages and are either transparent, allowing data to flow between stages, or opaque, blocking the data from flowing.</p>
+<a class="reference internal image-reference" href="../_images/AbbMouseTrap.png"><img alt="../_images/AbbMouseTrap.png" src="../_images/AbbMouseTrap.png" style="width: 650px;" />
+</a>
+<p><strong>Figure 3.8:</strong> <em>Pipeline structure of a “Mousetrap” circuit</em> [Mouse01]</p>
+<p>At the start, all <em>req</em> and <em>ack</em> signals are low, leading to a logical 1 output at the XNOR gates, making all <em>data latches</em> transparent. Once new data together with a <em>req</em> signal enters a stage, the transition in <em>req</em> causes the XNOR gate to output a logical 0, blocking the connected <em>data latch</em> from letting in new requests. Only when the next stage acknowledges the request, by making a transition in the <em>ack</em> signal, does the XNOR gate output 1 and allow new data into the stage.Generally, the Nth stage in the pipeline takes three actions once it receives new data:</p>
+<ol class="arabic simple">
+<li><p>The received data is passed along to the next stage <strong>N+1</strong> together with a transition on the request signal <strong><span class="math notranslate nohighlight">\(req_{N+1}\)</span></strong>.</p></li>
+<li><p>The previous stage <strong>N−1</strong> is acknowledged via the <strong><span class="math notranslate nohighlight">\(ack_{N−1}\)</span></strong> signal, allowing it to process new data.</p></li>
+<li><p>The current stage is blocked from receiving new data until it receives its acknowledgement <strong><span class="math notranslate nohighlight">\(ack_N\)</span></strong> from the next stage <strong>N+1</strong>.</p></li>
+</ol>
+<p>Try to comprehend the functionality of the pipeline through simulation:</p>
+<div style="width:100%; overflow:hidden; display:block;">
+  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
+    <iframe
+      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/AysncPipelines/Mousetrap.pip"
+      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px; display:block;"
+      loading="lazy">
+    </iframe>
+  </div>
+<p>The name <code class="docutils literal notranslate"><span class="pre">Mousetrap</span></code> is inspired by its behavior, which is reminiscent of a real-life mousetrap. As soon as new data enters the “trap”, it snaps shut by closing the latches and only reopens once the data has exited the stage and the pipeline is ready to accept new data. The circuit is efficient and has the benefit of avoiding the use of C-elements or the slow and complex capture-pass latches used for micropipelines (see Section 3.3.2). According to [Mouse01], its performance can be compared to that of wave-pipelined circuits, with the benefit of not being dependent on accurate path delays and not being vulnerable to temperature and voltage variations.</p>
+<section id="timing-constraints">
+<h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
+<p>To assure the intended functionality of the pipeline, two timing constraints must be met: <em>setup time</em> and <em>data overrun</em>.</p>
+<p><strong>Setup time.</strong><br />
+Setup time violations can affect the correct functionality of the data latches. When the data latch of stage N is enabled, new data, along with a <em><span class="math notranslate nohighlight">\(req_{N}\)</span></em> signal, can enter the stage. The <span class="math notranslate nohighlight">\(req_{N}\)</span> signal is then immediately forwarded to the XNOR gate, which subsequently disables the latch. If the delay between <span class="math notranslate nohighlight">\(req_{N}\)</span> entering the stage and the latch being disabled is shorter than the latches setup time, a timing violation occurs.</p>
+<div class="math notranslate nohighlight">
+\[t_{pcq} + t_{XNOR} &gt; t_{setup}\]</div>
+<p>To avoid this, the delay of <span class="math notranslate nohighlight">\(req_{N}\)</span> propagating through the latch (<span class="math notranslate nohighlight">\(t_{pcq}\)</span>) and the XNOR-gate (<span class="math notranslate nohighlight">\(t_{XNOR}\)</span>) must be larger than the setup time of the latch (<span class="math notranslate nohighlight">\(t_{setup}\)</span>), as expressed in the equation above.</p>
+<p><strong>Data overrun.</strong><br />
+Data overrun errors occur when arriving data catches up to previous data that has not yet been properly captured by the latches.</p>
+<p>When data arrives at stage N, a race condition is created between the <em><span class="math notranslate nohighlight">\(done_N\)</span></em> signal, which attempts to close the stage, and the <em><span class="math notranslate nohighlight">\(ack_{N−1}\)</span></em> signal, which allows new data into the previous stage. If the new data issued by <em><span class="math notranslate nohighlight">\(ack_{N−1}\)</span></em> reaches stage N before the latches of stage N are properly closed, a hazard occurs. To prevent this, the following timing constraint must be satisfied:</p>
+<div class="math notranslate nohighlight">
+\[t_{XNOR_{N-1}} + t_{pcq_{N-1}} + t_{logic_{N-1}}  &gt;  t_{XNOR_N} + t_{hold_{N}}\]</div>
+<p>The left term of the equation expresses the path <em><span class="math notranslate nohighlight">\(ack_{N-1}\)</span></em> and resulting new data takes through stage N-1, and the right-hand side of the equation expresses the time it takes for the latch to be closed, also accounting for the hold time.</p>
+<p>These timing constraints must be accounted for, but are easily satisfied, since the gate delays usually exceed the setup and hold times of the latches.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -457,6 +506,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
