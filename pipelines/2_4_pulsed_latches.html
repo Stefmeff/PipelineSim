@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.4 Pulsed Latch Pipeline &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
+    <title>2.4 Pulsed Latch &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/2_4_pulsed_latches';</script>
     <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -392,7 +394,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -403,11 +407,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2.4 Pulsed Latch Pipeline</h1>
+    <h1>2.4 Pulsed Latch</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -417,8 +429,46 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pulsed-latch-pipeline">
-<h1>2.4 Pulsed Latch Pipeline<a class="headerlink" href="#pulsed-latch-pipeline" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="pulsed-latch">
+<h1>2.4 Pulsed Latch<a class="headerlink" href="#pulsed-latch" title="Link to this heading">#</a></h1>
+<p>The pulsed latch pipeline operates similarly to a flip-flop-based system. However, instead of sampling data at the rising edge of the clock, a brief pulse of width <span class="math notranslate nohighlight">\(t_{pw}\)</span> is applied to a latch each cycle. This pulse samples the current input and holds it for the remainder of the clock cycle. Again, data tokens advance through the pipeline stages one clock cycle at a time, as illustrated in the figure below.</p>
+<a class="reference internal image-reference" href="../_images/2PhasePip.png"><img alt="../_images/2PhasePip.png" src="../_images/2PhasePip.png" style="width: 70%;" />
+</a>
+<div style="width:100%; overflow:hidden; display:block;">
+  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
+    <iframe
+      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/PulsedLatchPipeline.pip"
+      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px; display:block;"
+      loading="lazy">
+    </iframe>
+  </div>
+<section id="timing-constraints">
+<h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
+<p><strong>Max-Delay.</strong><br />
+For the max-delay constraint concerning pulsed latches, we need to make a distinction between the following cases:</p>
+<p>If the setup time <span class="math notranslate nohighlight">\(t_{setup}\)</span> is larger than the pulse width <span class="math notranslate nohighlight">\(t_{pw}\)</span>, arriving data must setup some time <span class="math notranslate nohighlight">\((t_{setup} - t_{pw})\)</span> before the rising clock edge. This results in the following constraint:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{c} \geq t_{pcq} + t_{pd} + (t_{setup} - t_{pw})
+\]</div>
+<p>If the setup time is smaller than the pulse width, it does not need to be taken into account. The clock period $<span class="math notranslate nohighlight">\(T_c\)</span>$ must simply offer enough time for data to travel through the latch and the combinational logic:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{c} \geq t_{pdq} + t_{pd}
+\]</div>
+<p>Combining these two cases, we take the maximum of both:</p>
+<div class="math notranslate nohighlight">
+\[
+T_{c} \geq \max(t_{pdq} + t_{pd}, \ t_{pcq} + t_{pd} + t_{setup} - t_{pw})
+\]</div>
+<p><strong>Min-Delay.</strong><br />
+The min-delay constraint for pulsed latches is expressed as:</p>
+<div class="math notranslate nohighlight">
+\[
+t_{ccq} + t_{cd} \geq t_{pw} + t_{hold}
+\]</div>
+<p>After data is launched from <span class="math notranslate nohighlight">\(L_1\)</span> at the rising clock edge, it must not arrive at the subsequent latch <span class="math notranslate nohighlight">\(L_2\)</span> until the hold time of the falling edge has passed. Compared to flip-flop-based pipelines, the additional pulse width delays the hold time window that has to be met.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -475,6 +525,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

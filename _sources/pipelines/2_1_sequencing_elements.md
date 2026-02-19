@@ -2,7 +2,7 @@
 
 Sequencing elements are employed to separate the different pipeline stages and control the data flow between them. They are memory elements that store the current tokens of a stage and output it to the connected combinational logic. In the case of synchronous pipelines, the sampling and propagation of tokens is triggered by a global clock signal. This section will explore the sequencing elements that act as the basis for classical synchronous circuits, examining their behavior and physical properties.
 
-## 2.2.1 Flip-Flops and Latches
+## 2.1.1 Flip-Flops and Latches
 
 The two most widely used sequencing elements are called the flip-flop and latch. Although there are several types of flip-flops and latches, the introduction of the D-latch and D-flip-flop will be sufficient to cover the topics at hand. They are the basic building blocks used to implement the various pipeline concepts that will be presented in the following sections.
 
@@ -14,7 +14,7 @@ A latch on the other hand is *transparent*[^2] when the clock is high and *opaqu
 
 **Figure 2.1:** *Flip-Flop and Latch Timing Diagram* [16]
 
-## 2.2.2 Metastability
+## 2.1.2 Metastability
 
 This ideal behaviour of the flip-flop and latch applies most of the time. However, there are some edge cases, where the elements might reach a so called metastable state, in which they cannot clearly decide on what value to store. In such cases tokens can get corrupted which might lead to severe system failures.
 
@@ -26,7 +26,7 @@ An analogy from everyday life to understand this problem more intuitively would 
 
 The issue of metastability is inherent in the hardware and unavoidable. It needs to be taken into consideration and properly dealt with. For the pipeline architectures presented in the later chapters, it will be a key aspect to ensure that the *setup* and *hold* time windows of the registers are met, in order for the designs to work correctly.
 
-## 2.2.3 Timing Notation
+## 2.1.3 Timing Notation
 
 This section will introduce some timing properties and notation for sequential and combinational circuit elements. These will be important to describe timing behaviour and constraints of the various pipeline implementations in this thesis.
 

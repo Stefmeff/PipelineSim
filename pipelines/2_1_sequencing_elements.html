@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -417,9 +417,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-flops-and-latches">2.2.1 Flip-Flops and Latches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metastability">2.2.2 Metastability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-notation">2.2.3 Timing Notation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-flops-and-latches">2.1.1 Flip-Flops and Latches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metastability">2.1.2 Metastability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-notation">2.1.3 Timing Notation</a></li>
 </ul>
             </nav>
         </div>
@@ -435,7 +435,7 @@ document.write(`
 <h1>2.1 Sequencing Elements<a class="headerlink" href="#sequencing-elements" title="Link to this heading">#</a></h1>
 <p>Sequencing elements are employed to separate the different pipeline stages and control the data flow between them. They are memory elements that store the current tokens of a stage and output it to the connected combinational logic. In the case of synchronous pipelines, the sampling and propagation of tokens is triggered by a global clock signal. This section will explore the sequencing elements that act as the basis for classical synchronous circuits, examining their behavior and physical properties.</p>
 <section id="flip-flops-and-latches">
-<h2>2.2.1 Flip-Flops and Latches<a class="headerlink" href="#flip-flops-and-latches" title="Link to this heading">#</a></h2>
+<h2>2.1.1 Flip-Flops and Latches<a class="headerlink" href="#flip-flops-and-latches" title="Link to this heading">#</a></h2>
 <p>The two most widely used sequencing elements are called the flip-flop and latch. Although there are several types of flip-flops and latches, the introduction of the D-latch and D-flip-flop will be sufficient to cover the topics at hand. They are the basic building blocks used to implement the various pipeline concepts that will be presented in the following sections.</p>
 <p>They both have a data (D) and clock (clk)<a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> signal as input and a data output (Q). The flip-flop samples the current input data (D) at the active clock edge and holds this sampled value at the output (Q) until the arrival of the next active edge. For the sake of simplicity, we assume the active clock edge to be the rising edge.</p>
 <p>A latch on the other hand is <em>transparent</em><a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> when the clock is high and <em>opaque</em><a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> when the clock is low. Meaning that when the clock is high, the data (D) gets directly transferred to the output and when the clock is low, the last input data is stored and held at the output Q, even if input D changes. Note that latches can also be active-low, meaning they are enabled by a low voltage level instead. For a visual understanding, the relation of input to output for these sequencing elements is represented in Figure 2.1.</p>
@@ -444,7 +444,7 @@ document.write(`
 <p><strong>Figure 2.1:</strong> <em>Flip-Flop and Latch Timing Diagram</em> [16]</p>
 </section>
 <section id="metastability">
-<h2>2.2.2 Metastability<a class="headerlink" href="#metastability" title="Link to this heading">#</a></h2>
+<h2>2.1.2 Metastability<a class="headerlink" href="#metastability" title="Link to this heading">#</a></h2>
 <p>This ideal behaviour of the flip-flop and latch applies most of the time. However, there are some edge cases, where the elements might reach a so called metastable state, in which they cannot clearly decide on what value to store. In such cases tokens can get corrupted which might lead to severe system failures.</p>
 <p>In the 1970’s researchers noticed excessive failure rates in interactions between systems that operated in different clock domains. Especially the multiprocessor systems, that were on the rise back then, often had to deal with these vulnerabilities. The paper in \cite{ChaneyMolnar73} suggested a root cause for this problem. They discovered that setting the data (D) and clock (clk) input almost simultaneously can lead to delayed or invalid outputs. As it turns out flip-flops have a hard time deciding which value to store, when the data makes a transition close to the sampling edge.</p>
 <p>They only work as intended when the data is applied at least a specific time window before and held constant for a certain time after the sampling clock edge. These time windows are defined by the so-called <em>setup</em> and <em>hold</em> time. For a data input to be sampled correctly, it has to be applied some time <span class="math notranslate nohighlight">\(t_{setup}\)</span> before the clock transition, and held for some time <span class="math notranslate nohighlight">\(t_{hold}\)</span> after the clock transition has taken place. If that is not the case, the sequencing element can remain in the mentioned metastable state for an undefined amount of time, before eventually settling on an output value. Note that this behaviour also applies to latches, when they switch from transparent to opaque.</p>
@@ -452,7 +452,7 @@ document.write(`
 <p>The issue of metastability is inherent in the hardware and unavoidable. It needs to be taken into consideration and properly dealt with. For the pipeline architectures presented in the later chapters, it will be a key aspect to ensure that the <em>setup</em> and <em>hold</em> time windows of the registers are met, in order for the designs to work correctly.</p>
 </section>
 <section id="timing-notation">
-<h2>2.2.3 Timing Notation<a class="headerlink" href="#timing-notation" title="Link to this heading">#</a></h2>
+<h2>2.1.3 Timing Notation<a class="headerlink" href="#timing-notation" title="Link to this heading">#</a></h2>
 <p>This section will introduce some timing properties and notation for sequential and combinational circuit elements. These will be important to describe timing behaviour and constraints of the various pipeline implementations in this thesis.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -574,9 +574,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-flops-and-latches">2.2.1 Flip-Flops and Latches</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metastability">2.2.2 Metastability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-notation">2.2.3 Timing Notation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-flops-and-latches">2.1.1 Flip-Flops and Latches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metastability">2.1.2 Metastability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-notation">2.1.3 Timing Notation</a></li>
 </ul>
   </nav></div>
 
