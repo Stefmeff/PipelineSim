@@ -399,7 +399,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -415,6 +417,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tool-description">Tool Description</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -426,7 +436,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-pipsim-s-documentation">
 <h1>Welcome to PipSim’s documentation!<a class="headerlink" href="#welcome-to-pipsim-s-documentation" title="Link to this heading">#</a></h1>
-<p>Hello Test</p>
+<p>This jupyter book is the result of my bachelors thesis <code class="docutils literal notranslate"><span class="pre">&quot;Design</span> <span class="pre">Principles</span> <span class="pre">and</span> <span class="pre">Interactive</span> <span class="pre">Visualization</span> <span class="pre">of</span> <span class="pre">Pipeline</span> <span class="pre">Architectures&quot;</span></code> in computer engineering at TU Wien. The theoretical part acts as an introduction to both <code class="docutils literal notranslate"><span class="pre">synchronous</span></code>and <code class="docutils literal notranslate"><span class="pre">asynchronous</span></code> pipeline architectures. Alongside this theoretical part a simulation tool was developed with the aim of simulating/visualizing all the presented circuits and architectures. The tool is meant to be used alongside the text to provide a more intuitive understanding of the topics at hand. For more details about the functionalities and usage of the simulation tool, read the description below. To dive into the theory, feel free to continue with reading the Section <code class="docutils literal notranslate"><span class="pre">Pipeline</span> <span class="pre">Architectures</span></code>. Note that for every section introducing a key circuit design, there will be an interactive window included, where you can immediatly test it’s functionality.</p>
+<section id="tool-description">
+<h2>Tool Description<a class="headerlink" href="#tool-description" title="Link to this heading">#</a></h2>
+<p>This simulation tool aims at visualizing the operation principles of both synchronous and asynchronous pipeline architectures, providing a more intuitive understanding of the topic. Similar to other available logic simulators, the tool allows to build digital circuits from scratch by placing and connecting different components. One of the advantages of this tool is, that it can also simulate the timing behaviour of the circuits, which is a key aspect when it comes to pipelining.</p>
 <div style="width:100%; overflow:hidden;">
   <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8);">
     <iframe
@@ -435,7 +448,14 @@ document.write(`
       loading="lazy">
     </iframe>
   </div>
-</div>        
+</div>      
+<p>The user can adjust relevant timing parameters of individual components, such as propagation delays, setup and hold time, clock period etc. and see how these parameters affect the circuits overall behaviour and which timing constraints need to be adhered, for the design to work as intended. By coloring signals belonging to different
+tokens, the user can easily distinguish and track the propagation of the data that travels through a pipeline.</p>
+<p>The window above shows the main interface of the application. The application allows the user to drag and drop different components from the library on the left and connect them via wires, to realize fully functional circuits. By right-clicking on a component, users can access an editor that allows them to modify component-specific timing parameters. All timing parameters are specified as positive integer values, with the unit of time corresponding to the simulation time displayed in the top menu. The editors also allow the user to
+check a box next to the propagation delay setting. This enables the visualization of a components delay via a progress bar displaying the signal waves that travel through a circuit.</p>
+<p>To start the simulation, the user has to press the start/pause button in the top menu. Now the user can interact and observe the functionality of the circuit. To adjust the speed of the visualization the user can change the simulation time in the top menu. Additionally there is a single-step mode, that runs the simulation for a specified amount of time units and then pauses it again. If there is a setup or hold time violation in a
+sequencing element, the simulation stops and the affected component is marked. Once the design of a circuit is complete, the tool allows the project to be saved and reloaded for later use. For further usage details there is also a help option and tool tip within the application.</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -487,6 +507,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tool-description">Tool Description</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
