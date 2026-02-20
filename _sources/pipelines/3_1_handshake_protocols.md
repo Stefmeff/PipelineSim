@@ -7,7 +7,7 @@ While there are numerous handshake protocols, all share a fundamental structure:
 <!-- Figure 1 -->
 <img src="plots/Handshake.png" width="70%" style="display:inline-block; margin-right:5%;">
 
-**Figure 1:** *Bundled data channel with separate request and acknowledge wires* [Sparso20] 
+**Figure 1:** *Bundled data channel with separate request and acknowledge wires* {cite}`Sparso20`
 
 One specific approach is a `4-phase bundled-data` protocol that requires the following steps:
 
@@ -22,7 +22,7 @@ After this, the sender can start the next communication cycle. Looking at the le
 
 <img src="plots/4PhaseProtocol.png" width="90%" style="display:inline-block;">
 
-**Figure 2:** *Timing diagram of bundled-data protocols* [Sparso20]
+**Figure 2:** *Timing diagram of bundled-data protocols* {cite}`Sparso20`
 
 
 Another approach that is more efficient in this aspect is the `2-phase bundled-data` protocol, seen to the right of Figure 2. It encodes request and acknowledge as signal transitions, rather than absolute values. Both transitions 0→1 and 1→0 represent the same event. This avoids the excessive use of signal transitions that were made in the 4-phase protocol.

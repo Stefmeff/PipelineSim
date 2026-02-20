@@ -12,13 +12,13 @@ A latch on the other hand is *transparent*[^2] when the clock is high and *opaqu
 
 <img src="plots/LatchFlop.png" width="70%" style="display:inline-block;">
 
-**Figure 2.1:** *Flip-Flop and Latch Timing Diagram* [16]
+**Figure 2.1:** *Flip-Flop and Latch Timing Diagram* {cite}`weste2011cmos`
 
 ## 2.1.2 Metastability
 
 This ideal behaviour of the flip-flop and latch applies most of the time. However, there are some edge cases, where the elements might reach a so called metastable state, in which they cannot clearly decide on what value to store. In such cases tokens can get corrupted which might lead to severe system failures.
 
-In the 1970's researchers noticed excessive failure rates in interactions between systems that operated in different clock domains. Especially the multiprocessor systems, that were on the rise back then, often had to deal with these vulnerabilities. The paper in \cite{ChaneyMolnar73} suggested a root cause for this problem. They discovered that setting the data (D) and clock (clk) input almost simultaneously can lead to delayed or invalid outputs. As it turns out flip-flops have a hard time deciding which value to store, when the data makes a transition close to the sampling edge.
+In the 1970's researchers noticed excessive failure rates in interactions between systems that operated in different clock domains. Especially the multiprocessor systems, that were on the rise back then, often had to deal with these vulnerabilities. The paper in {cite}`ChaneyMolnar73` suggested a root cause for this problem. They discovered that setting the data (D) and clock (clk) input almost simultaneously can lead to delayed or invalid outputs. As it turns out flip-flops have a hard time deciding which value to store, when the data makes a transition close to the sampling edge.
 
 They only work as intended when the data is applied at least a specific time window before and held constant for a certain time after the sampling clock edge. These time windows are defined by the so-called *setup* and *hold* time. For a data input to be sampled correctly, it has to be applied some time $t_{setup}$ before the clock transition, and held for some time $t_{hold}$ after the clock transition has taken place. If that is not the case, the sequencing element can remain in the mentioned metastable state for an undefined amount of time, before eventually settling on an output value. Note that this behaviour also applies to latches, when they switch from transparent to opaque.
 

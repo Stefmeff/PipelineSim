@@ -10,7 +10,7 @@ delays of the associated data path.
 
 <img src="plots/4PhasePipeline.png" width="70%" style="display:inline-block;">
 
-**Figure 3.5:** *4-phase bundled-data pipeline implementation* [13]
+**Figure 3.5:** *4-phase bundled-data pipeline implementation {cite}`Sparso20`* 
 
 Additionally, each message has to be sent into the pipeline according to the 4-phase
 protocol. If not acknowledged by the right-hand side, the pipeline will slowly fill with

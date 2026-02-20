@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -203,6 +203,10 @@
 </details></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
     </div>
@@ -433,13 +437,12 @@ document.write(`
 <p>In <code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">3.1</span></code>, we concerned ourselves with the theoretical protocols that are used to implement handshaking in asynchronous circuits. In this section we will look at fundamental circuit elements that act as the basis of asynchronous circuits.</p>
 <p>The handshake protocols discussed so far were all based on mutual agreement (request and acknowledgment) before transferring data between each other. Many asynchronous circuits rely on the so called <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">Pipeline</span></code> as the fundamental control structure to implement these handshakes. While there are some variations in implementations,
 depending on the specific protocol, the concept of the Muller pipeline remains as the backbone of most asynchronous circuits. Having understood the behaviour of the Muller pipeline will be key to understand the behaviour of the specific pipeline architectures introduced in Section 3.3.</p>
-<p>This section will first go over the <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">C-element</span></code> or <code class="docutils literal notranslate"><span class="pre">C-gate</span></code>, which is a fundamental building block for the Muller pipeline and asynchronous circuits in general. After that we will look at the implementation and behaviour of the Muller pipeline itself. These concepts date back as early as the 1950s and were pioneered by <code class="docutils literal notranslate"><span class="pre">David</span> <span class="pre">E.</span> <span class="pre">Muller</span></code> [9, 8].</p>
+<p>This section will first go over the <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">C-element</span></code> or <code class="docutils literal notranslate"><span class="pre">C-gate</span></code>, which is a fundamental building block for the Muller pipeline and asynchronous circuits in general. After that we will look at the implementation and behaviour of the Muller pipeline itself. These concepts date back as early as the 1950s and were pioneered by <code class="docutils literal notranslate"><span class="pre">David</span> <span class="pre">E.</span> <span class="pre">Muller</span></code> <span id="id1">[<a class="reference internal" href="references.html#id12" title="David E. Muller. Asynchronous logics and application to information processing. In Proc. Symp. on Application of Switching Theory in Space Technology, volume, 289-297. 1963.">12</a>, <a class="reference internal" href="references.html#id13" title="David E. Muller and W.S. Batrky. A theory of asnychronous circuits. In Proceedings of an International Symposium on the Theory of Switching, Cambridge, volume, 204-243. 1959.">13</a>]</span>.</p>
 <section id="muller-c-element">
 <h2>3.2.1 Muller C-Element<a class="headerlink" href="#muller-c-element" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Muller</span> <span class="pre">C-element</span></code> or <code class="docutils literal notranslate"><span class="pre">C-Gate</span></code> is a sequencing element for asynchronous circuits. Its function is quite straightforward: the output is <strong>1</strong>, when all inputs are <strong>1</strong> and <strong>0</strong>, when all inputs are <strong>0</strong>. For all other input combinations, the C-gate holds its current state.</p>
-<a class="reference internal image-reference" href="../_images/MullerC.png"><img alt="../_images/MullerC.png" src="../_images/MullerC.png" style="width: 50%;" />
-</a>
-<p><strong>Figure 3.3:</strong> <em>Specification of the Muller C-element</em> [13]</p>
+<a class="reference internal image-reference" href="../_images/MullerC.png"><img alt="../_images/MullerC.png" src="../_images/MullerC.png" style="width: 50%;" /></a>
+<p><strong>Figure 3.3:</strong> <em>Specification of the Muller C-element</em> <span id="id2">[<a class="reference internal" href="references.html#id7" title="Jens Sparsø. Introduction to Asynchronous Circuit Design. DTU Compute, Technical University of Denmark, 2020.">11</a>]</span></p>
 <p><strong>Figure 3.3</strong> shows the symbol and four possible formal specifications of the Muller C
 element. The element exhibits the behaviour that it only changes its state, when all
 inputs agree. Additionally, a state change at the output clearly indicates the states of
@@ -455,12 +458,11 @@ those events.</p>
 <p><strong>Figure 3.4</strong> depicts the general structure of the Muller pipeline2. It consists of a series of
 interconnected C-gates <strong>C[i]</strong>, where each gate receives its inputs from the output of its
 predecessor <strong>C[i-1]</strong> and the inverted output of its successor <strong>C[i+1]</strong>.</p>
-<a class="reference internal image-reference" href="../_images/MullerPipeline.png"><img alt="../_images/MullerPipeline.png" src="../_images/MullerPipeline.png" style="width: 70%;" />
-</a>
-<p><strong>Figure 3.4:</strong> <em>The Muller Pipeline</em> [13]</p>
+<a class="reference internal image-reference" href="../_images/MullerPipeline.png"><img alt="../_images/MullerPipeline.png" src="../_images/MullerPipeline.png" style="width: 70%;" /></a>
+<p><strong>Figure 3.4:</strong> <em>The Muller Pipeline</em> <span id="id3">[<a class="reference internal" href="references.html#id7" title="Jens Sparsø. Introduction to Asynchronous Circuit Design. DTU Compute, Technical University of Denmark, 2020.">11</a>]</span></p>
 <p>Initially, all C-gates <strong>C[i]</strong> store the value <strong>0</strong>. An input value <strong>1</strong> from predecessor <strong>C[i-1]</strong> is
 propagated, when the successor <strong>C[i+1]</strong> outputs a <strong>0</strong>. Similarly a <strong>0</strong> from <strong>C[i-1]</strong> will only
-propagate, if <strong>C[i+1]</strong> holds a <strong>1</strong>. Generally one can form the following simple state rule:</p>
+propagate, if <strong>C[i+1]</strong> holds a <strong>1</strong>. Generally one can form the following simple state rule <span id="id4">[<a class="reference internal" href="references.html#id11" title="I. E. Sutherland. Micropipelines. Commun. ACM, 32(6):720–738, 1989.">14</a>]</span>:</p>
 <p align="center">
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>

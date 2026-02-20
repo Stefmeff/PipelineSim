@@ -5,7 +5,7 @@ In `Section 3.1`, we concerned ourselves with the theoretical protocols that are
 The handshake protocols discussed so far were all based on mutual agreement (request and acknowledgment) before transferring data between each other. Many asynchronous circuits rely on the so called `Muller Pipeline` as the fundamental control structure to implement these handshakes. While there are some variations in implementations,
 depending on the specific protocol, the concept of the Muller pipeline remains as the backbone of most asynchronous circuits. Having understood the behaviour of the Muller pipeline will be key to understand the behaviour of the specific pipeline architectures introduced in Section 3.3.
 
-This section will first go over the `Muller C-element` or `C-gate`, which is a fundamental building block for the Muller pipeline and asynchronous circuits in general. After that we will look at the implementation and behaviour of the Muller pipeline itself. These concepts date back as early as the 1950s and were pioneered by `David E. Muller` [9, 8].
+This section will first go over the `Muller C-element` or `C-gate`, which is a fundamental building block for the Muller pipeline and asynchronous circuits in general. After that we will look at the implementation and behaviour of the Muller pipeline itself. These concepts date back as early as the 1950s and were pioneered by `David E. Muller` {cite}`Muller63,Muller59`.
 
 ## 3.2.1 Muller C-Element
 
@@ -13,7 +13,7 @@ The `Muller C-element` or `C-Gate` is a sequencing element for asynchronous circ
 
 <img src="plots/MullerC.png" width="50%" style="display:inline-block;">
 
-**Figure 3.3:** *Specification of the Muller C-element* [13]
+**Figure 3.3:** *Specification of the Muller C-element* {cite}`Sparso20`
 
 **Figure 3.3** shows the symbol and four possible formal specifications of the Muller C
 element. The element exhibits the behaviour that it only changes its state, when all
@@ -34,11 +34,11 @@ predecessor **C[i-1]** and the inverted output of its successor **C[i+1]**.
 
 <img src="plots/MullerPipeline.png" width="70%" style="display:inline-block;">
 
-**Figure 3.4:** *The Muller Pipeline* [13]
+**Figure 3.4:** *The Muller Pipeline* {cite}`Sparso20`
 
 Initially, all C-gates **C[i]** store the value **0**. An input value **1** from predecessor **C[i-1]** is
 propagated, when the successor **C[i+1]** outputs a **0**. Similarly a **0** from **C[i-1]** will only
-propagate, if **C[i+1]** holds a **1**. Generally one can form the following simple state rule:
+propagate, if **C[i+1]** holds a **1**. Generally one can form the following simple state rule {cite}`MicroPip89`:
 
 <p align="center">
 

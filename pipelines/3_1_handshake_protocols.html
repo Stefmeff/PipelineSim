@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -203,6 +203,10 @@
 </details></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
     </div>
@@ -420,11 +424,10 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="handshake-protocols">
 <h1>3.1 Handshake Protocols<a class="headerlink" href="#handshake-protocols" title="Link to this heading">#</a></h1>
 <p>This section presents several key handshaking protocols commonly used in modern asynchronous circuits. It is important to note that here we solely focus on the conceptual aspects of these handshakes; the detailed circuits that realize these protocols will be discussed in subsequent sections.</p>
-<p>While there are numerous handshake protocols, all share a fundamental structure: one side <code class="docutils literal notranslate"><span class="pre">requests</span></code> data to be processed, while the other side <code class="docutils literal notranslate"><span class="pre">acknowledges</span></code> receipt of the data. The set of handshake protocols which we will focus on are referred to as <code class="docutils literal notranslate"><span class="pre">bundled-data</span></code> protocols<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, meaning that the data is sent in a bundle, while the handshaking information is sent along in separate request (<em>req</em>) and acknowledge (<em>ack</em>) wires, as seen in Figure 1. On the contrary, there are also so-called <code class="docutils literal notranslate"><span class="pre">delay-insensitive</span></code> protocols, where the request information is encoded into the data signals by using two wires for each bit of information. Delay-insensitive protocols are, however, not covered in this section, since they are not relevant for the pipeline architectures presented in this thesis.</p>
+<p>While there are numerous handshake protocols, all share a fundamental structure: one side <code class="docutils literal notranslate"><span class="pre">requests</span></code> data to be processed, while the other side <code class="docutils literal notranslate"><span class="pre">acknowledges</span></code> receipt of the data. The set of handshake protocols which we will focus on are referred to as <code class="docutils literal notranslate"><span class="pre">bundled-data</span></code> protocols<a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, meaning that the data is sent in a bundle, while the handshaking information is sent along in separate request (<em>req</em>) and acknowledge (<em>ack</em>) wires, as seen in Figure 1. On the contrary, there are also so-called <code class="docutils literal notranslate"><span class="pre">delay-insensitive</span></code> protocols, where the request information is encoded into the data signals by using two wires for each bit of information. Delay-insensitive protocols are, however, not covered in this section, since they are not relevant for the pipeline architectures presented in this thesis.</p>
 <!-- Figure 1 -->
-<a class="reference internal image-reference" href="../_images/Handshake.png"><img alt="../_images/Handshake.png" src="../_images/Handshake.png" style="width: 70%;" />
-</a>
-<p><strong>Figure 1:</strong> <em>Bundled data channel with separate request and acknowledge wires</em> [Sparso20]</p>
+<a class="reference internal image-reference" href="../_images/Handshake.png"><img alt="../_images/Handshake.png" src="../_images/Handshake.png" style="width: 70%;" /></a>
+<p><strong>Figure 1:</strong> <em>Bundled data channel with separate request and acknowledge wires</em> <span id="id2">[<a class="reference internal" href="references.html#id7" title="Jens Sparsø. Introduction to Asynchronous Circuit Design. DTU Compute, Technical University of Denmark, 2020.">11</a>]</span></p>
 <p>One specific approach is a <code class="docutils literal notranslate"><span class="pre">4-phase</span> <span class="pre">bundled-data</span></code> protocol that requires the following steps:</p>
 <p><strong>1.</strong> <code class="docutils literal notranslate"><span class="pre">Sender</span></code> issues new data and sets <em>req</em> high<br />
 <strong>2.</strong> <code class="docutils literal notranslate"><span class="pre">Receiver</span></code> consumes data and sets <em>ack</em> high<br />
@@ -432,13 +435,12 @@ document.write(`
 <strong>4.</strong> <code class="docutils literal notranslate"><span class="pre">Receiver</span></code> acknowledges this by also taking <em>ack</em> low</p>
 <p>After this, the sender can start the next communication cycle. Looking at the left picture in Figure 2, one can see all the signal transitions that have to be made within one handshake. It is a straightforward approach but has the disadvantage that the request and acknowledge signals make unnecessary <code class="docutils literal notranslate"><span class="pre">return-to-zero</span></code> transitions. In practice, this will cost time and energy.</p>
 <!-- Figure 2 -->
-<a class="reference internal image-reference" href="../_images/4PhaseProtocol.png"><img alt="../_images/4PhaseProtocol.png" src="../_images/4PhaseProtocol.png" style="width: 90%;" />
-</a>
-<p><strong>Figure 2:</strong> <em>Timing diagram of bundled-data protocols</em> [Sparso20]</p>
+<a class="reference internal image-reference" href="../_images/4PhaseProtocol.png"><img alt="../_images/4PhaseProtocol.png" src="../_images/4PhaseProtocol.png" style="width: 90%;" /></a>
+<p><strong>Figure 2:</strong> <em>Timing diagram of bundled-data protocols</em> <span id="id3">[<a class="reference internal" href="references.html#id7" title="Jens Sparsø. Introduction to Asynchronous Circuit Design. DTU Compute, Technical University of Denmark, 2020.">11</a>]</span></p>
 <p>Another approach that is more efficient in this aspect is the <code class="docutils literal notranslate"><span class="pre">2-phase</span> <span class="pre">bundled-data</span></code> protocol, seen to the right of Figure 2. It encodes request and acknowledge as signal transitions, rather than absolute values. Both transitions 0→1 and 1→0 represent the same event. This avoids the excessive use of signal transitions that were made in the 4-phase protocol.</p>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="doc-footnote">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Bundled-data protocols are also often referred to as <code class="docutils literal notranslate"><span class="pre">single-rail</span></code> protocols.</p>
 </aside>

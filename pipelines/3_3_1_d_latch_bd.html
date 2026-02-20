@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -205,6 +205,10 @@
 </details></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
     </div>
@@ -438,9 +442,8 @@ where the output of each C-gate is connected to the Enable input of its associat
 In order to work properly, the <em>req</em> signals should not arrive until after the <em>data</em> has arrived.
 This condition is satisfied by introducing delay elements in the req paths larger than the
 delays of the associated data path.</p>
-<a class="reference internal image-reference" href="../_images/4PhasePipeline.png"><img alt="../_images/4PhasePipeline.png" src="../_images/4PhasePipeline.png" style="width: 70%;" />
-</a>
-<p><strong>Figure 3.5:</strong> <em>4-phase bundled-data pipeline implementation</em> [13]</p>
+<a class="reference internal image-reference" href="../_images/4PhasePipeline.png"><img alt="../_images/4PhasePipeline.png" src="../_images/4PhasePipeline.png" style="width: 70%;" /></a>
+<p><strong>Figure 3.5:</strong> <em>4-phase bundled-data pipeline implementation <span id="id1">[<a class="reference internal" href="references.html#id7" title="Jens Sparsø. Introduction to Asynchronous Circuit Design. DTU Compute, Technical University of Denmark, 2020.">11</a>]</span></em></p>
 <p>Additionally, each message has to be sent into the pipeline according to the 4-phase
 protocol. If not acknowledged by the right-hand side, the pipeline will slowly fill with
 the different tokens, until it blocks the left-hand side from issuing new data. This pipeline design is simple and robust but has some downsides regarding speed

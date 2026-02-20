@@ -5,7 +5,7 @@ The so-called `Micropipelines` were introduced by Ivan Sutherland in his 1988 Tu
 
 <img src="plots/CPLatch.png" width="70%" style="display:inline-block;">
 
-**Figure 3.6:** *Implementation and function of a capture-pass latch* [Sparso20]
+**Figure 3.6:** *Implementation and function of a capture-pass latch {cite}`Sparso20`* 
 
 Figure 3.6 shows the implementation and function of such a capture-pass latch. It has a **capture (C)** and a **pass (P)** input that control the flow of the input data. Initially, when both `C = 0` and `P = 0`, the latch is in *pass* mode and data is directly transferred to the output. Once a transition occurs on the capture input (`C = 1`, `P = 0`), the latch switches to *capture* mode, stores the previous data input, and holds it at the output. A transition on `P` (`C = 1`, `P = 1`) again causes the latch to be in *pass* mode, transferring the input directly to the output. Another signal transition on `C` (`C = 0`, `P = 1`) once more puts the latch into *capture* mode.
 
@@ -15,7 +15,7 @@ Replacing the ordinary latches with capture-pass latches, but keeping the Muller
 
 <img src="plots/Micropipeline.png" width="70%" style="display:inline-block;">
 
-**Figure 3.7:** *Structure of a Micropipeline for 2-phase bundled-data protocols* [Sparso20]
+**Figure 3.7:** *Structure of a Micropipeline for 2-phase bundled-data protocols* {cite}`Sparso`
 
 Here, the capture inputs (`C`) are connected to the output of the respective C-gates and the pass inputs (`P`) are connected to the *ack* signal from the successor stages. Assuming the default state where each C-gate holds the value `0`, all latches are in *pass* mode. Once the left-hand side issues a *req* message, encoded as a `0 → 1` transition, the latch switches to *capture* mode (`C = 1`, `P = 0`), storing the data and preventing new data from entering the latch. Once the right-hand side responds with an *ack* signal, encoded as a `0 → 1` transition, the latch returns to *pass* mode (`C = 1`, `P = 1`), allowing new data into the pipeline. New data is then issued analogously, except that both *req* and *ack* signals are encoded as the inverse transition `1 → 0`. once again, feel free to try out the protocol and behaviour of the pipeline in `Pipsim`:
 
@@ -33,7 +33,7 @@ Compared to the *4-phase bundled-data* approach shown in the previous section, t
 
 ### Timing Constraints
 
-The intended operation requires the satisfaction of several timing constraints. As shown in [Zhou22], it is necessary that the *setup* and *hold* times of the capture-pass latches are not violated.
+The intended operation requires the satisfaction of several timing constraints. As shown in {cite}`Zhou22`, it is necessary that the *setup* and *hold* times of the capture-pass latches are not violated.
 
 **Setup time.**  
 

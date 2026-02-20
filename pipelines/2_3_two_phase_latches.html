@@ -206,6 +206,10 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -418,6 +422,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
 </ul>
             </nav>
         </div>
@@ -432,9 +437,26 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="phase-transparent-latch-pipeline">
 <h1>2.3 2-Phase Transparent Latch Pipeline<a class="headerlink" href="#phase-transparent-latch-pipeline" title="Link to this heading">#</a></h1>
 <p>Two-phase transparent latch pipelines, as the name indicates, use latches instead of flip-flops. The pipeline utilizes the fact that flip-flops consist of a pair of latches that are clocked complementarily. The main idea is to split these latch pairs and the combinational logic and divide the full clock cycle into two half cycles. The subsequent latches are then controlled by 2 complementary clocks <span class="math notranslate nohighlight">\(\phi_1\)</span> and <span class="math notranslate nohighlight">\(\phi_2\)</span>. While one clock is high the other is always low and vice-versa. This results in one latch always being transparent, allowing data to pass through, and the next latch being opaque, preventing tokens from catching up.</p>
-<a class="reference internal image-reference" href="../_images/2PhasePip.png"><img alt="../_images/2PhasePip.png" src="../_images/2PhasePip.png" style="width: 70%;" />
-</a>
-<p><strong>Figure 2.3:</strong> <em>2-Phase Transparent Latch Pipeline \cite{weste2011cmos}</em></p>
+<a class="reference internal image-reference" href="../_images/2PhasePip.png"><img alt="../_images/2PhasePip.png" src="../_images/2PhasePip.png" style="width: 70%;" /></a>
+<p><strong>Figure 2.3:</strong> <em>2-Phase Transparent Latch Pipeline <span id="id1">[<a class="reference internal" href="references.html#id3" title="N.H.E. Weste and D.M. Harris. CMOS VLSI Design: A Circuits and Systems Perspective. Addison Wesley, 2011. ISBN 9780321547743.">3</a>]</span></em></p>
+<p>Figure 2.3 shows the general structure of such pipelines and how the complementary clocks are applied to the latches. Note that the clocks <span class="math notranslate nohighlight">\(\phi_1\)</span> and <span class="math notranslate nohighlight">\(\phi_2\)</span> do not have to be exact complements of each other, but may also be non-overlapping when <span class="math notranslate nohighlight">\(t_{nonoverlap} &gt; 0\)</span>. Similar to the flip-flop-based pipeline, we can now define maximum and minimum delay constraints for the combinational logic, ensuring the circuit functions as intended.</p>
+<section id="timing-constraints">
+<h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
+<p><strong>Max-Delay.</strong> For two-phase transparent latches, new data can pass through the first latch <span class="math notranslate nohighlight">\(L_1\)</span>, as soon as <span class="math notranslate nohighlight">\(\phi_1\)</span> becomes high making the latch transparent. The data then propagates through <span class="math notranslate nohighlight">\(L_1\)</span> (<span class="math notranslate nohighlight">\(t_{pdq1}\)</span>), the first stage of combinational logic (<span class="math notranslate nohighlight">\(t_{pd1}\)</span>), <span class="math notranslate nohighlight">\(L_2\)</span> (<span class="math notranslate nohighlight">\(t_{pdq2}\)</span>) and finally the second stage of combination logic (<span class="math notranslate nohighlight">\(t_{pd2}\)</span>). At the third latch <span class="math notranslate nohighlight">\(L_3\)</span>, the data could theoretically arrive as late as the falling edge of <span class="math notranslate nohighlight">\(\phi_1\)</span>’s next cycle without being lost. This could, however, significantly cut into the time that is reserved for a possible subsequent stage. In general, we cannot assume every stage to consume more than a clock cycle, resulting in the following max-delay condition:</p>
+<div class="math notranslate nohighlight">
+\[T_{c} \ge t_{pdq1} + t_{pd1} + t_{pdq2} + t_{pd2}\]</div>
+<p>In some cases, we will be able to make use of the extra time provided by the latch, borrowing time from the next stage. <code class="docutils literal notranslate"><span class="pre">Chapter</span> <span class="pre">2.5</span></code> will explore how this technique can lead to faster designs.</p>
+<hr class="docutils" />
+<p><strong>Min-Delay.</strong> The min-delay constraint for two-phase transparent latch pipelines can be derived as follows. The data begins to pass through the first latch <span class="math notranslate nohighlight">\(L_1\)</span> at the rising edge of <span class="math notranslate nohighlight">\(\phi_1\)</span>. After it travels through <span class="math notranslate nohighlight">\(L_1\)</span> and the combinational logic, the first signal changes that arrive at <span class="math notranslate nohighlight">\(L_2\)</span> must not violate the hold time of the previous falling edge of <span class="math notranslate nohighlight">\(\phi_2\)</span>. Taking into account a delay of <span class="math notranslate nohighlight">\(t_{nonoverlap}\)</span> between the falling edge of <span class="math notranslate nohighlight">\(\phi_2\)</span> and the rising edge of <span class="math notranslate nohighlight">\(\phi_1\)</span>, we can derive the following minimum for the logic contamination delay <span class="math notranslate nohighlight">\(t_{cd}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+t_{nonoverlap} + t_{ccq} + t_{cd} \ge t_{hold}
+\]</div>
+<p>Note that this constraint applies to both paths <span class="math notranslate nohighlight">\(t_{cd1}\)</span> and <span class="math notranslate nohighlight">\(t_{cd2}\)</span> of the two-phased pipeline stage. One can also see that choosing a large enough value for <span class="math notranslate nohighlight">\(t_{nonoverlap}\)</span> can completely rule out the possibility of hold-time violations. Generating nonoverlapping complementary clock signals at high speeds can, however, be challenging. As a result, commercial designs often rely on using the clock and its complement instead.</p>
+</section>
+<hr class="docutils" />
+<section id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">#</a></h2>
 <div style="width:100%; overflow:hidden; display:block;">
   <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
     <iframe
@@ -443,18 +465,6 @@ document.write(`
       loading="lazy">
     </iframe>
   </div>
-<p>Figure 2.3 shows the general structure of such pipelines and how the complementary clocks are applied to the latches. Note that the clocks <span class="math notranslate nohighlight">\(\phi_1\)</span> and <span class="math notranslate nohighlight">\(\phi_2\)</span> do not have to be exact complements of each other, but may also be non-overlapping when <span class="math notranslate nohighlight">\(t_{nonoverlap} &gt; 0\)</span>. Similar to the flip-flop-based pipeline, we can now define maximum and minimum delay constraints for the combinational logic, ensuring the circuit functions as intended.</p>
-<section id="timing-constraints">
-<h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
-<p><strong>Max-Delay.</strong> For two-phase transparent latches, new data can pass through the first latch <span class="math notranslate nohighlight">\(L_1\)</span>, as soon as <span class="math notranslate nohighlight">\(\phi_1\)</span> becomes high making the latch transparent. The data then propagates through <span class="math notranslate nohighlight">\(L_1\)</span> (<span class="math notranslate nohighlight">\(t_{pdq1}\)</span>), the first stage of combinational logic (<span class="math notranslate nohighlight">\(t_{pd1}\)</span>), <span class="math notranslate nohighlight">\(L_2\)</span> (<span class="math notranslate nohighlight">\(t_{pdq2}\)</span>) and finally the second stage of combination logic (<span class="math notranslate nohighlight">\(t_{pd2}\)</span>). At the third latch <span class="math notranslate nohighlight">\(L_3\)</span>, the data could theoretically arrive as late as the falling edge of <span class="math notranslate nohighlight">\(\phi_1\)</span>’s next cycle without being lost. This could, however, significantly cut into the time that is reserved for a possible subsequent stage. In general, we cannot assume every stage to consume more than a clock cycle, resulting in the following max-delay condition:</p>
-<div class="math notranslate nohighlight">
-\[T_{c} \ge t_{pdq1} + t_{pd1} + t_{pdq2} + t_{pd2}\]</div>
-<p>In some cases, we will be able to make use of the extra time provided by the latch, borrowing time from the next stage. \Cref{timeBorrowing} will explore how this technique can lead to faster designs.</p>
-<hr class="docutils" />
-<p><strong>Min-Delay.</strong> The min-delay constraint for two-phase transparent latch pipelines can be derived as follows. The data begins to pass through the first latch <span class="math notranslate nohighlight">\(L_1\)</span> at the rising edge of <span class="math notranslate nohighlight">\(\phi_1\)</span>. After it travels through <span class="math notranslate nohighlight">\(L_1\)</span> and the combinational logic, the first signal changes that arrive at <span class="math notranslate nohighlight">\(L_2\)</span> must not violate the hold time of the previous falling edge of <span class="math notranslate nohighlight">\(\phi_2\)</span>. Taking into account a delay of <span class="math notranslate nohighlight">\(t_{nonoverlap}\)</span> between the falling edge of <span class="math notranslate nohighlight">\(\phi_2\)</span> and the rising edge of <span class="math notranslate nohighlight">\(\phi_1\)</span>, we can derive the following minimum for the logic contamination delay <span class="math notranslate nohighlight">\(t_{cd}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[t_{nonoverlap} + t_{ccq} + t_{cd} \ge t_{hold}\]</div>
-<p>Note that this constraint applies to both paths <span class="math notranslate nohighlight">\(t_{cd1}\)</span> and <span class="math notranslate nohighlight">\(t_{cd2}\)</span> of the two-phased pipeline stage. One can also see that choosing a large enough value for <span class="math notranslate nohighlight">\(t_{nonoverlap}\)</span> can completely rule out the possibility of hold-time violations. Generating nonoverlapping complementary clock signals at high speeds can, however, be challenging. As a result, commercial designs often rely on using the clock and its complement instead.</p>
 </section>
 </section>
 
@@ -523,6 +533,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
 </ul>
   </nav></div>
 

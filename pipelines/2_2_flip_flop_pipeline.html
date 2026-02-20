@@ -206,6 +206,10 @@
 </ul>
 </details></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -418,6 +422,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
 </ul>
             </nav>
         </div>
@@ -431,20 +436,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="flip-flop-based-pipeline">
 <h1>2.2 Flip-Flop-Based Pipeline<a class="headerlink" href="#flip-flop-based-pipeline" title="Link to this heading">#</a></h1>
-<p>One of the most widely used architectures is the classical pipeline using flip-flop’s<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. If we recall the function of the flip-flop, it samples the input data D at the rising clock edge and holds it at the output Q until arrival of the next rising edge. This means that the combinational logic that lies between two flip-flops, has about one clock cycle of time, to process its current data token before the next one arrives. In this manner the data tokens advance from one pipeline stage to the next, while the clock together with the flip-flops ensure that everything happens in the desired order.</p>
-<a class="reference internal image-reference" href="../_images/FlopPip.png"><img alt="../_images/FlopPip.png" src="../_images/FlopPip.png" style="width: 70%;" />
-</a>
-<p><strong>Figure 2.2:</strong> <em>Flip-Flop Based Pipeline [weste2011cmos]</em></p>
-<div style="width:100%; overflow:hidden; display:block;">
-  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
-    <iframe
-      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/FlipFlopPipeline.pip"
-      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px; display:block;"
-      loading="lazy">
-    </iframe>
-  </div>
+<p>One of the most widely used architectures is the classical pipeline using flip-flop’s<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. If we recall the function of the flip-flop, it samples the input data D at the rising clock edge and holds it at the output Q until arrival of the next rising edge. This means that the combinational logic that lies between two flip-flops, has about one clock cycle of time, to process its current data token before the next one arrives. In this manner the data tokens advance from one pipeline stage to the next, while the clock together with the flip-flops ensure that everything happens in the desired order.</p>
+<a class="reference internal image-reference" href="../_images/FlopPip.png"><img alt="../_images/FlopPip.png" src="../_images/FlopPip.png" style="width: 70%;" /></a>
+<p><strong>Figure 2.2:</strong> <em>Flip-Flop Based Pipeline <span id="id2">[<a class="reference internal" href="references.html#id3" title="N.H.E. Weste and D.M. Harris. CMOS VLSI Design: A Circuits and Systems Perspective. Addison Wesley, 2011. ISBN 9780321547743.">3</a>]</span></em></p>
 <p>However, designing a pipeline this way also brings along some timing constraints, concerning the delay of the combinational logic and the chosen clock period, that must be adhered for the system to work correctly.</p>
-<p>We will distinguish between max-delay constraints, that define upper bounds for the propagation delay of a stage and min-delay constraints, that define the lower bounds for the propagation delay. To define these constraints, we will use the timing notation introduced in Chapter 2.1.3.</p>
+<p>We will distinguish between max-delay constraints, that define upper bounds for the propagation delay of a stage and min-delay constraints, that define the lower bounds for the propagation delay. To define these constraints, we will use the timing notation introduced in <code class="docutils literal notranslate"><span class="pre">Chapter</span> <span class="pre">2.1.3</span></code>.</p>
 <section id="timing-constraints">
 <h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
 <p><strong>Max-Delay.</strong> Generally, the chosen clock period <span class="math notranslate nohighlight">\(T_c\)</span> must offer a large enough time interval, so that a data token can pass through the first flip-flop, stabilize at its output (<span class="math notranslate nohighlight">\(t_{pcq}\)</span>), then pass through the combinational logic (<span class="math notranslate nohighlight">\(t_{pd}\)</span>) and still arrive early enough at the second flip-flop, for it to be sampled correctly (<span class="math notranslate nohighlight">\(t_{setup}\)</span>). Hence, the chosen clock period <span class="math notranslate nohighlight">\(T_c\)</span> has to meet the following constraint:</p>
@@ -459,11 +455,22 @@ T_c \ge t_{pcq} + t_{pd} + t_{setup}
 t_{ccq} + t_{cd} \ge t_{hold}
 \]</div>
 <p>Note that for this constraint, we use the contamination delays of the components, since we are interested in the first signal changes that could violate the hold time.</p>
+</section>
+<section id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">#</a></h2>
+<div style="width:100%; overflow:hidden; display:block;">
+  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
+    <iframe
+      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/FlipFlopPipeline.pip"
+      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px; display:block;"
+      loading="lazy">
+    </iframe>
+  </div>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="doc-footnote">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Process, voltage and temperature variations impact the timing behaviour of a circuit..</p>
+<p>Process, voltage and temperature variations impact the timing behaviour of a circuit.</p>
 </aside>
 </aside>
 </section>
@@ -534,6 +541,7 @@ t_{ccq} + t_{cd} \ge t_{hold}
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-constraints">Timing Constraints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
 </ul>
   </nav></div>
 

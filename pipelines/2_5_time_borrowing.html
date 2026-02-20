@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -57,12 +57,14 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/2_5_time_borrowing';</script>
     <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.5 Wave-Pipelining" href="2_6_wave_pipelines.html" />
-    <link rel="prev" title="2.4 Pulsed Latch Pipeline" href="2_4_pulsed_latches.html" />
+    <link rel="prev" title="2.4 Pulsed Latch" href="2_4_pulsed_latches.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -203,6 +205,10 @@
 </details></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
     </div>
@@ -419,6 +425,16 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="time-borrowing">
 <h1>2.5 Time Borrowing<a class="headerlink" href="#time-borrowing" title="Link to this heading">#</a></h1>
+<p>A key take away from the previous sections is that the clock period must offer enough time to account for the propagation delays of all stages. If the propagation delay of a stage is too large for the chosen clock period, the data will arrive late and will not be sampled correctly. Single stages with large propagation delays will therefore limit the possible clock frequency and can significantly impact the speed of the overall circuit.</p>
+<p>However, there might also be stages within a pipeline that have relatively small propagation delays. Here, early arriving data has to idle and the remaining time of the too large clock period will get wasted. The concept of <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">borrowing</span></code> tries to compensate these imbalances between the longer and shorter stages of a circuit, by allowing large stages to `borrow’ time from shorter stages, were the excess time would simply go unused.</p>
+<p>The previous sections already hinted at an inherent characteristic of latches that can be beneficial in this case. In contrast to flip-flops, where data has to setup before the rising clock edge, latches provide up to half a cycle of extra time, since data does not have to setup until the falling edge of the clock. Making use of this additional time for one stage, equally subtracts time reserved for the next stage. This way, larger stages can cut into the excess time that is provided by the shorter stages and get some extra processing time. Using this technique, the clock period can be smaller than the worst-case critical path. The time borrowing property can also add up over multiple cycles, but the overall path must still fit within the available time.</p>
+<a class="reference internal image-reference" href="../_images/AbbTimeBorrowing.png"><img alt="../_images/AbbTimeBorrowing.png" src="../_images/AbbTimeBorrowing.png" style="width: 70%;" /></a>
+<p><strong>Figure 2.5:</strong> <em>Time Borrowing in latch based systems <span id="id1">[<a class="reference internal" href="references.html#id2" title="N.H.E. West and D.M. Harris. Integrated Circuit Design. Pearson, 2011.">4</a>]</span></em></p>
+<p>In latch based systems this works automatically, without requiring any explicit design changes. As seen in Figure 2.5 one path can borrow up to a half a cycle of time from the next path (equally expressed in below). In flip-flop based systems one can achieve the same result by exchanging flip-flops with latches, at paths where time borrowing should be employed  <span id="id2">[<a class="reference internal" href="references.html#id2" title="N.H.E. West and D.M. Harris. Integrated Circuit Design. Pearson, 2011.">4</a>, <a class="reference internal" href="references.html#id17" title="Jan M. Rabaey, Anantha Chandrakasan, and Borivoje Nikolic. Digital integrated circuits- A design perspective. Prentice Hall, 2ed edition, 2004.">6</a>]</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+t_{borrow}  \leq \ \frac{T_{c}}{2} - (t_{setup} + t_{nonoverlap})
+\]</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -457,7 +473,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">2.4 Pulsed Latch Pipeline</p>
+        <p class="prev-next-title">2.4 Pulsed Latch</p>
       </div>
     </a>
     <a class="right-next"

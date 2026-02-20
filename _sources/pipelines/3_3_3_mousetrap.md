@@ -1,12 +1,12 @@
 # 3.3.3 Mousetrap
 
-The so-called `Mousetrap` pipeline introduced by [Mouse01, Mouse07] uses the `2-phase bundled-data` protocol, where the *req* and *ack* information is encoded via signal transitions.
+The so-called `Mousetrap` pipeline introduced by {cite}`Mouse01, Mouse07` uses the `2-phase bundled-data` protocol, where the *req* and *ack* information is encoded via signal transitions.
 
 The pipelines we have looked at so far all used some variation of the Muller pipeline to implement the handshakes. Here, the control structure of the pipeline is different and consists only of basic XNOR gates and latches. Figure below shows the general pipeline structure of a *Mousetrap*. It consists of a `latch controller` that handles the handshakes and controls the data flow between the *data latches*. The *data latches* separate the different pipeline stages and are either transparent, allowing data to flow between stages, or opaque, blocking the data from flowing.
 
 <img src="plots/AbbMouseTrap.png" width="650px">
 
-**Figure 3.8:** *Pipeline structure of a “Mousetrap” circuit* [Mouse01]
+**Figure 3.8:** *Pipeline structure of a “Mousetrap” circuit {cite}`Mouse01`* 
 
 At the start, all *req* and *ack* signals are low, leading to a logical 1 output at the XNOR gates, making all *data latches* transparent. Once new data together with a *req* signal enters a stage, the transition in *req* causes the XNOR gate to output a logical 0, blocking the connected *data latch* from letting in new requests. Only when the next stage acknowledges the request, by making a transition in the *ack* signal, does the XNOR gate output 1 and allow new data into the stage.Generally, the Nth stage in the pipeline takes three actions once it receives new data:
 
@@ -26,7 +26,7 @@ Try to comprehend the functionality of the pipeline through simulation:
     </iframe>
   </div>
 
-The name `Mousetrap` is inspired by its behavior, which is reminiscent of a real-life mousetrap. As soon as new data enters the “trap”, it snaps shut by closing the latches and only reopens once the data has exited the stage and the pipeline is ready to accept new data. The circuit is efficient and has the benefit of avoiding the use of C-elements or the slow and complex capture-pass latches used for micropipelines (see Section 3.3.2). According to [Mouse01], its performance can be compared to that of wave-pipelined circuits, with the benefit of not being dependent on accurate path delays and not being vulnerable to temperature and voltage variations.
+The name `Mousetrap` is inspired by its behavior, which is reminiscent of a real-life mousetrap. As soon as new data enters the “trap”, it snaps shut by closing the latches and only reopens once the data has exited the stage and the pipeline is ready to accept new data. The circuit is efficient and has the benefit of avoiding the use of C-elements or the slow and complex capture-pass latches used for micropipelines (see Section 3.3.2). According to {cite}`Mouse01`, its performance can be compared to that of wave-pipelined circuits, with the benefit of not being dependent on accurate path delays and not being vulnerable to temperature and voltage variations.
 
 
 ### Timing Constraints

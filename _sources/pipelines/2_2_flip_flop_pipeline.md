@@ -4,20 +4,11 @@ One of the most widely used architectures is the classical pipeline using flip-f
 
 <img src="plots/FlopPip.png" width="70%" style="display:inline-block;">
 
-**Figure 2.2:** *Flip-Flop Based Pipeline [weste2011cmos]*
-
-<div style="width:100%; overflow:hidden; display:block;">
-  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
-    <iframe
-      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/FlipFlopPipeline.pip"
-      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px; display:block;"
-      loading="lazy">
-    </iframe>
-  </div>
+**Figure 2.2:** *Flip-Flop Based Pipeline {cite}`weste2011cmos`*
 
 However, designing a pipeline this way also brings along some timing constraints, concerning the delay of the combinational logic and the chosen clock period, that must be adhered for the system to work correctly.  
 
-We will distinguish between max-delay constraints, that define upper bounds for the propagation delay of a stage and min-delay constraints, that define the lower bounds for the propagation delay. To define these constraints, we will use the timing notation introduced in Chapter 2.1.3.
+We will distinguish between max-delay constraints, that define upper bounds for the propagation delay of a stage and min-delay constraints, that define the lower bounds for the propagation delay. To define these constraints, we will use the timing notation introduced in `Chapter 2.1.3`.
 
 ## Timing Constraints
 
@@ -37,4 +28,16 @@ $$
 
 Note that for this constraint, we use the contamination delays of the components, since we are interested in the first signal changes that could violate the hold time.
 
-[^1]: Process, voltage and temperature variations impact the timing behaviour of a circuit..  
+[^1]: Process, voltage and temperature variations impact the timing behaviour of a circuit.
+
+## Simulation
+
+<div style="width:100%; overflow:hidden; display:block;">
+  <div style="transform: scale(0.8); transform-origin: 0 0; width: calc(100% / 0.8); display:block;">
+    <iframe
+      src="https://stefmeff.github.io/PipSim_Web/?file=https://raw.githubusercontent.com/Stefmeff/PipelineSim/refs/heads/main/ProjectTemplates/SyncPipelines/FlipFlopPipeline.pip"
+      style="width:100%; height:600px; border:1px solid #ddd; border-radius:8px; display:block;"
+      loading="lazy">
+    </iframe>
+  </div>
+

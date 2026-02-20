@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,6 +63,7 @@
     <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="references.html" />
     <link rel="prev" title="3.3.2 Micropipelines" href="3_3_2_micropipelines.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -204,6 +205,10 @@
 </details></li>
 </ul>
 </details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
     </div>
@@ -430,11 +435,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mousetrap">
 <h1>3.3.3 Mousetrap<a class="headerlink" href="#mousetrap" title="Link to this heading">#</a></h1>
-<p>The so-called <code class="docutils literal notranslate"><span class="pre">Mousetrap</span></code> pipeline introduced by [Mouse01, Mouse07] uses the <code class="docutils literal notranslate"><span class="pre">2-phase</span> <span class="pre">bundled-data</span></code> protocol, where the <em>req</em> and <em>ack</em> information is encoded via signal transitions.</p>
+<p>The so-called <code class="docutils literal notranslate"><span class="pre">Mousetrap</span></code> pipeline introduced by <span id="id1">[<a class="reference internal" href="references.html#id9" title="M. Singh and S.M. Nowick. Mousetrap: ultra-high-speed transition-signaling asynchronous pipelines. In Proceedings 2001 IEEE International Conference on Computer Design: VLSI in Computers and Processors. ICCD 2001, volume, 9-17. 2001.">16</a>, <a class="reference internal" href="references.html#id10" title="M. Singh and S. M. Nowick. Mousetrap: high-speed transition-signaling asynchronous pipelines. IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 2007.">17</a>]</span> uses the <code class="docutils literal notranslate"><span class="pre">2-phase</span> <span class="pre">bundled-data</span></code> protocol, where the <em>req</em> and <em>ack</em> information is encoded via signal transitions.</p>
 <p>The pipelines we have looked at so far all used some variation of the Muller pipeline to implement the handshakes. Here, the control structure of the pipeline is different and consists only of basic XNOR gates and latches. Figure below shows the general pipeline structure of a <em>Mousetrap</em>. It consists of a <code class="docutils literal notranslate"><span class="pre">latch</span> <span class="pre">controller</span></code> that handles the handshakes and controls the data flow between the <em>data latches</em>. The <em>data latches</em> separate the different pipeline stages and are either transparent, allowing data to flow between stages, or opaque, blocking the data from flowing.</p>
-<a class="reference internal image-reference" href="../_images/AbbMouseTrap.png"><img alt="../_images/AbbMouseTrap.png" src="../_images/AbbMouseTrap.png" style="width: 650px;" />
-</a>
-<p><strong>Figure 3.8:</strong> <em>Pipeline structure of a “Mousetrap” circuit</em> [Mouse01]</p>
+<a class="reference internal image-reference" href="../_images/AbbMouseTrap.png"><img alt="../_images/AbbMouseTrap.png" src="../_images/AbbMouseTrap.png" style="width: 650px;" /></a>
+<p><strong>Figure 3.8:</strong> <em>Pipeline structure of a “Mousetrap” circuit <span id="id2">[<a class="reference internal" href="references.html#id9" title="M. Singh and S.M. Nowick. Mousetrap: ultra-high-speed transition-signaling asynchronous pipelines. In Proceedings 2001 IEEE International Conference on Computer Design: VLSI in Computers and Processors. ICCD 2001, volume, 9-17. 2001.">16</a>]</span></em></p>
 <p>At the start, all <em>req</em> and <em>ack</em> signals are low, leading to a logical 1 output at the XNOR gates, making all <em>data latches</em> transparent. Once new data together with a <em>req</em> signal enters a stage, the transition in <em>req</em> causes the XNOR gate to output a logical 0, blocking the connected <em>data latch</em> from letting in new requests. Only when the next stage acknowledges the request, by making a transition in the <em>ack</em> signal, does the XNOR gate output 1 and allow new data into the stage.Generally, the Nth stage in the pipeline takes three actions once it receives new data:</p>
 <ol class="arabic simple">
 <li><p>The received data is passed along to the next stage <strong>N+1</strong> together with a transition on the request signal <strong><span class="math notranslate nohighlight">\(req_{N+1}\)</span></strong>.</p></li>
@@ -450,7 +454,7 @@ document.write(`
       loading="lazy">
     </iframe>
   </div>
-<p>The name <code class="docutils literal notranslate"><span class="pre">Mousetrap</span></code> is inspired by its behavior, which is reminiscent of a real-life mousetrap. As soon as new data enters the “trap”, it snaps shut by closing the latches and only reopens once the data has exited the stage and the pipeline is ready to accept new data. The circuit is efficient and has the benefit of avoiding the use of C-elements or the slow and complex capture-pass latches used for micropipelines (see Section 3.3.2). According to [Mouse01], its performance can be compared to that of wave-pipelined circuits, with the benefit of not being dependent on accurate path delays and not being vulnerable to temperature and voltage variations.</p>
+<p>The name <code class="docutils literal notranslate"><span class="pre">Mousetrap</span></code> is inspired by its behavior, which is reminiscent of a real-life mousetrap. As soon as new data enters the “trap”, it snaps shut by closing the latches and only reopens once the data has exited the stage and the pipeline is ready to accept new data. The circuit is efficient and has the benefit of avoiding the use of C-elements or the slow and complex capture-pass latches used for micropipelines (see Section 3.3.2). According to <span id="id3">[<a class="reference internal" href="references.html#id9" title="M. Singh and S.M. Nowick. Mousetrap: ultra-high-speed transition-signaling asynchronous pipelines. In Proceedings 2001 IEEE International Conference on Computer Design: VLSI in Computers and Processors. ICCD 2001, volume, 9-17. 2001.">16</a>]</span>, its performance can be compared to that of wave-pipelined circuits, with the benefit of not being dependent on accurate path delays and not being vulnerable to temperature and voltage variations.</p>
 <section id="timing-constraints">
 <h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
 <p>To assure the intended functionality of the pipeline, two timing constraints must be met: <em>setup time</em> and <em>data overrun</em>.</p>
@@ -507,6 +511,15 @@ Data overrun errors occur when arriving data catches up to previous data that ha
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">3.3.2 Micropipelines</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="references.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
