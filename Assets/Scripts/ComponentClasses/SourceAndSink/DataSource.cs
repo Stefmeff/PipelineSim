@@ -3,32 +3,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor;
 using UnityEngine;
 
 /**
  * @author: Stefan Moser
- * 
+ *
  * @details: DataSource is used for generating generic data tokens at each rising clock edge.
- * The output signals of DataSource are not meant to be used for implementing any logic, but rather for the
- * visualisation of different signals/tokens progressing through the circuit.
+ * Outputs an n-bit token on a single bus wire. Width is configurable (1-16 bits).
  * */
 public class DataSource : CircuitComponent
 {
     [JsonProperty] private InputPin clkIn;               //clock input pin
-    [JsonProperty] private OutputPin[] dataOutPins;
+    [JsonProperty] private OutputPin dataOut;             //single n-bit output pin
+    [JsonProperty] private OutputPin[] legacyDataOutPins; //kept for backwards compat with old saves
 
     [JsonProperty] private int nBits = 1;
 
     [JsonIgnore] private TimeTick timer;                //global simulation timer
     [JsonIgnore] private BitToken lastClkIn;
 
-    [JsonIgnore] private OutputPin_Mono[] pinGameObjects;
-
     [JsonIgnore] private GameObject editor;
-
     [JsonIgnore] private DataSourceEditor sourceEditor;
 
     /**
@@ -38,12 +32,9 @@ public class DataSource : CircuitComponent
     {
         //init pins:
         this.clkIn = new InputPin();
-        this.dataOutPins = new OutputPin[8];
+        this.dataOut = new OutputPin();
+        this.dataOut.width = 1;
 
-        for(int i = 0; i < dataOutPins.Length; i++){
-            dataOutPins[i] = new OutputPin();
-            dataOutPins[i].SetValue(new BitToken());
-        }
         lastClkIn = new BitToken();
 
         Subscribe();
@@ -53,7 +44,6 @@ public class DataSource : CircuitComponent
     //Event: new clock input data
     private void OnTimerTick(int tick)
     {
-
         BitToken c = clkIn.data;
 
         //rising clock edge
@@ -64,10 +54,15 @@ public class DataSource : CircuitComponent
 
                 Token token = sourceEditor.GetNextToken();
                 if(token != null){
+                    // Pack token bits into a single n-bit BitToken
+                    bool[] values = new bool[nBits];
                     for(int i = 0; i < nBits; i++){
-                        BitToken t = token.GetBitAt((nBits-1)-i).NewToken(clkIn.data.GetTime());
-                        dataOutPins[i].SetValue(t);
+                        BitToken bit = token.GetBitAt((nBits - 1) - i);
+                        values[i] = bit != null ? bit.GetValue() : false;
                     }
+                    Color tokenColor = token.GetBitAt(0).TokenColor();
+                    BitToken busToken = new BitToken(values, clkIn.data.GetTime(), tokenColor);
+                    dataOut.SetValue(busToken);
                 }
             }
         }
@@ -79,9 +74,7 @@ public class DataSource : CircuitComponent
     {
         sourceEditor.tokenCount = 0;
         clkIn.SetValue(new BitToken());
-        foreach(OutputPin p in dataOutPins){
-            p.SetValue(new BitToken());
-        }
+        dataOut.SetValue(new BitToken());
     }
 
 
@@ -112,12 +105,7 @@ public class DataSource : CircuitComponent
     public override void LoadPins(InputPin_Mono[] inPins, OutputPin_Mono[] outPins)
     {
         inPins[0].Init(clkIn);
-        
-        for(int i = 0; i < dataOutPins.Length; i++){
-            outPins[i].Init(dataOutPins[i]);
-        }
-        pinGameObjects = outPins;
-        ActivatePins();
+        outPins[0].Init(dataOut);
     }
 
     public int parseBitSize(string text){
@@ -125,27 +113,16 @@ public class DataSource : CircuitComponent
         {
             try{
                 int value = int.Parse(text);
-                if (value > 0 && value <= 8)
+                if (value > 0 && value <= 16)
                 {
                     nBits = value;
-                    ActivatePins();
+                    dataOut.width = nBits;
                 }
             }catch{
 
             }
         }
         return nBits;
-    }
-
-    private void ActivatePins(){
-        for(int i = 0; i < dataOutPins.Length; i++){
-            if(i<nBits){
-                pinGameObjects[i].gameObject.SetActive(true);
-            }else{
-                dataOutPins[i].disconnectWire();
-                pinGameObjects[i].gameObject.SetActive(false);
-            }
-        }
     }
 
     public override void LoadDelay(GameObject delayVisualizer)
@@ -163,7 +140,7 @@ public class DataSource : CircuitComponent
         sourceEditor = editor.GetComponent<DataSourceEditor>();
         sourceEditor.init(this);
         editor.SetActive(false);
-        
+
     }
 
     public override void OpenEditor()

@@ -64,6 +64,11 @@ public class DataSourceEditor : MonoBehaviour
         input.text = nBits + "";
     }
 
+    public int GetNBits()
+    {
+        return nBits;
+    }
+
     public void AddToken(){
         //instantiate prefab
         GameObject prefab = Resources.Load("Prefabs/TokenInputField") as GameObject;
