@@ -7,8 +7,7 @@ public class InformationWindow : MonoBehaviour
 {
     private TimeTick timer;        //global simulation timer
     private static InformationWindow instance;
-
-    [SerializeField] private TextMeshProUGUI messageText;
+    private TextMeshProUGUI messageText;
 
     void Awake()
     {
@@ -17,6 +16,9 @@ public class InformationWindow : MonoBehaviour
         //access timer:
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
+
+        // Auto-find text element in children
+        messageText = GetComponentInChildren<TextMeshProUGUI>(true);
     }
 
     void OnEnable()

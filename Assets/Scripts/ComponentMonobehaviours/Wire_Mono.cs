@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -34,6 +35,11 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
 
     private ProjectManager projectManager;
     private Camera cam;
+
+    // Bus notation
+    private GameObject busLabel;
+    private TextMeshPro busText;
+    private LineRenderer slashLine;
 
     // Start is called before the first frame update
     private void Awake()
@@ -111,6 +117,7 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
             k.Clear();
         }
 
+        if (busLabel != null) Destroy(busLabel);
     }
 
     // Update is called once per frame
@@ -254,6 +261,112 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         {
             lineRend.SetPosition(i, renderPoints[i]);
         }
+
+        // Update bus notation
+        UpdateBusLabel(controlPoints);
+    }
+
+    private void UpdateBusLabel(List<Vector3> controlPoints)
+    {
+        int width = wire.dataIn != null ? wire.dataIn.width : 1;
+
+        if (width <= 1)
+        {
+            // Single-bit wire — hide label if it exists
+            if (busLabel != null) busLabel.SetActive(false);
+            return;
+        }
+
+        // Create label on first use
+        if (busLabel == null) CreateBusLabel();
+        busLabel.SetActive(true);
+
+        // Position on first segment midpoint
+        if (controlPoints.Count < 2) return;
+
+        Vector3 p0 = controlPoints[0];
+        Vector3 p1 = controlPoints[1];
+        bool aligned = Mathf.Abs(p0.x - p1.x) < 0.1f || Mathf.Abs(p0.y - p1.y) < 0.1f;
+
+        Vector3 midpoint;
+        Vector3 tangent;
+
+        if (aligned)
+        {
+            midpoint = (p0 + p1) * 0.5f;
+            tangent = (p1 - p0).normalized;
+        }
+        else
+        {
+            // Bezier midpoint at t=0.5
+            Vector3 c1, c2;
+            if (Mathf.Abs(p1.x - p0.x) > Mathf.Abs(p1.y - p0.y))
+            {
+                float midX = (p0.x + p1.x) * 0.5f;
+                c1 = new Vector3(midX, p0.y, 0);
+                c2 = new Vector3(midX, p1.y, 0);
+            }
+            else
+            {
+                float midY = (p0.y + p1.y) * 0.5f;
+                c1 = new Vector3(p0.x, midY, 0);
+                c2 = new Vector3(p1.x, midY, 0);
+            }
+            midpoint = CubicBezier(p0, c1, c2, p1, 0.5f);
+            // Tangent = derivative of cubic bezier at t=0.5
+            tangent = CubicBezierDerivative(p0, c1, c2, p1, 0.5f).normalized;
+        }
+
+        busLabel.transform.position = midpoint;
+        busText.text = width.ToString();
+
+        // Position slash perpendicular to wire direction
+        float angle = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
+        float slashAngle = angle + 60f; // 60° from wire direction
+        float slashSize = cam.orthographicSize * 0.02f;
+
+        Vector3 slashDir = new Vector3(Mathf.Cos(slashAngle * Mathf.Deg2Rad), Mathf.Sin(slashAngle * Mathf.Deg2Rad), 0);
+        slashLine.SetPosition(0, midpoint - slashDir * slashSize);
+        slashLine.SetPosition(1, midpoint + slashDir * slashSize);
+
+        // Position text above the slash
+        Vector3 perpendicular = new Vector3(-tangent.y, tangent.x, 0);
+        float textOffset = cam.orthographicSize * 0.03f;
+        busText.transform.position = midpoint + perpendicular * textOffset;
+        busText.fontSize = cam.orthographicSize * 0.08f;
+    }
+
+    private void CreateBusLabel()
+    {
+        busLabel = new GameObject("BusLabel");
+        busLabel.transform.SetParent(transform);
+
+        // Create slash line
+        GameObject slashObj = new GameObject("BusSlash");
+        slashObj.transform.SetParent(busLabel.transform);
+        slashLine = slashObj.AddComponent<LineRenderer>();
+        slashLine.positionCount = 2;
+        slashLine.startWidth = 0.3f;
+        slashLine.endWidth = 0.3f;
+        slashLine.material = lineRend.material;
+        slashLine.startColor = Color.white;
+        slashLine.endColor = Color.white;
+        slashLine.sortingLayerName = "Wire";
+        slashLine.sortingOrder = 10;
+
+        // Create text
+        GameObject textObj = new GameObject("BusText");
+        textObj.transform.SetParent(busLabel.transform);
+        busText = textObj.AddComponent<TextMeshPro>();
+        busText.alignment = TextAlignmentOptions.Center;
+        busText.color = Color.white;
+        busText.sortingOrder = 10;
+    }
+
+    private Vector3 CubicBezierDerivative(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
+    {
+        float u = 1f - t;
+        return 3f * u * u * (p1 - p0) + 6f * u * t * (p2 - p1) + 3f * t * t * (p3 - p2);
     }
 
     private Vector3 CubicBezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
