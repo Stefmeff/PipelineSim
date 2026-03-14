@@ -22293,8 +22293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2.5}
-  m_SizeDelta: {x: 0, y: 5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1250488572
 MonoBehaviour:
@@ -22309,7 +22309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.121568635, g: 0.121568635, b: 0.121568635, a: 1}
+  m_Color: {r: 0.10980393, g: 0.10980393, b: 0.10980393, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -23394,6 +23394,7 @@ GameObject:
   - component: {fileID: 1323352272}
   - component: {fileID: 1323352273}
   - component: {fileID: 1323352274}
+  - component: {fileID: 1323352275}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -23419,7 +23420,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.10980392, g: 0.10980392, b: 0.10980392, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -23560,6 +23561,22 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1323352275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323352266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a55d1e3e9652bb458e1fccafa690734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseGridSize: 1
+  gridColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.3}
+  majorGridColor: {r: 0.4, g: 0.4, b: 0.4, a: 0.5}
+  majorGridEvery: 5
 --- !u!1 &1333791380
 GameObject:
   m_ObjectHideFlags: 0

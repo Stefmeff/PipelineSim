@@ -13,7 +13,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
 
     private ProjectManager projectManager;
 
-    private float dragBound = 4.0f;
+    private float dragBound = 0.5f;
 
 
     //variables used for animation
@@ -119,9 +119,12 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
         {
             s.press();
         }
+        if (drag)
+        {
+            transform.position = GridSnap.Snap(transform.position);
+        }
         drag = false;
         camDrag.camDragOn = true;
-        transform.position = GridSnap.Snap(transform.position);
     }
 
 

@@ -12,7 +12,7 @@ public class GridRenderer : MonoBehaviour
     [SerializeField] private Color gridColor = new Color(0.3f, 0.3f, 0.3f, 0.06f);
     [SerializeField] private Color majorGridColor = new Color(0.4f, 0.4f, 0.4f, 0.12f);
     [SerializeField] private int majorGridEvery = 5;
-    [SerializeField] private float maxLinesPerAxis = 24f;
+    [SerializeField] private float maxLinesPerAxis = 30f;
 
     private Material lineMaterial;
     private Mesh gridMesh;
