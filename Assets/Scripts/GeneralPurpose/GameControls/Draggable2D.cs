@@ -59,6 +59,8 @@ public class Draggable2D : MonoBehaviour
     public void OnMouseUp()
     {
         camDrag.camDragOn = true;
+        // Snap to grid on release
+        transform.position = GridSnap.Snap(transform.position);
     }
 
     public void OnMouseOver()

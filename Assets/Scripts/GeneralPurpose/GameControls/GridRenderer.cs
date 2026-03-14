@@ -2,100 +2,137 @@ using UnityEngine;
 
 /// <summary>
 /// Renders a background grid that adapts to camera zoom level.
-/// Attach this script to the Main Camera.
+/// Attach to any GameObject (e.g. an empty "Grid" object).
+/// Uses a MeshRenderer on the "Background" sorting layer so
+/// all components, wires, and UI render on top.
 /// </summary>
 public class GridRenderer : MonoBehaviour
 {
     [Header("Grid Settings")]
-    [SerializeField] private float baseGridSize = 1f;
-    [SerializeField] private Color gridColor = new Color(0.3f, 0.3f, 0.3f, 0.3f);
-    [SerializeField] private Color majorGridColor = new Color(0.4f, 0.4f, 0.4f, 0.5f);
+    [SerializeField] private float baseGridSize = 10f;
+    [SerializeField] private Color gridColor = new Color(0.3f, 0.3f, 0.3f, 0.06f);
+    [SerializeField] private Color majorGridColor = new Color(0.4f, 0.4f, 0.4f, 0.12f);
     [SerializeField] private int majorGridEvery = 5;
 
     private Material lineMaterial;
-    private Camera cam;
+    private Mesh gridMesh;
+    private MeshFilter meshFilter;
+    private MeshRenderer meshRenderer;
+
+    private float lastOrthoSize;
+    private Vector3 lastCamPos;
 
     private void Start()
     {
-        cam = GetComponent<Camera>();
         CreateLineMaterial();
+        CreateMeshComponents();
+        RebuildGrid();
     }
 
     private void CreateLineMaterial()
     {
-        // Unity built-in shader for GL line drawing
-        Shader shader = Shader.Find("Hidden/Internal-Colored");
+        Shader shader = Shader.Find("Sprites/Default");
         lineMaterial = new Material(shader);
         lineMaterial.hideFlags = HideFlags.HideAndDontSave;
-        lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
-        lineMaterial.SetInt("_ZWrite", 0);
     }
 
-    private void OnPostRender()
+    private void CreateMeshComponents()
     {
-        if (cam == null || lineMaterial == null) return;
+        meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        meshRenderer.material = lineMaterial;
+        meshRenderer.sortingLayerName = "Background";
+        meshRenderer.sortingOrder = 0;
 
-        // Determine grid spacing based on zoom level
+        gridMesh = new Mesh();
+        gridMesh.name = "GridMesh";
+        meshFilter.mesh = gridMesh;
+    }
+
+    private void LateUpdate()
+    {
+        Camera cam = Camera.main;
+        if (cam == null) return;
+
+        if (Mathf.Abs(cam.orthographicSize - lastOrthoSize) > 0.1f ||
+            Vector3.Distance(cam.transform.position, lastCamPos) > 0.5f)
+        {
+            RebuildGrid();
+            lastOrthoSize = cam.orthographicSize;
+            lastCamPos = cam.transform.position;
+        }
+    }
+
+    private void RebuildGrid()
+    {
+        Camera cam = Camera.main;
+        if (cam == null) return;
+
         float gridSize = baseGridSize;
         float orthoSize = cam.orthographicSize;
 
-        // Scale grid so it doesn't become too dense or too sparse
-        // At zoom 16 (close): gridSize = 1
-        // At zoom 64: gridSize = 4
-        // At zoom 256: gridSize = 16
-        while (orthoSize / gridSize > 80) gridSize *= 2f;
-        while (orthoSize / gridSize < 10) gridSize /= 2f;
+        // No auto-scaling — always show base grid size
 
-        // Calculate visible area
         float aspect = cam.aspect;
         float height = orthoSize * 2f;
         float width = height * aspect;
 
         Vector3 camPos = cam.transform.position;
 
-        // Snap grid origin to grid lines so grid doesn't slide with camera
         float startX = Mathf.Floor((camPos.x - width / 2f) / gridSize) * gridSize;
         float endX = Mathf.Ceil((camPos.x + width / 2f) / gridSize) * gridSize;
         float startY = Mathf.Floor((camPos.y - height / 2f) / gridSize) * gridSize;
         float endY = Mathf.Ceil((camPos.y + height / 2f) / gridSize) * gridSize;
 
-        lineMaterial.SetPass(0);
+        int verticalLines = Mathf.CeilToInt((endX - startX) / gridSize) + 1;
+        int horizontalLines = Mathf.CeilToInt((endY - startY) / gridSize) + 1;
+        int totalLines = verticalLines + horizontalLines;
 
-        GL.PushMatrix();
-        GL.LoadProjectionMatrix(cam.projectionMatrix);
-        GL.modelview = cam.worldToCameraMatrix;
+        Vector3[] vertices = new Vector3[totalLines * 2];
+        Color[] colors = new Color[totalLines * 2];
+        int[] indices = new int[totalLines * 2];
 
-        GL.Begin(GL.LINES);
+        int v = 0;
 
-        // Draw vertical lines
-        for (float x = startX; x <= endX; x += gridSize)
+        for (float x = startX; x <= endX && v + 1 < vertices.Length; x += gridSize)
         {
-            bool isMajor = Mathf.Abs(Mathf.Round(x / gridSize) % majorGridEvery) < 0.01f;
-            GL.Color(isMajor ? majorGridColor : gridColor);
-            GL.Vertex3(x, startY, 0);
-            GL.Vertex3(x, endY, 0);
+            int lineIndex = Mathf.RoundToInt(x / gridSize);
+            bool isMajor = ((lineIndex % majorGridEvery) + majorGridEvery) % majorGridEvery == 0;
+            Color c = isMajor ? majorGridColor : gridColor;
+            vertices[v] = new Vector3(x, startY, 0);
+            colors[v] = c;
+            indices[v] = v;
+            v++;
+            vertices[v] = new Vector3(x, endY, 0);
+            colors[v] = c;
+            indices[v] = v;
+            v++;
         }
 
-        // Draw horizontal lines
-        for (float y = startY; y <= endY; y += gridSize)
+        for (float y = startY; y <= endY && v + 1 < vertices.Length; y += gridSize)
         {
-            bool isMajor = Mathf.Abs(Mathf.Round(y / gridSize) % majorGridEvery) < 0.01f;
-            GL.Color(isMajor ? majorGridColor : gridColor);
-            GL.Vertex3(startX, y, 0);
-            GL.Vertex3(endX, y, 0);
+            int lineIndex = Mathf.RoundToInt(y / gridSize);
+            bool isMajor = ((lineIndex % majorGridEvery) + majorGridEvery) % majorGridEvery == 0;
+            Color c = isMajor ? majorGridColor : gridColor;
+            vertices[v] = new Vector3(startX, y, 0);
+            colors[v] = c;
+            indices[v] = v;
+            v++;
+            vertices[v] = new Vector3(endX, y, 0);
+            colors[v] = c;
+            indices[v] = v;
+            v++;
         }
 
-        GL.End();
-        GL.PopMatrix();
+        gridMesh.Clear();
+        gridMesh.vertices = vertices;
+        gridMesh.colors = colors;
+        gridMesh.SetIndices(indices, MeshTopology.Lines, 0);
     }
 
     private void OnDestroy()
     {
-        if (lineMaterial != null)
-        {
-            DestroyImmediate(lineMaterial);
-        }
+        if (lineMaterial != null) DestroyImmediate(lineMaterial);
+        if (gridMesh != null) DestroyImmediate(gridMesh);
     }
 }

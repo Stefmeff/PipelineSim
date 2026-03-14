@@ -47,7 +47,7 @@ public class DragDropUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         Vector3 mousePos;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        mousePos = new Vector3(mousePos.x, mousePos.y, 0);
+        mousePos = GridSnap.Snap(new Vector3(mousePos.x, mousePos.y, 0));
         Instantiate(dropPrefab, mousePos, dropPrefab.transform.rotation);
     }
 

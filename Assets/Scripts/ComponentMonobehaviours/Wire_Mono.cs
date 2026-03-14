@@ -241,7 +241,8 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
     private void addKnot()
     {
         //instantiate OutputPin Prefab:
-        GameObject o = Instantiate(knotPrefab, new Vector3(lastMousePos.x, lastMousePos.y, 0), Quaternion.identity);
+        Vector3 snappedPos = GridSnap.Snap(new Vector3(lastMousePos.x, lastMousePos.y, 0));
+        GameObject o = Instantiate(knotPrefab, snappedPos, Quaternion.identity);
         Knot_Mono knot = o.GetComponent<Knot_Mono>();
         knots.Add(knot);
 

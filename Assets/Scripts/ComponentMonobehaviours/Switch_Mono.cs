@@ -121,6 +121,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
         }
         drag = false;
         camDrag.camDragOn = true;
+        transform.position = GridSnap.Snap(transform.position);
     }
 
 

@@ -124,6 +124,7 @@ public class Knot_Mono : MonoBehaviour
 
         camDrag.camDragOn = true;
         drag = false;
+        transform.position = GridSnap.Snap(transform.position);
     }
 
 
