@@ -74,7 +74,7 @@ public class Delay : CircuitComponent, IDelay
         BitToken d = dataIn.data;
         if(!d.EqualsToken(lastDataIn)){
             lastDataIn = d.NewToken(d.GetTime());
-            signalQueue.Add(Tuple.Create(lastDataIn,new GameObject()));
+            signalQueue.Add(Tuple.Create(lastDataIn,(GameObject)null));
         }
 
         if (signalQueue.Count > 1)
@@ -87,7 +87,7 @@ public class Delay : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -114,7 +114,7 @@ public class Delay : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -129,7 +129,7 @@ public class Delay : CircuitComponent, IDelay
     public override void Reset()
     {
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 

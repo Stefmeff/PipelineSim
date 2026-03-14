@@ -104,14 +104,14 @@ public class CPLatch : CircuitComponent, IDelay
             {
                 //PASS MODE:
                 int time = Math.Max(d.GetTime(),Math.Max(c.GetTime(), p.GetTime()));
-                signalQueue.Add(Tuple.Create(d.NewToken(time),new GameObject()));
+                signalQueue.Add(Tuple.Create(d.NewToken(time),(GameObject)null));
                 
             }else if((c.GetValue() == true && p.GetValue() == false) || (c.GetValue() == false && p.GetValue() == true)){
                 //CAPTURE MODE:
                 int time = Math.Max(c.GetTime(), p.GetTime());
                 if(d.GetTime()<= time){
                     if(CheckSetup(time)){
-                        signalQueue.Add(Tuple.Create(d.NewToken(time),new GameObject()));
+                        signalQueue.Add(Tuple.Create(d.NewToken(time),(GameObject)null));
                     }
                 }else{
                     CheckHold(time);
@@ -129,7 +129,7 @@ public class CPLatch : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -177,7 +177,7 @@ public class CPLatch : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -194,7 +194,7 @@ public class CPLatch : CircuitComponent, IDelay
         errorMessage.text = "";
 
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 

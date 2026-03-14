@@ -85,7 +85,7 @@ public class AND : CircuitComponent, IDelay
             BitToken last = (A.GetTime() >= B.GetTime()) ? A : B;
             BitToken and = new BitToken(A.GetValue() & B.GetValue(),last.GetTime(),last.TokenColor());
 
-            signalQueue.Add(Tuple.Create(and,new GameObject()));
+            signalQueue.Add(Tuple.Create(and,(GameObject)null));
         }
 
         //check signal queue
@@ -99,9 +99,9 @@ public class AND : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
-                dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
+                dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));
             }
         }
     }
@@ -135,9 +135,9 @@ public class AND : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
-                dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
+                dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));
             }
         }
 
@@ -164,7 +164,7 @@ public class AND : CircuitComponent, IDelay
     public override void Reset(){
         //clear delay queue and destroy the drawn squares
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 

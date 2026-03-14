@@ -105,13 +105,13 @@ public class Latch : CircuitComponent , IDelay
 
             if(c.GetValue() == true){
                 int newTime = Math.Max(c.GetTime(), d.GetTime());
-                signalQueue.Add(Tuple.Create(d.NewToken(newTime),new GameObject()));
+                signalQueue.Add(Tuple.Create(d.NewToken(newTime),(GameObject)null));
             }else{
                 if(d.GetTime() <= c.GetTime()){
                     //sample:
                     if(CheckSetup()){
                         storedData = d.NewToken(d.GetTime());
-                        signalQueue.Add(Tuple.Create(storedData,new GameObject()));
+                        signalQueue.Add(Tuple.Create(storedData,(GameObject)null));
                     }
                 }else{
                     //no sampling => check hold time
@@ -130,7 +130,7 @@ public class Latch : CircuitComponent , IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -172,7 +172,7 @@ public class Latch : CircuitComponent , IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -191,7 +191,7 @@ public class Latch : CircuitComponent , IDelay
         errorMessage.text = "";
 
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 

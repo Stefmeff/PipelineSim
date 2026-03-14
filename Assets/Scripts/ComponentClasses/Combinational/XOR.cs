@@ -78,7 +78,7 @@ public class XOR : CircuitComponent, IDelay
 
 
             //add computed result to delay queue:
-            signalQueue.Add(Tuple.Create(xor,new GameObject())); 
+            signalQueue.Add(Tuple.Create(xor,(GameObject)null));
         }
 
         //check signal queue
@@ -92,7 +92,7 @@ public class XOR : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -126,7 +126,7 @@ public class XOR : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -161,7 +161,7 @@ public class XOR : CircuitComponent, IDelay
     public override void Reset(){
         //clear delay queue and destroy the drawn squares
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 

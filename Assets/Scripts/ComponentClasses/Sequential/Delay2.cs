@@ -82,7 +82,7 @@ public class Delay2 : CircuitComponent
             {
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
 
             }
@@ -97,7 +97,7 @@ public class Delay2 : CircuitComponent
     public override void Reset()
     {
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 

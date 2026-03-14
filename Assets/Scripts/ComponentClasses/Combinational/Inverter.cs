@@ -64,7 +64,7 @@ public class Inverter : CircuitComponent, IDelay
             lastDataIn = dataIn.data;
             BitToken inverted = new BitToken(!lastDataIn.GetValue(), lastDataIn.GetTime(),lastDataIn.TokenColor());
 
-            signalQueue.Add(Tuple.Create(inverted,new GameObject()));
+            signalQueue.Add(Tuple.Create(inverted,(GameObject)null));
         }
 
         if (signalQueue.Count > 1)
@@ -77,7 +77,7 @@ public class Inverter : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -107,7 +107,7 @@ public class Inverter : CircuitComponent, IDelay
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                GameObject.Destroy(signalQueue[0].Item2);
+                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -121,7 +121,7 @@ public class Inverter : CircuitComponent, IDelay
     public override void Reset()
     {
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            GameObject.Destroy(t.Item2);
+            if(t.Item2 != null) GameObject.Destroy(t.Item2);
         }
         signalQueue.Clear();
 
