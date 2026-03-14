@@ -177,39 +177,89 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
    //updates the points of the line renderer
     private void UpdateLineRenderer()
     {
-        lineRend.positionCount = wire.knotCount;
-        lineRend.SetPosition(0, sourcePin.position);
+        // Collect all control points in order: source -> knots -> sink/mouse
+        List<Vector3> controlPoints = new List<Vector3>();
+        controlPoints.Add(sourcePin.position);
 
-        int i = 1;
         foreach(Knot knot in wire.knots)
         {
-            lineRend.SetPosition(i, knot.transform.position);
-            i = i + 1;
+            controlPoints.Add(knot.transform.position);
         }
-
 
         if(draw)
         {
-            lineRend.positionCount = wire.knotCount + 1;
             lastMousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-             if(Input.GetKey(KeyCode.LeftControl)){
-                //when control is pressed => draw lines with fixed angle
+            if(Input.GetKey(KeyCode.LeftControl)){
                 Vector2 knotPos;
                 if(wire.knots.Count == 0){
-                    knotPos= wire.dataIn.transform.position;
+                    knotPos = wire.dataIn.transform.position;
                 }else{
                     knotPos = wire.knots.Last().transform.position;
                 }
-                
-                lastMousePos = fixedAngle(knotPos,lastMousePos);
-             }
-            lineRend.SetPosition(i, new Vector3(lastMousePos.x, lastMousePos.y, 0));
+                lastMousePos = fixedAngle(knotPos, lastMousePos);
+            }
+            controlPoints.Add(new Vector3(lastMousePos.x, lastMousePos.y, 0));
+        }
+        else if(wire.dataOut != null)
+        {
+            controlPoints.Add(sinkPin.position);
         }
 
-        if(wire.dataOut!=null)
+        // Build the line: straight segments for aligned points, curves for others
+        List<Vector3> renderPoints = new List<Vector3>();
+        if(controlPoints.Count > 0) renderPoints.Add(controlPoints[0]);
+
+        for(int i = 1; i < controlPoints.Count; i++)
         {
-            lineRend.SetPosition(i, sinkPin.position);
+            Vector3 p0 = controlPoints[i - 1];
+            Vector3 p1 = controlPoints[i];
+
+            bool aligned = Mathf.Abs(p0.x - p1.x) < 0.1f || Mathf.Abs(p0.y - p1.y) < 0.1f;
+
+            if(aligned)
+            {
+                renderPoints.Add(p1);
+            }
+            else
+            {
+                // Cubic bezier with L-shaped control points
+                Vector3 c1, c2;
+                if(Mathf.Abs(p1.x - p0.x) > Mathf.Abs(p1.y - p0.y))
+                {
+                    // Wider than tall: go horizontal first, then vertical
+                    float midX = (p0.x + p1.x) * 0.5f;
+                    c1 = new Vector3(midX, p0.y, 0);
+                    c2 = new Vector3(midX, p1.y, 0);
+                }
+                else
+                {
+                    // Taller than wide: go vertical first, then horizontal
+                    float midY = (p0.y + p1.y) * 0.5f;
+                    c1 = new Vector3(p0.x, midY, 0);
+                    c2 = new Vector3(p1.x, midY, 0);
+                }
+
+                int segments = 16;
+                for(int s = 1; s <= segments; s++)
+                {
+                    float t = s / (float)segments;
+                    Vector3 point = CubicBezier(p0, c1, c2, p1, t);
+                    renderPoints.Add(point);
+                }
+            }
         }
+
+        lineRend.positionCount = renderPoints.Count;
+        for(int i = 0; i < renderPoints.Count; i++)
+        {
+            lineRend.SetPosition(i, renderPoints[i]);
+        }
+    }
+
+    private Vector3 CubicBezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
+    {
+        float u = 1f - t;
+        return u * u * u * p0 + 3f * u * u * t * p1 + 3f * u * t * t * p2 + t * t * t * p3;
     }
 
     private Vector2 fixedAngle(Vector2 origin, Vector2 dest){

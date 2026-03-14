@@ -1,18 +1,18 @@
 using UnityEngine;
 
 /// <summary>
-/// Renders a background grid that adapts to camera zoom level.
-/// Attach to any GameObject (e.g. an empty "Grid" object).
-/// Uses a MeshRenderer on the "Background" sorting layer so
-/// all components, wires, and UI render on top.
+/// Renders a background grid that auto-scales with zoom.
+/// Finer lines disappear when zoomed out. Updates GridSnap
+/// to match the currently visible grid level.
 /// </summary>
 public class GridRenderer : MonoBehaviour
 {
     [Header("Grid Settings")]
-    [SerializeField] private float baseGridSize = 10f;
+    [SerializeField] private float baseGridSize = 5f;
     [SerializeField] private Color gridColor = new Color(0.3f, 0.3f, 0.3f, 0.06f);
     [SerializeField] private Color majorGridColor = new Color(0.4f, 0.4f, 0.4f, 0.12f);
     [SerializeField] private int majorGridEvery = 5;
+    [SerializeField] private float maxLinesPerAxis = 24f;
 
     private Material lineMaterial;
     private Mesh gridMesh;
@@ -68,16 +68,18 @@ public class GridRenderer : MonoBehaviour
         Camera cam = Camera.main;
         if (cam == null) return;
 
-        float gridSize = baseGridSize;
         float orthoSize = cam.orthographicSize;
-
-        // No auto-scaling — always show base grid size
-
         float aspect = cam.aspect;
         float height = orthoSize * 2f;
         float width = height * aspect;
-
         Vector3 camPos = cam.transform.position;
+
+        // Auto-scale: double grid size until it fits within maxLinesPerAxis
+        float gridSize = baseGridSize;
+        while (height / gridSize > maxLinesPerAxis) gridSize *= 2f;
+
+        // Update snap to match visible grid
+        GridSnap.gridSize = gridSize;
 
         float startX = Mathf.Floor((camPos.x - width / 2f) / gridSize) * gridSize;
         float endX = Mathf.Ceil((camPos.x + width / 2f) / gridSize) * gridSize;
@@ -91,7 +93,6 @@ public class GridRenderer : MonoBehaviour
         Vector3[] vertices = new Vector3[totalLines * 2];
         Color[] colors = new Color[totalLines * 2];
         int[] indices = new int[totalLines * 2];
-
         int v = 0;
 
         for (float x = startX; x <= endX && v + 1 < vertices.Length; x += gridSize)
@@ -99,14 +100,8 @@ public class GridRenderer : MonoBehaviour
             int lineIndex = Mathf.RoundToInt(x / gridSize);
             bool isMajor = ((lineIndex % majorGridEvery) + majorGridEvery) % majorGridEvery == 0;
             Color c = isMajor ? majorGridColor : gridColor;
-            vertices[v] = new Vector3(x, startY, 0);
-            colors[v] = c;
-            indices[v] = v;
-            v++;
-            vertices[v] = new Vector3(x, endY, 0);
-            colors[v] = c;
-            indices[v] = v;
-            v++;
+            vertices[v] = new Vector3(x, startY, 0); colors[v] = c; indices[v] = v; v++;
+            vertices[v] = new Vector3(x, endY, 0); colors[v] = c; indices[v] = v; v++;
         }
 
         for (float y = startY; y <= endY && v + 1 < vertices.Length; y += gridSize)
@@ -114,14 +109,8 @@ public class GridRenderer : MonoBehaviour
             int lineIndex = Mathf.RoundToInt(y / gridSize);
             bool isMajor = ((lineIndex % majorGridEvery) + majorGridEvery) % majorGridEvery == 0;
             Color c = isMajor ? majorGridColor : gridColor;
-            vertices[v] = new Vector3(startX, y, 0);
-            colors[v] = c;
-            indices[v] = v;
-            v++;
-            vertices[v] = new Vector3(endX, y, 0);
-            colors[v] = c;
-            indices[v] = v;
-            v++;
+            vertices[v] = new Vector3(startX, y, 0); colors[v] = c; indices[v] = v; v++;
+            vertices[v] = new Vector3(endX, y, 0); colors[v] = c; indices[v] = v; v++;
         }
 
         gridMesh.Clear();
