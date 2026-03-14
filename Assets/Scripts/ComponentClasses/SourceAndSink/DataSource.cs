@@ -15,7 +15,6 @@ public class DataSource : CircuitComponent
 {
     [JsonProperty] private InputPin clkIn;               //clock input pin
     [JsonProperty] private OutputPin dataOut;             //single n-bit output pin
-    [JsonProperty] private OutputPin[] legacyDataOutPins; //kept for backwards compat with old saves
 
     [JsonProperty] private int nBits = 1;
 

@@ -43,6 +43,7 @@ public class Delay2 : CircuitComponent
     {
         //init pins:
         this.dataIn = new InputPin();
+        this.dataIn.width = 0; // accept any bit width
         this.dataOut = new OutputPin();
 
         signalQueue = new List<Tuple<BitToken,GameObject>>();

@@ -50,6 +50,7 @@ public class CPLatch : CircuitComponent, IDelay
         this.capture = new InputPin();
         this.pass = new InputPin();
         this.dataIn = new InputPin();
+        this.dataIn.width = 0; // accept any bit width
         this.dataOut = new OutputPin();
 
         signalQueue = new List<Tuple<BitToken,GameObject>>();

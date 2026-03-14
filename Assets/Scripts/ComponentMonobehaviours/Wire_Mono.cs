@@ -322,18 +322,24 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
 
         // Position slash perpendicular to wire direction
         float angle = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
-        float slashAngle = angle + 60f; // 60° from wire direction
-        float slashSize = cam.orthographicSize * 0.02f;
+        float slashAngle = angle + 85f; // nearly perpendicular to wire
+        float slashSize = 2.5f;
 
         Vector3 slashDir = new Vector3(Mathf.Cos(slashAngle * Mathf.Deg2Rad), Mathf.Sin(slashAngle * Mathf.Deg2Rad), 0);
         slashLine.SetPosition(0, midpoint - slashDir * slashSize);
         slashLine.SetPosition(1, midpoint + slashDir * slashSize);
+        slashLine.startWidth = 1f;
+        slashLine.endWidth = 1f;
+        slashLine.startColor = wire.coloring;
+        slashLine.endColor = wire.coloring;
 
         // Position text above the slash
         Vector3 perpendicular = new Vector3(-tangent.y, tangent.x, 0);
-        float textOffset = cam.orthographicSize * 0.03f;
+        float textOffset = 5.5f;
         busText.transform.position = midpoint + perpendicular * textOffset;
-        busText.fontSize = cam.orthographicSize * 0.08f;
+        busText.fontSize = 30f;
+        busText.fontStyle = TMPro.FontStyles.Bold;
+        busText.color = wire.coloring;
     }
 
     private void CreateBusLabel()
@@ -349,8 +355,9 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         slashLine.startWidth = 0.3f;
         slashLine.endWidth = 0.3f;
         slashLine.material = lineRend.material;
-        slashLine.startColor = Color.white;
-        slashLine.endColor = Color.white;
+        Color busNotationColor = new Color(0.65f, 0.65f, 0.65f, 1f);
+        slashLine.startColor = busNotationColor;
+        slashLine.endColor = busNotationColor;
         slashLine.sortingLayerName = "Wire";
         slashLine.sortingOrder = 10;
 
@@ -359,7 +366,7 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         textObj.transform.SetParent(busLabel.transform);
         busText = textObj.AddComponent<TextMeshPro>();
         busText.alignment = TextAlignmentOptions.Center;
-        busText.color = Color.white;
+        busText.color = busNotationColor;
         busText.sortingOrder = 10;
     }
 

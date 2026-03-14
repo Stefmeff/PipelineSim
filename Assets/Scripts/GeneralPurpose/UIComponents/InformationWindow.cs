@@ -7,6 +7,7 @@ public class InformationWindow : MonoBehaviour
 {
     private TimeTick timer;        //global simulation timer
     private static InformationWindow instance;
+    private TextMeshProUGUI titleText;
     private TextMeshProUGUI messageText;
 
     void Awake()
@@ -17,8 +18,18 @@ public class InformationWindow : MonoBehaviour
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
 
-        // Auto-find text element in children
-        messageText = GetComponentInChildren<TextMeshProUGUI>(true);
+        FindTextElements();
+    }
+
+    private void FindTextElements()
+    {
+        // "Description" child = title/headline
+        Transform desc = transform.Find("Description");
+        if (desc != null) titleText = desc.GetComponent<TextMeshProUGUI>();
+
+        // "Message" child = detailed message body
+        Transform msg = transform.Find("Message");
+        if (msg != null) messageText = msg.GetComponentInChildren<TextMeshProUGUI>(true);
     }
 
     void OnEnable()
@@ -32,15 +43,30 @@ public class InformationWindow : MonoBehaviour
         timer.restart();
     }
 
+    public static void Show(string title, string message)
+    {
+        // Find instance if not yet set (Awake doesn't run on inactive objects)
+        if (instance == null)
+        {
+            instance = FindObjectOfType<InformationWindow>(true);
+            if (instance == null) return;
+
+            if (instance.timer == null)
+            {
+                GameObject o = GameObject.FindWithTag("Timer");
+                instance.timer = o.GetComponent<TimeTick>();
+            }
+            instance.FindTextElements();
+        }
+
+        if (instance.titleText != null) instance.titleText.text = title;
+        if (instance.messageText != null) instance.messageText.text = message;
+        instance.gameObject.SetActive(true);
+    }
+
+    // Overload for backwards compat
     public static void Show(string message)
     {
-        if (instance != null)
-        {
-            if (instance.messageText != null)
-            {
-                instance.messageText.text = message;
-            }
-            instance.gameObject.SetActive(true);
-        }
+        Show("Error", message);
     }
 }

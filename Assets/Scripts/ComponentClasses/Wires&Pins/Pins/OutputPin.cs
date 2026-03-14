@@ -42,6 +42,8 @@ public class OutputPin
     public virtual void SetValue(BitToken data)
     {
         this.data = data;
+        // Auto-propagate width from token
+        this.width = data.GetWidth();
 
         if (wire != null)
         {

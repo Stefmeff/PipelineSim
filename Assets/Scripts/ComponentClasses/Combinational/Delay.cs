@@ -44,6 +44,7 @@ public class Delay : CircuitComponent, IDelay
     {
         //init pins:
         this.dataIn = new InputPin();
+        this.dataIn.width = 0; // accept any bit width
         this.dataOut = new OutputPin();
         lastDataIn = new BitToken();
 

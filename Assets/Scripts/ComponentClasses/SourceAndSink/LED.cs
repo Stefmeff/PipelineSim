@@ -18,6 +18,7 @@ public class LED : CircuitComponent
     public LED()
     {
         this.input = new InputPin();
+        this.input.width = 0; // accept any bit width
         this.data = new BitToken();
 
         Subscribe();

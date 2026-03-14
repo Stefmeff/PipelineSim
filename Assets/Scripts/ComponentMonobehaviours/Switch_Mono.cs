@@ -13,7 +13,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
 
     private ProjectManager projectManager;
 
-    private float dragBound = 0.5f;
+    private float dragBound = 3f;
 
 
     //variables used for animation
