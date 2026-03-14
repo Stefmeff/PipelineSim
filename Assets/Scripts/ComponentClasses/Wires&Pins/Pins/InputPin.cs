@@ -15,6 +15,7 @@ public class InputPin
 {
     [JsonIgnore] public BitToken data {get;private set;}                //data that is set on this input pin
     [JsonProperty] private Wire wire;                   //connected input wire
+    [JsonProperty] public int width = 1;                //bit width of this pin (1 = single-bit)
     [JsonIgnore] public Transform transform;            //the transform of this pin
 
     //Event: new data on this pin

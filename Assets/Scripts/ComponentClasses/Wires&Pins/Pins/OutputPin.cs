@@ -15,6 +15,7 @@ public class OutputPin
     [JsonIgnore] public BitToken data;                      //data that this pin writes
     [JsonProperty] private List<InputPin> connectedPins;    //pins this pin writes to
     [JsonProperty] private Wire wire;
+    [JsonProperty] public int width = 1;                   //bit width of this pin (1 = single-bit)
     [JsonIgnore] public Transform transform;                //the transform of this pin
 
     public OutputPin()

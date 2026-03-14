@@ -44,7 +44,17 @@ public class InputPin_Mono : MonoBehaviour
         OutputPin dataIn = connectionHandler.searchesConnection;
         if (dataIn != null)
         {
-            connectionHandler.possibleConnection = pin;
+            // Check width compatibility
+            if (dataIn.width != pin.width)
+            {
+                // Width mismatch — show error, don't allow connection
+                InformationWindow.Show("Cannot connect: wire carries " + dataIn.width + "-bit signal but pin expects " + pin.width + "-bit");
+                connectionHandler.possibleConnection = null;
+            }
+            else
+            {
+                connectionHandler.possibleConnection = pin;
+            }
         }
     }
 
