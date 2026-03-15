@@ -95,9 +95,13 @@ public class ComponentMono : MonoBehaviour, IObjectMono
             case componentType.Delay2:
                 return new Delay2();
             case componentType.ChipInputNode:
-                return new ChipInputNode();
+                ChipInputNode cin = new ChipInputNode();
+                cin.LoadEditor();
+                return cin;
             case componentType.ChipOutputNode:
-                return new ChipOutputNode();
+                ChipOutputNode cout = new ChipOutputNode();
+                cout.LoadEditor();
+                return cout;
 
         }
         return null;
@@ -132,8 +136,10 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 d.LoadEditor();
                 break;
             case ChipInputNode:
+                ((ChipInputNode)component).LoadEditor();
                 break;
             case ChipOutputNode:
+                ((ChipOutputNode)component).LoadEditor();
                 break;
         }
     }

@@ -17,6 +17,9 @@ public class ChipOutputNode : CircuitComponent
     [JsonIgnore] private BitToken data;
     [JsonIgnore] private TimeTick timer;
 
+    [JsonIgnore] private GameObject editorObj;
+    [JsonIgnore] private ChipPinEditor pinEditor;
+
     public delegate void UpdateLabel(string name);
     public event UpdateLabel UpdateLabelEvent;
 
@@ -100,5 +103,23 @@ public class ChipOutputNode : CircuitComponent
 
     public override void LoadDelay(GameObject delayVisualizer) { }
 
-    public override void OpenEditor() { }
+    public void LoadEditor()
+    {
+        GameObject o = GameObject.FindWithTag("Editor");
+        Transform t = o.transform.Find("ChipPinEditor");
+        if (t != null)
+        {
+            editorObj = t.gameObject;
+            pinEditor = editorObj.GetComponent<ChipPinEditor>();
+        }
+    }
+
+    public override void OpenEditor()
+    {
+        if (pinEditor != null)
+        {
+            pinEditor.Init(this);
+            editorObj.SetActive(true);
+        }
+    }
 }

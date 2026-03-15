@@ -78,19 +78,15 @@ public class ChipEditorManager : MonoBehaviour
     private void RegisterLoadedPins()
     {
         ComponentMono[] allComps = Object.FindObjectsOfType<ComponentMono>();
-        Debug.Log("RegisterLoadedPins: found " + allComps.Length + " ComponentMono objects");
 
         foreach (ComponentMono comp in allComps)
         {
-            Debug.Log("Component: " + comp.gameObject.name + " type: " + (comp.component != null ? comp.component.GetType().Name : "null"));
             if (comp.component is ChipInputNode && inputPinBar != null)
             {
-                Debug.Log("Registering input pin: " + comp.gameObject.name);
                 inputPinBar.RegisterExistingPin(comp.gameObject);
             }
             else if (comp.component is ChipOutputNode && outputPinBar != null)
             {
-                Debug.Log("Registering output pin: " + comp.gameObject.name);
                 outputPinBar.RegisterExistingPin(comp.gameObject);
             }
         }
