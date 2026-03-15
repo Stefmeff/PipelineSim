@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 3957043512772455591}
   - component: {fileID: 3048609341147762779}
   - component: {fileID: 1357640624389961419}
+  - component: {fileID: 5058536440601253738}
   m_Layer: 0
   m_Name: Clock
   m_TagString: Untagged
@@ -249,6 +250,18 @@ MonoBehaviour:
   inPins: []
   outPins:
   - {fileID: 490758404445161748}
+--- !u!114 &5058536440601253738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3143145431770189950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250f1033bc65d044f9e1b10d061bb023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5135628845661586381
 GameObject:
   m_ObjectHideFlags: 0
