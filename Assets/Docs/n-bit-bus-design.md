@@ -144,6 +144,11 @@ Extend PipelineSim to support multi-bit (bus) wires alongside existing single-bi
 - Route bits through AND/OR/XOR gates
 - Use merger to combine results back into a bus
 
+### 5.4 Merger color handling
+- When merging single-bit tokens with different colors, use the color of the **most recently updated** token
+- Track timestamp of each input: whichever bit was set last, its color is used for the merged bus token
+- This keeps it simple and the color always reflects the most recent activity
+
 ---
 
 ## Phase 6: Custom Components
