@@ -20,8 +20,18 @@ public class ButtonYes : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         gameObject.GetComponent<Image>().color = (Color)new Color32(0x7D,0x83,0x88,0xFF);
-        projectManager.ClearWorld();
         clearConfirmWindow.SetActive(false);
+
+        // In ChipEditor: return to sandbox. In Sandbox: clear project.
+        ChipEditorManager chipEditor = Object.FindObjectOfType<ChipEditorManager>();
+        if (chipEditor != null)
+        {
+            SceneTransition.ReturnToSandbox();
+        }
+        else
+        {
+            projectManager.ClearWorld();
+        }
     }
 
 public void OnPointerEnter(PointerEventData eventData)

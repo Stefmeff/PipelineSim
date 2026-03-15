@@ -50,18 +50,22 @@ public class ProjectManager : MonoBehaviour
             
 
         #else
-            //if project has command line arguments => open project
-            string[] args = System.Environment.GetCommandLineArgs();
-            if(args.Length > 1){
-                try
-                {
-                        string path = args[1];
-                        string jsonString = File.ReadAllText(path);
-                        LoadWorld(jsonString);
-                } 
-                catch(FileNotFoundException e){
-                    //file not found
-                    Debug.Log(e);
+            // Check if returning from ChipEditor with auto-saved state
+            if (!SceneTransition.TryRestoreTempSave(this))
+            {
+                //if project has command line arguments => open project
+                string[] args = System.Environment.GetCommandLineArgs();
+                if(args.Length > 1 && !args[1].StartsWith("-")){
+                    try
+                    {
+                            string path = args[1];
+                            string jsonString = File.ReadAllText(path);
+                            LoadWorld(jsonString);
+                    }
+                    catch(FileNotFoundException e){
+                        //file not found
+                        Debug.Log(e);
+                    }
                 }
             }
         #endif

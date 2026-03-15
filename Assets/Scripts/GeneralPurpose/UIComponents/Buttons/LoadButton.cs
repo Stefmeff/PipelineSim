@@ -42,6 +42,14 @@ public class LoadGame : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     
     public void OnPointerDown(PointerEventData eventData)
     {
+        // In ChipEditor scene, delegate to ChipEditorManager
+        ChipEditorManager chipEditor = Object.FindObjectOfType<ChipEditorManager>();
+        if (chipEditor != null)
+        {
+            chipEditor.LoadChip();
+            return;
+        }
+
         //pause simulation before loading file:
         timer.pause(true);
         timer.restart();
@@ -51,7 +59,8 @@ public class LoadGame : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         i.color = overColor;
-        toolTip.text = "  load file";
+        ChipEditorManager chipEditor = Object.FindObjectOfType<ChipEditorManager>();
+        toolTip.text = chipEditor != null ? "  load chip" : "  load file";
     }
 
     public void OnPointerExit(PointerEventData eventData)

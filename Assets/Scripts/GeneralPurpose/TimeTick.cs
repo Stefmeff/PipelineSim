@@ -51,22 +51,26 @@ public class TimeTick : MonoBehaviour
     {
         //init input field:
         GameObject o = GameObject.FindWithTag("SimulationSpeed");
-        InputSimulationSpeed = o.GetComponent<TMP_InputField>();
-        InputSimulationSpeed.text = tickTimerMax + " sec";
+        if (o != null)
+        {
+            InputSimulationSpeed = o.GetComponent<TMP_InputField>();
+            InputSimulationSpeed.text = tickTimerMax + " sec";
+            InputSimulationSpeed.onEndEdit.AddListener(delegate { LockInputSpeed(InputSimulationSpeed); });
+        }
 
         o = GameObject.FindWithTag("StepSize");
-        InputStepSize = o.GetComponent<TMP_InputField>();
-        InputStepSize.text = stepSize + "";
-        
+        if (o != null)
+        {
+            InputStepSize = o.GetComponent<TMP_InputField>();
+            InputStepSize.text = stepSize + "";
+            InputStepSize.onEndEdit.AddListener(delegate { LockInputStep(InputStepSize); });
+        }
 
-        pauseButton = GameObject.FindWithTag("ButtonPause").GetComponent<ButtonPause>();
+        GameObject pauseObj = GameObject.FindWithTag("ButtonPause");
+        if (pauseObj != null) pauseButton = pauseObj.GetComponent<ButtonPause>();
 
         o = GameObject.FindGameObjectWithTag("ProjectManager");
         projectManager = o.GetComponent<ProjectManager>();
-
-        //add input event listener:
-        InputSimulationSpeed.onEndEdit.AddListener(delegate { LockInputSpeed(InputSimulationSpeed); });
-        InputStepSize.onEndEdit.AddListener(delegate { LockInputStep(InputStepSize); });
         tick = 0;
     }
 
@@ -75,10 +79,10 @@ public class TimeTick : MonoBehaviour
     {
         if(p == false){
             stepModeOn = false;
-            buttonStep.ChangeColor();
+            if (buttonStep != null) buttonStep.ChangeColor();
         }
         paused = p;
-        pauseButton.ChangeIcon(paused);
+        if (pauseButton != null) pauseButton.ChangeIcon(paused);
     }
 
     //restarts the simulation
@@ -87,7 +91,7 @@ public class TimeTick : MonoBehaviour
         tick = 0;
 
         stepModeOn = false;
-        buttonStep.ChangeColor();
+        if (buttonStep != null) buttonStep.ChangeColor();
 
         //reset all the game elements to a default state
         projectManager.ResetComponents();

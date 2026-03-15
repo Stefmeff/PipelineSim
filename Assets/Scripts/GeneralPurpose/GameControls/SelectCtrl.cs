@@ -25,12 +25,18 @@ public class SelectCtrl : MonoBehaviour
     private void Awake()
     {
         GameObject o = GameObject.FindWithTag("ButtonRotate");
-        ButtonRotate b1 = o.GetComponent<ButtonRotate>();
-        b1.RotateObjectEvent += OnRotate;
+        if (o != null)
+        {
+            ButtonRotate b1 = o.GetComponent<ButtonRotate>();
+            if (b1 != null) b1.RotateObjectEvent += OnRotate;
+        }
 
         o = GameObject.FindWithTag("ButtonDelete");
-        ButtonDelete b2 = o.GetComponent<ButtonDelete>();
-        b2.DeleteObjectEvent += OnDelete;
+        if (o != null)
+        {
+            ButtonDelete b2 = o.GetComponent<ButtonDelete>();
+            if (b2 != null) b2.DeleteObjectEvent += OnDelete;
+        }
     }
 
     private void OnDelete()

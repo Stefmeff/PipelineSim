@@ -22,7 +22,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     [SerializeField] private InputPin_Mono[] inPins = new InputPin_Mono[]{};
     [SerializeField] private OutputPin_Mono[] outPins = new OutputPin_Mono[]{};
 
-    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource};
+    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode};
     private GameObject delayVisualizer;
     private GameObject ErrorMessage;
     private ProjectManager projectManager;
@@ -94,6 +94,10 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 return d;
             case componentType.Delay2:
                 return new Delay2();
+            case componentType.ChipInputNode:
+                return new ChipInputNode();
+            case componentType.ChipOutputNode:
+                return new ChipOutputNode();
 
         }
         return null;
@@ -126,6 +130,10 @@ public class ComponentMono : MonoBehaviour, IObjectMono
             case DataSource:
                 DataSource d = (DataSource)component;
                 d.LoadEditor();
+                break;
+            case ChipInputNode:
+                break;
+            case ChipOutputNode:
                 break;
         }
     }

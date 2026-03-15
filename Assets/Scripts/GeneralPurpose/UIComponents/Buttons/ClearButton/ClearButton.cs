@@ -29,15 +29,27 @@ public class ClearGame : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        // Update dialog text based on scene
+        bool inChipEditor = Object.FindObjectOfType<ChipEditorManager>() != null;
+        Transform descriptionText = clearConfirmWindow.transform.Find("Message/Description (1)");
+        if (descriptionText != null)
+        {
+            TMP_Text txt = descriptionText.GetComponent<TMP_Text>();
+            if (txt != null)
+            {
+                txt.text = inChipEditor
+                    ? "Are you sure you want to exit the chip editor? Unsaved changes might get lost!"
+                    : txt.text;
+            }
+        }
         clearConfirmWindow.SetActive(true);
-        //projectManager.ClearWorld();
-        //Debug.Log("Clear world...");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         i.color =  new Color32(0x64,0x7B,0xCA,0x96);
-        toolTip.text = "  clear project";
+        bool inChipEditor = Object.FindObjectOfType<ChipEditorManager>() != null;
+        toolTip.text = inChipEditor ? "  back to sandbox" : "  clear project";
     }
 
     public void OnPointerExit(PointerEventData eventData)

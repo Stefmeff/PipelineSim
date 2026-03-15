@@ -21,7 +21,7 @@ public class CameraZoom : MonoBehaviour
     private void Start()
     {
         zoom = cam.orthographicSize;
-        
+
         GameObject o = GameObject.FindGameObjectWithTag("ProjectManager");
         projectManager = o.GetComponent<ProjectManager>();
     }
@@ -30,11 +30,11 @@ public class CameraZoom : MonoBehaviour
     {
         if(projectManager.zoomActive){
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            
+
             zoom -= scroll * zoomMultiplier;
             zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
             cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, zoom, ref velocity, smoothTime);
         }
-        
+
     }
 }

@@ -70,6 +70,6 @@ public class OutputPin_Mono : MonoBehaviour
     private void OnDestroy()
     {
         //destroy connected wire
-        pin.disconnectWire();
+        if (pin != null) pin.disconnectWire();
     }
 }

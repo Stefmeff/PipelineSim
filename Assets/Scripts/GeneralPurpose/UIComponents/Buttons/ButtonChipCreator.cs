@@ -17,7 +17,7 @@ public class ButtonChipCreator : MonoBehaviour, IPointerDownHandler, IPointerEnt
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Chip Creator: opening editor (not yet implemented)");
+        SceneTransition.OpenChipEditor();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

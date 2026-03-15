@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 /**
- * This class is used for moving the main camera via mouse drag. 
+ * This class is used for moving the main camera via mouse drag.
  */
 public class CameraMouseDrag : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDragHandler
 {
@@ -41,7 +41,7 @@ public class CameraMouseDrag : MonoBehaviour, IPointerDownHandler, IEndDragHandl
         //calculate the difference of the mouse drag and reposition camera
         difference = GetMousePos - cam.transform.position;
         cam.transform.position = origin - difference;
-        
+
     }
 
     public void OnEndDrag(PointerEventData eventData)

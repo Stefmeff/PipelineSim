@@ -6,7 +6,7 @@ using UnityEngine;
 
 /**
  * @author: Stefan Moser
- * 
+ *
  * @brief: This classed is used for dragging/moving 2D game components with the mouse
  * */
 public class Draggable2D : MonoBehaviour
@@ -52,15 +52,34 @@ public class Draggable2D : MonoBehaviour
         camDrag.camDragOn = false;
         if(projectManager.dragActive){
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = new Vector3(mousePos.x, mousePos.y, 0);
+
+            // Interface pins: only update Y via pinLock
+            InterfacePinLock pinLock = GetComponent<InterfacePinLock>();
+            if (pinLock != null)
+            {
+                pinLock.UpdateDragY(mousePos.y);
+            }
+            else
+            {
+                transform.position = new Vector3(mousePos.x, mousePos.y, 0);
+            }
         }
     }
 
     public void OnMouseUp()
     {
         camDrag.camDragOn = true;
-        // Snap to grid on release
-        transform.position = GridSnap.Snap(transform.position);
+
+        InterfacePinLock pinLock = GetComponent<InterfacePinLock>();
+        if (pinLock != null)
+        {
+            pinLock.FinishDrag();
+        }
+        else
+        {
+            // Snap to grid on release
+            transform.position = GridSnap.Snap(transform.position);
+        }
     }
 
     public void OnMouseOver()

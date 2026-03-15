@@ -32,6 +32,14 @@ public class SaveGame : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        // In ChipEditor scene, delegate to ChipEditorManager
+        ChipEditorManager chipEditor = Object.FindObjectOfType<ChipEditorManager>();
+        if (chipEditor != null)
+        {
+            chipEditor.SaveChip();
+            return;
+        }
+
         string jsonString = projectManager.SaveWorld();
         SaveAsFile(jsonString);
     }
@@ -39,7 +47,8 @@ public class SaveGame : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     public void OnPointerEnter(PointerEventData eventData)
     {
         i.color = overColor;
-        toolTip.text = "  save to file";
+        ChipEditorManager chipEditor = Object.FindObjectOfType<ChipEditorManager>();
+        toolTip.text = chipEditor != null ? "  save chip" : "  save to file";
     }
 
     public void OnPointerExit(PointerEventData eventData)
