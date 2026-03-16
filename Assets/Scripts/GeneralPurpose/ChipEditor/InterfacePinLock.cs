@@ -66,6 +66,7 @@ public class InterfacePinLock : MonoBehaviour
     {
         savedY = GridSnap.Snap(new Vector3(0, savedY, 0)).y;
         savedY = ClampYBetweenNeighbors(savedY);
+        if (parentBar != null) parentBar.RenumberPins();
     }
 
     private float ClampYBetweenNeighbors(float y)

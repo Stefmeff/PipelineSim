@@ -107,7 +107,11 @@ public class ChipEditorManager : MonoBehaviour
             var inputPins = inputPinBar.GetPinsOrdered();
             for (int i = 0; i < inputPins.Count; i++)
             {
-                chipDefinition.inputs.Add(new InterfacePin("In" + i, 1, i));
+                ComponentMono comp = inputPins[i].GetComponent<ComponentMono>();
+                ChipInputNode node = comp != null ? comp.component as ChipInputNode : null;
+                string name = node != null ? node.pinName : "In" + i;
+                int width = node != null ? node.pinWidth : 1;
+                chipDefinition.inputs.Add(new InterfacePin(name, width, i));
             }
         }
 
@@ -117,7 +121,11 @@ public class ChipEditorManager : MonoBehaviour
             var outputPins = outputPinBar.GetPinsOrdered();
             for (int i = 0; i < outputPins.Count; i++)
             {
-                chipDefinition.outputs.Add(new InterfacePin("Out" + i, 1, i));
+                ComponentMono comp = outputPins[i].GetComponent<ComponentMono>();
+                ChipOutputNode node = comp != null ? comp.component as ChipOutputNode : null;
+                string name = node != null ? node.pinName : "Out" + i;
+                int width = node != null ? node.pinWidth : 1;
+                chipDefinition.outputs.Add(new InterfacePin(name, width, i));
             }
         }
 

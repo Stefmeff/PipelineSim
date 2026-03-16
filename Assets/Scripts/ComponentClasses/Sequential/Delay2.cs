@@ -57,7 +57,7 @@ public class Delay2 : CircuitComponent
         Subscribe();
                 
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(2).gameObject;
+        editor = o.transform.Find("Delay2Editor")?.gameObject;
     }
 
 

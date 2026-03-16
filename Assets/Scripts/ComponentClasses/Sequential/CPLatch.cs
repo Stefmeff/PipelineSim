@@ -59,7 +59,7 @@ public class CPLatch : CircuitComponent, IDelay
         Subscribe();
 
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(5).gameObject;
+        editor = o.transform.Find("CPLatchEditor")?.gameObject;
     }
 
     private void OnTickNoDelay(int tick){

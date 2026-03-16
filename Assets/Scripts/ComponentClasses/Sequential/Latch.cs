@@ -65,7 +65,7 @@ public class Latch : CircuitComponent , IDelay
         Subscribe();
 
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(4).gameObject;
+        editor = o.transform.Find("LatchEditor")?.gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay

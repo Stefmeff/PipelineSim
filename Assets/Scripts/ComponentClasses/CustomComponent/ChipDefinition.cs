@@ -12,7 +12,7 @@ using UnityEngine;
 public class ChipDefinition
 {
     [JsonProperty] public string chipId;
-    [JsonProperty] public string name;
+    [JsonIgnore] public string name;
     [JsonProperty] public string color;
     [JsonProperty] public List<InterfacePin> inputs;
     [JsonProperty] public List<InterfacePin> outputs;
@@ -72,7 +72,9 @@ public class ChipDefinition
             return null;
         }
         string json = File.ReadAllText(path);
-        return JsonConvert.DeserializeObject<ChipDefinition>(json, settings);
+        ChipDefinition chip = JsonConvert.DeserializeObject<ChipDefinition>(json, settings);
+        if (chip != null) chip.name = chipId;
+        return chip;
     }
 
     /// <summary>
@@ -86,7 +88,11 @@ public class ChipDefinition
         {
             string json = File.ReadAllText(file);
             ChipDefinition chip = JsonConvert.DeserializeObject<ChipDefinition>(json, settings);
-            if (chip != null) chips.Add(chip);
+            if (chip != null)
+            {
+                chip.name = Path.GetFileNameWithoutExtension(file);
+                chips.Add(chip);
+            }
         }
         return chips;
     }

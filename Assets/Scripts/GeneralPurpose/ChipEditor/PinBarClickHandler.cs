@@ -88,6 +88,7 @@ public class PinBarClickHandler : MonoBehaviour, IPointerClickHandler
         pinLock.Init(this, fixedX);
 
         pins.Add(pin);
+        RenumberPins();
     }
 
     private bool IsPositionOccupied(Vector3 pos)
@@ -151,5 +152,43 @@ public class PinBarClickHandler : MonoBehaviour, IPointerClickHandler
     public bool IsInputSide()
     {
         return isInputSide;
+    }
+
+    /// <summary>
+    /// Renumbers auto-named pins based on visual order (top = 1).
+    /// Pins with custom names are left unchanged.
+    /// </summary>
+    public void RenumberPins()
+    {
+        string prefix = isInputSide ? "IN" : "OUT";
+        var ordered = GetPinsOrdered();
+
+        for (int i = 0; i < ordered.Count; i++)
+        {
+            ComponentMono comp = ordered[i].GetComponent<ComponentMono>();
+            if (comp == null) continue;
+
+            string currentName = null;
+            if (comp.component is ChipInputNode cin) currentName = cin.pinName;
+            else if (comp.component is ChipOutputNode cout) currentName = cout.pinName;
+
+            if (currentName == null) continue;
+
+            // Check if name is auto-generated (prefix + number, or default "In"/"Out")
+            if (IsAutoName(currentName, prefix))
+            {
+                string newName = prefix + (i + 1);
+                if (comp.component is ChipInputNode cin2) cin2.SetPinName(newName);
+                else if (comp.component is ChipOutputNode cout2) cout2.SetPinName(newName);
+            }
+        }
+    }
+
+    private bool IsAutoName(string name, string prefix)
+    {
+        if (name == "In" || name == "Out") return true;
+        if (!name.StartsWith(prefix)) return false;
+        string suffix = name.Substring(prefix.Length);
+        return int.TryParse(suffix, out _);
     }
 }

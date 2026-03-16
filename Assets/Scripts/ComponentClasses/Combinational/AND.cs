@@ -51,7 +51,7 @@ public class AND : CircuitComponent, IDelay
 
         
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(1).gameObject;
+        editor = o.transform.Find("DelayEditor")?.gameObject;
 
         Subscribe();
     }

@@ -46,13 +46,13 @@ public class Clock : CircuitComponent
         Subscribe();
 
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(0).gameObject;
+        editor = o.transform.Find("ClockEditor")?.gameObject;
     }
 
 
     /**
      * Constructor of Clock object
-     * 
+     *
      * @param high: number of ticks clock is high
      * @param low: number of ticks clock is low
      * */
@@ -71,7 +71,7 @@ public class Clock : CircuitComponent
         Subscribe();
 
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(0).gameObject;
+        editor = o.transform.Find("ClockEditor")?.gameObject;
     }
 
 

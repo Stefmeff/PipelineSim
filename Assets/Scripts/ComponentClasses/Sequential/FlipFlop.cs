@@ -68,7 +68,7 @@ public class FlipFlop : CircuitComponent, IDelay
 
         
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(3).gameObject;
+        editor = o.transform.Find("FlopEditor")?.gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay

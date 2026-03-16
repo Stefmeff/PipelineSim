@@ -43,7 +43,7 @@ public class Inverter : CircuitComponent, IDelay
         Subscribe();
 
         o = GameObject.FindWithTag("Editor");
-        editor = o.transform.GetChild(1).gameObject;
+        editor = o.transform.Find("DelayEditor")?.gameObject;
     }
 
     //Tick Event: Behaviour when gate does not have a delay

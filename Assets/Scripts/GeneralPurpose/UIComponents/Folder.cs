@@ -22,6 +22,11 @@ public class Folder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         origColor = image.color;
     }
 
+    public void SetItems(List<GameObject> newItems)
+    {
+        items = newItems;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         opened = !opened;
