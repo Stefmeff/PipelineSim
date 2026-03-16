@@ -57,6 +57,10 @@ public static class SceneTransition
     /// </summary>
     public static bool TryRestoreTempSave(ProjectManager pm)
     {
+        // Only restore in Sandbox scene
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName != "Sandbox") return false;
+
         // Only restore when actively returning from chip editor
         if (!returningFromEditor)
         {

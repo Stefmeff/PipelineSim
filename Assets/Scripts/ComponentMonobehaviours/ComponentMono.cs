@@ -22,7 +22,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     [SerializeField] private InputPin_Mono[] inPins = new InputPin_Mono[]{};
     [SerializeField] private OutputPin_Mono[] outPins = new OutputPin_Mono[]{};
 
-    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode, CustomChip};
+    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode, CustomChip, Splitter, Merger};
     private GameObject delayVisualizer;
     private GameObject ErrorMessage;
     private ProjectManager projectManager;
@@ -107,6 +107,16 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 chip.BuildVisual(this.gameObject);
                 chip.InitInternalCircuit();
                 return chip;
+            case componentType.Splitter:
+                Splitter splitter = new Splitter();
+                splitter.LoadEditor();
+                splitter.BuildVisual(this.gameObject);
+                return splitter;
+            case componentType.Merger:
+                Merger merger = new Merger();
+                merger.LoadEditor();
+                merger.BuildVisual(this.gameObject);
+                return merger;
 
         }
         return null;
@@ -149,6 +159,14 @@ public class ComponentMono : MonoBehaviour, IObjectMono
             case CustomChip:
                 ((CustomChip)component).BuildVisual(this.gameObject);
                 ((CustomChip)component).InitInternalCircuit();
+                break;
+            case Splitter:
+                ((Splitter)component).LoadEditor();
+                ((Splitter)component).BuildVisual(this.gameObject);
+                break;
+            case Merger:
+                ((Merger)component).LoadEditor();
+                ((Merger)component).BuildVisual(this.gameObject);
                 break;
         }
     }
