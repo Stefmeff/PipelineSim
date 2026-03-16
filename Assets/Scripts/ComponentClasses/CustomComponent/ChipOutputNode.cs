@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -99,6 +100,11 @@ public class ChipOutputNode : CircuitComponent
     public override void LoadPins(InputPin_Mono[] inPins, OutputPin_Mono[] outPins)
     {
         inPins[0].Init(input);
+    }
+
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(input);
     }
 
     public override void LoadDelay(GameObject delayVisualizer) { }

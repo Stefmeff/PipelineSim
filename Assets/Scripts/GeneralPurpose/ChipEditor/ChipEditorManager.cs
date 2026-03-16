@@ -131,6 +131,10 @@ public class ChipEditorManager : MonoBehaviour
 
         chipDefinition.internalCircuit = projectManager.SaveWorld();
 
+        // Calculate max delay from internal circuit
+        chipDefinition.delay = CalculateChipDelay(chipDefinition.internalCircuit);
+        Debug.Log("Chip delay: " + chipDefinition.delay);
+
 #if UNITY_WEBGL && !UNITY_EDITOR
         // TODO: WebGL chip saving
         chipDefinition.Save();
@@ -182,6 +186,31 @@ public class ChipEditorManager : MonoBehaviour
             }
         }
 #endif
+    }
+
+    private int CalculateChipDelay(string internalCircuitJson)
+    {
+        if (string.IsNullOrEmpty(internalCircuitJson)) return 0;
+
+        var settings = new Newtonsoft.Json.JsonSerializerSettings
+        {
+            PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects,
+            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto
+        };
+
+        var components = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<CircuitComponent>>(
+            internalCircuitJson, settings);
+
+        if (components == null) return 0;
+
+        // Nested custom chips need their chipDef loaded for GetDelay()
+        foreach (CircuitComponent comp in components)
+        {
+            if (comp is CustomChip nested)
+                nested.InitInternalCircuit();
+        }
+
+        return ChipDelayCalculator.CalculateMaxDelay(components);
     }
 
     private void OnBack()

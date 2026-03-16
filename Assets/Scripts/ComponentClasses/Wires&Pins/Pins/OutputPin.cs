@@ -65,6 +65,8 @@ public class OutputPin
         connectedPins.Add(pin);
     }
 
+    public List<InputPin> GetConnectedPins() { return connectedPins; }
+
     public void disconnectPin(InputPin pin)
     {
         connectedPins.Remove(pin);
@@ -88,7 +90,7 @@ public class OutputPin
             this.wire.Dispose();
             this.wire = null;
             foreach(InputPin p in connectedPins){
-                p.SetValue(new BitToken());
+                p.SetValue(new BitToken(p.width > 0 ? p.width : 1));
             }
             connectedPins.Clear();
             return true;

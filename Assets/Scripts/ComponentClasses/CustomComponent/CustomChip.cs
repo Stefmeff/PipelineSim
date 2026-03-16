@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -22,6 +23,11 @@ public class CustomChip : CircuitComponent
     [JsonIgnore] private List<ChipInputNode> internalInputNodes = new List<ChipInputNode>();
     [JsonIgnore] private List<ChipOutputNode> internalOutputNodes = new List<ChipOutputNode>();
     [JsonIgnore] private List<CircuitComponent> internalComponents = new List<CircuitComponent>();
+
+    // Delay visualization
+    [JsonIgnore] private GameObject delayVisualizer;
+    [JsonIgnore] private List<Tuple<BitToken, GameObject>> signalQueue = new List<Tuple<BitToken, GameObject>>();
+    [JsonIgnore] private List<BitToken> lastInputs = new List<BitToken>();
 
     [JsonIgnore] public static string chipNameToSpawn;
 
@@ -73,6 +79,7 @@ public class CustomChip : CircuitComponent
     {
         GameObject o = GameObject.FindWithTag("Timer");
         timer = o.GetComponent<TimeTick>();
+        timer.TimerTickEvent += OnTimerTick;
     }
 
     /// <summary>
@@ -158,17 +165,75 @@ public class CustomChip : CircuitComponent
                 outputs[idx].SetValue(internalOutputNodes[idx].input.data);
             };
         }
+
+        // Init lastInputs for change detection
+        lastInputs.Clear();
+        for (int i = 0; i < inputs.Count; i++)
+            lastInputs.Add(new BitToken());
+    }
+
+    private void OnTimerTick(int tick)
+    {
+        if (delayVisualizer == null) return;
+
+        int delay = GetDelay();
+
+        // Init signal queue with sentinel if empty
+        if (signalQueue.Count == 0)
+        {
+            BitToken init = new BitToken();
+            GameObject square = DelayHandler.NewSquare(100, init.ActiveColor(), delayVisualizer, 1);
+            signalQueue.Add(Tuple.Create(init, square));
+        }
+
+        // Detect input changes → add visual square
+        for (int i = 0; i < inputs.Count; i++)
+        {
+            if (i >= lastInputs.Count) break;
+            BitToken current = inputs[i].data;
+            if (!current.EqualsToken(lastInputs[i]))
+            {
+                lastInputs[i] = current;
+                GameObject square = DelayHandler.NewSquare(0, current.ActiveColor(), delayVisualizer, tick);
+                signalQueue.Add(Tuple.Create(current, square));
+            }
+        }
+
+        // Check if next signal has passed through
+        if (signalQueue.Count > 1)
+        {
+            BitToken nextOut = signalQueue[1].Item1;
+            int arrivalTime = nextOut.GetTime();
+
+            if (arrivalTime + delay <= tick)
+            {
+                if (signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                signalQueue.RemoveAt(0);
+            }
+        }
+
+        // Draw squares
+        DelayHandler.DrawSquares(signalQueue, delay, tick);
     }
 
     public override void Reset()
     {
+        // Clear visual squares
+        foreach (Tuple<BitToken, GameObject> t in signalQueue)
+        {
+            if (t.Item2 != null) GameObject.Destroy(t.Item2);
+        }
+        signalQueue.Clear();
+
+        // Reset last input tracking
+        lastInputs.Clear();
+        for (int i = 0; i < inputs.Count; i++)
+            lastInputs.Add(new BitToken());
+
         foreach (OutputPin pin in outputs)
         {
-            pin.SetValue(new BitToken());
+            pin.SetValue(new BitToken(pin.width));
         }
-        // Don't reset internal components — they are pure data objects
-        // without GameObjects and their Reset() may reference visual elements.
-        // They will receive fresh data through the event wiring.
     }
 
     public override Component Load()
@@ -247,6 +312,21 @@ public class CustomChip : CircuitComponent
             descRt.sizeDelta = new Vector2(chipWidth * 2f, chipHeight);
             descObj.SetActive(false);
             draggable.description = descObj;
+        }
+
+        // Delay visualizer — beneath the chip body
+        if (chipDef.delay > 0)
+        {
+            GameObject vizPrefab = Resources.Load("Prefabs/DelayVisualizer") as GameObject;
+            if (vizPrefab != null)
+            {
+                GameObject vizObj = GameObject.Instantiate(vizPrefab, root.transform);
+                vizObj.name = "DelayVisualizer";
+                vizObj.transform.localPosition = new Vector3(0, -chipHeight / 2f - 2.5f, 0);
+                vizObj.transform.localScale = new Vector3(chipWidth * 0.7f, 1.5f, 1);
+                vizObj.SetActive(true);
+                delayVisualizer = vizObj;
+            }
         }
 
         // First pin Y
@@ -328,12 +408,27 @@ public class CustomChip : CircuitComponent
         // Pins are created dynamically in BuildVisual
     }
 
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.AddRange(this.inputs);
+        outputs.AddRange(this.outputs);
+    }
+
+    public override int GetDelay()
+    {
+        EnsureChipDefLoaded();
+        return chipDef != null ? chipDef.delay : 0;
+    }
+
     public override void LoadDelay(GameObject delayVisualizer) { }
 
     public override void OpenEditor() { }
 
     public override void Dispose()
     {
+        // Unsubscribe from timer
+        if (timer != null) timer.TimerTickEvent -= OnTimerTick;
+
         // Unsubscribe internal components from Timer to prevent memory leaks
         foreach (CircuitComponent comp in internalComponents)
         {

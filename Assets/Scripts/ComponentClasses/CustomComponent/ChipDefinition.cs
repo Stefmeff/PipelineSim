@@ -17,6 +17,7 @@ public class ChipDefinition
     [JsonProperty] public List<InterfacePin> inputs;
     [JsonProperty] public List<InterfacePin> outputs;
     [JsonProperty] public string internalCircuit;
+    [JsonProperty] public int delay;
 
     private static JsonSerializerSettings settings = new JsonSerializerSettings
     {

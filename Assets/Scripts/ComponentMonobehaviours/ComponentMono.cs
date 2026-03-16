@@ -182,10 +182,19 @@ public class ComponentMono : MonoBehaviour, IObjectMono
             for( int i = 0; i < editor.transform.childCount; ++i )
             {
                 editor.transform.GetChild(i).gameObject.SetActive(false);
-            }       
+            }
             component.OpenEditor();
-            projectManager.dragActive = false;
-            projectManager.zoomActive = false;
+
+            // Only disable drag/zoom if an editor actually opened
+            for( int i = 0; i < editor.transform.childCount; ++i )
+            {
+                if (editor.transform.GetChild(i).gameObject.activeSelf)
+                {
+                    projectManager.dragActive = false;
+                    projectManager.zoomActive = false;
+                    break;
+                }
+            }
         }
     }
 

@@ -13,6 +13,12 @@ public static class SceneTransition
     /// </summary>
     public static string chipIdToEdit;
 
+    /// <summary>
+    /// True only when actively returning from chip editor to sandbox.
+    /// Prevents stale temp files from restoring on fresh game start.
+    /// </summary>
+    public static bool returningFromEditor = false;
+
     private static string TempSavePath => Path.Combine(Application.persistentDataPath, "_sandbox_temp.pip");
 
     /// <summary>
@@ -41,6 +47,7 @@ public static class SceneTransition
     /// </summary>
     public static void ReturnToSandbox()
     {
+        returningFromEditor = true;
         SceneManager.LoadScene("Sandbox");
         // Restoration happens in ProjectManager.Awake() via CheckTempRestore()
     }
@@ -50,9 +57,15 @@ public static class SceneTransition
     /// </summary>
     public static bool TryRestoreTempSave(ProjectManager pm)
     {
-        // Only restore in Sandbox scene, not in ChipEditor
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName != "Sandbox") return false;
+        // Only restore when actively returning from chip editor
+        if (!returningFromEditor)
+        {
+            // Clean up any stale temp files from crashes
+            if (File.Exists(TempSavePath)) File.Delete(TempSavePath);
+            return false;
+        }
+
+        returningFromEditor = false;
 
         if (File.Exists(TempSavePath))
         {

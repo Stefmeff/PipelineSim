@@ -121,6 +121,11 @@ public class Clock : CircuitComponent
         outPins[0].Init(clkOut);
     }
 
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        outputs.Add(clkOut);
+    }
+
     public override void LoadDelay(GameObject delayVisualizer)
     {
     }

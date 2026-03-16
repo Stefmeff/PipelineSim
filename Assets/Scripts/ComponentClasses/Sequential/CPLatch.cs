@@ -92,6 +92,7 @@ public class CPLatch : CircuitComponent, IDelay
     }
 
     private void OnTickDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         BitToken c = capture.data;
         BitToken p = pass.data;
         BitToken d = dataIn.data;
@@ -138,6 +139,7 @@ public class CPLatch : CircuitComponent, IDelay
     }
 
     private void OnTickVisualizeDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         BitToken c = capture.data;
         BitToken p = pass.data;
         BitToken d = dataIn.data;
@@ -190,9 +192,9 @@ public class CPLatch : CircuitComponent, IDelay
 
     public override void Reset()
     {
-        sRend.color = defaultColor;
+        if (sRend != null) sRend.color = defaultColor;
         lastData = new BitToken();
-        errorMessage.text = "";
+        if (errorMessage != null) errorMessage.text = "";
 
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
             if(t.Item2 != null) GameObject.Destroy(t.Item2);
@@ -202,7 +204,7 @@ public class CPLatch : CircuitComponent, IDelay
         capture.SetValue(new BitToken());
         pass.SetValue(new BitToken());
         dataIn.SetValue(new BitToken());
-        dataOut.SetValue(new BitToken());
+        dataOut.SetValue(new BitToken(dataOut.width));
 
         DelayInit();
     }
@@ -213,9 +215,12 @@ public class CPLatch : CircuitComponent, IDelay
             return true;
         }else{
             //error setup
-            sRend.color = errorColor;
-            errorMessage.text = "SETUP!";
-            timer.pause(true);
+            if (sRend != null) sRend.color = errorColor;
+            if (errorMessage != null) errorMessage.text = "SETUP!";
+            InformationWindow.Show("Setup Time Violation",
+                "Data arrived " + (lastData.GetTime() - (sampleTime - setup))
+                + " ticks too late (setup=" + setup + ").\n\n"
+                + "The data input must be stable at least " + setup + " ticks before the capture edge.");
             return false;
         }
     }
@@ -227,9 +232,12 @@ public class CPLatch : CircuitComponent, IDelay
         }
         else{
             //error hold
-            sRend.color = errorColor;
-            errorMessage.text = "HOLD!";
-            timer.pause(true);
+            if (sRend != null) sRend.color = errorColor;
+            if (errorMessage != null) errorMessage.text = "HOLD!";
+            InformationWindow.Show("Hold Time Violation",
+                "Data changed " + ((sampleTime + hold) - lastData.GetTime())
+                + " ticks too early (hold=" + hold + ").\n\n"
+                + "The data input must remain stable for at least " + hold + " ticks after the capture edge.");
             return false;
         }
     }
@@ -262,22 +270,28 @@ public class CPLatch : CircuitComponent, IDelay
     
     public void DelayInit(){
         lastData = new BitToken();
-        GameObject square = DelayHandler.NewSquare(100,lastData.ActiveColor(),delayVisualizer,1);
+        GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastData.ActiveColor(),delayVisualizer,1) : null;
         signalQueue.Add(Tuple.Create(lastData,square));
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 
     private void Subscribe()
     {
         Dispose();
-        
+
         if(visualizerOn){
             timer.TimerTickEvent += OnTickVisualizeDelay;
         }else if(delay > 0){
-            timer.TimerTickEvent += OnTickDelay;  
+            timer.TimerTickEvent += OnTickDelay;
         }else{
             timer.TimerTickEvent += OnTickNoDelay;
         }
+    }
+
+    [System.Runtime.Serialization.OnDeserialized]
+    internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
+    {
+        Subscribe();
     }
 
     public override void Dispose()
@@ -290,7 +304,7 @@ public class CPLatch : CircuitComponent, IDelay
     public void VisualizeDelay(bool on)
     {
         visualizerOn = on;
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
         Subscribe();
     }
 
@@ -335,6 +349,12 @@ public class CPLatch : CircuitComponent, IDelay
             }
         }
         return this.hold;
+    }
+
+    public override int GetDelay() { return delay; }
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(capture); inputs.Add(pass); inputs.Add(dataIn); outputs.Add(dataOut);
     }
 
     public override void OpenEditor()

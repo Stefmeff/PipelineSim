@@ -59,6 +59,7 @@ public class Inverter : CircuitComponent, IDelay
 
     //Tick Event: Behaviour when gate has a delay > 0
     private void OnTickDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         //if new input data => new output with delay
         if(!dataIn.data.EqualsToken(lastDataIn)){
             lastDataIn = dataIn.data;
@@ -86,7 +87,7 @@ public class Inverter : CircuitComponent, IDelay
 
     //Tick Event: Behaviour with delay visualization
     private void OnTickVisualizeDelay(int tick){
-
+        if (signalQueue.Count == 0) DelayInit();
         //if new input data => new output with delay visulization 
         if(!dataIn.data.EqualsToken(lastDataIn)){
             lastDataIn = dataIn.data;
@@ -157,21 +158,27 @@ public class Inverter : CircuitComponent, IDelay
     private void Subscribe()
     {
         Dispose();
-        
+
         if(visualizerOn){
             timer.TimerTickEvent += OnTickVisualizeDelay;
         }else if(delay > 0){
-            timer.TimerTickEvent += OnTickDelay;  
+            timer.TimerTickEvent += OnTickDelay;
         }else{
             timer.TimerTickEvent += OnTickNoDelay;
         }
     }
 
+    [System.Runtime.Serialization.OnDeserialized]
+    internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
+    {
+        Subscribe();
+    }
+
     private void DelayInit(){
         lastDataIn = new BitToken(true,0);
-        GameObject square = DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1);
+        GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
         signalQueue.Add(Tuple.Create(lastDataIn,square));
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 
 
@@ -199,7 +206,7 @@ public class Inverter : CircuitComponent, IDelay
     public void VisualizeDelay(bool on)
     {
         visualizerOn = on;
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
         Subscribe();
     }
 
@@ -207,8 +214,14 @@ public class Inverter : CircuitComponent, IDelay
         return visualizerOn;
     }
 
+    public override int GetDelay() { return delay; }
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(dataIn); outputs.Add(dataOut);
+    }
+
     public override void OpenEditor()
-    {   
+    {
         editor.SetActive(true);
         DelayEditor e = editor.GetComponent<DelayEditor>();
         e.init(this);

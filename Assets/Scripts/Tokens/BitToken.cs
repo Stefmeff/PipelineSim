@@ -23,6 +23,15 @@ public class BitToken
         this.color = red;
     }
 
+    public BitToken(int width)
+    {
+        this.time = 0;
+        this.width = width;
+        this.value = false;
+        this.values = new bool[width];
+        this.color = low;
+    }
+
     public BitToken(bool value, int time)
     {
         this.value = value;

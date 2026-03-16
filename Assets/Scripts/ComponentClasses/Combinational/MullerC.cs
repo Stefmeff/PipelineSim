@@ -84,7 +84,7 @@ public class MullerC : CircuitComponent, IDelay
 
     //Tick Event: Behaviour when gate has a delay > 0
     private void OnTickDelay(int tick){
-
+        if (signalQueue.Count == 0) DelayInit();
         BitToken A = dataA.data;
         BitToken B = dataB.data;
 
@@ -124,7 +124,7 @@ public class MullerC : CircuitComponent, IDelay
     //Tick Event: Behaviour with delay visualization
     private void OnTickVisualizeDelay(int tick)
     {
-        
+        if (signalQueue.Count == 0) DelayInit();
         BitToken A = dataA.data;
         BitToken B = dataB.data;
 
@@ -217,21 +217,27 @@ public class MullerC : CircuitComponent, IDelay
     private void Subscribe()
     {
         Dispose();
- 
+
         if(visualizerOn){
             timer.TimerTickEvent += OnTickVisualizeDelay;
         }else if(delay > 0){
-            timer.TimerTickEvent += OnTickDelay;  
+            timer.TimerTickEvent += OnTickDelay;
         }else{
             timer.TimerTickEvent += OnTickNoDelay;
         }
     }
 
+    [System.Runtime.Serialization.OnDeserialized]
+    internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
+    {
+        Subscribe();
+    }
+
     public void DelayInit(){
-        lastResult = new BitToken(); 
-        GameObject square = DelayHandler.NewSquare(100,lastResult.ActiveColor(),delayVisualizer,1);
+        lastResult = new BitToken();
+        GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastResult.ActiveColor(),delayVisualizer,1) : null;
         signalQueue.Add(Tuple.Create(lastResult,square));
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 
 
@@ -259,12 +265,18 @@ public class MullerC : CircuitComponent, IDelay
     public void VisualizeDelay(bool on)
     {
         visualizerOn = on;
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
         Subscribe();
     }
 
     public bool IsVisualizerActive(){
         return visualizerOn;
+    }
+
+    public override int GetDelay() { return delay; }
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(dataA); inputs.Add(dataB); outputs.Add(dataOut);
     }
 
     public override void OpenEditor()

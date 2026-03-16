@@ -72,6 +72,7 @@ public class Delay : CircuitComponent, IDelay
 
     //Tick Event: Behaviour when gate has a delay > 0
     private void OnTickDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         BitToken d = dataIn.data;
         if(!d.EqualsToken(lastDataIn)){
             lastDataIn = d.NewToken(d.GetTime());
@@ -97,6 +98,7 @@ public class Delay : CircuitComponent, IDelay
 
     //Tick Event: Behaviour with delay visualization
     private void OnTickVisualizeDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         BitToken d = dataIn.data;
         if(!d.EqualsToken(lastDataIn)){
             lastDataIn = d.NewToken(d.GetTime());
@@ -135,7 +137,7 @@ public class Delay : CircuitComponent, IDelay
         signalQueue.Clear();
 
         dataIn.SetValue(new BitToken());
-        dataOut.SetValue(new BitToken());
+        dataOut.SetValue(new BitToken(dataOut.width));
 
         DelayInit();
     }
@@ -169,14 +171,20 @@ public class Delay : CircuitComponent, IDelay
     private void Subscribe()
     {
         Dispose();
-        
+
         if(visualizerOn){
             timer.TimerTickEvent += OnTickVisualizeDelay;
         }else if(delay > 0){
-            timer.TimerTickEvent += OnTickDelay;  
+            timer.TimerTickEvent += OnTickDelay;
         }else{
             timer.TimerTickEvent += OnTickNoDelay;
         }
+    }
+
+    [System.Runtime.Serialization.OnDeserialized]
+    internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
+    {
+        Subscribe();
     }
 
 
@@ -191,9 +199,9 @@ public class Delay : CircuitComponent, IDelay
 
     private void DelayInit(){
         lastDataIn = new BitToken();
-        GameObject square = DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1);
+        GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
         signalQueue.Add(Tuple.Create(lastDataIn,square));
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 
     public int parseDelay(string inputDelay){
@@ -212,12 +220,18 @@ public class Delay : CircuitComponent, IDelay
     public void VisualizeDelay(bool on)
     {
         visualizerOn = on;
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
         Subscribe();
     }
 
     public bool IsVisualizerActive(){
         return visualizerOn;
+    }
+
+    public override int GetDelay() { return delay; }
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(dataIn); outputs.Add(dataOut);
     }
 
     public override void OpenEditor()

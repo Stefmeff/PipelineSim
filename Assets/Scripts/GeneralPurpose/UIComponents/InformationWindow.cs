@@ -40,7 +40,7 @@ public class InformationWindow : MonoBehaviour
 
     void OnDisable()
     {
-        timer.restart();
+        timer.pause(false);
     }
 
     public static void Show(string title, string message)

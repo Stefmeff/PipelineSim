@@ -97,6 +97,7 @@ public class FlipFlop : CircuitComponent, IDelay
 
     //Tick Event: Behaviour when gate has a delay > 0
     private void OnTickDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         BitToken c = clk.data;
         BitToken d = dataIn.data;
 
@@ -138,6 +139,7 @@ public class FlipFlop : CircuitComponent, IDelay
 
     //Tick Event: Behaviour with delay visualization
     private void OnTickVisualizeDelay(int tick){
+        if (signalQueue.Count == 0) DelayInit();
         BitToken c = clk.data;
         BitToken d = dataIn.data;
 
@@ -182,9 +184,9 @@ public class FlipFlop : CircuitComponent, IDelay
     //Event: Restart simulation
     public override void Reset()
     {
-        sRend.color = defaultColor;
+        if (sRend != null) sRend.color = defaultColor;
         storedData = new BitToken();
-        errorMessage.text = "";
+        if (errorMessage != null) errorMessage.text = "";
 
         foreach(Tuple<BitToken,GameObject> t in signalQueue){
             if(t.Item2 != null) GameObject.Destroy(t.Item2);
@@ -193,7 +195,7 @@ public class FlipFlop : CircuitComponent, IDelay
 
         clk.SetValue(new BitToken());
         dataIn.SetValue(new BitToken());
-        dataOut.SetValue(new BitToken());
+        dataOut.SetValue(new BitToken(dataOut.width));
 
         DelayInit();
 
@@ -206,9 +208,12 @@ public class FlipFlop : CircuitComponent, IDelay
             return true;
         }else{
             //error setup
-            sRend.color = errorColor;
-            errorMessage.text = "SETUP!";
-            timer.pause(true);
+            if (sRend != null) sRend.color = errorColor;
+            if (errorMessage != null) errorMessage.text = "SETUP!";
+            InformationWindow.Show("Setup Time Violation",
+                "Data arrived " + (lastDataIn.GetTime() - (lastClk.GetTime() - setup))
+                + " ticks too late (setup=" + setup + ").\n\n"
+                + "The data input must be stable at least " + setup + " ticks before the clock edge.");
             return false;
         }
     }
@@ -220,9 +225,12 @@ public class FlipFlop : CircuitComponent, IDelay
         }
         else{
             //error hold
-            sRend.color = errorColor;
-            errorMessage.text = "HOLD!";
-            timer.pause(true);
+            if (sRend != null) sRend.color = errorColor;
+            if (errorMessage != null) errorMessage.text = "HOLD!";
+            InformationWindow.Show("Hold Time Violation",
+                "Data changed " + ((lastClk.GetTime() + hold) - lastDataIn.GetTime())
+                + " ticks too early (hold=" + hold + ").\n\n"
+                + "The data input must remain stable for at least " + hold + " ticks after the clock edge.");
             return false;
         }
     }
@@ -252,9 +260,9 @@ public class FlipFlop : CircuitComponent, IDelay
 
     public void DelayInit(){
         lastDataIn = new BitToken();
-        GameObject square = DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1);
+        GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
         signalQueue.Add(Tuple.Create(lastDataIn,square));
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 
     public void SetDelay(int delay)
@@ -263,15 +271,10 @@ public class FlipFlop : CircuitComponent, IDelay
         Subscribe();
     }
 
-    public int GetDelay()
-    {
-        return this.delay;
-    }
-
     public void VisualizeDelay(bool on)
     {
         visualizerOn = on;
-        delayVisualizer.SetActive(visualizerOn);
+        if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
         Subscribe();
     }
 
@@ -284,14 +287,20 @@ public class FlipFlop : CircuitComponent, IDelay
     private void Subscribe()
     {
         Dispose();
-        
+
         if(visualizerOn){
             timer.TimerTickEvent += OnTickVisualizeDelay;
         }else if(delay > 0){
-            timer.TimerTickEvent += OnTickDelay;  
+            timer.TimerTickEvent += OnTickDelay;
         }else{
             timer.TimerTickEvent += OnTickNoDelay;
         }
+    }
+
+    [System.Runtime.Serialization.OnDeserialized]
+    internal void OnDeserialized(System.Runtime.Serialization.StreamingContext context)
+    {
+        Subscribe();
     }
 
     //unsubscribe from all event so garbage collector can delete object
@@ -339,6 +348,12 @@ public class FlipFlop : CircuitComponent, IDelay
             }
         }
         return this.hold;
+    }
+
+    public override int GetDelay() { return delay; }
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(clk); inputs.Add(dataIn); outputs.Add(dataOut);
     }
 
     public override void OpenEditor()

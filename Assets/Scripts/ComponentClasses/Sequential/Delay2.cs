@@ -64,15 +64,18 @@ public class Delay2 : CircuitComponent
     //Event: Time tick => sample new input signals and output signal if delay achieved
     private void OnTimerTick(int tick)
     {
+        // Self-initialize if DelayInit was never called (pure-data mode)
+        if (signalQueue.Count == 0) DelayInit();
+
         if (!dataIn.data.EqualsToken(lastDataIn))
         {
             lastDataIn = dataIn.data;
 
             //new input signal => add to queue (signal + square)
-            GameObject square = DelayHandler.NewSquare(0,lastDataIn.ActiveColor(),delayVisualizer,tick);
+            GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(0,lastDataIn.ActiveColor(),delayVisualizer,tick) : null;
             signalQueue.Add(Tuple.Create(lastDataIn,square));
         }
-        
+
         if (signalQueue.Count > 1)
         {
             BitToken nextOut = signalQueue[1].Item1;
@@ -81,17 +84,17 @@ public class Delay2 : CircuitComponent
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
-                dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
+                dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));
                 //set output and remove from signal queue
                 if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
                 signalQueue.RemoveAt(0);
 
             }
-        } 
+        }
 
 
         //Draw each signal delay squares:
-        DelayHandler.DrawSquares(signalQueue,delay,tick);
+        if (delayVisualizer != null) DelayHandler.DrawSquares(signalQueue,delay,tick);
     }
 
     //Event: Restart of the simulation => reset delay element
@@ -103,7 +106,7 @@ public class Delay2 : CircuitComponent
         signalQueue.Clear();
 
         dataIn.SetValue(new BitToken());
-        dataOut.SetValue(new BitToken());
+        dataOut.SetValue(new BitToken(dataOut.width));
         DelayInit();
         
 
@@ -148,8 +151,14 @@ public class Delay2 : CircuitComponent
 
     public void DelayInit(){
         lastDataIn = new BitToken();
-        GameObject square = DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1);
+        GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
         signalQueue.Add(Tuple.Create(lastDataIn,square));
+    }
+
+    public override int GetDelay() { return delay; }
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(dataIn); outputs.Add(dataOut);
     }
 
     public override void OpenEditor()

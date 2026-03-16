@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class DataSourceEditor : MonoBehaviour
 {
-    private DataSource dataSource;   
+    private DataSource dataSource;
     private TMP_InputField inputField;
     private int nBits;
     private GameObject scrollContent;
-    private List<Color> colorScheme;  
     private List<TokenInputField> tokenFields;
     public int tokenCount = 0;
-    private int colorIndex = 0;
 
 
     void Awake()
@@ -27,23 +25,26 @@ public class DataSourceEditor : MonoBehaviour
         //add input event listener:
         inputField.onEndEdit.AddListener(delegate { ParseInput(inputField); });
 
-        
-        colorScheme = new List<Color>();
-        colorScheme.Add(setTransp(Color.green));
-        colorScheme.Add(setTransp(Color.blue));
-        colorScheme.Add(setTransp(Color.yellow));
-        colorScheme.Add(setTransp(Color.cyan));
-        colorScheme.Add(setTransp(Color.magenta));
-        colorScheme.Add(new Color32(0xff,0x88,0x00,0xFF));
-
         tokenFields = new List<TokenInputField>();
     }
 
     public void init(DataSource dataSource)
     {
         this.dataSource = dataSource;
-        foreach(Color c in colorScheme){
-            AddToken();
+
+        // Clear existing UI fields
+        foreach (TokenInputField tf in tokenFields)
+        {
+            if (tf != null) GameObject.Destroy(tf.gameObject);
+        }
+        tokenFields.Clear();
+
+        // Read token data from DataSource and create UI fields
+        List<string> binaries = dataSource.GetTokenBinaries();
+        for (int i = 0; i < binaries.Count; i++)
+        {
+            int colorIndex = i % DataSource.colorScheme.Count;
+            AddTokenField(binaries[i], DataSource.colorScheme[colorIndex], i);
         }
         fillParameters();
     }
@@ -69,41 +70,42 @@ public class DataSourceEditor : MonoBehaviour
         return nBits;
     }
 
-    public void AddToken(){
+    private void AddTokenField(string binary, Color color, int index)
+    {
         //instantiate prefab
         GameObject prefab = Resources.Load("Prefabs/TokenInputField") as GameObject;
-        GameObject TokenInputField = Instantiate(prefab) as GameObject;
-        TokenInputField f = TokenInputField.GetComponent<TokenInputField>();
+        GameObject tokenInputFieldObj = Instantiate(prefab) as GameObject;
+        TokenInputField f = tokenInputFieldObj.GetComponent<TokenInputField>();
 
-        //Init BitToken inputfield
-        if (colorIndex >= colorScheme.Count) colorIndex = 0;
-        f.Init(nBits, colorScheme[colorIndex]);
-        colorIndex++;
+        //Init BitToken inputfield with stored data
+        f.Init(nBits, color, binary, dataSource, index);
         tokenFields.Add(f);
 
         //update content size fitter for newly added prefab:
-        Transform t = TokenInputField.transform;
-        t.SetParent(scrollContent.transform,false);
+        Transform t = tokenInputFieldObj.transform;
+        t.SetParent(scrollContent.transform, false);
         LayoutRebuilder.ForceRebuildLayoutImmediate(t as RectTransform);
-        UpdateContentSizeFitter();    
+        UpdateContentSizeFitter();
+    }
+
+    public void AddToken(){
+        dataSource.AddToken();
+        int index = tokenFields.Count;
+        int colorIndex = index % DataSource.colorScheme.Count;
+        AddTokenField(new string('1', nBits), DataSource.colorScheme[colorIndex], index);
     }
 
     public void RemoveToken(){
+        if (tokenFields.Count == 0) return;
         int lastIndex = tokenFields.Count - 1;
         TokenInputField last = tokenFields[lastIndex];
         tokenFields.RemoveAt(lastIndex);
         GameObject.Destroy(last.gameObject);
-
-        colorIndex--;
-        if(colorIndex < 0)colorIndex = colorScheme.Count-1;
+        dataSource.RemoveToken();
     }
 
     public Token GetNextToken(){
-        if(tokenFields.Count == 0)return null;
-        if(tokenCount >= tokenFields.Count)tokenCount=0;
-        Token token = tokenFields[tokenCount].GetToken();
-        tokenCount++;
-        return token;
+        return dataSource.GetNextToken();
     }
 
     private void UpdateTokenSizes(){
@@ -117,12 +119,4 @@ public class DataSourceEditor : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(t);
 
     }
-
-    private Color32 setTransp(Color c){
-        //Change the transparency of the token colours
-        Color32 b = new Color(c.r,c.g,c.b);
-        b.a = 0xD4;
-        return b;
-    }
-
 }

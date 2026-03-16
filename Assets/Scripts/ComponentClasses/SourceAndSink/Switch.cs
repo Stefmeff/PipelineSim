@@ -93,6 +93,11 @@ public class Switch : CircuitComponent
         throw new System.NotImplementedException();
     }
 
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        outputs.Add(output);
+    }
+
     public override void LoadDelay(GameObject delayVisualizer)
     {
     }

@@ -31,7 +31,8 @@ public class InputPin
 
     public void SetValue(BitToken data)
     {
-        // Width validation at simulation time (width=0 means accept any)
+        // Width validation at simulation time:
+        // - width=0 on pin means accept any width
         if (width > 0 && data.GetWidth() != width)
         {
             InformationWindow.Show(

@@ -46,5 +46,14 @@ public abstract class CircuitComponent
 
     public abstract void Dispose();
 
-    
+    /// <summary>
+    /// Returns the propagation delay of this component (0 if none).
+    /// </summary>
+    public virtual int GetDelay() { return 0; }
+
+    /// <summary>
+    /// Collects all input and output pins of this component into the provided lists.
+    /// Used for graph traversal (e.g., delay path calculation).
+    /// </summary>
+    public virtual void CollectPins(List<InputPin> inputs, List<OutputPin> outputs) { }
 }

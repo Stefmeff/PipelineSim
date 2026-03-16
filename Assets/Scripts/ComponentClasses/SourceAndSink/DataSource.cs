@@ -18,6 +18,21 @@ public class DataSource : CircuitComponent
 
     [JsonProperty] private int nBits = 1;
 
+    // Token data — owned by DataSource, editor is just a view
+    [JsonProperty] private List<string> tokenBinaries = new List<string>();
+
+    [JsonIgnore] public int tokenCount = 0;
+
+    [JsonIgnore] public static readonly List<Color> colorScheme = new List<Color>
+    {
+        SetTransp(Color.green),
+        SetTransp(Color.blue),
+        SetTransp(Color.yellow),
+        SetTransp(Color.cyan),
+        SetTransp(Color.magenta),
+        new Color32(0xff, 0x88, 0x00, 0xFF)
+    };
+
     [JsonIgnore] private TimeTick timer;                //global simulation timer
     [JsonIgnore] private BitToken lastClkIn;
 
@@ -36,9 +51,50 @@ public class DataSource : CircuitComponent
 
         lastClkIn = new BitToken();
 
+        // Init default tokens if empty (one per color)
+        if (tokenBinaries.Count == 0)
+        {
+            for (int i = 0; i < colorScheme.Count; i++)
+            {
+                tokenBinaries.Add(new string('1', nBits));
+            }
+        }
+
         Subscribe();
     }
 
+    /// <summary>
+    /// Gets the next token from the stored data (works with or without editor).
+    /// </summary>
+    public Token GetNextToken()
+    {
+        if (tokenBinaries.Count == 0) return null;
+        if (tokenCount >= tokenBinaries.Count) tokenCount = 0;
+
+        int colorIndex = tokenCount % colorScheme.Count;
+        Token token = new Token(tokenBinaries[tokenCount], colorScheme[colorIndex]);
+        tokenCount++;
+        return token;
+    }
+
+    public List<string> GetTokenBinaries() { return tokenBinaries; }
+
+    public void SetTokenBinary(int index, string binary)
+    {
+        if (index >= 0 && index < tokenBinaries.Count)
+            tokenBinaries[index] = binary;
+    }
+
+    public void AddToken()
+    {
+        tokenBinaries.Add(new string('1', nBits));
+    }
+
+    public void RemoveToken()
+    {
+        if (tokenBinaries.Count > 0)
+            tokenBinaries.RemoveAt(tokenBinaries.Count - 1);
+    }
 
     //Event: new clock input data
     private void OnTimerTick(int tick)
@@ -51,7 +107,7 @@ public class DataSource : CircuitComponent
             lastClkIn = c;
             if(lastClkIn.GetValue() == true){
 
-                Token token = sourceEditor.GetNextToken();
+                Token token = GetNextToken();
                 if(token != null){
                     // Pack token bits into a single n-bit BitToken
                     bool[] values = new bool[nBits];
@@ -71,9 +127,9 @@ public class DataSource : CircuitComponent
     //Event: simulation restart
     public override void Reset()
     {
-        sourceEditor.tokenCount = 0;
+        tokenCount = 0;
         clkIn.SetValue(new BitToken());
-        dataOut.SetValue(new BitToken());
+        dataOut.SetValue(new BitToken(nBits));
     }
 
 
@@ -116,12 +172,23 @@ public class DataSource : CircuitComponent
                 {
                     nBits = value;
                     dataOut.width = nBits;
+
+                    // Resize all token binaries to match new bit width
+                    for (int i = 0; i < tokenBinaries.Count; i++)
+                    {
+                        tokenBinaries[i] = new string('1', nBits);
+                    }
                 }
             }catch{
 
             }
         }
         return nBits;
+    }
+
+    public override void CollectPins(List<InputPin> inputs, List<OutputPin> outputs)
+    {
+        inputs.Add(clkIn); outputs.Add(dataOut);
     }
 
     public override void LoadDelay(GameObject delayVisualizer)
@@ -145,5 +212,12 @@ public class DataSource : CircuitComponent
     public override void OpenEditor()
     {
         editor.SetActive(true);
+    }
+
+    private static Color32 SetTransp(Color c)
+    {
+        Color32 b = new Color(c.r, c.g, c.b);
+        b.a = 0xD4;
+        return b;
     }
 }
