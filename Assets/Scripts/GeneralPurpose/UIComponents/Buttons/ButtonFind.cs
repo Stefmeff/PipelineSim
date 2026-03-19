@@ -21,7 +21,7 @@ public class ButtonFind  : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        projectManager.FindCenter();
+        projectManager.FitCameraToCircuit();
     }
 
 

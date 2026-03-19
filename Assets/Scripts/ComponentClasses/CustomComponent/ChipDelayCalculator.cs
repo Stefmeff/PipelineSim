@@ -1,16 +1,23 @@
 using System.Collections.Generic;
 
-/// <summary>
-/// Calculates the maximum delay path through a custom chip's internal circuit.
-/// Uses topological traversal: starts from ChipInputNodes, propagates max delay
-/// through components via their pin connections, and reads max delay at ChipOutputNodes.
-/// Handles nested custom chips recursively via GetDelay().
-/// </summary>
+/**
+ * @brief Calculates the maximum delay path through a custom chip's internal circuit.
+ *
+ * @details Uses a BFS-based longest-path traversal: starts from ChipInputNodes (delay 0),
+ * propagates cumulative delay through components via their pin connections, and reads
+ * the maximum delay at ChipOutputNodes. Handles nested custom chips recursively via GetDelay().
+ **/
 public static class ChipDelayCalculator
 {
-    /// <summary>
-    /// Calculates the maximum propagation delay across all paths from any input to any output.
-    /// </summary>
+    /**
+     * @brief Calculates the maximum propagation delay across all paths from any input to any output.
+     *
+     * @details Builds an adjacency graph from pin connections, then runs BFS from all
+     * ChipInputNodes simultaneously, tracking the longest path to each component.
+     *
+     * @param[in] components all components in the internal circuit
+     * @return the maximum cumulative delay in ticks from any input to any output
+     **/
     public static int CalculateMaxDelay(List<CircuitComponent> components)
     {
         if (components == null || components.Count == 0) return 0;
@@ -28,8 +35,7 @@ public static class ChipDelayCalculator
             }
         }
 
-        // Step 2: Build adjacency list (component → downstream components)
-        // and collect each component's output pins for traversal
+        // Step 2: Build output pin map for traversal
         Dictionary<CircuitComponent, List<OutputPin>> compOutputs = new Dictionary<CircuitComponent, List<OutputPin>>();
         foreach (CircuitComponent comp in components)
         {
@@ -39,12 +45,11 @@ public static class ChipDelayCalculator
             compOutputs[comp] = outs;
         }
 
-        // Step 3: BFS/longest-path from ChipInputNodes
-        // maxDelay[comp] = the maximum cumulative delay reaching this component's output
+        // Step 3: BFS longest-path from ChipInputNodes
         Dictionary<CircuitComponent, int> maxDelay = new Dictionary<CircuitComponent, int>();
         Queue<CircuitComponent> queue = new Queue<CircuitComponent>();
 
-        // Seed: ChipInputNodes have 0 delay (they're just pass-throughs)
+        // Seed: ChipInputNodes have 0 delay (pass-throughs)
         foreach (CircuitComponent comp in components)
         {
             if (comp is ChipInputNode)
@@ -98,15 +103,20 @@ public static class ChipDelayCalculator
         return result;
     }
 
-    /// <summary>
-    /// Calculates the max delay per output pin (indexed matching chipDef.outputs order).
-    /// Returns an array where each element is the max delay to that output.
-    /// </summary>
+    /**
+     * @brief Calculates the max delay per output pin, indexed matching chipDef.outputs order.
+     *
+     * @details Runs the same BFS longest-path algorithm as CalculateMaxDelay, but returns
+     * per-output results instead of a single maximum.
+     *
+     * @param[in] components all components in the internal circuit
+     * @param[in] outputNodes the ChipOutputNodes in chipDef.outputs order
+     * @return array where element i is the max delay to outputNodes[i]
+     **/
     public static int[] CalculatePerOutputDelay(List<CircuitComponent> components, List<ChipOutputNode> outputNodes)
     {
         if (components == null || outputNodes == null) return new int[0];
 
-        // Run the same algorithm as CalculateMaxDelay
         Dictionary<InputPin, CircuitComponent> pinOwner = new Dictionary<InputPin, CircuitComponent>();
         Dictionary<CircuitComponent, List<OutputPin>> compOutputs = new Dictionary<CircuitComponent, List<OutputPin>>();
 

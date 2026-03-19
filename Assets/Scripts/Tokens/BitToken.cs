@@ -83,13 +83,8 @@ public class BitToken
                 return low;
             }
         }else{
-            // N-bit bus: color if any bit is high, dimmed if all zero, grey if uninitialized
-            if(values.Any(v => v)){
-                return color;
-            }else{
-                // All zeros — dimmed token color
-                return Color.Lerp(low, color, 0.35f);
-            }
+            // N-bit bus: always show token color regardless of bit values
+            return color;
         }
     }
 

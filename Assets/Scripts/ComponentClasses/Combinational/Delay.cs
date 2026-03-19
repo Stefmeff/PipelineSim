@@ -25,7 +25,7 @@ public class Delay : CircuitComponent, IDelay
 
     //DELAY:
     [JsonProperty] private int delay = 0;                    //number of timer-ticks till input gets transferred to output
-    [JsonIgnore] private List<Tuple<BitToken, GameObject>> signalQueue;     //all the signals currently traveling through this delay element
+    [JsonIgnore] private List<SignalEntry> signalQueue;     //all the signals currently traveling through this delay element
     [JsonIgnore] public GameObject delayVisualizer;                         //used for visualizing the delay and the signal transitions on the output
     [JsonProperty] public bool visualizerOn = false;
     [JsonIgnore] private BitToken lastDataIn;
@@ -48,7 +48,7 @@ public class Delay : CircuitComponent, IDelay
         this.dataOut = new OutputPin();
         lastDataIn = new BitToken();
 
-        signalQueue = new List<Tuple<BitToken,GameObject>>();
+        signalQueue = new List<SignalEntry>();
         dataOut.SetValue(new BitToken());
 
         //Get timer reference
@@ -76,20 +76,20 @@ public class Delay : CircuitComponent, IDelay
         BitToken d = dataIn.data;
         if(!d.EqualsToken(lastDataIn)){
             lastDataIn = d.NewToken(d.GetTime());
-            signalQueue.Add(Tuple.Create(lastDataIn,(GameObject)null));
+            signalQueue.Add(new SignalEntry(lastDataIn,(GameObject)null));
         }
 
         if (signalQueue.Count > 1)
         {
 
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -105,19 +105,19 @@ public class Delay : CircuitComponent, IDelay
 
             //add result to queue: 
             GameObject square = DelayHandler.NewSquare(0,lastDataIn.ActiveColor(),delayVisualizer,tick);
-            signalQueue.Add(Tuple.Create(lastDataIn,square));        }
+            signalQueue.Add(new SignalEntry(lastDataIn,square));        }
 
         if (signalQueue.Count > 1)
         {
 
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -131,8 +131,8 @@ public class Delay : CircuitComponent, IDelay
     //Event: Restart of the simulation => reset delay element
     public override void Reset()
     {
-        foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            if(t.Item2 != null) GameObject.Destroy(t.Item2);
+        foreach(SignalEntry t in signalQueue){
+            DelayHandler.ReturnSquare(t.visual);
         }
         signalQueue.Clear();
 
@@ -200,7 +200,7 @@ public class Delay : CircuitComponent, IDelay
     private void DelayInit(){
         lastDataIn = new BitToken();
         GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
-        signalQueue.Add(Tuple.Create(lastDataIn,square));
+        signalQueue.Add(new SignalEntry(lastDataIn,square));
         if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 

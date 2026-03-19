@@ -25,7 +25,7 @@ public class Delay2 : CircuitComponent
 
     //DELAY:
     [JsonProperty] public int delay = 0;                    //number of timer-ticks till input gets transferred to output
-    [JsonIgnore] private List<Tuple<BitToken, GameObject>> signalQueue;     //all the signals currently traveling through this delay element   
+    [JsonIgnore] private List<SignalEntry> signalQueue;     //all the signals currently traveling through this delay element   
     [JsonIgnore] public GameObject delayVisualizer;
 
 
@@ -46,7 +46,7 @@ public class Delay2 : CircuitComponent
         this.dataIn.width = 0; // accept any bit width
         this.dataOut = new OutputPin();
 
-        signalQueue = new List<Tuple<BitToken,GameObject>>();
+        signalQueue = new List<SignalEntry>();
 
         lastDataIn = new BitToken();
 
@@ -73,12 +73,12 @@ public class Delay2 : CircuitComponent
 
             //new input signal => add to queue (signal + square)
             GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(0,lastDataIn.ActiveColor(),delayVisualizer,tick) : null;
-            signalQueue.Add(Tuple.Create(lastDataIn,square));
+            signalQueue.Add(new SignalEntry(lastDataIn,square));
         }
 
         if (signalQueue.Count > 1)
         {
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
@@ -86,7 +86,7 @@ public class Delay2 : CircuitComponent
             {
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
 
             }
@@ -100,8 +100,8 @@ public class Delay2 : CircuitComponent
     //Event: Restart of the simulation => reset delay element
     public override void Reset()
     {
-        foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            if(t.Item2 != null) GameObject.Destroy(t.Item2);
+        foreach(SignalEntry t in signalQueue){
+            DelayHandler.ReturnSquare(t.visual);
         }
         signalQueue.Clear();
 
@@ -152,7 +152,7 @@ public class Delay2 : CircuitComponent
     public void DelayInit(){
         lastDataIn = new BitToken();
         GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
-        signalQueue.Add(Tuple.Create(lastDataIn,square));
+        signalQueue.Add(new SignalEntry(lastDataIn,square));
     }
 
     public override int GetDelay() { return delay; }

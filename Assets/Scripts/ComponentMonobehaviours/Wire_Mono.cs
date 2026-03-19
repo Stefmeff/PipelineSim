@@ -10,38 +10,68 @@ using UnityEngine;
 [RequireComponent(typeof(EdgeCollider2D))]
 
 /**
- * This class is used for drawing wires
- */
+ * @brief MonoBehaviour responsible for drawing and updating wires in the circuit.
+ *
+ * @details Wires are rendered as Bezier curves between a source pin, optional knots,
+ * and a sink pin using a LineRenderer. A dirty flag system ensures that the expensive
+ * Bezier geometry rebuild only runs when a pin or knot has actually moved, rather than
+ * every frame unconditionally.
+ *
+ * Multi-bit (bus) wires display a slash notation with bit width label at the midpoint
+ * of the first segment. Bus label properties are cached to avoid redundant TMP updates.
+ **/
 public class Wire_Mono : MonoBehaviour, IObjectMono
 {
-    private Wire wire;   //Main Wire Object that stores the state of this GameObject
+    private Wire wire;   /**< main Wire data object that stores the state of this GameObject */
 
-    private Transform sourcePin;
-    private Transform sinkPin;
-    private List<Knot_Mono> knots;
+    private Transform sourcePin;   /**< transform of the wire's source (OutputPin) */
+    private Transform sinkPin;     /**< transform of the wire's sink (InputPin) */
+    private List<Knot_Mono> knots; /**< visual knot MonoBehaviours along the wire */
     private PinConnectionHandler connectionHandler;
 
-    //variables used for initializing wire connection
-    private bool draw = false;
+    private bool draw = false;       /**< true while the user is actively drawing/creating this wire */
     private Transform mouseTransform;
 
     public GameObject knotPrefab;
 
-    //line renderer and edge collider for drawing the wire
-    private UnityEngine.LineRenderer lineRend;
-    private EdgeCollider2D edgeColl;
-    
+    private UnityEngine.LineRenderer lineRend; /**< LineRenderer component for drawing the wire curve */
+    private EdgeCollider2D edgeColl;           /**< EdgeCollider2D for mouse interaction (hover, click) */
+
     private Vector2 lastMousePos;
 
     private ProjectManager projectManager;
     private Camera cam;
 
-    // Bus notation
+    /**
+     * @name Dirty flag system
+     * @brief Prevents the expensive Bezier rebuild from running every frame.
+     *
+     * @details Each frame, the cached positions of source, sink and knots are compared
+     * against their current transforms. If nothing moved, UpdateLineRenderer() is skipped entirely.
+     * During wire creation (draw mode), the wire is always dirty since the mouse moves every frame.
+     * @{
+     **/
+    private bool dirty = true;                                        /**< if true, geometry needs rebuild */
+    private Vector3 cachedSourcePos;                                  /**< last known source pin position */
+    private Vector3 cachedSinkPos;                                    /**< last known sink pin position */
+    private List<Vector3> cachedKnotPositions = new List<Vector3>();   /**< last known knot positions */
+    /** @} */
+
+    /**
+     * @name Bus label cache
+     * @brief Avoids redundant TMP property assignments that trigger internal layout work.
+     * @{
+     **/
+    private Color cachedWireColor;   /**< last wire color applied to the LineRenderer */
+    private string cachedBusText;    /**< last bit width string written to the TMP label */
+    private Color cachedBusColor;    /**< last color applied to the bus slash and text */
+    /** @} */
+
+    // Bus notation GameObjects
     private GameObject busLabel;
     private TextMeshPro busText;
     private LineRenderer slashLine;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         //add to project:
@@ -63,9 +93,16 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         knots = new List<Knot_Mono>();
     }
 
+    /**
+     * @brief Initializes the wire visual from a Wire data object.
+     *
+     * @details Loads all knot GameObjects, stores pin transforms, and subscribes
+     * to the wire's destruct event. Marks the wire as dirty so it renders on the next frame.
+     *
+     * @param[in] wire the Wire data object containing pin references and knot list
+     **/
     public void Init(Wire wire)
     {
-        //init wire and knots
         this.wire = wire;
 
         if(wire.dataIn != null) sourcePin = wire.dataIn.transform;
@@ -73,14 +110,12 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
 
         foreach(Knot k in wire.knots)
         {
-            //load eacht knot
             Knot_Mono m = (Knot_Mono)k.Load();
             knots.Add(m);
         }
 
         this.wire.DestructEvent += Clear;
-
-        //string jsonString = JsonConvert.SerializeObject(wire, settings);
+        dirty = true;
     }
 
     public CircuitComponent GetMain()
@@ -120,17 +155,82 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         if (busLabel != null) Destroy(busLabel);
     }
 
-    // Update is called once per frame
+    /**
+     * @brief Per-frame update: checks dirty flag and rebuilds wire geometry only when needed.
+     *
+     * @details The update performs three checks in order:
+     * 1. If in draw mode, the wire is always dirty (mouse position changes every frame).
+     * 2. If not dirty, compares source/sink/knot positions against cached values.
+     *    Any mismatch sets dirty = true.
+     * 3. If the wire's signal color changed, updates the LineRenderer colors and marks dirty
+     *    (so the bus label color is also refreshed).
+     *
+     * Only when dirty is true does the expensive UpdateLineRenderer() (Bezier rebuild) run.
+     * Afterwards, positions are cached and dirty is reset to false.
+     **/
     private void Update()
     {
-        lineRend.startColor = wire.coloring;
-        lineRend.endColor = wire.coloring;
+        if (wire == null || sourcePin == null) return;
 
+        // Always dirty during wire creation (mouse moves every frame)
+        if (draw)
+        {
+            dirty = true;
+            drawWire();
+        }
 
-        //=>make that update only happens when knot is moved
-        UpdateLineRenderer();
+        // Check if source or sink moved
+        if (!dirty)
+        {
+            if (sourcePin.position != cachedSourcePos) dirty = true;
+            else if (sinkPin != null && sinkPin.position != cachedSinkPos) dirty = true;
+            else
+            {
+                // Check if any knot moved
+                for (int i = 0; i < wire.knots.Count; i++)
+                {
+                    Vector3 knotPos = wire.knots[i].transform.position;
+                    if (i >= cachedKnotPositions.Count || knotPos != cachedKnotPositions[i])
+                    {
+                        dirty = true;
+                        break;
+                    }
+                }
+                if (wire.knots.Count != cachedKnotPositions.Count) dirty = true;
+            }
+        }
 
-        if (draw) drawWire();
+        // Update wire color (cheap — only set when changed)
+        if (wire.coloring != cachedWireColor)
+        {
+            cachedWireColor = wire.coloring;
+            lineRend.startColor = wire.coloring;
+            lineRend.endColor = wire.coloring;
+            dirty = true; // color change affects bus label too
+        }
+
+        if (dirty)
+        {
+            UpdateLineRenderer();
+            CachePositions();
+            dirty = false;
+        }
+    }
+
+    /**
+     * @brief Caches the current positions of source, sink and all knots
+     * for dirty-checking on the next frame.
+     **/
+    private void CachePositions()
+    {
+        cachedSourcePos = sourcePin.position;
+        if (sinkPin != null) cachedSinkPos = sinkPin.position;
+
+        cachedKnotPositions.Clear();
+        foreach (Knot knot in wire.knots)
+        {
+            cachedKnotPositions.Add(knot.transform.position);
+        }
     }
 
 
@@ -140,11 +240,17 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         draw = true;
     }
 
+    /**
+     * @brief Handles mouse input during wire creation (draw mode).
+     *
+     * @details Left click on a compatible pin completes the connection. Left click
+     * on empty space adds a knot. Right click aborts wire creation and destroys the wire.
+     * Holding Ctrl during connection aligns the target component to the wire endpoint.
+     **/
     private void drawWire()
     {
         if (Input.GetMouseButtonDown(0))
         {
-           //right mouse click...
             if (connectionHandler.possibleConnection != null)
             {
                 //output pin selected:
@@ -152,14 +258,12 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
 
                 //if ctrl: align connected pin
                 if(Input.GetKey(KeyCode.LeftControl)){
-                    //calculate direction of movement
                     Vector2 pinPos = wire.dataOut.transform.position;
                     Vector2 direction = lastMousePos - pinPos;
 
-                    //get parent parent object of pin and move
                     Transform parent = wire.dataOut.transform.parent;
                     Vector2 parentPosition = parent.position;
-                    parent.transform.position = parentPosition + direction; 
+                    parent.transform.position = parentPosition + direction;
                 }
                 connectionHandler.possibleConnection.connectWire(wire);
                 draw = false;
@@ -181,7 +285,13 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
     }
 
 
-   //updates the points of the line renderer
+    /**
+     * @brief Rebuilds the wire's Bezier curve geometry and updates the LineRenderer.
+     *
+     * @details Collects control points (source -> knots -> sink/mouse), then for each
+     * segment either draws a straight line (if axis-aligned) or a cubic Bezier curve
+     * with L-shaped control points. Also updates the bus notation label for multi-bit wires.
+     **/
     private void UpdateLineRenderer()
     {
         // Collect all control points in order: source -> knots -> sink/mouse
@@ -201,7 +311,7 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
                 if(wire.knots.Count == 0){
                     knotPos = wire.dataIn.transform.position;
                 }else{
-                    knotPos = wire.knots.Last().transform.position;
+                    knotPos = wire.knots[wire.knots.Count - 1].transform.position;
                 }
                 lastMousePos = fixedAngle(knotPos, lastMousePos);
             }
@@ -266,6 +376,15 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         UpdateBusLabel(controlPoints);
     }
 
+    /**
+     * @brief Updates the bus notation label (slash + bit width) for multi-bit wires.
+     *
+     * @details Only shown for wires with width > 1. The slash is positioned perpendicular
+     * to the wire direction at the first segment's midpoint. Text and color properties
+     * are cached and only updated when they actually change, avoiding redundant TMP work.
+     *
+     * @param[in] controlPoints the wire's control points (source, knots, sink)
+     **/
     private void UpdateBusLabel(List<Vector3> controlPoints)
     {
         int width = wire.dataIn != null ? wire.dataIn.width : 1;
@@ -318,7 +437,14 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         }
 
         busLabel.transform.position = midpoint;
-        busText.text = width.ToString();
+
+        // Only update TMP text when bit width actually changes
+        string widthStr = width.ToString();
+        if (cachedBusText != widthStr)
+        {
+            cachedBusText = widthStr;
+            busText.text = widthStr;
+        }
 
         // Position slash perpendicular to wire direction
         float angle = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
@@ -330,18 +456,25 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         slashLine.SetPosition(1, midpoint + slashDir * slashSize);
         slashLine.startWidth = 1f;
         slashLine.endWidth = 1f;
-        slashLine.startColor = wire.coloring;
-        slashLine.endColor = wire.coloring;
+
+        // Only update bus colors when wire color actually changes
+        if (cachedBusColor != wire.coloring)
+        {
+            cachedBusColor = wire.coloring;
+            slashLine.startColor = wire.coloring;
+            slashLine.endColor = wire.coloring;
+            busText.color = wire.coloring;
+        }
 
         // Position text above the slash
         Vector3 perpendicular = new Vector3(-tangent.y, tangent.x, 0);
         float textOffset = 5.5f;
         busText.transform.position = midpoint + perpendicular * textOffset;
-        busText.fontSize = 30f;
-        busText.fontStyle = TMPro.FontStyles.Bold;
-        busText.color = wire.coloring;
     }
 
+    /**
+     * @brief Creates the bus notation GameObjects (slash line + text label) on first use.
+     **/
     private void CreateBusLabel()
     {
         busLabel = new GameObject("BusLabel");
@@ -366,22 +499,54 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         textObj.transform.SetParent(busLabel.transform);
         busText = textObj.AddComponent<TextMeshPro>();
         busText.alignment = TextAlignmentOptions.Center;
+        busText.fontSize = 30f;
+        busText.fontStyle = TMPro.FontStyles.Bold;
         busText.color = busNotationColor;
         busText.sortingOrder = 10;
     }
 
+    /**
+     * @brief Computes the derivative of a cubic Bezier curve at parameter t.
+     *
+     * @param[in] p0 start point
+     * @param[in] p1 first control point
+     * @param[in] p2 second control point
+     * @param[in] p3 end point
+     * @param[in] t parameter (0..1)
+     * @return tangent vector at t
+     **/
     private Vector3 CubicBezierDerivative(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
         float u = 1f - t;
         return 3f * u * u * (p1 - p0) + 6f * u * t * (p2 - p1) + 3f * t * t * (p3 - p2);
     }
 
+    /**
+     * @brief Evaluates a cubic Bezier curve at parameter t.
+     *
+     * @param[in] p0 start point
+     * @param[in] p1 first control point
+     * @param[in] p2 second control point
+     * @param[in] p3 end point
+     * @param[in] t parameter (0..1)
+     * @return point on the curve at t
+     **/
     private Vector3 CubicBezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
     {
         float u = 1f - t;
         return u * u * u * p0 + 3f * u * u * t * p1 + 3f * u * t * t * p2 + t * t * t * p3;
     }
 
+    /**
+     * @brief Snaps the destination point to the nearest axis-aligned angle relative to origin.
+     *
+     * @details Used during wire creation when Ctrl is held. Constrains the mouse position
+     * to horizontal or vertical alignment with the previous knot/source.
+     *
+     * @param[in] origin reference point (last knot or source pin)
+     * @param[in] dest raw mouse position
+     * @return axis-snapped destination
+     **/
     private Vector2 fixedAngle(Vector2 origin, Vector2 dest){
         float angle = CalcAngle(origin,dest);
 
@@ -392,7 +557,7 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         }
         else if(angle >= -115 && angle <= -65)
         {
-            dest.x = origin.x; 
+            dest.x = origin.x;
         }
         else if(angle >= 155 || angle <= -155)
         {
@@ -400,31 +565,46 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         }
         return dest;
     }
-    
 
+
+    /**
+     * @brief Calculates the angle in degrees between two 2D points.
+     *
+     * @param[in] pos1 first point
+     * @param[in] pos2 second point
+     * @return angle in degrees (-180..180)
+     **/
     private float CalcAngle(Vector2 pos1, Vector2 pos2){
         Vector2 direction = pos2 - pos1;
         float angle = Mathf.Atan2(direction.y,direction.x) * Mathf.Rad2Deg;
         return angle;
     }
 
+    /**
+     * @brief Adds a knot at the current mouse position during wire creation.
+     *
+     * @details The knot is snapped to the grid, instantiated from the knot prefab,
+     * and added to both the visual knots list and the Wire data object.
+     **/
     private void addKnot()
     {
-        //instantiate OutputPin Prefab:
         Vector3 snappedPos = GridSnap.Snap(new Vector3(lastMousePos.x, lastMousePos.y, 0));
         GameObject o = Instantiate(knotPrefab, snappedPos, Quaternion.identity);
         Knot_Mono knot = o.GetComponent<Knot_Mono>();
         knots.Add(knot);
 
-        //init with new Knot object:
         Knot pin = new Knot(wire.dataIn);
         knot.Init(pin);
 
-        //add knot to wire
         this.wire.addKnot(pin);
     }
 
-    //updates the points of the edge collider
+    /**
+     * @brief Updates the EdgeCollider2D points to match the current LineRenderer path.
+     *
+     * @details This enables mouse interaction (hover highlight, click detection) along
+     * the wire's rendered curve.
+     **/
     private void UpdateEdgeCollider()
     {
         Vector3 linePos = lineRend.transform.position;

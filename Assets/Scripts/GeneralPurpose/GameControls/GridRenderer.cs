@@ -78,8 +78,8 @@ public class GridRenderer : MonoBehaviour
         float gridSize = baseGridSize;
         while (height / gridSize > maxLinesPerAxis) gridSize *= 2f;
 
-        // Update snap to match visible grid
-        GridSnap.gridSize = gridSize;
+        // Snap always uses base grid size so components stay aligned at all zoom levels
+        GridSnap.gridSize = baseGridSize;
 
         float startX = Mathf.Floor((camPos.x - width / 2f) / gridSize) * gridSize;
         float endX = Mathf.Ceil((camPos.x + width / 2f) / gridSize) * gridSize;

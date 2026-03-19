@@ -43,8 +43,9 @@ public class TimeTick : MonoBehaviour
     private TMP_InputField InputStepSize;               //input field for stepSize
     private ButtonPause pauseButton;
 
-    private int slowCounter = 0;                    //counter => how many times was program slower than target simulation time                     
+    private int slowCounter = 0;                    //counter => how many times was program slower than target simulation time
     private int fastCounter = 0;                    //counter => how many times was program faster than target simulation time
+    private float lastDisplayedSpeed = -1f;          //cached value to avoid redundant string updates
 
 
     void Awake()
@@ -142,7 +143,7 @@ public class TimeTick : MonoBehaviour
                 if(10f >= value && value >= 0.001f){
                 tickTimerMax = value;
                 targetSimulationTime = value;
-                InputSimulationSpeed.text = tickTimerMax + " sec"; 
+                UpdateSpeedDisplay();
                 slowCounter = 0;
                 fastCounter = 0;
                 restart();
@@ -153,7 +154,7 @@ public class TimeTick : MonoBehaviour
             }
         }
         //empty => keep old parameters
-        InputSimulationSpeed.text = tickTimerMax + " sec"; 
+        UpdateSpeedDisplay();
     }
     
     void LockInputStep(TMP_InputField input)
@@ -172,12 +173,11 @@ public class TimeTick : MonoBehaviour
     private void AdaptSimulationTime(){
         if(Time.deltaTime > targetSimulationTime){
             //elapsed time larger than target time => slow down timer
-            //AdaptSimulationTime();
             if(Time.deltaTime > tickTimerMax){
                 slowCounter++;
                 if(slowCounter >= 15){
                     tickTimerMax = (float)Math.Round(tickTimerMax+0.001f,3);
-                    InputSimulationSpeed.text = tickTimerMax + " sec"; 
+                    UpdateSpeedDisplay();
                     slowCounter = 0;
                 }
             }
@@ -188,10 +188,17 @@ public class TimeTick : MonoBehaviour
                 slowCounter--;
                 if(fastCounter >= 50){
                     tickTimerMax = (float)Math.Round(tickTimerMax-0.001f,3);
-                    InputSimulationSpeed.text = tickTimerMax + " sec"; 
+                    UpdateSpeedDisplay();
                     fastCounter=0;
                 }
             }
+        }
+    }
+
+    private void UpdateSpeedDisplay(){
+        if (InputSimulationSpeed != null && tickTimerMax != lastDisplayedSpeed){
+            lastDisplayedSpeed = tickTimerMax;
+            InputSimulationSpeed.text = tickTimerMax + " sec";
         }
     }
 }

@@ -26,6 +26,13 @@ public class CameraZoom : MonoBehaviour
         projectManager = o.GetComponent<ProjectManager>();
     }
 
+    public void SetZoom(float newZoom)
+    {
+        zoom = Mathf.Clamp(newZoom, minZoom, maxZoom);
+        cam.orthographicSize = zoom;
+        velocity = 0f;
+    }
+
     private void Update()
     {
         if(projectManager.zoomActive){

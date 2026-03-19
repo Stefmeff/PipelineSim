@@ -8,17 +8,17 @@ using UnityEngine;
  */
 public class MouseTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
     public new Transform transform;
+    private Camera cam;
 
     void Start()
     {
         transform = this.GetComponent<Transform>();
+        cam = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 }

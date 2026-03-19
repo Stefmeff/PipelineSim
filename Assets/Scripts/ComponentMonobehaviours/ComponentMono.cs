@@ -22,7 +22,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     [SerializeField] private InputPin_Mono[] inPins = new InputPin_Mono[]{};
     [SerializeField] private OutputPin_Mono[] outPins = new OutputPin_Mono[]{};
 
-    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode, CustomChip, Splitter, Merger};
+    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode, CustomChip, Splitter, Merger, MUX};
     private GameObject delayVisualizer;
     private GameObject ErrorMessage;
     private ProjectManager projectManager;
@@ -117,6 +117,10 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 merger.LoadEditor();
                 merger.BuildVisual(this.gameObject);
                 return merger;
+            case componentType.MUX:
+                MUX mux = new MUX();
+                mux.BuildVisual(this.gameObject);
+                return mux;
 
         }
         return null;
@@ -167,6 +171,9 @@ public class ComponentMono : MonoBehaviour, IObjectMono
             case Merger:
                 ((Merger)component).LoadEditor();
                 ((Merger)component).BuildVisual(this.gameObject);
+                break;
+            case MUX:
+                ((MUX)component).BuildVisual(this.gameObject);
                 break;
         }
     }

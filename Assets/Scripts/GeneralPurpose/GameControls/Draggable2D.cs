@@ -23,6 +23,9 @@ public class Draggable2D : MonoBehaviour
     private CameraMouseDrag camDrag;
     private SelectCtrl selector; //opens component editor on left click
     private ProjectManager projectManager;
+    private Camera cam;
+    private static Texture2D dragCursor;
+    private static Vector2 dragHotspot;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,7 @@ public class Draggable2D : MonoBehaviour
         //init variable for animation:
         transform = this.GetComponent<Transform>();
         originalScale = transform.localScale;
-        animateScale = originalScale * 1.1f;
+        animateScale = originalScale * 1.03f;
 
         //init background canvas to disable "world drag" when "object drag"
         GameObject o = GameObject.FindWithTag("BackgroundCanvas");
@@ -44,14 +47,23 @@ public class Draggable2D : MonoBehaviour
         o = GameObject.FindGameObjectWithTag("ProjectManager");
         projectManager = o.GetComponent<ProjectManager>();
 
+        cam = Camera.main;
+
+        if (dragCursor == null)
+        {
+            dragCursor = Resources.Load<Texture2D>("Art/Cursors/drag");
+            if (dragCursor != null)
+                dragHotspot = new Vector2(dragCursor.width / 2f, dragCursor.height / 2f);
+        }
     }
 
 
     public void OnMouseDrag()
     {
         camDrag.camDragOn = false;
+        Cursor.SetCursor(dragCursor, dragHotspot, CursorMode.Auto);
         if(projectManager.dragActive){
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
             // Interface pins: only update Y via pinLock
             InterfacePinLock pinLock = GetComponent<InterfacePinLock>();
@@ -69,6 +81,7 @@ public class Draggable2D : MonoBehaviour
     public void OnMouseUp()
     {
         camDrag.camDragOn = true;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
         InterfacePinLock pinLock = GetComponent<InterfacePinLock>();
         if (pinLock != null)

@@ -22,7 +22,7 @@ public class MullerC : CircuitComponent, IDelay
 
     //DELAY:
     [JsonProperty] private int delay = 0;                                    //number of timer-ticks till input gets transferred to output 
-    [JsonIgnore] private List<Tuple<BitToken, GameObject>> signalQueue;        //all the signals currently traveling through this delay element
+    [JsonIgnore] private List<SignalEntry> signalQueue;        //all the signals currently traveling through this delay element
     [JsonIgnore] public GameObject delayVisualizer;                         //used for visualizing the delay and the signal transitions on the output
     [JsonProperty] public bool visualizerOn = false;
 
@@ -47,7 +47,7 @@ public class MullerC : CircuitComponent, IDelay
 
 
         lastResult = new BitToken();
-        signalQueue = new List<Tuple<BitToken,GameObject>>();
+        signalQueue = new List<SignalEntry>();
 
 
         //subscribe to Timer events:
@@ -100,21 +100,21 @@ public class MullerC : CircuitComponent, IDelay
                 BitToken last = (A.GetTime() >= B.GetTime()) ? A : B;
                 BitToken lastResult = new BitToken(last.GetValue(),last.GetTime(),last.TokenColor());
 
-                signalQueue.Add(Tuple.Create(lastResult,(GameObject)null));
+                signalQueue.Add(new SignalEntry(lastResult,(GameObject)null));
             }
         }
 
         if (signalQueue.Count > 1)
         {
 
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -142,7 +142,7 @@ public class MullerC : CircuitComponent, IDelay
 
                 //add result to queue: 
                 GameObject square = DelayHandler.NewSquare(0,lastResult.ActiveColor(),delayVisualizer,tick);
-                signalQueue.Add(Tuple.Create(lastResult,square));
+                signalQueue.Add(new SignalEntry(lastResult,square));
             }
         }
 
@@ -150,14 +150,14 @@ public class MullerC : CircuitComponent, IDelay
         if (signalQueue.Count > 1)
         {
 
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -171,8 +171,8 @@ public class MullerC : CircuitComponent, IDelay
     public override void Reset(){
         lastResult = new BitToken();
         //delete delay visualization
-        foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            if(t.Item2 != null) GameObject.Destroy(t.Item2);
+        foreach(SignalEntry t in signalQueue){
+            DelayHandler.ReturnSquare(t.visual);
         }
         signalQueue.Clear();
 
@@ -236,7 +236,7 @@ public class MullerC : CircuitComponent, IDelay
     public void DelayInit(){
         lastResult = new BitToken();
         GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastResult.ActiveColor(),delayVisualizer,1) : null;
-        signalQueue.Add(Tuple.Create(lastResult,square));
+        signalQueue.Add(new SignalEntry(lastResult,square));
         if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 

@@ -122,13 +122,43 @@ public class ProjectManager : MonoBehaviour
     * */
     public void LoadWorld(string jsonString)
     {
+        List<CircuitComponent> elements;
+        try
+        {
+            elements = JsonConvert.DeserializeObject<List<CircuitComponent>>(jsonString, settings);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to deserialize circuit: " + e.Message);
+            InformationWindow.Show("Failed to Load Circuit",
+                "The circuit file could not be read. It may be corrupted or from an incompatible version.\n\n"
+                + e.Message);
+            return;
+        }
 
-        List<CircuitComponent> elements = JsonConvert.DeserializeObject<List<CircuitComponent>>(jsonString, settings);
+        if (elements == null)
+        {
+            InformationWindow.Show("Failed to Load Circuit",
+                "The circuit file is empty or could not be parsed.");
+            return;
+        }
 
         foreach (CircuitComponent l in elements)
         {
-            l.Load();
+            try
+            {
+                l.Load();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Failed to load component: " + l.GetType().Name + " — " + e.Message);
+                InformationWindow.Show("Failed to Load Component",
+                    "A component of type \"" + l.GetType().Name + "\" could not be loaded.\n\n"
+                    + e.Message);
+            }
         }
+
+        FitCameraToCircuit();
     }
 
     //save project to json file
@@ -155,26 +185,63 @@ public class ProjectManager : MonoBehaviour
         }
     }
 
-    //Finds the coordinate center of all the game elements
-    public void FindCenter(){
-        float xSum = 0;
-        float ySum = 0;
-        float dotCount = 0;
+    //Centers camera on all game elements and adjusts zoom so everything is visible
+    public void FitCameraToCircuit(){
+        if (gameElements.Count == 0) return;
+
+        //compute bounding box of all elements
+        float minX = float.MaxValue, maxX = float.MinValue;
+        float minY = float.MaxValue, maxY = float.MinValue;
 
         foreach(IObjectMono o in gameElements)
         {
-            dotCount ++;
-            xSum += ((MonoBehaviour)o).gameObject.transform.position.x;
-            ySum += ((MonoBehaviour)o).gameObject.transform.position.y;
+            Vector3 p = ((MonoBehaviour)o).gameObject.transform.position;
+            if (p.x < minX) minX = p.x;
+            if (p.x > maxX) maxX = p.x;
+            if (p.y < minY) minY = p.y;
+            if (p.y > maxY) maxY = p.y;
         }
 
-        if(dotCount > 0){
-            xSum = xSum / dotCount;
-            ySum = ySum / dotCount;
+        //compute zoom to fit all elements with padding
+        float padding = 40f;
+        float width = maxX - minX + padding;
+        float height = maxY - minY + padding;
+
+        //the sandbox area is bounded by UI panels:
+        // - left sidebar (ScrollBackground): 0 to 16.25% of screen width
+        // - top menu bar (MenuArea): 91.5% to 100% of screen height
+        // so the visible sandbox occupies the remaining fraction of the full camera view
+        float visibleFractionX = 1f - 0.1625f;  // 83.75% of screen width
+        float visibleFractionY = 0.915f;         // 91.5% of screen height
+
+        //orthographicSize controls half the vertical world extent across the FULL screen,
+        //but only visibleFraction of that is actually visible in the sandbox area
+        float zoomForHeight = height / (2f * visibleFractionY);
+        float zoomForWidth = width / (2f * visibleFractionX * Camera.main.aspect);
+
+        //offset the camera center so the circuit is centered in the sandbox area, not the full screen
+        //the sandbox midpoint in normalized screen coords:
+        //  X: (0.1625 + 1.0) / 2 = 0.58125  (shifted right from 0.5)
+        //  Y: (0.0 + 0.915) / 2 = 0.4575    (shifted down from 0.5)
+        float cx = (minX + maxX) / 2f;
+        float cy = (minY + maxY) / 2f;
+        float targetZoom = Mathf.Max(zoomForHeight, zoomForWidth);
+
+        //convert the screen-center offset to world units
+        //full camera view spans orthographicSize*2 vertically and orthographicSize*2*aspect horizontally
+        float offsetX = (0.58125f - 0.5f) * targetZoom * 2f * Camera.main.aspect;
+        float offsetY = (0.4575f - 0.5f) * targetZoom * 2f;
+        Camera.main.transform.position = new Vector3(cx - offsetX, cy - offsetY, -10);
+
+        CameraZoom cameraZoom = Camera.main.GetComponent<CameraZoom>();
+        if (cameraZoom != null)
+        {
+            cameraZoom.SetZoom(targetZoom);
         }
-
-
-        Camera.main.transform.position = new Vector3(xSum,ySum,-10);
+        else
+        {
+            Camera.main.orthographicSize = targetZoom;
+        }
     }
 
 

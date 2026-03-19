@@ -131,6 +131,16 @@ public class ChipEditorManager : MonoBehaviour
 
         chipDefinition.internalCircuit = projectManager.SaveWorld();
 
+        // Check for circular dependencies before saving
+        string cycle = chipDefinition.CheckCircularDependency(chipDefinition.name);
+        if (cycle != null)
+        {
+            Debug.LogWarning(cycle);
+            InformationWindow.Show("Circular Dependency",
+                "Cannot save: this chip contains itself through nested chips.");
+            return;
+        }
+
         // Calculate max delay from internal circuit
         chipDefinition.delay = CalculateChipDelay(chipDefinition.internalCircuit);
         Debug.Log("Chip delay: " + chipDefinition.delay);
@@ -145,6 +155,17 @@ public class ChipEditorManager : MonoBehaviour
         {
             // Use the filename (without extension) as the chip name
             chipDefinition.name = System.IO.Path.GetFileNameWithoutExtension(path);
+
+            // Re-check circular dependency with the final filename
+            string fileCycle = chipDefinition.CheckCircularDependency(chipDefinition.name);
+            if (fileCycle != null)
+            {
+                Debug.LogWarning(fileCycle);
+                InformationWindow.Show("Circular Dependency",
+                    "Cannot save: this chip contains itself through nested chips.");
+                return;
+            }
+
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(chipDefinition, new Newtonsoft.Json.JsonSerializerSettings
             {
                 PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects,

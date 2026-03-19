@@ -3,10 +3,10 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 
-/// <summary>
-/// Attached to the UI pin bar image. On left-click spawns a world-space pin prefab
-/// at the clicked Y position, locked to the bar edge's X coordinate.
-/// </summary>
+/**
+ * @brief Attached to the UI pin bar image. On left-click spawns a world-space pin prefab
+ * at the clicked Y position, locked to the bar edge's X coordinate.
+ **/
 public class PinBarClickHandler : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private int maxPins = 8;

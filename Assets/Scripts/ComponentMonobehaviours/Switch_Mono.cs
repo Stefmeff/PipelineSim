@@ -29,6 +29,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
     //variable for ctrl
     private CameraMouseDrag camDrag;
     private SelectCtrl selector;
+    private Camera cam;
 
 
     // Start is called before the first frame update
@@ -43,7 +44,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
         //init variable for animation:
         transform = this.GetComponent<Transform>();
         originalScale = transform.localScale;
-        animateScale = originalScale * 1.1f;
+        animateScale = originalScale * 1.03f;
         animationOn = this.transform.GetChild(3).gameObject;
         animationOff = this.transform.GetChild(4).gameObject;
 
@@ -55,6 +56,8 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
         //init SelectCtrl to steer object => Delete, Rotate,...
         o = GameObject.FindWithTag("Selector");
         selector = o.GetComponent<SelectCtrl>();
+
+        cam = Camera.main;
 
         this.s = new Switch();
         s.UpdateAnimationEvent += UpdateAnimation;
@@ -130,7 +133,7 @@ public class Switch_Mono : MonoBehaviour, IObjectMono
 
     private void OnMouseDrag()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (projectManager.dragActive && drag)
         {
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);

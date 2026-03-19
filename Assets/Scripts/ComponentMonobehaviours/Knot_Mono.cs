@@ -21,6 +21,7 @@ public class Knot_Mono : MonoBehaviour
     private CameraMouseDrag camDrag;
 
     private ProjectManager projectManager;
+    private Camera cam;
 
     private bool drag = false;
 
@@ -41,6 +42,8 @@ public class Knot_Mono : MonoBehaviour
 
         o = GameObject.FindGameObjectWithTag("ProjectManager");
         projectManager = o.GetComponent<ProjectManager>();
+
+        cam = Camera.main;
 
         if (knot != null)
         {
@@ -92,7 +95,7 @@ public class Knot_Mono : MonoBehaviour
     private void OnMouseDrag()
     {
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         if (projectManager.dragActive && drag)
         {
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);

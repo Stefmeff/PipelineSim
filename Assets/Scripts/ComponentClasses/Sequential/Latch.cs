@@ -28,7 +28,7 @@ public class Latch : CircuitComponent , IDelay
     [JsonProperty] private int delay = 0;        //delay
 
     //DELAY VISUALIZATION:
-    [JsonIgnore] private List<Tuple<BitToken, GameObject>> signalQueue;        //all the signals currently traveling through this delay element
+    [JsonIgnore] private List<SignalEntry> signalQueue;        //all the signals currently traveling through this delay element
     [JsonIgnore] public GameObject delayVisualizer;                         //used for visualizing the delay and the signal transitions on the output
     [JsonProperty] public bool visualizerOn = false;    
     [JsonIgnore] private TimeTick timer;                                    //global simulation timer
@@ -57,7 +57,7 @@ public class Latch : CircuitComponent , IDelay
         this.dataIn.width = 0; // accept any bit width
         this.dataOut = new OutputPin();
 
-        signalQueue = new List<Tuple<BitToken,GameObject>>();
+        signalQueue = new List<SignalEntry>();
 
         //subscribe to Timer events:
         GameObject o = GameObject.FindWithTag("Timer");
@@ -107,13 +107,13 @@ public class Latch : CircuitComponent , IDelay
 
             if(c.GetValue() == true){
                 int newTime = Math.Max(c.GetTime(), d.GetTime());
-                signalQueue.Add(Tuple.Create(d.NewToken(newTime),(GameObject)null));
+                signalQueue.Add(new SignalEntry(d.NewToken(newTime),(GameObject)null));
             }else{
                 if(d.GetTime() <= c.GetTime()){
                     //sample:
                     if(CheckSetup()){
                         storedData = d.NewToken(d.GetTime());
-                        signalQueue.Add(Tuple.Create(storedData,(GameObject)null));
+                        signalQueue.Add(new SignalEntry(storedData,(GameObject)null));
                     }
                 }else{
                     //no sampling => check hold time
@@ -125,14 +125,14 @@ public class Latch : CircuitComponent , IDelay
         if (signalQueue.Count > 1)
         {
 
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -153,7 +153,7 @@ public class Latch : CircuitComponent , IDelay
                 int newTime = Math.Max(c.GetTime(), d.GetTime());
                 BitToken result = d.NewToken(newTime);
                 GameObject square = DelayHandler.NewSquare(0,result.ActiveColor(),delayVisualizer,tick);
-                signalQueue.Add(Tuple.Create(result,square));
+                signalQueue.Add(new SignalEntry(result,square));
             }else{
                 if(d.GetTime() <= c.GetTime()){
                     //sample:
@@ -168,14 +168,14 @@ public class Latch : CircuitComponent , IDelay
         if (signalQueue.Count > 1)
         {
 
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             //check if next output signal is ready
             if (arrivalTime + delay <= tick)
             {
                 //set output and remove from signal queue
-                if(signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
                 dataOut.SetValue(nextOut.NewToken(arrivalTime + delay));  
             }
@@ -193,8 +193,8 @@ public class Latch : CircuitComponent , IDelay
         storedData = new BitToken();
         if (errorMessage != null) errorMessage.text = "";
 
-        foreach(Tuple<BitToken,GameObject> t in signalQueue){
-            if(t.Item2 != null) GameObject.Destroy(t.Item2);
+        foreach(SignalEntry t in signalQueue){
+            DelayHandler.ReturnSquare(t.visual);
         }
         signalQueue.Clear();
 
@@ -268,7 +268,7 @@ public class Latch : CircuitComponent , IDelay
     public void DelayInit(){
         lastDataIn = new BitToken();
         GameObject square = delayVisualizer != null ? DelayHandler.NewSquare(100,lastDataIn.ActiveColor(),delayVisualizer,1) : null;
-        signalQueue.Add(Tuple.Create(lastDataIn,square));
+        signalQueue.Add(new SignalEntry(lastDataIn,square));
         if (delayVisualizer != null) delayVisualizer.SetActive(visualizerOn);
     }
 

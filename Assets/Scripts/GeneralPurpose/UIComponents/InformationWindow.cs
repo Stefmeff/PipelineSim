@@ -29,7 +29,10 @@ public class InformationWindow : MonoBehaviour
 
         // "Message" child = detailed message body
         Transform msg = transform.Find("Message");
-        if (msg != null) messageText = msg.GetComponentInChildren<TextMeshProUGUI>(true);
+        if (msg != null)
+        {
+            messageText = msg.GetComponentInChildren<TextMeshProUGUI>(true);
+        }
     }
 
     void OnEnable()

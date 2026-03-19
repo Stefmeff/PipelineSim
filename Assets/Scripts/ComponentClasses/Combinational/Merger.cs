@@ -111,8 +111,9 @@ public class Merger : CircuitComponent
         dynamicPinObjects.Clear();
 
         float grid = 5f;
+        float pinSpacing = 10f;
         float barWidth = 1f;
-        float barHeight = (nBits - 1) * grid;
+        float barHeight = (nBits - 1) * pinSpacing;
         float totalHeight = barHeight + grid;
         float topY = barHeight / 2f;
 
@@ -135,11 +136,11 @@ public class Merger : CircuitComponent
         // Small horizontal lines from each input pin to bar
         for (int i = 0; i < nBits; i++)
         {
-            float pinY = topY - i * grid;
+            float pinY = topY - i * pinSpacing;
             GameObject line = new GameObject("Line_" + i);
             line.transform.SetParent(root.transform, false);
-            line.transform.localPosition = new Vector3(-grid * 0.375f, pinY, 0);
-            line.transform.localScale = new Vector3(grid * 0.75f, barWidth, 1);
+            line.transform.localPosition = new Vector3(-grid * 0.5f, pinY, 0);
+            line.transform.localScale = new Vector3(grid, barWidth, 1);
             SpriteRenderer lineRend = line.AddComponent<SpriteRenderer>();
             lineRend.sprite = CreateSquareSprite();
             lineRend.color = new Color32(0x55, 0x5F, 0x66, 0xFF);
@@ -151,8 +152,8 @@ public class Merger : CircuitComponent
         {
             GameObject line = new GameObject("Line_Out");
             line.transform.SetParent(root.transform, false);
-            line.transform.localPosition = new Vector3(grid * 0.375f, 0, 0);
-            line.transform.localScale = new Vector3(grid * 0.75f, barWidth, 1);
+            line.transform.localPosition = new Vector3(grid * 0.5f, 0, 0);
+            line.transform.localScale = new Vector3(grid, barWidth, 1);
             SpriteRenderer lineRend = line.AddComponent<SpriteRenderer>();
             lineRend.sprite = CreateSquareSprite();
             lineRend.color = new Color32(0x55, 0x5F, 0x66, 0xFF);
@@ -184,9 +185,9 @@ public class Merger : CircuitComponent
         GameObject inputPinPrefab = Resources.Load("Prefabs/InputPin") as GameObject;
         for (int i = 0; i < nBits; i++)
         {
-            float pinY = topY - i * grid;
+            float pinY = topY - i * pinSpacing;
             GameObject inPinObj = GameObject.Instantiate(inputPinPrefab, root.transform);
-            inPinObj.transform.localPosition = new Vector3(-grid * 0.75f, pinY, 0);
+            inPinObj.transform.localPosition = new Vector3(-grid, pinY, 0);
             inPinObj.transform.localScale = new Vector3(4f, 4f, 1);
 
             InputPin_Mono inPinMono = inPinObj.GetComponentInChildren<InputPin_Mono>();
@@ -197,7 +198,7 @@ public class Merger : CircuitComponent
         // Output pin — centered on right side of bar
         GameObject outputPinPrefab = Resources.Load("Prefabs/OutputPin") as GameObject;
         GameObject outPinObj = GameObject.Instantiate(outputPinPrefab, root.transform);
-        outPinObj.transform.localPosition = new Vector3(grid * 0.75f, 0, 0);
+        outPinObj.transform.localPosition = new Vector3(grid, 0, 0);
         outPinObj.transform.localScale = new Vector3(4f, 4f, 1);
 
         OutputPin_Mono outPinMono = outPinObj.GetComponentInChildren<OutputPin_Mono>();

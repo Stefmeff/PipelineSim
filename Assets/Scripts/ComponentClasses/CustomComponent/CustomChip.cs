@@ -4,32 +4,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-/// <summary>
-/// A placed custom chip in the Sandbox. Loads a ChipDefinition by name,
-/// dynamically creates pins and visual layout.
-/// Internal circuit exists as pure data objects (no GameObjects) — signals
-/// propagate through deserialized pin/wire references.
-/// </summary>
+/**
+ * @brief A placed custom chip in the Sandbox.
+ *
+ * @details Loads a ChipDefinition by chipName, dynamically creates external pins
+ * matching the chip's interface, and builds a visual representation (body, labels, pins).
+ *
+ * The internal circuit exists as pure data objects (no GameObjects) — JSON deserialization
+ * preserves all wire/pin references, and components subscribe to the Timer in their constructors.
+ * Signal flow: external InputPin → ChipInputNode.InjectValue() → internal wire/pin chain
+ * → ChipOutputNode.input.NewDataEvent → external OutputPin.SetValue().
+ **/
 public class CustomChip : CircuitComponent
 {
-    [JsonProperty] public string chipName;
-    [JsonProperty] public List<InputPin> inputs = new List<InputPin>();
-    [JsonProperty] public List<OutputPin> outputs = new List<OutputPin>();
+    [JsonProperty] public string chipName;                                    /**< chipId used to load the ChipDefinition */
+    [JsonProperty] public List<InputPin> inputs = new List<InputPin>();       /**< external input pins (wired in Sandbox) */
+    [JsonProperty] public List<OutputPin> outputs = new List<OutputPin>();    /**< external output pins (wired in Sandbox) */
 
-    [JsonIgnore] private ChipDefinition chipDef;
+    [JsonIgnore] private ChipDefinition chipDef;  /**< loaded chip definition (.chip file) */
     [JsonIgnore] private TimeTick timer;
 
-    // Internal circuit — pure data, no GameObjects
+    /** @name Internal circuit — pure data, no GameObjects @{ */
     [JsonIgnore] private List<ChipInputNode> internalInputNodes = new List<ChipInputNode>();
     [JsonIgnore] private List<ChipOutputNode> internalOutputNodes = new List<ChipOutputNode>();
     [JsonIgnore] private List<CircuitComponent> internalComponents = new List<CircuitComponent>();
+    /** @} */
 
-    // Delay visualization
+    /** @name Delay visualization @{ */
     [JsonIgnore] private GameObject delayVisualizer;
-    [JsonIgnore] private List<Tuple<BitToken, GameObject>> signalQueue = new List<Tuple<BitToken, GameObject>>();
+    [JsonIgnore] private List<SignalEntry> signalQueue = new List<SignalEntry>();
     [JsonIgnore] private List<BitToken> lastInputs = new List<BitToken>();
+    /** @} */
 
-    [JsonIgnore] public static string chipNameToSpawn;
+    [JsonIgnore] public static string chipNameToSpawn; /**< set before instantiation to specify which chip to create */
+
+    /**
+     * @brief Static stack tracking the ancestor chain of chips currently being loaded.
+     *
+     * @details Used as a guard against circular dependencies during InitInternalCircuit().
+     * A chip name is pushed before recursing into its internal circuit and popped after.
+     * If a chip name already exists in the stack, it means the chip is trying to load
+     * itself through a chain of nested chips — a circular dependency.
+     * Multiple sibling instances of the same chip are allowed (they don't overlap on the stack).
+     **/
+    [JsonIgnore] private static List<string> loadingAncestors = new List<string>();
 
     private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings
     {
@@ -38,6 +56,13 @@ public class CustomChip : CircuitComponent
         Formatting = Formatting.Indented
     };
 
+    /**
+     * @brief Constructor — loads the ChipDefinition and creates pins if chipName is set.
+     *
+     * @details chipName can be set either via the static chipNameToSpawn (for new placements)
+     * or by JSON deserialization (for loading saved circuits). In the deserialization case,
+     * chipName is set AFTER the constructor runs, so EnsureChipDefLoaded() handles deferred loading.
+     **/
     public CustomChip()
     {
         if (!string.IsNullOrEmpty(chipNameToSpawn))
@@ -55,6 +80,9 @@ public class CustomChip : CircuitComponent
         Subscribe();
     }
 
+    /**
+     * @brief Creates external input/output pins matching the ChipDefinition's interface.
+     **/
     private void CreatePins()
     {
         inputs.Clear();
@@ -82,36 +110,100 @@ public class CustomChip : CircuitComponent
         timer.TimerTickEvent += OnTimerTick;
     }
 
-    /// <summary>
-    /// Ensures chipDef is loaded and pins are created.
-    /// Needed because JSON deserialization sets chipName AFTER constructor runs.
-    /// </summary>
+    /**
+     * @brief Ensures chipDef is loaded and pins are created.
+     *
+     * @details Needed because JSON deserialization sets chipName AFTER the constructor runs.
+     * Called lazily before any operation that needs chipDef.
+     **/
     private void EnsureChipDefLoaded()
     {
         if (chipDef == null && !string.IsNullOrEmpty(chipName))
         {
             chipDef = ChipDefinition.Load(chipName);
-            if (chipDef != null && inputs.Count == 0 && outputs.Count == 0)
+            if (chipDef == null)
+            {
+                InformationWindow.Show("Missing Chip Definition",
+                    "The custom chip \"" + chipName + "\" could not be loaded. "
+                    + "The .chip file may have been deleted or moved.\n\n"
+                    + "Components referencing this chip will not simulate.");
+                return;
+            }
+            if (inputs.Count == 0 && outputs.Count == 0)
             {
                 CreatePins();
             }
         }
     }
 
-    /// <summary>
-    /// Loads the internal circuit as pure data objects (no GameObjects).
-    /// JSON deserialization preserves all wire connections between pins.
-    /// Components subscribe to Timer in their constructors during deserialization.
-    /// </summary>
+    /**
+     * @brief Loads the internal circuit as pure data objects (no GameObjects).
+     *
+     * @details Deserializes the internal circuit JSON from the ChipDefinition. All wire/pin
+     * references are preserved by Newtonsoft's reference handling. Components subscribe to
+     * the Timer in their constructors during deserialization. No Load() is called, so no
+     * GameObjects are created and no ProjectManager registration occurs.
+     *
+     * After deserialization, external input pins are wired to internal ChipInputNodes,
+     * and internal ChipOutputNodes are wired to external output pins via event subscriptions.
+     * Nested custom chips are initialized recursively.
+     *
+     * A static HashSet tracks which chips are currently being loaded across the entire
+     * recursion tree to detect circular references at load time (safety net for corrupt files).
+     * Entries are added before recursing and removed after returning.
+     **/
     public void InitInternalCircuit()
     {
         EnsureChipDefLoaded();
         if (chipDef == null || string.IsNullOrEmpty(chipDef.internalCircuit)) return;
 
-        // Deserialize internal components — constructors run, Timer subscriptions happen,
-        // wire/pin references are preserved. No Load() = no GameObjects = no ProjectManager.
-        List<CircuitComponent> elements = JsonConvert.DeserializeObject<List<CircuitComponent>>(
-            chipDef.internalCircuit, jsonSettings);
+        // Load-time circular dependency guard — checks ancestor chain, not siblings
+        if (loadingAncestors.Contains(chipName))
+        {
+            string chain = string.Join(" -> ", loadingAncestors) + " -> " + chipName;
+            Debug.LogWarning("Circular dependency detected at load time: " + chain);
+            try { InformationWindow.Show("Circular Dependency",
+                "A circular reference was detected. This chip will not simulate."); }
+            catch { /* UI may not exist in pure-data context */ }
+            return;
+        }
+        loadingAncestors.Add(chipName);
+
+        try
+        {
+            InitInternalCircuitInner();
+        }
+        finally
+        {
+            // Always remove from ancestor stack, even if an exception occurs
+            loadingAncestors.RemoveAt(loadingAncestors.Count - 1);
+        }
+    }
+
+    /**
+     * @brief Inner implementation of InitInternalCircuit, called after the circular dependency
+     * guard has passed.
+     *
+     * @details Deserializes the internal circuit JSON, categorizes components, wires up
+     * external pins to internal ChipInputNodes/ChipOutputNodes, and recursively initializes
+     * nested custom chips.
+     **/
+    private void InitInternalCircuitInner()
+    {
+        List<CircuitComponent> elements;
+        try
+        {
+            elements = JsonConvert.DeserializeObject<List<CircuitComponent>>(
+                chipDef.internalCircuit, jsonSettings);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to load internal circuit of chip \"" + chipName + "\": " + e.Message);
+            InformationWindow.Show("Failed to Load Chip Circuit",
+                "The internal circuit of chip \"" + chipName + "\" could not be loaded. "
+                + "It may be corrupted or from an incompatible version.\n\n" + e.Message);
+            return;
+        }
 
         if (elements == null) return;
 
@@ -127,7 +219,7 @@ public class CustomChip : CircuitComponent
             else if (comp is ChipOutputNode cout)
                 internalOutputNodes.Add(cout);
             else if (comp is CustomChip nestedChip)
-                nestedChip.InitInternalCircuit(); // recursive — also calls EnsureChipDefLoaded
+                nestedChip.InitInternalCircuit(); // recursive — guard is in the public method
         }
 
         // Sort by pin order (matching chipDef pin order)
@@ -172,6 +264,14 @@ public class CustomChip : CircuitComponent
             lastInputs.Add(new BitToken());
     }
 
+    /**
+     * @brief Per-tick handler for delay visualization on the custom chip body.
+     *
+     * @details Detects input changes, creates visual squares in the delay visualizer,
+     * and removes them once the signal has passed through the chip's propagation delay.
+     *
+     * @param[in] tick the current simulation tick
+     **/
     private void OnTimerTick(int tick)
     {
         if (delayVisualizer == null) return;
@@ -183,7 +283,7 @@ public class CustomChip : CircuitComponent
         {
             BitToken init = new BitToken();
             GameObject square = DelayHandler.NewSquare(100, init.ActiveColor(), delayVisualizer, 1);
-            signalQueue.Add(Tuple.Create(init, square));
+            signalQueue.Add(new SignalEntry(init, square));
         }
 
         // Detect input changes → add visual square
@@ -195,19 +295,19 @@ public class CustomChip : CircuitComponent
             {
                 lastInputs[i] = current;
                 GameObject square = DelayHandler.NewSquare(0, current.ActiveColor(), delayVisualizer, tick);
-                signalQueue.Add(Tuple.Create(current, square));
+                signalQueue.Add(new SignalEntry(current, square));
             }
         }
 
         // Check if next signal has passed through
         if (signalQueue.Count > 1)
         {
-            BitToken nextOut = signalQueue[1].Item1;
+            BitToken nextOut = signalQueue[1].token;
             int arrivalTime = nextOut.GetTime();
 
             if (arrivalTime + delay <= tick)
             {
-                if (signalQueue[0].Item2 != null) GameObject.Destroy(signalQueue[0].Item2);
+                DelayHandler.ReturnSquare(signalQueue[0].visual);
                 signalQueue.RemoveAt(0);
             }
         }
@@ -219,9 +319,9 @@ public class CustomChip : CircuitComponent
     public override void Reset()
     {
         // Clear visual squares
-        foreach (Tuple<BitToken, GameObject> t in signalQueue)
+        foreach (SignalEntry t in signalQueue)
         {
-            if (t.Item2 != null) GameObject.Destroy(t.Item2);
+            DelayHandler.ReturnSquare(t.visual);
         }
         signalQueue.Clear();
 
@@ -236,6 +336,11 @@ public class CustomChip : CircuitComponent
         }
     }
 
+    /**
+     * @brief Instantiates the chip prefab, builds the visual, and initializes the internal circuit.
+     *
+     * @return the ComponentMono attached to the instantiated GameObject
+     **/
     public override Component Load()
     {
         EnsureChipDefLoaded();
@@ -250,9 +355,15 @@ public class CustomChip : CircuitComponent
         return c;
     }
 
-    /// <summary>
-    /// Builds the chip's visual: body sprite as child, pins at world positions, labels.
-    /// </summary>
+    /**
+     * @brief Builds the chip's visual representation: body sprite, border, pins, labels, delay visualizer.
+     *
+     * @details Dynamically sizes the chip body based on the number of pins. Input pins are placed
+     * on the left, output pins on the right. A delay visualizer bar is added beneath the body
+     * if the chip has a propagation delay > 0.
+     *
+     * @param[in] root the instantiated chip prefab GameObject to attach visuals to
+     **/
     public void BuildVisual(GameObject root)
     {
         EnsureChipDefLoaded();
@@ -347,7 +458,10 @@ public class CustomChip : CircuitComponent
             if (pinMono != null) pinMono.Init(inputs[i]);
 
             float innerLeft = -chipWidth / 2f + borderSize;
-            CreateLabel(root.transform, chipDef.inputs[i].name,
+            string inLabel = chipDef.inputs[i].width > 1
+                ? chipDef.inputs[i].name + "[" + chipDef.inputs[i].width + "]"
+                : chipDef.inputs[i].name;
+            CreateLabel(root.transform, inLabel,
                 new Vector3(innerLeft + (chipWidth - borderSize * 2) * 0.25f, pinY, 0),
                 (chipWidth - borderSize * 2) * 0.45f, pinSpacing, TextAlignmentOptions.Left);
         }
@@ -372,12 +486,25 @@ public class CustomChip : CircuitComponent
             }
 
             float innerRight = chipWidth / 2f - borderSize;
-            CreateLabel(root.transform, chipDef.outputs[i].name,
+            string outLabel = chipDef.outputs[i].width > 1
+                ? chipDef.outputs[i].name + "[" + chipDef.outputs[i].width + "]"
+                : chipDef.outputs[i].name;
+            CreateLabel(root.transform, outLabel,
                 new Vector3(innerRight - (chipWidth - borderSize * 2) * 0.25f, pinY, 0),
                 (chipWidth - borderSize * 2) * 0.45f, pinSpacing, TextAlignmentOptions.Right);
         }
     }
 
+    /**
+     * @brief Creates a TextMeshPro label as a child of the given parent.
+     *
+     * @param[in] parent transform to parent the label under
+     * @param[in] text label text
+     * @param[in] localPos local position relative to parent
+     * @param[in] width label rect width
+     * @param[in] height label rect height
+     * @param[in] alignment text alignment
+     **/
     private void CreateLabel(Transform parent, string text, Vector3 localPos, float width, float height, TextAlignmentOptions alignment)
     {
         GameObject labelObj = new GameObject("Label_" + text);
@@ -395,6 +522,11 @@ public class CustomChip : CircuitComponent
         rt.sizeDelta = new Vector2(width, height);
     }
 
+    /**
+     * @brief Creates a 1x1 white sprite for use as chip body rectangles.
+     *
+     * @return a new white square Sprite
+     **/
     private Sprite CreateSquareSprite()
     {
         Texture2D tex = new Texture2D(1, 1);
@@ -424,12 +556,16 @@ public class CustomChip : CircuitComponent
 
     public override void OpenEditor() { }
 
+    /**
+     * @brief Cleans up timer subscription and disposes all internal circuit components.
+     *
+     * @details Unsubscribes internal components from the Timer to prevent memory leaks
+     * when the chip is removed from the Sandbox.
+     **/
     public override void Dispose()
     {
-        // Unsubscribe from timer
         if (timer != null) timer.TimerTickEvent -= OnTimerTick;
 
-        // Unsubscribe internal components from Timer to prevent memory leaks
         foreach (CircuitComponent comp in internalComponents)
         {
             try { comp.Dispose(); } catch { /* internal components may lack GameObjects */ }
