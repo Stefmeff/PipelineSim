@@ -7,9 +7,8 @@ using TMPro;
 
 public class ButtonInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    private GameObject infoBar;
+    private const string helpUrl = "https://stefmeff.github.io/PipelineSim/intro.html";
 
-    private bool infoBarOn = false;
     private Image i;
     private Color32 defaultColor = new Color32(0x42,0x42,0x42,0xFF);
     private Color32 overColor = new Color32(0x32,0x32,0x32,0xFF);
@@ -17,18 +16,14 @@ public class ButtonInfo : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
     private TMP_Text toolTip;
     void Awake()
     {
-        GameObject o = GameObject.FindGameObjectWithTag("InfoBar");
-        infoBar = o.transform.GetChild(0).gameObject;
-
         i = gameObject.GetComponent<Image>();
-        o = GameObject.FindWithTag("ToolTip");
+        GameObject o = GameObject.FindWithTag("ToolTip");
         toolTip = o.GetComponent<TMP_Text>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        infoBarOn = !infoBarOn;
-        infoBar.SetActive(infoBarOn);
+        Application.OpenURL(helpUrl);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

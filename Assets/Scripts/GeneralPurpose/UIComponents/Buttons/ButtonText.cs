@@ -37,7 +37,7 @@ public class ButtonText : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         image = GetComponent<Image>();
         penCursor = Resources.Load<Texture2D>("Art/Cursors/pen");
         if (penCursor != null)
-            penHotspot = new Vector2(0, penCursor.height);
+            penHotspot = new Vector2(4, 4);
     }
 
     void Update()

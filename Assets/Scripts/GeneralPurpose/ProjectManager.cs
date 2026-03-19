@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.Networking;
 using System.Text;
@@ -69,6 +70,18 @@ public class ProjectManager : MonoBehaviour
                 }
             }
         #endif
+    }
+
+    private IEnumerator Start()
+    {
+        // Wait one frame for UI layout to finish, then scroll component library to top
+        yield return null;
+        GameObject scrollArea = GameObject.FindGameObjectWithTag("ScrollBar");
+        if (scrollArea != null)
+        {
+            ScrollRect scroll = scrollArea.GetComponent<ScrollRect>();
+            if (scroll != null) scroll.verticalNormalizedPosition = 1f;
+        }
     }
 
     IEnumerator GetText(string url) {

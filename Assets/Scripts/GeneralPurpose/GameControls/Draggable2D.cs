@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider2D))]  //draggable components need a collider
 
@@ -58,8 +59,18 @@ public class Draggable2D : MonoBehaviour
     }
 
 
+    private bool dragBlocked = false;
+
+    private void OnMouseDown()
+    {
+        // Block drag if the click started over the sidebar or menu bar
+        Vector3 mousePos = Input.mousePosition;
+        dragBlocked = mousePos.x < Screen.width * 0.1625f || mousePos.y > Screen.height * 0.915f;
+    }
+
     public void OnMouseDrag()
     {
+        if (dragBlocked) return;
         camDrag.camDragOn = false;
         Cursor.SetCursor(dragCursor, dragHotspot, CursorMode.Auto);
         if(projectManager.dragActive){
