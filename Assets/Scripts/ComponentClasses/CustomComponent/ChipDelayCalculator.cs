@@ -60,6 +60,10 @@ public static class ChipDelayCalculator
         }
 
         // Process in BFS order, updating max delay at each downstream component
+        // Track visit count per component to detect and break cycles
+        Dictionary<CircuitComponent, int> visitCount = new Dictionary<CircuitComponent, int>();
+        int maxVisits = components.Count + 1; // in a DAG, no component is visited more than N times
+
         while (queue.Count > 0)
         {
             CircuitComponent current = queue.Dequeue();
@@ -82,6 +86,11 @@ public static class ChipDelayCalculator
                     // Only update and re-process if we found a longer path
                     if (!maxDelay.ContainsKey(downstream) || newDelay > maxDelay[downstream])
                     {
+                        // Break cycles: stop re-enqueueing if visited too many times
+                        if (!visitCount.ContainsKey(downstream)) visitCount[downstream] = 0;
+                        visitCount[downstream]++;
+                        if (visitCount[downstream] > maxVisits) continue;
+
                         maxDelay[downstream] = newDelay;
                         queue.Enqueue(downstream);
                     }
@@ -141,6 +150,9 @@ public static class ChipDelayCalculator
             }
         }
 
+        Dictionary<CircuitComponent, int> visitCount = new Dictionary<CircuitComponent, int>();
+        int maxVisits = components.Count + 1;
+
         while (queue.Count > 0)
         {
             CircuitComponent current = queue.Dequeue();
@@ -162,6 +174,10 @@ public static class ChipDelayCalculator
 
                     if (!maxDelay.ContainsKey(downstream) || newDelay > maxDelay[downstream])
                     {
+                        if (!visitCount.ContainsKey(downstream)) visitCount[downstream] = 0;
+                        visitCount[downstream]++;
+                        if (visitCount[downstream] > maxVisits) continue;
+
                         maxDelay[downstream] = newDelay;
                         queue.Enqueue(downstream);
                     }
