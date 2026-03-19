@@ -133,6 +133,30 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
         }
     }
 
+    /// <summary>
+    /// Returns true if this wire's source or sink pin is a child of the given transform.
+    /// </summary>
+    public bool IsConnectedTo(Transform parent)
+    {
+        if (sourcePin != null && sourcePin.IsChildOf(parent)) return true;
+        if (sinkPin != null && sinkPin.IsChildOf(parent)) return true;
+        return false;
+    }
+
+    /// <summary>
+    /// Shows or hides this wire's visual elements (LineRenderer, knots, bus label).
+    /// </summary>
+    public void SetVisible(bool visible)
+    {
+        if (lineRend != null) lineRend.enabled = visible;
+        if (slashLine != null) slashLine.enabled = visible;
+        if (busLabel != null) busLabel.SetActive(visible);
+        foreach (Knot_Mono k in knots)
+        {
+            if (k != null) k.gameObject.SetActive(visible);
+        }
+    }
+
     public void Clear()
     {
         Destroy(this.gameObject);

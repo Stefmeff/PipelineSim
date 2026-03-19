@@ -14,10 +14,98 @@ public class PinBarClickHandler : MonoBehaviour, IPointerClickHandler
 
     private RectTransform barRect;
     private List<GameObject> pins = new List<GameObject>();
+    private ProjectManager projectManager;
+    private Canvas canvas;
+    private Camera canvasCam;
+    private Dictionary<GameObject, bool> pinHiddenState = new Dictionary<GameObject, bool>();
 
     private void Awake()
     {
         barRect = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>();
+        canvasCam = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
+
+        GameObject pmObj = GameObject.FindGameObjectWithTag("ProjectManager");
+        if (pmObj != null) projectManager = pmObj.GetComponent<ProjectManager>();
+    }
+
+    private void LateUpdate()
+    {
+        if (pins.Count == 0) return;
+
+        float barEdgeWorldX = GetBarEdgeWorldX();
+
+        foreach (GameObject pin in pins)
+        {
+            if (pin == null) continue;
+
+            bool shouldHide = ShouldHidePin(pin, barEdgeWorldX);
+
+            // Only update when state changes (SetVisible uses FindObjectsOfType)
+            bool wasHidden;
+            pinHiddenState.TryGetValue(pin, out wasHidden);
+            if (shouldHide != wasHidden)
+            {
+                pinHiddenState[pin] = shouldHide;
+                InterfacePinLock pinLock = pin.GetComponent<InterfacePinLock>();
+                if (pinLock != null) pinLock.SetVisible(!shouldHide);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks if a pin's wire points in the wrong direction (backwards).
+    /// For input pins: hide if the connected component is to the LEFT of the bar edge.
+    /// For output pins: hide if the connected component is to the RIGHT of the bar edge.
+    /// </summary>
+    private bool ShouldHidePin(GameObject pin, float barEdgeWorldX)
+    {
+        ComponentMono comp = pin.GetComponent<ComponentMono>();
+        if (comp == null) return false;
+
+        if (isInputSide)
+        {
+            // ChipInput has an OutputPin — check where its connected InputPins are
+            OutputPin_Mono outMono = pin.GetComponentInChildren<OutputPin_Mono>();
+            if (outMono != null && outMono.pin != null)
+            {
+                foreach (InputPin connected in outMono.pin.GetConnectedPins())
+                {
+                    if (connected.transform != null && connected.transform.position.x < barEdgeWorldX)
+                        return true;
+                }
+            }
+        }
+        else
+        {
+            // ChipOutput has an InputPin — check where the source OutputPin is
+            InputPin_Mono inMono = pin.GetComponentInChildren<InputPin_Mono>();
+            if (inMono != null && inMono.pin != null)
+            {
+                Transform source = inMono.pin.GetSourceTransform();
+                if (source != null && source.position.x > barEdgeWorldX)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Returns the bar edge world X without grid snapping (for visibility checks).
+    /// </summary>
+    private float GetBarEdgeWorldX()
+    {
+        Vector3[] corners = new Vector3[4];
+        barRect.GetWorldCorners(corners);
+
+        Vector2 screenPoint;
+        if (isInputSide)
+            screenPoint = RectTransformUtility.WorldToScreenPoint(canvasCam, corners[2]); // right edge
+        else
+            screenPoint = RectTransformUtility.WorldToScreenPoint(canvasCam, corners[0]); // left edge
+
+        return Camera.main.ScreenToWorldPoint(new Vector3(screenPoint.x, 0, 0)).x;
     }
 
     /// <summary>
@@ -26,27 +114,7 @@ public class PinBarClickHandler : MonoBehaviour, IPointerClickHandler
     /// </summary>
     private float GetFixedWorldX()
     {
-        Vector3[] corners = new Vector3[4];
-        barRect.GetWorldCorners(corners);
-        // corners: 0=bottom-left, 1=top-left, 2=top-right, 3=bottom-right
-
-        Canvas canvas = GetComponentInParent<Canvas>();
-        Camera canvasCam = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
-
-        if (isInputSide)
-        {
-            // Right edge of input bar
-            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(canvasCam, corners[2]);
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, 0));
-            return GridSnap.Snap(worldPoint).x;
-        }
-        else
-        {
-            // Left edge of output bar
-            Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(canvasCam, corners[0]);
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(new Vector3(screenPoint.x, screenPoint.y, 0));
-            return GridSnap.Snap(worldPoint).x;
-        }
+        return GridSnap.Snap(new Vector3(GetBarEdgeWorldX(), 0, 0)).x;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -134,6 +202,7 @@ public class PinBarClickHandler : MonoBehaviour, IPointerClickHandler
     public void RemovePin(GameObject pin)
     {
         pins.Remove(pin);
+        pinHiddenState.Remove(pin);
         Destroy(pin);
     }
 

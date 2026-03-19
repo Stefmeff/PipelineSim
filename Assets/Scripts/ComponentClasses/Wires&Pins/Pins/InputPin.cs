@@ -46,6 +46,15 @@ public class InputPin
         NewDataEvent?.Invoke();
     }
 
+    /// <summary>
+    /// Returns the transform of the OutputPin feeding this InputPin (via the connected wire).
+    /// </summary>
+    public Transform GetSourceTransform()
+    {
+        if (wire != null && wire.dataIn != null) return wire.dataIn.transform;
+        return null;
+    }
+
     public Wire connectWire(Wire wire){
         if(this.wire == null){
             this.wire = wire;

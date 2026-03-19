@@ -245,6 +245,28 @@ public class ProjectManager : MonoBehaviour
     }
 
 
+    //Returns the X bounds of all non-interface-pin components (the actual circuit content)
+    public bool GetCircuitBoundsX(out float minX, out float maxX)
+    {
+        minX = float.MaxValue;
+        maxX = float.MinValue;
+        bool found = false;
+
+        foreach(IObjectMono o in gameElements)
+        {
+            ComponentMono comp = o as ComponentMono;
+            if (comp != null && (comp.component is ChipInputNode || comp.component is ChipOutputNode))
+                continue;
+
+            float x = ((MonoBehaviour)o).gameObject.transform.position.x;
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            found = true;
+        }
+
+        return found;
+    }
+
     // Extracts query parameter from URL (for WebGL only)
     private string GetUrlParameter(string key)
     {

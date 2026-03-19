@@ -7,7 +7,7 @@ using UnityEngine;
  */
 public class InputPin_Mono : MonoBehaviour
 {
-    private InputPin pin;
+    public InputPin pin { get; private set; }
     private PinConnectionHandler connectionHandler;
 
     //variables used for animation

@@ -183,6 +183,25 @@ public class InterfacePinLock : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows or hides the pin's sprite and connected wires.
+    /// The UI label on the bar stays visible regardless.
+    /// </summary>
+    public void SetVisible(bool visible)
+    {
+        // Hide/show the pin dot sprites
+        foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
+            sr.enabled = visible;
+
+        // Hide/show all wires connected to this pin
+        Wire_Mono[] allWires = FindObjectsOfType<Wire_Mono>();
+        foreach (Wire_Mono wire in allWires)
+        {
+            if (wire.IsConnectedTo(transform))
+                wire.SetVisible(visible);
+        }
+    }
+
     private void OnDestroy()
     {
         if (labelRect != null) Destroy(labelRect.gameObject);
