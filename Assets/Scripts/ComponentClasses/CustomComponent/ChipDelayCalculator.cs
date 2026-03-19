@@ -62,7 +62,7 @@ public static class ChipDelayCalculator
         // Process in BFS order, updating max delay at each downstream component
         // Track visit count per component to detect and break cycles
         Dictionary<CircuitComponent, int> visitCount = new Dictionary<CircuitComponent, int>();
-        int maxVisits = components.Count + 1; // in a DAG, no component is visited more than N times
+        int maxVisits = 2; // allow one re-enqueue for longer DAG paths, but prevent cycle accumulation
 
         while (queue.Count > 0)
         {

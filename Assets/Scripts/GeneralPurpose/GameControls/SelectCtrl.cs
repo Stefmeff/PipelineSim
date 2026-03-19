@@ -70,7 +70,7 @@ public class SelectCtrl : MonoBehaviour
             }
         }
 
-        if(selected){
+        if(selected && !TextAnnotation_Mono.IsAnyEditing){
             //parse variouse keyboard inputs
             if (Input.GetKeyDown(KeyCode.Delete))
             {

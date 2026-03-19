@@ -318,6 +318,12 @@ public class CustomChip : CircuitComponent
 
     public override void Reset()
     {
+        // Reset all internal components first (clears their lastDataIn etc.)
+        foreach (CircuitComponent comp in internalComponents)
+        {
+            comp.Reset();
+        }
+
         // Clear visual squares
         foreach (SignalEntry t in signalQueue)
         {

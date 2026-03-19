@@ -50,6 +50,7 @@ public class TextAnnotation_Mono : MonoBehaviour, IObjectMono
 
     // Editing state
     private bool isEditing = false;
+    public static bool IsAnyEditing { get; private set; } = false;
 
     private Camera cam;
 
@@ -695,6 +696,7 @@ public class TextAnnotation_Mono : MonoBehaviour, IObjectMono
     private void StartEditing()
     {
         isEditing = true;
+        IsAnyEditing = true;
         border.color = borderEditColor;
         inner.color = fillEditColor;
 
@@ -712,6 +714,7 @@ public class TextAnnotation_Mono : MonoBehaviour, IObjectMono
     {
         if (!isEditing) return;
         isEditing = false;
+        IsAnyEditing = false;
         border.color = borderColor;
         inner.color = fillColor;
 
