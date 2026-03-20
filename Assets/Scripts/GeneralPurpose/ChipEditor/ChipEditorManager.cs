@@ -141,9 +141,10 @@ public class ChipEditorManager : MonoBehaviour
             return;
         }
 
-        // Calculate max delay from internal circuit
-        chipDefinition.delay = CalculateChipDelay(chipDefinition.internalCircuit);
-        Debug.Log("Chip delay: " + chipDefinition.delay);
+        // Calculate delay from internal circuit
+        chipDefinition.delay = CalculateChipDelay(chipDefinition.internalCircuit, false);
+        chipDefinition.minDelay = CalculateChipDelay(chipDefinition.internalCircuit, true);
+        Debug.Log("Chip delay: max=" + chipDefinition.delay + " min=" + chipDefinition.minDelay);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         // TODO: WebGL chip saving
@@ -209,7 +210,7 @@ public class ChipEditorManager : MonoBehaviour
 #endif
     }
 
-    private int CalculateChipDelay(string internalCircuitJson)
+    private int CalculateChipDelay(string internalCircuitJson, bool min = false)
     {
         if (string.IsNullOrEmpty(internalCircuitJson)) return 0;
 
@@ -231,7 +232,9 @@ public class ChipEditorManager : MonoBehaviour
                 nested.InitInternalCircuit();
         }
 
-        return ChipDelayCalculator.CalculateMaxDelay(components);
+        return min
+            ? ChipDelayCalculator.CalculateMinDelay(components)
+            : ChipDelayCalculator.CalculateMaxDelay(components);
     }
 
     private void OnBack()

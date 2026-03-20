@@ -22,7 +22,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
     [SerializeField] private InputPin_Mono[] inPins = new InputPin_Mono[]{};
     [SerializeField] private OutputPin_Mono[] outPins = new OutputPin_Mono[]{};
 
-    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode, CustomChip, Splitter, Merger, MUX};
+    private enum componentType { AND, OR, XOR, MullerC, Inverter, Delay, Delay2, CPLatch, FlipFlop, Latch, Clock, DataSource, ChipInputNode, ChipOutputNode, CustomChip, Splitter, Merger};
     private GameObject delayVisualizer;
     private GameObject ErrorMessage;
     private ProjectManager projectManager;
@@ -104,6 +104,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 return cout;
             case componentType.CustomChip:
                 CustomChip chip = new CustomChip();
+                chip.LoadEditor();
                 chip.BuildVisual(this.gameObject);
                 chip.InitInternalCircuit();
                 return chip;
@@ -117,10 +118,6 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 merger.LoadEditor();
                 merger.BuildVisual(this.gameObject);
                 return merger;
-            case componentType.MUX:
-                MUX mux = new MUX();
-                mux.BuildVisual(this.gameObject);
-                return mux;
 
         }
         return null;
@@ -161,6 +158,7 @@ public class ComponentMono : MonoBehaviour, IObjectMono
                 ((ChipOutputNode)component).LoadEditor();
                 break;
             case CustomChip:
+                ((CustomChip)component).LoadEditor();
                 ((CustomChip)component).BuildVisual(this.gameObject);
                 ((CustomChip)component).InitInternalCircuit();
                 break;
@@ -171,9 +169,6 @@ public class ComponentMono : MonoBehaviour, IObjectMono
             case Merger:
                 ((Merger)component).LoadEditor();
                 ((Merger)component).BuildVisual(this.gameObject);
-                break;
-            case MUX:
-                ((MUX)component).BuildVisual(this.gameObject);
                 break;
         }
     }

@@ -349,16 +349,77 @@ public class CustomChip : CircuitComponent
      **/
     public override Component Load()
     {
-        EnsureChipDefLoaded();
+        // Force reload from disk (picks up edits made in ChipEditor)
+        chipDef = ChipDefinition.Load(chipName);
+        if (chipDef != null) ReconcilePins();
 
         GameObject prefab = Resources.Load("Prefabs/CustomChip") as GameObject;
         GameObject o = GameObject.Instantiate(prefab, pos, rot);
         ComponentMono c = o.GetComponent<ComponentMono>();
-        c.Load(this);
+        c.Load(this); // calls LoadEditor, BuildVisual, InitInternalCircuit
         Subscribe();
-        BuildVisual(o);
-        InitInternalCircuit();
         return c;
+    }
+
+    /// <summary>
+    /// Reconciles deserialized (old) pins with the current chip definition.
+    /// Added pins get created unconnected. Removed pins have their wires disconnected.
+    /// Reordered pins keep existing wire connections as-is.
+    /// </summary>
+    private void ReconcilePins()
+    {
+        if (chipDef == null) return;
+        if (inputs.Count == chipDef.inputs.Count && outputs.Count == chipDef.outputs.Count)
+        {
+            // Same count — just update widths
+            for (int i = 0; i < inputs.Count; i++)
+                inputs[i].width = chipDef.inputs[i].width;
+            for (int i = 0; i < outputs.Count; i++)
+                outputs[i].width = chipDef.outputs[i].width;
+            return;
+        }
+
+        // Snapshot old pins
+        List<InputPin> oldInputs = new List<InputPin>(inputs);
+        List<OutputPin> oldOutputs = new List<OutputPin>(outputs);
+        inputs.Clear();
+        outputs.Clear();
+
+        // Reconcile inputs: reuse existing, create new for added, disconnect removed
+        for (int i = 0; i < chipDef.inputs.Count; i++)
+        {
+            if (i < oldInputs.Count)
+            {
+                oldInputs[i].width = chipDef.inputs[i].width;
+                inputs.Add(oldInputs[i]);
+            }
+            else
+            {
+                InputPin pin = new InputPin();
+                pin.width = chipDef.inputs[i].width;
+                inputs.Add(pin);
+            }
+        }
+        for (int i = chipDef.inputs.Count; i < oldInputs.Count; i++)
+            oldInputs[i].disconnectWire();
+
+        // Reconcile outputs: reuse existing, create new for added, disconnect removed
+        for (int i = 0; i < chipDef.outputs.Count; i++)
+        {
+            if (i < oldOutputs.Count)
+            {
+                oldOutputs[i].width = chipDef.outputs[i].width;
+                outputs.Add(oldOutputs[i]);
+            }
+            else
+            {
+                OutputPin pin = new OutputPin();
+                pin.width = chipDef.outputs[i].width;
+                outputs.Add(pin);
+            }
+        }
+        for (int i = chipDef.outputs.Count; i < oldOutputs.Count; i++)
+            oldOutputs[i].disconnectWire();
     }
 
     /**
@@ -558,9 +619,30 @@ public class CustomChip : CircuitComponent
         return chipDef != null ? chipDef.delay : 0;
     }
 
+    public int GetMinDelay()
+    {
+        EnsureChipDefLoaded();
+        return chipDef != null ? chipDef.minDelay : 0;
+    }
+
     public override void LoadDelay(GameObject delayVisualizer) { }
 
-    public override void OpenEditor() { }
+    [JsonIgnore] private GameObject editor;
+
+    public void LoadEditor()
+    {
+        GameObject o = GameObject.FindWithTag("Editor");
+        if (o != null) editor = o.transform.Find("FunctionBlockEditor")?.gameObject;
+    }
+
+    public override void OpenEditor()
+    {
+        if (editor == null) LoadEditor();
+        if (editor == null) return;
+        editor.SetActive(true);
+        FunctionBlockEditor e = editor.GetComponent<FunctionBlockEditor>();
+        if (e != null) e.init(this);
+    }
 
     /**
      * @brief Cleans up timer subscription and disposes all internal circuit components.

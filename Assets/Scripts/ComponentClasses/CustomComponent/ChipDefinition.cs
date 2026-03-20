@@ -22,6 +22,7 @@ public class ChipDefinition
     [JsonProperty] public List<InterfacePin> outputs; /**< output pin definitions */
     [JsonProperty] public string internalCircuit;     /**< serialized internal circuit JSON */
     [JsonProperty] public int delay;                  /**< longest-path propagation delay in ticks */
+    [JsonProperty] public int minDelay;               /**< shortest-path propagation delay in ticks */
 
     private static JsonSerializerSettings settings = new JsonSerializerSettings
     {

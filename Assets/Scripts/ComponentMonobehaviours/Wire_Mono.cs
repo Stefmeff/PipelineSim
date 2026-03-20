@@ -194,7 +194,11 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
      **/
     private void Update()
     {
-        if (wire == null || sourcePin == null) return;
+        if (wire == null || sourcePin == null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
 
         // Always dirty during wire creation (mouse moves every frame)
         if (draw)
@@ -341,7 +345,7 @@ public class Wire_Mono : MonoBehaviour, IObjectMono
             }
             controlPoints.Add(new Vector3(lastMousePos.x, lastMousePos.y, 0));
         }
-        else if(wire.dataOut != null)
+        else if(wire.dataOut != null && sinkPin != null)
         {
             controlPoints.Add(sinkPin.position);
         }

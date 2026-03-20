@@ -44,7 +44,16 @@ public class InputPin_Mono : MonoBehaviour
         OutputPin dataIn = connectionHandler.searchesConnection;
         if (dataIn != null)
         {
-            connectionHandler.possibleConnection = pin;
+            if (pin.GetSourceTransform() == null)
+            {
+                connectionHandler.possibleConnection = pin;
+            }
+            else
+            {
+                // Pin already occupied — abort wire creation
+                connectionHandler.searchesConnection = null;
+                dataIn.disconnectWire();
+            }
         }
     }
 

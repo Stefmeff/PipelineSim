@@ -113,6 +113,103 @@ public static class ChipDelayCalculator
     }
 
     /**
+     * @brief Calculates the minimum propagation delay across all paths from any input to any output.
+     *
+     * @details Same BFS structure as CalculateMaxDelay but tracks the shortest path instead.
+     * Uses min-relaxation: only updates when a shorter path is found.
+     *
+     * @param[in] components all components in the internal circuit
+     * @return the minimum cumulative delay in ticks from any input to any output
+     **/
+    public static int CalculateMinDelay(List<CircuitComponent> components)
+    {
+        if (components == null || components.Count == 0) return 0;
+
+        // Step 1: Build InputPin → owning component map
+        Dictionary<InputPin, CircuitComponent> pinOwner = new Dictionary<InputPin, CircuitComponent>();
+        foreach (CircuitComponent comp in components)
+        {
+            List<InputPin> ins = new List<InputPin>();
+            List<OutputPin> outs = new List<OutputPin>();
+            comp.CollectPins(ins, outs);
+            foreach (InputPin ip in ins)
+                pinOwner[ip] = comp;
+        }
+
+        // Step 2: Build output pin map for traversal
+        Dictionary<CircuitComponent, List<OutputPin>> compOutputs = new Dictionary<CircuitComponent, List<OutputPin>>();
+        foreach (CircuitComponent comp in components)
+        {
+            List<InputPin> ins = new List<InputPin>();
+            List<OutputPin> outs = new List<OutputPin>();
+            comp.CollectPins(ins, outs);
+            compOutputs[comp] = outs;
+        }
+
+        // Step 3: BFS shortest-path from ChipInputNodes
+        Dictionary<CircuitComponent, int> minDelay = new Dictionary<CircuitComponent, int>();
+        Queue<CircuitComponent> queue = new Queue<CircuitComponent>();
+
+        foreach (CircuitComponent comp in components)
+        {
+            if (comp is ChipInputNode)
+            {
+                minDelay[comp] = 0;
+                queue.Enqueue(comp);
+            }
+        }
+
+        Dictionary<CircuitComponent, int> visitCount = new Dictionary<CircuitComponent, int>();
+        int maxVisits = 2;
+
+        while (queue.Count > 0)
+        {
+            CircuitComponent current = queue.Dequeue();
+            int currentDelay = minDelay[current];
+
+            if (!compOutputs.ContainsKey(current)) continue;
+
+            foreach (OutputPin outPin in compOutputs[current])
+            {
+                List<InputPin> connected = outPin.GetConnectedPins();
+                if (connected == null) continue;
+
+                foreach (InputPin downstreamPin in connected)
+                {
+                    if (!pinOwner.ContainsKey(downstreamPin)) continue;
+
+                    CircuitComponent downstream = pinOwner[downstreamPin];
+                    int newDelay = currentDelay + downstream.GetDelay();
+
+                    // Only update and re-process if we found a shorter path
+                    if (!minDelay.ContainsKey(downstream) || newDelay < minDelay[downstream])
+                    {
+                        if (!visitCount.ContainsKey(downstream)) visitCount[downstream] = 0;
+                        visitCount[downstream]++;
+                        if (visitCount[downstream] > maxVisits) continue;
+
+                        minDelay[downstream] = newDelay;
+                        queue.Enqueue(downstream);
+                    }
+                }
+            }
+        }
+
+        // Step 4: Find min delay at ChipOutputNodes
+        int result = int.MaxValue;
+        foreach (CircuitComponent comp in components)
+        {
+            if (comp is ChipOutputNode && minDelay.ContainsKey(comp))
+            {
+                if (minDelay[comp] < result)
+                    result = minDelay[comp];
+            }
+        }
+
+        return result == int.MaxValue ? 0 : result;
+    }
+
+    /**
      * @brief Calculates the max delay per output pin, indexed matching chipDef.outputs order.
      *
      * @details Runs the same BFS longest-path algorithm as CalculateMaxDelay, but returns
