@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Getting Started &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'manual/getting_started';</script>
+    <link rel="shortcut icon" href="../_static/Logo-schwarz-1.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo-schwarz-1.png" class="logo__image only-light" alt="Design Principles and Interactive Visualization of Pipeline Architectures - Home"/>
+    <script>document.write(`<img src="../_static/Logo-schwarz-1.png" class="logo__image only-dark" alt="Design Principles and Interactive Visualization of Pipeline Architectures - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to PipSim’s documentation!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline Architectures</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pipelines/1_intro.html">1 Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pipelines/2_intro.html">2 Synchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/2_1_sequencing_elements.html">2.1 Sequencing Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/2_2_flip_flop_pipeline.html">2.2 Flip-Flop-Based Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/2_3_two_phase_latches.html">2.3 2-Phase Transparent Latch Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/2_4_pulsed_latches.html">2.4 Pulsed Latch Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/2_5_time_borrowing.html">2.5 Time Borrowing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/2_6_wave_pipelines.html">2.6 Wave-Pipelining</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pipelines/3_intro.html">3 Asynchronous Pipelines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/3_1_handshake_protocols.html">3.1 Handshake Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pipelines/3_2_async_elements.html">3.2 Basic Asynchronous Circuit Elements</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pipelines/3_3_implementations.html">3.3 Pipeline Implementations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines/3_3_1_d_latch_bd.html">3.3.1 D-Latch-Based Bundled-Data Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines/3_3_2_micropipelines.html">3.3.2 Micropipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pipelines/3_3_3_mousetrap.html">3.3.3 Mousetrap</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../pipelines/references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Stefmeff/PipelineSim" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stefmeff/PipelineSim/edit/main/docs/manual/getting_started.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Stefmeff/PipelineSim/issues/new?title=Issue%20on%20page%20%2Fmanual/getting_started.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/manual/getting_started.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting Started</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface">Interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#component-library-left-panel">Component Library (Left Panel)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-center">Workspace (Center)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-menu-bar">Top Menu Bar</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-workflow">Basic Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#place-components">1. Place Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-components">2. Connect Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-components">3. Configure Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">4. Run the Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-and-load">5. Save and Load</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-visualization">Signal Visualization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-violations">Timing Violations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>PipSim is a digital circuit simulator designed for building and visualizing pipeline architectures. It supports both synchronous and asynchronous circuit design with real-time signal visualization, propagation delays, and timing constraint checking.</p>
+</section>
+<section id="interface">
+<h2>Interface<a class="headerlink" href="#interface" title="Permalink to this heading">#</a></h2>
+<p>The main interface consists of the following areas:</p>
+<section id="component-library-left-panel">
+<h3>Component Library (Left Panel)<a class="headerlink" href="#component-library-left-panel" title="Permalink to this heading">#</a></h3>
+<p>The component library on the left side contains all available circuit components organized into categories:</p>
+<ul class="simple">
+<li><p><strong>Combinational</strong> — Logic gates (AND, OR, XOR, Inverter, Muller C-Element)</p></li>
+<li><p><strong>Sequential</strong> — Timing elements (Flip-Flop, Latch, Capture-Pass Latch, Delay)</p></li>
+<li><p><strong>Sources &amp; Sinks</strong> — Signal generators and indicators (Switch, Clock, Data Source, LED)</p></li>
+<li><p><strong>Bus</strong> — Multi-bit wire utilities (Splitter, Merger)</p></li>
+<li><p><strong>Custom</strong> — User-created chip definitions</p></li>
+</ul>
+<p>Click on a category folder to expand it and see the available components. Drag a component from the library into the workspace to place it.</p>
+</section>
+<section id="workspace-center">
+<h3>Workspace (Center)<a class="headerlink" href="#workspace-center" title="Permalink to this heading">#</a></h3>
+<p>The workspace is where you build your circuit. You can:</p>
+<ul class="simple">
+<li><p><strong>Pan</strong> — Click and drag on the background to move the view</p></li>
+<li><p><strong>Zoom</strong> — Scroll the mouse wheel to zoom in and out</p></li>
+<li><p><strong>Place components</strong> — Drag from the library into the workspace</p></li>
+<li><p><strong>Move components</strong> — Click and drag a placed component to reposition it. Components snap to a grid on release.</p></li>
+</ul>
+</section>
+<section id="top-menu-bar">
+<h3>Top Menu Bar<a class="headerlink" href="#top-menu-bar" title="Permalink to this heading">#</a></h3>
+<p>The top menu contains simulation controls and file operations:</p>
+<ul class="simple">
+<li><p><strong>Play/Pause</strong> — Start or pause the simulation</p></li>
+<li><p><strong>Restart</strong> — Reset the simulation to its initial state</p></li>
+<li><p><strong>Step</strong> — Advance the simulation by a configurable number of time units</p></li>
+<li><p><strong>Simulation Speed</strong> — Adjust how fast the simulation runs</p></li>
+<li><p><strong>Save</strong> — Save the current circuit to a <code class="docutils literal notranslate"><span class="pre">.pip</span></code> file</p></li>
+<li><p><strong>Load</strong> — Load a previously saved circuit</p></li>
+<li><p><strong>Chip Creator</strong> — Open the chip editor to create reusable custom components</p></li>
+</ul>
+</section>
+</section>
+<section id="basic-workflow">
+<h2>Basic Workflow<a class="headerlink" href="#basic-workflow" title="Permalink to this heading">#</a></h2>
+<section id="place-components">
+<h3>1. Place Components<a class="headerlink" href="#place-components" title="Permalink to this heading">#</a></h3>
+<p>Drag components from the library on the left into the workspace. Each component snaps to the grid when released.</p>
+</section>
+<section id="connect-components">
+<h3>2. Connect Components<a class="headerlink" href="#connect-components" title="Permalink to this heading">#</a></h3>
+<p>To create a wire connection:</p>
+<ol class="arabic simple">
+<li><p>Click on an <strong>output pin</strong> (right side of a component) — this starts drawing a wire</p></li>
+<li><p>Click in the workspace to place intermediate wire points (knots)</p></li>
+<li><p>Click on an <strong>input pin</strong> (left side of another component) to complete the connection</p></li>
+</ol>
+<p>Wires can be branched by clicking on an existing wire knot.</p>
+</section>
+<section id="configure-components">
+<h3>3. Configure Components<a class="headerlink" href="#configure-components" title="Permalink to this heading">#</a></h3>
+<p>Right-click on any component to open its editor. Depending on the component type, you can configure:</p>
+<ul class="simple">
+<li><p><strong>Propagation delay</strong> — How many time units it takes for a signal to pass through</p></li>
+<li><p><strong>Delay visualization</strong> — Check the box to show a progress bar visualizing signal propagation</p></li>
+<li><p><strong>Timing parameters</strong> — Setup time, hold time (for sequential elements)</p></li>
+<li><p><strong>Clock period</strong> — High and low times (for Clock components)</p></li>
+<li><p><strong>Bit width</strong> — Number of bits (for Data Source, Splitter, Merger)</p></li>
+</ul>
+</section>
+<section id="run-the-simulation">
+<h3>4. Run the Simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading">#</a></h3>
+<p>Press the <strong>Play</strong> button to start the simulation. Interact with switches to inject signals into your circuit. Observe how signals propagate through the components, with colors indicating different data tokens.</p>
+</section>
+<section id="save-and-load">
+<h3>5. Save and Load<a class="headerlink" href="#save-and-load" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Save</strong> — Click the save button to store your circuit as a <code class="docutils literal notranslate"><span class="pre">.pip</span></code> file</p></li>
+<li><p><strong>Load</strong> — Click the load button to open a previously saved circuit</p></li>
+</ul>
+</section>
+</section>
+<section id="signal-visualization">
+<h2>Signal Visualization<a class="headerlink" href="#signal-visualization" title="Permalink to this heading">#</a></h2>
+<p>PipSim uses color-coded tokens to visualize signal propagation:</p>
+<ul class="simple">
+<li><p><strong>Grey/Light</strong> — Logic low (0) or no signal</p></li>
+<li><p><strong>Colored</strong> — Logic high (1), with the color representing the token identity</p></li>
+<li><p>Tokens from different data sources are colored differently, allowing you to track individual data items as they flow through a pipeline</p></li>
+</ul>
+<p>When delay visualization is enabled on a component, a progress bar appears below it showing signal waves traveling through the component. This makes propagation delays visible and helps understand pipeline timing.</p>
+</section>
+<section id="timing-violations">
+<h2>Timing Violations<a class="headerlink" href="#timing-violations" title="Permalink to this heading">#</a></h2>
+<p>PipSim checks timing constraints on sequential elements:</p>
+<ul class="simple">
+<li><p><strong>Setup time violation</strong> — Data arrived too late before the clock edge</p></li>
+<li><p><strong>Hold time violation</strong> — Data changed too early after the clock edge</p></li>
+</ul>
+<p>When a violation occurs, the simulation pauses and an information window displays the details of the violation, including how many time units the signal was early or late.</p>
+</section>
+<section id="keyboard-shortcuts">
+<h2>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Delete</strong> — Delete the selected component</p></li>
+<li><p><strong>Ctrl + Click</strong> — Constrain wire drawing to horizontal/vertical</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./manual"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interface">Interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#component-library-left-panel">Component Library (Left Panel)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-center">Workspace (Center)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-menu-bar">Top Menu Bar</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-workflow">Basic Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#place-components">1. Place Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-components">2. Connect Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-components">3. Configure Components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">4. Run the Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#save-and-load">5. Save and Load</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-visualization">Signal Visualization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-violations">Timing Violations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Documentation of PipSim Visualization Tool
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

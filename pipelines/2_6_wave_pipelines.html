@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2.5 Wave-Pipelining &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
   
@@ -28,39 +29,43 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/2_6_wave_pipelines';</script>
-    <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
+    <link rel="shortcut icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3 Asynchronous Pipelines" href="3_intro.html" />
@@ -161,18 +166,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -238,9 +232,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -398,9 +392,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -438,7 +432,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="wave-pipelining">
-<h1>2.5 Wave-Pipelining<a class="headerlink" href="#wave-pipelining" title="Link to this heading">#</a></h1>
+<h1>2.5 Wave-Pipelining<a class="headerlink" href="#wave-pipelining" title="Permalink to this heading">#</a></h1>
 <p>The methods discussed so far, concerned themselves with pipelines, where there is only one token in a combinational logic stage at the same time. The data traveling through the stages was cleanly separated by intermediate sequencing elements, which were clocked with some clock period larger than the maximum propagation delay of the logic.</p>
 <p>The idea of wave-pipelined circuit is to get rid of intermediate sequencing elements entirely, hence sending multiple signal ‘waves’ or tokens into the combinational logic at the same time. As will be explained later in this section, one can enforce sequence onto the waves, not by adding additional sequencing elements like before, but just by ensuring certain timing constraints are met. Ideally, this improves both throughput and latency, by eliminating the sequencing overhead that occurs in traditional pipelines.</p>
 <p>The idea of wave pipelining was first proposed by Cotton <span id="id1">[<a class="reference internal" href="references.html#id5" title="L.W. Cotten. Maximum rate pipeline systems. Proceedings SJCC, pages 581-586, 1969.">7</a>]</span>, who called this concept a maximum rate pipeline. He compared the main idea to manufacturing assembly lines, a frequently used analogy for pipelines. Figure \ref{fig:AssembLine}, Case 1. shows a conventional pipeline, where there is only one manufacturing piece at each station at the same time. This basically matches the behaviour of the pipelines we have seen so far.</p>
@@ -447,7 +441,7 @@ document.write(`
 <p>One could then also imagine an idealized `maximum rate’ pipeline, as seen in Figure 2.6, Case 2., where manufacturing pieces are sent into the pipeline back to back without any space between them. This represents an optimal pipeline, which would be impossible to realize in practice, due to the differences in delay times at the stations that would lead to collisions. We can, however, find a compromise between the two, by introducing just enough separation <span class="math notranslate nohighlight">\(\Delta X\)</span> between the objects, such that the different delays are accounted for and there occur no collisions. This results in a realizable maximum rate pipeline, as seen in Figure 2.6, Case 3.</p>
 <p>For hardware pipelines this concept works quite similar. The basic idea is to find the minimum clock period, so tokens get processed at a maximum speed, while also accounting for the different path delays in the circuit and avoiding collisions. The paper in <span id="id3">[<a class="reference internal" href="references.html#id6" title="W.P. Burleson, M. Ciesielski, F. Klass, and W. Liu. Wave-pipelining: a tutorial and research survey. IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 6(3):464-474, 1998.">8</a>]</span> builds upon the work done by Cotten and describes the generalized approach introduced in this section.</p>
 <section id="circuit-model">
-<h2>Circuit Model<a class="headerlink" href="#circuit-model" title="Link to this heading">#</a></h2>
+<h2>Circuit Model<a class="headerlink" href="#circuit-model" title="Permalink to this heading">#</a></h2>
 <p>To apply the concept of a maximum-rate pipeline to hardware, we first assume the following model of a classical edge-triggered pipeline seen in Figure 2.7, which was also discussed earlier in <code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">2.2</span></code>. First, we define the essential timing parameters of such a circuit, so we can later derive timing constraints and valid clocking intervals for a wave pipelined approach.</p>
 <a class="reference internal image-reference" href="../_images/AbbClassicPipe.png"><img alt="../_images/AbbClassicPipe.png" src="../_images/AbbClassicPipe.png" style="width: 70%;" /></a>
 <p><strong>Figure 2.7:</strong> <em>Flip-Flop Based Pipeline <span id="id4">[<a class="reference internal" href="references.html#id6" title="W.P. Burleson, M. Ciesielski, F. Klass, and W. Liu. Wave-pipelining: a tutorial and research survey. IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 6(3):464-474, 1998.">8</a>]</span></em></p>
@@ -458,14 +452,14 @@ document.write(`
 <p>The left and right border of a delay contour hence represent the signals traveling through the logic with a minimal delay <span class="math notranslate nohighlight">\(D_{min}\)</span> and a maximal delay <span class="math notranslate nohighlight">\(D_{max}\)</span>, respectively. The shaded area in between marks the unstable region, where the computation by the combinational logic is still being performed. For simplicity reasons, this can also be portrayed as delay cones, as seen on the right in Figure 2.8.</p>
 </section>
 <section id="timing-constraints">
-<h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Link to this heading">#</a></h2>
+<h2>Timing Constraints<a class="headerlink" href="#timing-constraints" title="Permalink to this heading">#</a></h2>
 <p>When dealing with multiple signal waves traveling through the logic at the same time, it is key to ensure that the different waves do not interfere with each other, so no tokens get corrupted. Visualizing a wave-pipelined circuit via delay cones, as seen in Figure \ref{fig:WavePip}, can help provide a better understanding of the way multiple waves progress through the hardware and which constraints need to be made.</p>
 <a class="reference internal image-reference" href="../_images/AbbWavesContour.png"><img alt="../_images/AbbWavesContour.png" src="../_images/AbbWavesContour.png" style="width: 70%;" /></a>
 <p><strong>Figure 2.9:</strong> <em>Visualization of wave-pipelined circuit <span id="id6">[<a class="reference internal" href="references.html#id6" title="W.P. Burleson, M. Ciesielski, F. Klass, and W. Liu. Wave-pipelining: a tutorial and research survey. IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 6(3):464-474, 1998.">8</a>]</span></em></p>
 <p>As seen in the Figure 2.9, wave <em>i</em> gets launched  at the first rising clock edge. Wave <em>i+1</em> launches at the beginning of the next cycle, before the previous wave <em>i</em> has not even finished running through the logic. The shaded areas of the output data and the delay cones again mark times where the data is still in an unstable state.</p>
 </section>
 <section id="register-constraints">
-<h2>Register Constraints<a class="headerlink" href="#register-constraints" title="Link to this heading">#</a></h2>
+<h2>Register Constraints<a class="headerlink" href="#register-constraints" title="Permalink to this heading">#</a></h2>
 <p>A first constraint to ensure correct behaviour would be that the wave gets captured correctly by the output register. This means that the arriving wave should be stable early enough to not violate the setup time of the register and the next wave should arrive late enough to not violate the hold time of the register. This problem is referred to as the <em>register constraints</em>.</p>
 <p>We first define the parameter <em>N</em>, which is the number of clock cycles it takes for a wave to travel through the logic and stabilize at the output. This parameter N is also an indicator of the degree of wave-pipelining, as it also denotes how many waves will be in a stage at the same time.</p>
 <p>The time <span class="math notranslate nohighlight">\(T_L\)</span> at which a waves gets sampled is now some N clock cycles after being launched from the input register plus the constructive clock skew <span class="math notranslate nohighlight">\(\Delta\)</span> used for adjustments:</p>
@@ -491,7 +485,7 @@ T_{c} &gt; (D_{max} - D_{min}) + t_{setup} + t_{hold} + 2\Delta_{CK}
 <p>This constraint was already derived by Cotten in <span id="id7">[<a class="reference internal" href="references.html#id5" title="L.W. Cotten. Maximum rate pipeline systems. Proceedings SJCC, pages 581-586, 1969.">7</a>]</span> and shows that the clock period is mainly dependant on the difference between the longest and shortest path of the logic, as it must be ensured that early signals of subsequent waves do not catch up with late signals of the current wave.</p>
 </section>
 <section id="internal-node-constraints">
-<h2>Internal Node Constraints<a class="headerlink" href="#internal-node-constraints" title="Link to this heading">#</a></h2>
+<h2>Internal Node Constraints<a class="headerlink" href="#internal-node-constraints" title="Permalink to this heading">#</a></h2>
 <p>The constraints above ensure the correct capturing of the data at the bordering registers. However, it is also key to avoid the collision of waves at the individual logic gates. The following constraint is quite similar to the one made above.</p>
 <p>For each internal node <em>x</em> the current input wave <em>i</em> must be stable long enough so it can correctly propagate through the logic gate. The earliest possible signals of the next wave <em>i+1</em> shall not arrive, before the last signals of the current wave have passed through the logic. This constraint is referred to as <em>internal node constraint</em>.</p>
 <p>To derive a formal expression for this constraint, we define <span class="math notranslate nohighlight">\(d_{MAX}(x)\)</span> and <span class="math notranslate nohighlight">\(d_{MIN}(x)\)</span> as the longest and shortest propagation delays of node <em>x</em>. We also denote <span class="math notranslate nohighlight">\(T_{SX}\)</span> as the minimum time that node <em>x</em> must be stable to produce a correct output. The resulting constraint is defined as:</p>
@@ -502,7 +496,7 @@ T_{c} &gt; d_{MAX}(x) - d_{MIN}(x) + T_{SX} + \Delta_{CK}
 <p>This equation can be viewed analogously to Constraint \ref{eq:1}, where (<span class="math notranslate nohighlight">\(d_{MAX}(x) - d_{MIN}(x)\)</span>) is equivalent to  <span class="math notranslate nohighlight">\((D_{max} - D_{min})\)</span> and <span class="math notranslate nohighlight">\(T_{SX}\)</span> is equivalent to <span class="math notranslate nohighlight">\(t_{setup} + t_{hold}\)</span>.</p>
 </section>
 <section id="valid-clocking">
-<h2>Valid Clocking<a class="headerlink" href="#valid-clocking" title="Link to this heading">#</a></h2>
+<h2>Valid Clocking<a class="headerlink" href="#valid-clocking" title="Permalink to this heading">#</a></h2>
 <p>Intuitively one would assume that any clock period larger than the constraints made by Equation \ref{eq:1} and \ref{eq:2} would satisfy the conditions for a working wave-pipelined circuit. However, work done in <span id="id8">[<a class="reference internal" href="references.html#id14" title="W.K.C. Lam, R.K. Brayton, and A.L. Sangiovanni-Vincentelli. Valid clock frequencies and their computation in wavepipelined circuits. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 15(7):791-807, 1996.">9</a>]</span> and <span id="id9">[<a class="reference internal" href="references.html#id15" title="C.T. Gray, W. Liu, and R.K. Cavin. Timing constraints for wave-pipelined systems. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 13(8):987-1004, 1994.">10</a>]</span> has shown that the region of valid clocking frequencies is not continuous, but made up of finite sets of disjoint valid intervals. If we consider the constraints in \ref{eq:3} and \ref{eq:4}, we can see that <span class="math notranslate nohighlight">\(T_L = NT_{c}+\Delta\)</span> is bounded by two sides:</p>
 <div class="math notranslate nohighlight">
 \[

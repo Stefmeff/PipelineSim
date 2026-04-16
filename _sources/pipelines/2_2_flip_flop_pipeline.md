@@ -29,7 +29,7 @@ $$
 Note that for this constraint, we use the contamination delays of the components, since we are interested in the first signal changes that could violate the hold time.
 
 [^1]: Process, voltage and temperature variations impact the timing behaviour of a circuit.
-
+---
 ## Simulation
 
 <div style="width:100%; overflow:hidden; display:block;">

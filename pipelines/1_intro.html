@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1. Introduction &#8212; Design Principles and Interactive Visualization of Pipeline Architectures</title>
   
@@ -28,37 +29,41 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'pipelines/1_intro';</script>
-    <link rel="icon" href="../_static/Logo-schwarz-1.png"/>
+    <link rel="shortcut icon" href="../_static/Logo-schwarz-1.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Synchronous Pipelines" href="2_intro.html" />
@@ -159,18 +164,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -236,9 +230,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -422,7 +416,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
 <p>Modern computer hardware operates within the digital domain, encoding data in binary form through high and low voltage levels and performing operations by processing data through a sequence of logic gates. In general, digital circuits can be modeled as seen in <strong>Figure 1:</strong> A data source provides an input <code class="docutils literal notranslate"><span class="pre">token</span></code><a class="footnote-reference brackets" href="#id6" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <strong>x</strong>, representing a vector of <em>n</em> bits. This input token is processed by a circuit that implements a logic function <em>f</em>, mapping the input <strong>x</strong> to a corresponding output <strong>y = f(x)</strong>. The output <strong>y</strong> is then absorbed and stored by a data sink <span id="id2">[<a class="reference internal" href="references.html#id18" title="M. Delvai and A. Steininger. Solving the fundamental problem of digital design - a systematic review of design methods. In 9th EUROMICRO Conference on Digital System Design (DSD'06), volume, 131-138. 2006. doi:10.1109/DSD.2006.84.">1</a>, <a class="reference internal" href="references.html#id8" title="Markus Ferringer. Asynchronous logic in real-time systems. PhD thesis, Technische Universität Wien, 2011.">2</a>]</span>.</p>
 <a class="reference internal image-reference" href="../_images/DataFlowModel.png"><img alt="../_images/DataFlowModel.png" src="../_images/DataFlowModel.png" style="width: 50%;" /></a>
 <p><strong>Figure 1:</strong> <em>Data flow model of a digital circuit</em> <span id="id3">[<a class="reference internal" href="references.html#id8" title="Markus Ferringer. Asynchronous logic in real-time systems. PhD thesis, Technische Universität Wien, 2011.">2</a>]</span></p>
@@ -434,15 +428,13 @@ document.write(`
 <p>The basic structure of a pipelined circuit is shown in Figure 2. It depicts the partition of the combinational logic into different stages C₁, C₂, …, Cₙ. This mirrors the organization of classical processor pipelines, where instructions are processed by a sequence of consecutive stages such as fetch, decode, execute, etc. To enforce a clear separation of these stages and control the flow of the tokens, so-called <code class="docutils literal notranslate"><span class="pre">sequencing</span></code> elements are introduced R₁, R₂, …, Rₙ. These are memory elements used for storing the current token of a stage and either allowing or preventing data of previous stages from entering. Although the added sequencing elements introduce some additional delay, known as <code class="docutils literal notranslate"><span class="pre">sequencing</span> <span class="pre">overhead</span></code>, the resulting increase in throughput is a highly beneficial trade-off.</p>
 <p>Sequencing elements can be controlled <code class="docutils literal notranslate"><span class="pre">synchronously</span></code>or <code class="docutils literal notranslate"><span class="pre">asynchronously</span></code>. Synchronous circuits are controlled by a global <code class="docutils literal notranslate"><span class="pre">clock</span></code> signal that periodically produces events, triggering data flow from one stage to another. All stages transfer their data at the same time, and tokens move through the pipeline at a constant rate. Asynchronous circuits, on the other hand, are based on stages communicating via <code class="docutils literal notranslate"><span class="pre">handshakes</span></code>, signaling when they are ready to send and receive new data. <code class="docutils literal notranslate"><span class="pre">Chapter</span> <span class="pre">2</span></code> will focus on the sequencing elements and implementations of synchronous pipelines, which are the most widely used class of pipelines. Asynchronous pipelines will be the topic of <code class="docutils literal notranslate"><span class="pre">Chapter</span> <span class="pre">3</span></code>. During reading, there will always be examplary circuits created in <code class="docutils literal notranslate"><span class="pre">PipSim</span></code>, that you can use alongside the text to simulate the behaviour of the circuits and understand the theoretical concepts more intuitively.</p>
 <hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id6" role="doc-footnote">
+<aside class="footnote brackets" id="id6" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>A ‘token’ refers to a set of binary data that is logically related and serves as the input of a circuit (e.g., a processor instruction).</p>
 </aside>
-<aside class="footnote brackets" id="id7" role="doc-footnote">
+<aside class="footnote brackets" id="id7" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
 <p>Combinational circuits describe the set of circuits where the output is only dependent on the current inputs.</p>
-</aside>
 </aside>
 </section>
 
